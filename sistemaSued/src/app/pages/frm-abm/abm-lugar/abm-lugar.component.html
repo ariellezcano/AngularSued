@@ -1,0 +1,102 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Lugar</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Lugar:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.codLugar"
+            id="codigo"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">Tipo:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.codTipo"
+            id="descripcion"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Sub-Tipo:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.codSubTipo"
+            id="codigo"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Descripción:</label
+        >
+        <textarea
+          class="form-control"
+          [(ngModel)]="item.descripcion"
+          name="descripcion"
+          [ngModelOptions]="{ standalone: true }"
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <app-combo-lugar
+          [dibujar]="item"
+          (emitir)="seleccionCalle($event)"
+        ></app-combo-lugar>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Número:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.dirNro"
+            id="codigo"
+            type="text"
+            class="form-control"
+            placeholder="Dirección"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Adicional:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.dirAdic"
+            id="codigo"
+            type="text"
+            class="form-control"
+            placeholder="Dirección adicional"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

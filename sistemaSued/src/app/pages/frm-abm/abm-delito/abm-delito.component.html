@@ -1,0 +1,117 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Delito</h3>
+  <hr />
+  <form class="text-center" (ngSubmit)="doAction()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label for="Nombre" class="col-sm-12 col-form-label"> Título:</label>
+          <div class="col-sm-12">
+            <input
+              [(ngModel)]="item.codTitulo"
+              id="codigo"
+              name="codTitulo"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label for="Nombre" class="col-sm-12 col-form-label">
+            Capítulo:</label
+          >
+          <div class="col-sm-12">
+            <input
+              [(ngModel)]="item.codCapitulo"
+              id="descripcion"
+              name="codCapitulo"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Tipo:</label>
+        <input
+          [(ngModel)]="item.codTipo"
+          id="descripcion"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Sub-Tipo:</label>
+        <input
+          [(ngModel)]="item.codSubTipo"
+          id="descripcion"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Descripción:</label
+        >
+        <textarea
+          class="form-control"
+          [(ngModel)]="item.descripcion"
+          name="descripcion"
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">Artículo:</label>
+        <input
+        [(ngModel)]="item.articulo"
+        id="articulo"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      </div>
+      <div class="col-md-6">
+        <app-combo-dncp
+          [dibujar]="item"
+          (emitir)="seleccionDncp($event)"
+        ></app-combo-dncp>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-2">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          ¿Imputable?</label
+        >
+      </div>
+      <div class="col-md-1">
+        <input
+          class="form-control-sm"
+          type="checkbox"
+          [(ngModel)]="item.imputable"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

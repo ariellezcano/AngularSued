@@ -1,0 +1,164 @@
+<div id="title" class="top-row ps-3 navbar navbar-dark" style="width: 228px; height: 55px; overflow: auto">
+    <div class="container-fluid">
+        <a class="navbar-brand">Estadísticas Policiales</a>
+    </div>
+</div>
+
+<div class="sidebar" style="width: 228px; height: 600px; overflow: auto">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp; <span id="texto">Usuarios</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" (click)="areaExpandida = !areaExpandida">
+                <i class="fa fa-table" aria-hidden="true"></i>&nbsp; <span id="texto">Tablas</span> 
+            </NavLink>
+        </div>
+        <div *ngIf="areaExpandida">
+            <ul style="width: 250px; height: 200px; overflow: auto">
+                <!-- <li>
+                    <a href="/lst-articulo">
+                        Artículos
+                    </a>
+                </li> -->
+                <li>
+                    <a href="/lst-delito">
+                        Delitos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-lugar">
+                        Lugares
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-medio">
+                        Medios Utilizados
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-objeto">
+                        Objetos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-barrio">
+                        Barrios
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-calle">
+                        Calles
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-dncp">
+                        Delitos DNCP
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-departamento">
+                        Departamentos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-localidad">
+                        Localidades
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-modalidades">
+                        Modalidades
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-naciones">
+                        Nacionalidades
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-estudio">
+                        Nivel de Estudio
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-ocupaciones">
+                        Ocupaciones
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-provincia">
+                        Provincias
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-sexos">
+                        Sexos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-unidades">
+                        Unidades
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-vinculos">
+                        Vinculos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-marcasArmas">
+                        Marcas de armas
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-marcasVehiculos">
+                        Marcas de vehículos
+                    </a>
+                </li>
+                <li>
+                    <a href="/lst-modelVehiculos">
+                        Modelos de vehículos
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" (click)="areaPlanillas = !areaPlanillas">
+                <i class="fa fa-book" aria-hidden="true"></i>&nbsp; <span id="texto">Planillas</span>
+            </NavLink>
+        </div>
+        <div *ngIf="areaPlanillas">
+            <ul>
+                <li>
+                    <a [routerLink]="['/lst-paises/']">
+                        Contravenciones
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/lst-paises/']">
+                        Colisiones
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/lst-paises/']">
+                        Lesiones leves
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/lst-paises/']">
+                        Contravenciones (2004)
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" [routerLink]="['/lst-paises/']">
+                <span class="oi oi-list-rich" aria-hidden="true"></span>&nbsp; <span id="texto">Preventivos</span>
+            </NavLink>
+        </div>
+    </nav>
+</div>

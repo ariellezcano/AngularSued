@@ -1,0 +1,120 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Localidad</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Código:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.codigo"
+            id="codigo"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">Nombre:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.nombre"
+            id="descripcion"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Código Postal:</label
+        >
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.codPostal"
+            id="codigo"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <app-combo-nacion
+          [dibujar]="item"
+          (emitir)="seleccionNac($event)"
+        ></app-combo-nacion>
+      </div>
+      <div class="col-md-4">
+        <app-combo-provincia
+          [dibujar]="item"
+          (emitir)="seleccionProv($event)"
+        ></app-combo-provincia>
+      </div>
+      <div class="col-md-4">
+        <app-combo-departamento
+          [dibujar]="item"
+          (emitir)="seleccionDpto($event)"
+        ></app-combo-departamento>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Código Provincia:</label
+        >
+        <div class="col-sm-12">
+          <input
+            disabled
+            [(ngModel)]="item.codProv"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Código Departamento:</label
+        >
+        <div class="col-sm-12">
+          <input
+            disabled
+            [(ngModel)]="item.codDto"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+            Código Localidad:</label
+          >
+          <div class="col-sm-12">
+            <input
+              [(ngModel)]="item.codLoc"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+  
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <div class="control-group">
+      <div class="form-group controls">
+        <br>
+        <label>Seleccione Artículo</label>
+        <select
+          (ngModelChange)="capturar($event)"
+          name="item"
+          [(ngModel)]="item"
+          [compareWith]="compareWitch"
+          class="form-control form-sm"
+        >
+          <option *ngFor="let item of items" [ngValue]="item">
+            {{ item.articulo }} inc: {{ item.inciso }}: {{ item.descripcionArt }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>

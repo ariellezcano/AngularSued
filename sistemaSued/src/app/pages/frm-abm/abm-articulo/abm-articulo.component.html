@@ -1,0 +1,64 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Artículo</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"
+          >N° Artículo:</label
+        >
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.articulo"
+            id="articulo"
+            type="number"
+            class="form-control"
+            formControlName="articulo"
+            [ngClass]="{ 'is-invalid': enviado && f['articulo'].errors }"
+          />
+          <div *ngIf="enviado && f['articulo'].errors" class="invalid-feedback">
+            <div *ngIf="f['articulo'].errors['required']">
+              Campo obligatorio
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Inciso:</label>
+        <div class="col-sm-12">
+          <input
+            [(ngModel)]="item.inciso"
+            id="descripcion"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Descripción:</label
+        >
+        <textarea
+          class="form-control"
+          [(ngModel)]="item.descripcionArt"
+          name="descripcion"
+          [ngModelOptions]="{ standalone: true }"
+        ></textarea>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />
