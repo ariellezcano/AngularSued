@@ -48,6 +48,18 @@ import { FilNacionesComponent } from './filters/fil-naciones/fil-naciones.compon
 import { FilProvinciaComponent } from './filters/fil-provincia/fil-provincia.component';
 import { AbmProvinciaComponent } from './frm-abm/abm-provincia/abm-provincia.component';
 import { LstProvinciaComponent } from './lst/lst-provincia/lst-provincia.component';
+import { FilObjetoComponent } from './filters/fil-objeto/fil-objeto.component';
+import { AbmObjetoComponent } from './frm-abm/abm-objeto/abm-objeto.component';
+import { LstObjetoComponent } from './lst/lst-objeto/lst-objeto.component';
+import { LstModalidadComponent } from './lst/lst-modalidad/lst-modalidad.component';
+import { FilModalidadComponent } from './filters/fil-modalidad/fil-modalidad.component';
+import { AbmModalidadComponent } from './frm-abm/abm-modalidad/abm-modalidad.component';
+import { LstEstudioComponent } from './lst/lst-estudio/lst-estudio.component';
+import { AbmEstudioComponent } from './frm-abm/abm-estudio/abm-estudio.component';
+import { FilEstudioComponent } from './filters/fil-estudio/fil-estudio.component';
+import { LstOcupacionComponent } from './lst/lst-ocupacion/lst-ocupacion.component';
+import { FilOcupacionComponent } from './filters/fil-ocupacion/fil-ocupacion.component';
+import { AbmOcupacionComponent } from './frm-abm/abm-ocupacion/abm-ocupacion.component';
 
 @NgModule({
     declarations: [
@@ -95,6 +107,18 @@ import { LstProvinciaComponent } from './lst/lst-provincia/lst-provincia.compone
       FilProvinciaComponent,
       AbmProvinciaComponent,
       LstProvinciaComponent,
+      FilObjetoComponent,
+      AbmObjetoComponent,
+      LstObjetoComponent,
+      LstModalidadComponent,
+      FilModalidadComponent,
+      AbmModalidadComponent,
+      LstEstudioComponent,
+      AbmEstudioComponent,
+      FilEstudioComponent,
+      LstOcupacionComponent,
+      FilOcupacionComponent,
+      AbmOcupacionComponent,
     ],
     exports: [],
     imports: [

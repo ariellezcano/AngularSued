@@ -9,3 +9,7 @@ export {Medio} from './component/medio';
 export {Provincia} from './component/provincia';
 export {Naciones} from './component/nacion';
 export {Localidad} from './component/localidad';
+export {Objeto} from './component/objeto';
+export {Modalidad} from './component/modalidad';
+export {Estudio} from './component/estudios';
+export {Ocupacion} from './component/ocupacion';

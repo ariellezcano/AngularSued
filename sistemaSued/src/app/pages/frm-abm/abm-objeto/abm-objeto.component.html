@@ -1,0 +1,60 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Barrio</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Código Tipo:</label
+        >
+        <input
+          [(ngModel)]="item.codTipo"
+          id="codigo"
+          type="text"
+          class="form-control"
+          formControlName="codigoTipo"
+          [ngClass]="{ 'is-invalid': enviado && f['codigoTipo'].errors }"
+        />
+        <div *ngIf="enviado && f['codigoTipo'].errors" class="invalid-feedback">
+          <div *ngIf="f['codigoTipo'].errors['required']">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Código Sub-Tipo:</label
+        >
+        <input
+          [(ngModel)]="item.codSubTipo"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Descripción:</label>
+      <input
+        [(ngModel)]="item.descripcion"
+        type="text"
+        class="form-control"
+        formControlName="descripcion"
+        [ngClass]="{ 'is-invalid': enviado && f['descripcion'].errors }"
+      />
+      <div *ngIf="enviado && f['descripcion'].errors" class="invalid-feedback">
+        <div *ngIf="f['descripcion'].errors['required']">Campo obligatorio</div>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

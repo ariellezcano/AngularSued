@@ -8,10 +8,14 @@ import { AbmCalleComponent } from "./frm-abm/abm-calle/abm-calle.component";
 import { AbmDelitoComponent } from "./frm-abm/abm-delito/abm-delito.component";
 import { AbmDepartamentoComponent } from "./frm-abm/abm-departamento/abm-departamento.component";
 import { AbmDncpComponent } from "./frm-abm/abm-dncp/abm-dncp.component";
+import { AbmEstudioComponent } from "./frm-abm/abm-estudio/abm-estudio.component";
 import { AbmLocalidadComponent } from "./frm-abm/abm-localidad/abm-localidad.component";
 import { AbmLugarComponent } from "./frm-abm/abm-lugar/abm-lugar.component";
 import { AbmMedioComponent } from "./frm-abm/abm-medio/abm-medio.component";
+import { AbmModalidadComponent } from "./frm-abm/abm-modalidad/abm-modalidad.component";
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
+import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
+import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
 import { LstArticuloComponent } from "./lst/lst-articulo/lst-articulo.component";
 import { LstBarrioComponent } from "./lst/lst-barrio/lst-barrio.component";
@@ -19,10 +23,14 @@ import { LstCalleComponent } from "./lst/lst-calle/lst-calle.component";
 import { LstDelitoComponent } from "./lst/lst-delito/lst-delito.component";
 import { LstDepartamentoComponent } from "./lst/lst-departamento/lst-departamento.component";
 import { LstDncpComponent } from "./lst/lst-dncp/lst-dncp.component";
+import { LstEstudioComponent } from "./lst/lst-estudio/lst-estudio.component";
 import { LstLocalidadComponent } from "./lst/lst-localidad/lst-localidad.component";
 import { LstLugarComponent } from "./lst/lst-lugar/lst-lugar.component";
 import { LstMedioComponent } from "./lst/lst-medio/lst-medio.component";
+import { LstModalidadComponent } from "./lst/lst-modalidad/lst-modalidad.component";
 import { LstNacionesComponent } from "./lst/lst-naciones/lst-naciones.component";
+import { LstObjetoComponent } from "./lst/lst-objeto/lst-objeto.component";
+import { LstOcupacionComponent } from "./lst/lst-ocupacion/lst-ocupacion.component";
 import { LstProvinciaComponent } from "./lst/lst-provincia/lst-provincia.component";
 import { PagesComponent } from "./pages.component";
 
@@ -223,6 +231,66 @@ const routes: Routes = [
             {
               path: '',
               component: LstProvinciaComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-objeto',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmObjetoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstObjetoComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-modalidad',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmModalidadComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstModalidadComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-estudio',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmEstudioComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstEstudioComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-ocupacion',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmOcupacionComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstOcupacionComponent,
              //canActivate: [AuthGuard],
             },
           ],

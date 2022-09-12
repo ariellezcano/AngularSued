@@ -8,3 +8,7 @@ export {MedioService} from './component/medio.service';
 export {LocalidadService} from './component/localidad.service';
 export {NacionesService} from './component/naciones.service';
 export {ProvinciaService} from './component/provincia.service';
+export {ObjetoService} from './component/objeto.service';
+export {ModalidadService} from './component/modalidad.service';
+export {EstudiosService} from './component/estudios.service';
+export {OcupacionService} from './component/ocupacion.service';
