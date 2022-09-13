@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PantallaPrincipalComponent } from "./component/pantalla-principal/pantalla-principal.component";
+import { AbmArmaMarcaComponent } from "./frm-abm/abm-arma-marca/abm-arma-marca.component";
 import { AbmArticuloComponent } from "./frm-abm/abm-articulo/abm-articulo.component";
 import { AbmBarrioComponent } from "./frm-abm/abm-barrio/abm-barrio.component";
 import { AbmCalleComponent } from "./frm-abm/abm-calle/abm-calle.component";
@@ -17,6 +18,9 @@ import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.compon
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
+import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
+import { AbmVinculoComponent } from "./frm-abm/abm-vinculo/abm-vinculo.component";
+import { LstArmaMarcaComponent } from "./lst/lst-arma-marca/lst-arma-marca.component";
 import { LstArticuloComponent } from "./lst/lst-articulo/lst-articulo.component";
 import { LstBarrioComponent } from "./lst/lst-barrio/lst-barrio.component";
 import { LstCalleComponent } from "./lst/lst-calle/lst-calle.component";
@@ -32,6 +36,8 @@ import { LstNacionesComponent } from "./lst/lst-naciones/lst-naciones.component"
 import { LstObjetoComponent } from "./lst/lst-objeto/lst-objeto.component";
 import { LstOcupacionComponent } from "./lst/lst-ocupacion/lst-ocupacion.component";
 import { LstProvinciaComponent } from "./lst/lst-provincia/lst-provincia.component";
+import { LstSexoComponent } from "./lst/lst-sexo/lst-sexo.component";
+import { LstVinculoComponent } from "./lst/lst-vinculo/lst-vinculo.component";
 import { PagesComponent } from "./pages.component";
 
 const routes: Routes = [
@@ -291,6 +297,51 @@ const routes: Routes = [
             {
               path: '',
               component: LstOcupacionComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-sexo',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmSexoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstSexoComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-vinculo',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmVinculoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstVinculoComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-marcas',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmArmaMarcaComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstArmaMarcaComponent,
              //canActivate: [AuthGuard],
             },
           ],

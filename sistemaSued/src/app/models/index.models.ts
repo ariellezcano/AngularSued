@@ -13,3 +13,6 @@ export {Objeto} from './component/objeto';
 export {Modalidad} from './component/modalidad';
 export {Estudio} from './component/estudios';
 export {Ocupacion} from './component/ocupacion';
+export {Sexo} from './component/sexo';
+export {Vinculo} from './component/vinculo';
+export {ArmaMarca} from './component/arma-marca';

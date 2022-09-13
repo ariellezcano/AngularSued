@@ -60,6 +60,15 @@ import { FilEstudioComponent } from './filters/fil-estudio/fil-estudio.component
 import { LstOcupacionComponent } from './lst/lst-ocupacion/lst-ocupacion.component';
 import { FilOcupacionComponent } from './filters/fil-ocupacion/fil-ocupacion.component';
 import { AbmOcupacionComponent } from './frm-abm/abm-ocupacion/abm-ocupacion.component';
+import { FilSexoComponent } from './filters/fil-sexo/fil-sexo.component';
+import { AbmSexoComponent } from './frm-abm/abm-sexo/abm-sexo.component';
+import { LstSexoComponent } from './lst/lst-sexo/lst-sexo.component';
+import { FilVinculoComponent } from './filters/fil-vinculo/fil-vinculo.component';
+import { AbmVinculoComponent } from './frm-abm/abm-vinculo/abm-vinculo.component';
+import { LstVinculoComponent } from './lst/lst-vinculo/lst-vinculo.component';
+import { FilArmaMarcaComponent } from './filters/fil-arma-marca/fil-arma-marca.component';
+import { AbmArmaMarcaComponent } from './frm-abm/abm-arma-marca/abm-arma-marca.component';
+import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.component';
 
 @NgModule({
     declarations: [
@@ -119,6 +128,15 @@ import { AbmOcupacionComponent } from './frm-abm/abm-ocupacion/abm-ocupacion.com
       LstOcupacionComponent,
       FilOcupacionComponent,
       AbmOcupacionComponent,
+      FilSexoComponent,
+      AbmSexoComponent,
+      LstSexoComponent,
+      FilVinculoComponent,
+      AbmVinculoComponent,
+      LstVinculoComponent,
+      FilArmaMarcaComponent,
+      AbmArmaMarcaComponent,
+      LstArmaMarcaComponent,
     ],
     exports: [],
     imports: [

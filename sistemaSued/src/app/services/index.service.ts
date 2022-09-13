@@ -12,3 +12,6 @@ export {ObjetoService} from './component/objeto.service';
 export {ModalidadService} from './component/modalidad.service';
 export {EstudiosService} from './component/estudios.service';
 export {OcupacionService} from './component/ocupacion.service';
+export {SexoService} from './component/sexo.service';
+export {VinculoService} from './component/vinculo.service';
+export {ArmaMarcaService} from './component/arma-marca.service';
