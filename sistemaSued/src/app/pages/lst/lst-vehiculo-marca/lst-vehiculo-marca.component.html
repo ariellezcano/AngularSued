@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <legend class="text-dark">
+          <em>
+            <b> <u>Listado de marcas de vehículos</u> </b>
+          </em>
+        </legend>
+      </div>
+      <div class="col-md-6">
+        <button class="btn btn-outline-primary" (click)="linkear(0)">
+          <i class="fa fa-plus" aria-hidden="true">
+            &nbsp;
+            <b>Agregar nuevo</b>
+          </i>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <app-fil-vehiculo-marca (emmit)="doFound($event)"></app-fil-vehiculo-marca>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table text-center">
+          <thead class="border border-dark">
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+              <td class="text-primary">{{ item.codigo }}</td>
+              <td class="text-primary">{{ item.descripcion}}</td>
+              <td>
+                <button
+                  (click)="linkear(item.id)"
+                  type="button"
+                  title="Modificar"
+                  placement="top"
+                  show-delay="10"
+                  class="btn btn-info btn-sm"
+                >
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                &nbsp;
+                <button
+                  (click)="eliminar(item.id)"
+                  type="button"
+                  title="Eliminar"
+                  placement="top"
+                  show-delay="10"
+                  class="btn btn-danger btn-sm"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        *ngIf="items.length === 0"
+        class="alert alert-info alert-dismissible fade show text-center"
+        role="alert"
+      >
+        <strong>No hay datos</strong>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <button class="btn btn-outline-primary" type="button" (click)="back()">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i> &nbsp; Volver a
+        Inicio
+      </button>
+    </div>
+  </div>
+  <br />
+  

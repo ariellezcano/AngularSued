@@ -15,3 +15,4 @@ export {OcupacionService} from './component/ocupacion.service';
 export {SexoService} from './component/sexo.service';
 export {VinculoService} from './component/vinculo.service';
 export {ArmaMarcaService} from './component/arma-marca.service';
+export {VehiculoMarcaService} from './component/vehiculo-marca.service';

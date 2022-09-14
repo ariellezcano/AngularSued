@@ -16,3 +16,4 @@ export {Ocupacion} from './component/ocupacion';
 export {Sexo} from './component/sexo';
 export {Vinculo} from './component/vinculo';
 export {ArmaMarca} from './component/arma-marca';
+export {VehiculoMarca} from './component/vehiculo-marca';

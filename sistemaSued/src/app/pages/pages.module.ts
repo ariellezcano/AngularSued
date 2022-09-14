@@ -69,6 +69,9 @@ import { LstVinculoComponent } from './lst/lst-vinculo/lst-vinculo.component';
 import { FilArmaMarcaComponent } from './filters/fil-arma-marca/fil-arma-marca.component';
 import { AbmArmaMarcaComponent } from './frm-abm/abm-arma-marca/abm-arma-marca.component';
 import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.component';
+import { LstVehiculoMarcaComponent } from './lst/lst-vehiculo-marca/lst-vehiculo-marca.component';
+import { AbmVehiculoMarcaComponent } from './frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component';
+import { FilVehiculoMarcaComponent } from './filters/fil-vehiculo-marca/fil-vehiculo-marca.component';
 
 @NgModule({
     declarations: [
@@ -137,6 +140,9 @@ import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.compo
       FilArmaMarcaComponent,
       AbmArmaMarcaComponent,
       LstArmaMarcaComponent,
+      LstVehiculoMarcaComponent,
+      AbmVehiculoMarcaComponent,
+      FilVehiculoMarcaComponent,
     ],
     exports: [],
     imports: [
