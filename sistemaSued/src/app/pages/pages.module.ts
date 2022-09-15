@@ -72,6 +72,10 @@ import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.compo
 import { LstVehiculoMarcaComponent } from './lst/lst-vehiculo-marca/lst-vehiculo-marca.component';
 import { AbmVehiculoMarcaComponent } from './frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component';
 import { FilVehiculoMarcaComponent } from './filters/fil-vehiculo-marca/fil-vehiculo-marca.component';
+import { FilModeloVehiculoComponent } from './filters/fil-modelo-vehiculo/fil-modelo-vehiculo.component';
+import { AbmModeloVehiculoComponent } from './frm-abm/abm-modelo-vehiculo/abm-modelo-vehiculo.component';
+import { LstModeloVehiculoComponent } from './lst/lst-modelo-vehiculo/lst-modelo-vehiculo.component';
+import { ComboMarcaComponent } from './component/combo-marca/combo-marca.component';
 
 @NgModule({
     declarations: [
@@ -143,6 +147,10 @@ import { FilVehiculoMarcaComponent } from './filters/fil-vehiculo-marca/fil-vehi
       LstVehiculoMarcaComponent,
       AbmVehiculoMarcaComponent,
       FilVehiculoMarcaComponent,
+      FilModeloVehiculoComponent,
+      AbmModeloVehiculoComponent,
+      LstModeloVehiculoComponent,
+      ComboMarcaComponent,
     ],
     exports: [],
     imports: [

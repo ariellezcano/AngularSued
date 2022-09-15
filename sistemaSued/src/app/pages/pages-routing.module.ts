@@ -14,6 +14,7 @@ import { AbmLocalidadComponent } from "./frm-abm/abm-localidad/abm-localidad.com
 import { AbmLugarComponent } from "./frm-abm/abm-lugar/abm-lugar.component";
 import { AbmMedioComponent } from "./frm-abm/abm-medio/abm-medio.component";
 import { AbmModalidadComponent } from "./frm-abm/abm-modalidad/abm-modalidad.component";
+import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-modelo-vehiculo.component";
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
@@ -33,6 +34,7 @@ import { LstLocalidadComponent } from "./lst/lst-localidad/lst-localidad.compone
 import { LstLugarComponent } from "./lst/lst-lugar/lst-lugar.component";
 import { LstMedioComponent } from "./lst/lst-medio/lst-medio.component";
 import { LstModalidadComponent } from "./lst/lst-modalidad/lst-modalidad.component";
+import { LstModeloVehiculoComponent } from "./lst/lst-modelo-vehiculo/lst-modelo-vehiculo.component";
 import { LstNacionesComponent } from "./lst/lst-naciones/lst-naciones.component";
 import { LstObjetoComponent } from "./lst/lst-objeto/lst-objeto.component";
 import { LstOcupacionComponent } from "./lst/lst-ocupacion/lst-ocupacion.component";
@@ -359,6 +361,21 @@ const routes: Routes = [
             {
               path: '',
               component: LstVehiculoMarcaComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-modelos',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmModeloVehiculoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstModeloVehiculoComponent,
              //canActivate: [AuthGuard],
             },
           ],
