@@ -18,3 +18,4 @@ export {Vinculo} from './component/vinculo';
 export {ArmaMarca} from './component/arma-marca';
 export {VehiculoMarca} from './component/vehiculo-marca';
 export {ModeloVehiculo} from './component/modelo-vehiculo';
+export {Preventivo} from './component/preventivo';

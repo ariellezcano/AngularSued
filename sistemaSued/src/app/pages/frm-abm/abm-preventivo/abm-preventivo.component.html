@@ -1,0 +1,130 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">
+    Panel ABM Preventivos
+  </h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Fecha Preventivo:</label
+        >
+        <input
+          [(ngModel)]="item.fechaPreventivo"
+          id="codigo"
+          type="date"
+          class="form-control"
+          formControlName="codigo"
+          [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
+        />
+        <div *ngIf="enviado && f['codigo'].errors" class="invalid-feedback">
+          <div *ngIf="f['codigo'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="">unidad</label>
+        <input type="text" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          <b> Comunicacion Preventiva:</b></label
+        >
+        <div class="row">
+          <div class="col-md-4">
+            <label for="">Año:</label>
+            <input
+              [(ngModel)]="item.anio"
+              type="number"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="">Nro:</label>
+            <input
+              [(ngModel)]="item.nro"
+              type="number"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="">Letra:</label>
+            <input
+              [(ngModel)]="item.letra"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <label for="">Intervencion Policial</label>
+          <input
+            [(ngModel)]="item.intervencionPol"
+            type="checkbox"
+            class="form-sm-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="">Fecha Hecho</label> &nbsp;
+            <input
+              [(ngModel)]="item.fechaHecho"
+              type="date"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="">Hora:</label> &nbsp;
+            <input
+              [(ngModel)]="item.fechaHecho"
+              type="time"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="">Delito:</label>
+        <input
+          (change)="filtrarDelito()"
+          [(ngModel)]="busqueda"
+          name="busqueda"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <select
+          *ngIf="ditems.length > 0"
+          class="form-control"
+          (click)="capturar(ditem)"
+        >
+          <option *ngFor="let ditem of ditems" value="volvo">
+            {{ ditem.descripcion }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

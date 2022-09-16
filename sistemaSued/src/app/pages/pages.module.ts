@@ -76,6 +76,9 @@ import { FilModeloVehiculoComponent } from './filters/fil-modelo-vehiculo/fil-mo
 import { AbmModeloVehiculoComponent } from './frm-abm/abm-modelo-vehiculo/abm-modelo-vehiculo.component';
 import { LstModeloVehiculoComponent } from './lst/lst-modelo-vehiculo/lst-modelo-vehiculo.component';
 import { ComboMarcaComponent } from './component/combo-marca/combo-marca.component';
+import { LstPreventivoComponent } from './lst/lst-preventivo/lst-preventivo.component';
+import { FilPreventivoComponent } from './filters/fil-preventivo/fil-preventivo.component';
+import { AbmPreventivoComponent } from './frm-abm/abm-preventivo/abm-preventivo.component';
 
 @NgModule({
     declarations: [
@@ -151,6 +154,9 @@ import { ComboMarcaComponent } from './component/combo-marca/combo-marca.compone
       AbmModeloVehiculoComponent,
       LstModeloVehiculoComponent,
       ComboMarcaComponent,
+      LstPreventivoComponent,
+      FilPreventivoComponent,
+      AbmPreventivoComponent,
     ],
     exports: [],
     imports: [
