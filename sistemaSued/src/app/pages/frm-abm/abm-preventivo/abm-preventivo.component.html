@@ -14,12 +14,8 @@
           id="codigo"
           type="date"
           class="form-control"
-          formControlName="codigo"
-          [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
+          [ngModelOptions]="{ standalone: true }"
         />
-        <div *ngIf="enviado && f['codigo'].errors" class="invalid-feedback">
-          <div *ngIf="f['codigo'].errors['required']">Campo obligatorio</div>
-        </div>
       </div>
       <div class="col-md-6">
         <label for="">unidad</label>
@@ -84,7 +80,7 @@
           <div class="col-md-6">
             <label for="">Hora:</label> &nbsp;
             <input
-              [(ngModel)]="item.fechaHecho"
+              [(ngModel)]="item.hora"
               type="time"
               class="form-control"
               [ngModelOptions]="{ standalone: true }"
@@ -105,17 +101,147 @@
           [ngModelOptions]="{ standalone: true }"
         />
         <select
-          *ngIf="ditems.length > 0"
+          *ngIf="ditems.length > 0 && this.busqueda"
+          name="ditem"
+          [(ngModel)]="ditem"
           class="form-control"
-          (click)="capturar(ditem)"
+          (ngModelChange)="capturar($event)"
+          [ngModelOptions]="{ standalone: true }"
         >
-          <option *ngFor="let ditem of ditems" value="volvo">
-            {{ ditem.descripcion }}
+          <option *ngFor="let ditem of ditems" [ngValue]="ditem">
+            {{ ditem.descripcion }} - {{ ditem.dnpcNavigation.descripcion }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="">Lugar:</label>
+        <input
+          (change)="filtrarLugar()"
+          [(ngModel)]="busquedaLugar"
+          name="busquedaLugar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <select
+          *ngIf="lugarItems.length > 0 && this.busquedaLugar"
+          name="litem"
+          [(ngModel)]="litem"
+          class="form-control"
+          (ngModelChange)="capturarLugar($event)"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option *ngFor="let litem of lugarItems" [ngValue]="litem">
+            {{ litem.descripcion }}
           </option>
         </select>
       </div>
     </div>
-    <div class="col-md-6"></div>
+    <div class="form-group row">
+      <div class="row">
+        <legend>
+          <b>
+            <em><u>Dirección:</u></em></b
+          >
+        </legend>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="">Calle:</label>
+          <input
+            (change)="filtrarCalle()"
+            [(ngModel)]="busquedaCalle"
+            name="busquedaCalle"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <select
+            *ngIf="CItems.length > 0 && this.busquedaCalle"
+            name="Citem"
+            [(ngModel)]="Citem"
+            class="form-control"
+            (ngModelChange)="capturarCalle($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let Citem of CItems" [ngValue]="Citem">
+              {{ Citem.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">Barrio:</label>
+          <input
+            (change)="filtrarBarrio()"
+            [(ngModel)]="busquedaBarrio"
+            name="busquedaBarrio"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <select
+            *ngIf="BItems.length > 0 && this.busquedaBarrio"
+            name="Bitem"
+            [(ngModel)]="Bitem"
+            class="form-control"
+            (ngModelChange)="capturarBarrio($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let Bitem of BItems" [ngValue]="Bitem">
+              {{ Bitem.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="">Nro.:</label> &nbsp;
+          <input
+            [(ngModel)]="item.dirNro"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="">Dirección Adicional:</label> &nbsp;
+          <input
+            [(ngModel)]="item.dirAdic"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <span> <b><u> Coordenadas:</u></b></span>
+      <div class="col-md-4">
+        <a class="btn btn-success" target="_blank" href="https://policiadigital.chaco.gob.ar/mapa/">
+          <i class="fa fa-street-view" aria-hidden="true"></i>
+          Ver Mapa
+        </a>
+      </div>
+      <div class="col-md-4">
+        <label for="">Latitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.latitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+      </div>
+      <div class="col-md-4">
+        <label for="">Longitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.longitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+      </div>
+    </div>
     <br />
     <hr />
     <div class="row">

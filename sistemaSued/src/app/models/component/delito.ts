@@ -11,5 +11,7 @@ export class Delito {
 
     dnpcNavigation: any;
 
-    constructor(){}
+    constructor(){
+        
+    }
 }
