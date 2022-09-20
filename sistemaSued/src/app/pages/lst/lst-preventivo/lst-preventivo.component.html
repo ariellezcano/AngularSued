@@ -38,10 +38,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of items">
-              <td class="text-primary">{{ item.fechaPreventivo }}</td>
+              <td class="text-primary">{{ item.fechaPreventivo |date: 'dd/MM/yyyy' }}</td>
               <td class="text-primary">{{ item.anio}} - {{ item.nro}} - {{ item.letra}}</td>
               <td class="text-primary">{{ item.intervencionPol }}</td>
-              <td class="text-primary">{{ item.fechaHecho }}</td>
+              <td class="text-primary">{{ item.fechaHecho |date: 'dd/MM/yyyy' }}</td>
               <td class="text-primary">{{ item.hora }}</td>
               <td class="text-primary">{{ item?.delitoNavigation?.descripcion }}</td>
               <td>

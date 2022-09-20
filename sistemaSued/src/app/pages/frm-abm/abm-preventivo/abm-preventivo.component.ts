@@ -127,15 +127,15 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async guardar() {
-    console.log("hora", this.item.hora);
+    console.log("hora", this.item);
     try {
       let data = await this.wsdl
         .doInsert(this.item)
-        .then
-        /*data => {
-          console.log("data de data", data)
-        }*/
-        ();
+        .then(
+          data => {
+            console.log("data de data", data)
+          }
+        );
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
