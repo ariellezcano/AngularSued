@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 import { Barrio, Calle, Delito, Lugar, Preventivo } from 'src/app/models/index.models';
 import { BarrioService, CalleService, DelitoService, LugarService, PreventivoService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
@@ -127,14 +128,16 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async guardar() {
-    console.log("hora", this.item);
+    
+    this.item.hora = moment(this.item.hora, "h:mm:ss A").format('HH:mm');
+    console.log(this.item.hora);
     try {
       let data = await this.wsdl
         .doInsert(this.item)
         .then(
-          data => {
-            console.log("data de data", data)
-          }
+          // data => {
+          //   console.log("data de data", data)
+          // }
         );
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
