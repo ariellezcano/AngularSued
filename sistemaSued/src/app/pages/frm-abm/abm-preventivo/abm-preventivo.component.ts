@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -114,15 +115,17 @@ export class AbmPreventivoComponent implements OnInit {
               this.item.fechaPreventivo
             ).format('YYYY-MM-DD');
           }
-          if (this.item.hora != undefined) {
-            let item = this.item.hora.toString();
-            for (let i = 0; i < item.length; i++) {
-              if (i == 1) {
-                //var element = i.toString();
-                var separar = i.toString().split(':');
-                //var format = separar.replace(/[',']/g, ':');
-              }
-            }
+          if(this.item.barrio != undefined){
+            this.busquedaBarrio = this.item.barrioNavigation.nombre;
+          }
+          if(this.item.delito != undefined){
+            this.busqueda = this.item.delitoNavigation.descripcion;
+          }
+          if(this.item.lugar != undefined){
+            this.busquedaLugar = this.item.lugarNavigation.descripcion;
+          }
+          if(this.item.calle != undefined){
+            this.busquedaCalle = this.item.calleNavigation.nombre;
           }
         }
       } catch (error) {}
@@ -163,9 +166,10 @@ export class AbmPreventivoComponent implements OnInit {
   async guardar() {
     var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
     //var convert = hora;
-    var Format = hora.replace(/[:]/g, '');
-    this.item.hora = Number(Format);
-    console.log(this.item.hora);
+    //var Format = hora.replace(/[:]/g, '');
+    this.item.hora = hora;
+
+    console.log(this.item);
 
     try {
       let data = await this.wsdl
