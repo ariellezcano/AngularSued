@@ -7,8 +7,20 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { Barrio, Calle, Delito, Lugar, Preventivo } from 'src/app/models/index.models';
-import { BarrioService, CalleService, DelitoService, LugarService, PreventivoService } from 'src/app/services/index.service';
+import {
+  Barrio,
+  Calle,
+  Delito,
+  Lugar,
+  Preventivo,
+} from 'src/app/models/index.models';
+import {
+  BarrioService,
+  CalleService,
+  DelitoService,
+  LugarService,
+  PreventivoService,
+} from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -91,6 +103,27 @@ export class AbmPreventivoComponent implements OnInit {
         // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
+
+          if (this.item.fechaHecho != undefined) {
+            this.item.fechaHecho = moment(this.item.fechaHecho).format(
+              'YYYY-MM-DD'
+            );
+          }
+          if (this.item.fechaPreventivo != undefined) {
+            this.item.fechaPreventivo = moment(
+              this.item.fechaPreventivo
+            ).format('YYYY-MM-DD');
+          }
+          if (this.item.hora != undefined) {
+            let item = this.item.hora.toString();
+            for (let i = 0; i < item.length; i++) {
+              if (i == 1) {
+                //var element = i.toString();
+                var separar = i.toString().split(':');
+                //var format = separar.replace(/[',']/g, ':');
+              }
+            }
+          }
         }
       } catch (error) {}
     }
@@ -99,11 +132,11 @@ export class AbmPreventivoComponent implements OnInit {
   doAction() {
     this.enviado = true;
     //if (this.form.valid) {
-      if (this.id > 0) {
-        this.actualizarDatos(this.item);
-      } else {
-        this.guardar();
-      }
+    if (this.id > 0) {
+      this.actualizarDatos(this.item);
+    } else {
+      this.guardar();
+    }
     //}
   }
 
@@ -128,17 +161,20 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async guardar() {
-    
-    this.item.hora = moment(this.item.hora, "h:mm:ss A").format('HH:mm');
+    var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
+    //var convert = hora;
+    var Format = hora.replace(/[:]/g, '');
+    this.item.hora = Number(Format);
     console.log(this.item.hora);
+
     try {
       let data = await this.wsdl
         .doInsert(this.item)
-        .then(
-          // data => {
-          //   console.log("data de data", data)
-          // }
-        );
+        .then
+        // data => {
+        //   console.log("data de data", data)
+        // }
+        ();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -171,19 +207,18 @@ export class AbmPreventivoComponent implements OnInit {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlDelito.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
-        console.log('data', result);
         if (result.code == 200) {
           this.ditems = [];
           this.ditems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada')
+          Swal.fire('No existe la busqueda realizada');
         }
       }
     } catch (error) {}
   }
 
-  capturar(event: Delito){
-    if(event != undefined){
+  capturar(event: Delito) {
+    if (event != undefined) {
       this.item.delito = event.id;
       this.busqueda = event.descripcion;
     }
@@ -198,16 +233,16 @@ export class AbmPreventivoComponent implements OnInit {
           this.lugarItems = [];
           this.lugarItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada')
+          Swal.fire('No existe la búsqueda realizada');
         }
       }
     } catch (error) {
-      Swal.fire("Error al obtener el dato")
+      Swal.fire('Error al obtener el dato');
     }
   }
 
-  capturarLugar(event: Lugar){
-    if(event != undefined){
+  capturarLugar(event: Lugar) {
+    if (event != undefined) {
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
     }
@@ -222,16 +257,16 @@ export class AbmPreventivoComponent implements OnInit {
           this.CItems = [];
           this.CItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada')
+          Swal.fire('No existe la búsqueda realizada');
         }
       }
     } catch (error) {
-      Swal.fire("Error al obtener el dato")
+      Swal.fire('Error al obtener el dato');
     }
   }
 
-  capturarCalle(event: Calle){
-    if(event != undefined){
+  capturarCalle(event: Calle) {
+    if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
     }
@@ -246,16 +281,16 @@ export class AbmPreventivoComponent implements OnInit {
           this.BItems = [];
           this.BItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada')
+          Swal.fire('No existe la búsqueda realizada');
         }
       }
     } catch (error) {
-      Swal.fire("Error al obtener el dato")
+      Swal.fire('Error al obtener el dato');
     }
   }
 
-  capturarBarrio(event: Barrio){
-    if(event != undefined){
+  capturarBarrio(event: Barrio) {
+    if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
     }
