@@ -19,3 +19,4 @@ export {ArmaMarca} from './component/arma-marca';
 export {VehiculoMarca} from './component/vehiculo-marca';
 export {ModeloVehiculo} from './component/modelo-vehiculo';
 export {Preventivo} from './component/preventivo';
+export {PreventivoMedio} from './component/preventivo-medio';

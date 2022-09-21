@@ -18,6 +18,7 @@ import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-mo
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
+import { AbmPreventivoMedioComponent } from "./frm-abm/abm-preventivo-medio/abm-preventivo-medio.component";
 import { AbmPreventivoComponent } from "./frm-abm/abm-preventivo/abm-preventivo.component";
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
 import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
@@ -393,6 +394,11 @@ const routes: Routes = [
             {
               path: '',
               component: LstPreventivoComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'medioUtilizado/:id',
+              component: AbmPreventivoMedioComponent,
              //canActivate: [AuthGuard],
             },
           ],

@@ -18,4 +18,5 @@ export {ArmaMarcaService} from './component/arma-marca.service';
 export {VehiculoMarcaService} from './component/vehiculo-marca.service';
 export {ModeloVehiculoService} from './component/modelo-vehiculo.service';
 export {PreventivoService} from './component/preventivo.service';
-export {LugarService} from './component/lugar.service'
+export {LugarService} from './component/lugar.service';
+export {PreventivoMedioService} from './component/preventivo-medio.service';

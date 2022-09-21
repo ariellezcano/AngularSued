@@ -45,7 +45,28 @@
               <td class="text-primary">{{ item.hora }}</td>
               <td class="text-primary">{{ item?.delitoNavigation?.descripcion }}</td>
               <td>
-                <button
+                <div class="row">
+                  <div class="col-md-12">
+                    <select
+                    [(ngModel)]="seleccionAccion"
+                    (click)="seleccion(item.id)"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option id="opt" selected>Seleccione:</option>
+                    <option value="medio">Medio Utilizado</option>
+                    <option value="objeto">Objeto</option>
+                    <option value="modalidad">Modalidad</option>
+                    <option value="victimas">Victimas</option>
+                    <option value="inculpados">Inculpados</option>
+                    <option value="ampliaciones">Ampliaciones</option>
+                  </select>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button
                   (click)="linkear(item.id)"
                   type="button"
                   title="Modificar"
@@ -65,7 +86,9 @@
                   class="btn btn-danger btn-sm"
                 >
                   <i class="fa fa-trash"></i>
-                </button>
+                </button>  
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

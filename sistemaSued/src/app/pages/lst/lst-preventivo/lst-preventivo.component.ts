@@ -8,15 +8,17 @@ import { FilPreventivoComponent } from '../../filters/fil-preventivo/fil-prevent
 @Component({
   selector: 'app-lst-preventivo',
   templateUrl: './lst-preventivo.component.html',
-  styleUrls: ['./lst-preventivo.component.scss']
+  styleUrls: ['./lst-preventivo.component.scss'],
 })
 export class LstPreventivoComponent implements OnInit {
+  @ViewChild(FilPreventivoComponent, { static: false })
+  fil!: FilPreventivoComponent;
 
-  @ViewChild(FilPreventivoComponent, { static: false }) fil!: FilPreventivoComponent;
+  seleccionAccion: any;
 
   item!: Preventivo;
-
   items: Preventivo[];
+
   user: any;
 
   constructor(private wsdl: PreventivoService, private router: Router) {
@@ -24,8 +26,7 @@ export class LstPreventivoComponent implements OnInit {
     this.items = [];
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   doFound(event: Preventivo[]) {
     this.items = event;
@@ -70,6 +71,29 @@ export class LstPreventivoComponent implements OnInit {
           );
         }
       });
+  }
+
+  seleccion(id: any) {
+    switch (this.seleccionAccion.length > 0) {
+      case this.seleccionAccion == 'medio':
+        this.router.navigateByUrl('lst-preventivo/medioUtilizado/' + id);
+        break;
+      case this.seleccionAccion == 'objeto':
+        this.router.navigateByUrl('lst-preventivo/abmSalida/' + id);
+        break;
+      case this.seleccionAccion == 'modalidad':
+        this.router.navigateByUrl('lst-preventivo/abmLibertad/' + id);
+        break;
+      case this.seleccionAccion == 'victimas':
+        this.router.navigateByUrl('lst-preventivo/abmlibTransitoria/' + id);
+        break;
+      case this.seleccionAccion == 'inculpados':
+        this.router.navigateByUrl('lst-preventivo/abmTraslado/' + id);
+        break;
+      case this.seleccionAccion == 'ampliaciones':
+        this.router.navigateByUrl('lst-preventivo/abmTraslado/' + id);
+        break;
+    }
   }
 
   valorRol(item: any) {

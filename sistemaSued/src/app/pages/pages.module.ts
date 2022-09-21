@@ -79,6 +79,7 @@ import { ComboMarcaComponent } from './component/combo-marca/combo-marca.compone
 import { LstPreventivoComponent } from './lst/lst-preventivo/lst-preventivo.component';
 import { FilPreventivoComponent } from './filters/fil-preventivo/fil-preventivo.component';
 import { AbmPreventivoComponent } from './frm-abm/abm-preventivo/abm-preventivo.component';
+import { AbmPreventivoMedioComponent } from './frm-abm/abm-preventivo-medio/abm-preventivo-medio.component';
 
 @NgModule({
     declarations: [
@@ -157,6 +158,7 @@ import { AbmPreventivoComponent } from './frm-abm/abm-preventivo/abm-preventivo.
       LstPreventivoComponent,
       FilPreventivoComponent,
       AbmPreventivoComponent,
+      AbmPreventivoMedioComponent,
     ],
     exports: [],
     imports: [
