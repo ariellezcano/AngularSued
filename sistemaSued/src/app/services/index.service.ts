@@ -20,3 +20,4 @@ export {ModeloVehiculoService} from './component/modelo-vehiculo.service';
 export {PreventivoService} from './component/preventivo.service';
 export {LugarService} from './component/lugar.service';
 export {PreventivoMedioService} from './component/preventivo-medio.service';
+export {PrevObjetoService} from './component/prev-objeto.service';

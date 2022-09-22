@@ -1,7 +1,5 @@
 <div class="container">
-  <h3 class="alert alert-info text-center" role="alert">
-    Panel Medios Utilizados
-  </h3>
+  <h3 class="alert alert-info text-center" role="alert">Panel Objetos</h3>
   <hr />
 
   <div class="row">
@@ -58,20 +56,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
-      <input
-        [(ngModel)]="item.fecha"
-        id="codigo"
-        type="date"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </div>
     <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Medio:</label>
+      <label for="" class="col-sm-12 col-form-label">Filtro Objeto:</label>
       <input
-        (change)="filtrarMedio()"
+        (change)="filtrarObjeto()"
         [(ngModel)]="busqueda"
         name="busqueda"
         type="text"
@@ -79,19 +67,41 @@
         [ngModelOptions]="{ standalone: true }"
       />
       <select
-        *ngIf="Mitems.length > 0 && this.busqueda"
-        name="Mitem"
-        [(ngModel)]="Mitem"
+        *ngIf="Oitems.length > 0 && this.busqueda"
+        name="Oitem"
+        [(ngModel)]="Oitem"
         class="form-control"
         (ngModelChange)="capturar($event)"
         [ngModelOptions]="{ standalone: true }"
       >
-        <option *ngFor="let Mitem of Mitems" [ngValue]="Mitem">
-          {{ Mitem.descripcion }}
+        <option *ngFor="let Oitem of Oitems" [ngValue]="Oitem">
+          {{ Oitem.descripcion }}
         </option>
       </select>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Cantidad:</label>
+      <input
+        [(ngModel)]="item.cantidad"
+        id="codigo"
+        type="number"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Valor:</label>
+      <input
+        [(ngModel)]="item.valor"
+        id="codigo"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
       <center>
         <label for="Nombre" class="col-sm-12 col-form-label"> Secuestro:</label>
         <input
@@ -102,21 +112,45 @@
         />
       </center>
     </div>
-    <div class="col-md-3">
-      <center>
-        <button
-          id="boton"
-          type="button"
-          title="Guardar"
-          placement="top"
-          (click)="addRow()"
-          show-delay="10"
-          class="btn btn-outline-info"
-        >
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          Agregar a tabla
-        </button>
-      </center>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
+      <input
+        [(ngModel)]="item.fecha"
+        name="fecha"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label">
+        Cantidad Secuestro:</label
+      >
+      <input
+        [(ngModel)]="item.cantSecuestro"
+        name="cantSecuestro"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <center>
+          <button
+            id="boton"
+            type="button"
+            title="Guardar"
+            placement="top"
+            (click)="addRow()"
+            show-delay="10"
+            class="btn btn-outline-info"
+          >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Agregar a tabla
+          </button>
+        </center>
+      </div>
     </div>
   </div>
   <br />
@@ -124,26 +158,33 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
-          <th>Código Medio</th>
+          <th>Código Objeto</th>
           <th>Descripción</th>
           <th>Secuestro</th>
+          <th>Valor</th>
           <th>Fecha</th>
           <th>Acción</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
-          <ng-container *ngIf="i.id > 0; then thenTemplate; else elseTemplate"></ng-container>
+          <ng-container
+            *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
+          ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.medioNavigation.codMedio }} - {{ i.medioNavigation.codTipo }}</td>
-            <td>{{ i.medioNavigation.descripcion }}</td>
+            <td>
+              {{ i.objetoNavigation.codTipo }} -
+              {{ i.objetoNavigation.codSubTipo }}
+            </td>
+            <td>{{ i.objetoNavigation.descripcion }}</td>
           </ng-template>
           <ng-template #elseTemplate>
             <td>{{ i.codigo }}</td>
-            <td>{{ i.capturaDescripcion }}</td>
+            <td>{{ i.capturaObj }}</td>
           </ng-template>
           <td>{{ valor(i.secuestro) }}</td>
-          <td>{{ i.fecha |date:"dd/MM/yyyy" }}</td>
+          <td>{{ i.valor }}</td>
+          <td>{{ i.fecha | date: "dd/MM/yyyy" }}</td>
 
           <!-- editar y guardar -->
           <ng-container
@@ -160,7 +201,7 @@
                 (click)="preDelete(i)"
                 class="btn btn-danger btn-circle"
               >
-              <i class="fa fa-trash" aria-hidden="true"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
             </td>
           </ng-template>
@@ -175,7 +216,7 @@
                 (click)="deleteRow(i)"
                 class="btn btn-info btn-circle"
               >
-              <i class="fa fa-trash" aria-hidden="true"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
             </td>
           </ng-template>
@@ -195,11 +236,13 @@
   <br />
   <hr />
   <div class="row">
-    <button class="btn btn-dark" type="button" (click)="agregarDato()">Guardar</button>
+    <button class="btn btn-dark" type="button" (click)="agregarDato()">
+      Guardar
+    </button>
     &nbsp;
     <button class="btn btn-info" type="button" (click)="back()">
       Cancelar
     </button>
   </div>
 </div>
-<br>
+<br />

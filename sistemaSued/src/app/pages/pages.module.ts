@@ -80,6 +80,7 @@ import { LstPreventivoComponent } from './lst/lst-preventivo/lst-preventivo.comp
 import { FilPreventivoComponent } from './filters/fil-preventivo/fil-preventivo.component';
 import { AbmPreventivoComponent } from './frm-abm/abm-preventivo/abm-preventivo.component';
 import { AbmPreventivoMedioComponent } from './frm-abm/abm-preventivo-medio/abm-preventivo-medio.component';
+import { AbmPrevObjetoComponent } from './frm-abm/abm-prev-objeto/abm-prev-objeto.component';
 
 @NgModule({
     declarations: [
@@ -159,6 +160,7 @@ import { AbmPreventivoMedioComponent } from './frm-abm/abm-preventivo-medio/abm-
       FilPreventivoComponent,
       AbmPreventivoComponent,
       AbmPreventivoMedioComponent,
+      AbmPrevObjetoComponent,
     ],
     exports: [],
     imports: [

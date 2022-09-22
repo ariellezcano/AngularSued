@@ -79,7 +79,7 @@ export class LstPreventivoComponent implements OnInit {
         this.router.navigateByUrl('lst-preventivo/medioUtilizado/' + id);
         break;
       case this.seleccionAccion == 'objeto':
-        this.router.navigateByUrl('lst-preventivo/abmSalida/' + id);
+        this.router.navigateByUrl('lst-preventivo/objeto/' + id);
         break;
       case this.seleccionAccion == 'modalidad':
         this.router.navigateByUrl('lst-preventivo/abmLibertad/' + id);
@@ -96,12 +96,15 @@ export class LstPreventivoComponent implements OnInit {
     }
   }
 
-  valorRol(item: any) {
+  valor(item: any) {
     item = item;
-    if (item == null) {
-      this.user = 'Sin asignar';
+    let valor = '';
+    if (item) {
+      valor = 'Si';
+    } else {
+      valor = 'No';
     }
-    return this.user;
+    return valor;
   }
 
   linkear(id?: Number) {

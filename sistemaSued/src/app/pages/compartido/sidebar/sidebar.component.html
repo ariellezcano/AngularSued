@@ -1,10 +1,25 @@
+<div class="position">
 <div
   id="title"
   class="top-row ps-3 navbar navbar-dark"
-  style="width: 228px; height: 55px; overflow: auto"
+  style="width: 228px; height: 55px;"
 >
   <div class="container-fluid">
-    <a class="navbar-brand">Estadísticas Policiales</a>
+    <div class="row">
+      <div class="col-md-3">
+        <a class="simple-text logo-mini">
+          <div class="logo-img">
+            <img src="./assets/img/escudo.png" />
+          </div>
+        </a>
+      </div>
+      <div class="col-md-9">
+        <center>
+        <span id="texto"><b>Estadísticas</b></span>
+      </center>
+      </div>
+    </div>
+    
   </div>
 </div>
 
@@ -24,12 +39,7 @@
       </NavLink>
     </div>
     <div *ngIf="areaExpandida">
-      <ul style="width: 250px; height: 200px; overflow: auto">
-        <!-- <li>
-                    <a href="/lst-articulo">
-                        Artículos
-                    </a>
-                </li> -->
+      <ul style="width: 228px; height: 200px; overflow: auto">
         <li>
           <a href="/lst-delito"> Delitos </a>
         </li>
@@ -121,4 +131,5 @@
       </NavLink>
     </div>
   </nav>
+</div>
 </div>

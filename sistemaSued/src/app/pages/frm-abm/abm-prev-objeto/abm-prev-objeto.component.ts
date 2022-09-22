@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Medio,
-  Preventivo,
-  PreventivoMedio,
-} from 'src/app/models/index.models';
-import {
-  MedioService,
-  PreventivoMedioService,
-  PreventivoService,
-} from 'src/app/services/index.service';
+import { Objeto, Preventivo, PrevObjeto } from 'src/app/models/index.models';
+import { ObjetoService, PreventivoService, PrevObjetoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-abm-preventivo-medio',
-  templateUrl: './abm-preventivo-medio.component.html',
-  styleUrls: ['./abm-preventivo-medio.component.scss'],
+  selector: 'app-abm-prev-objeto',
+  templateUrl: './abm-prev-objeto.component.html',
+  styleUrls: ['./abm-prev-objeto.component.scss']
 })
-export class AbmPreventivoMedioComponent implements OnInit {
+export class AbmPrevObjetoComponent implements OnInit {
+
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -28,31 +21,31 @@ export class AbmPreventivoMedioComponent implements OnInit {
   enviado = false;
 
   busqueda;
-
+  
   prev: Preventivo;
-  prevMed: PreventivoMedio;
+  prevObj: PrevObjeto;
 
-  item: PreventivoMedio;
-  items: PreventivoMedio[];
+  item: PrevObjeto;
+  items: PrevObjeto[];
 
-  Mitems: Medio[];
-  Mitem: Medio;
+  Oitems: Objeto[];
+  Oitem: Objeto;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private wsdl: PreventivoMedioService,
+    private wsdl: PrevObjetoService,
     private wsdlPreventivo: PreventivoService,
-    private wsdlMedio: MedioService,
+    private wsdlMedio: ObjetoService,
     private formBuilder: FormBuilder
   ) {
-    this.item = new PreventivoMedio();
+    this.item = new PrevObjeto();
     this.items = [];
     this.prev = new Preventivo();
-    this.prevMed = new PreventivoMedio();
+    this.prevObj = new PrevObjeto();
     this.busqueda = '';
-    this.Mitem = new Medio();
-    this.Mitems = [];
+    this.Oitem = new Objeto();
+    this.Oitems = [];
   }
 
   ngOnInit(): void {
@@ -90,8 +83,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
-        //this.codigo = result.data[0].medioNavigation.codMedio +'-'+ result.data.medioNavigation.codTipo
-        //this.captura = result.data[0].medioNavigation.descripcion;
       } else {
         this.items = [];
       }
@@ -109,7 +100,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   //   }
   // }
 
-  async actualizarDatos(obj: PreventivoMedio) {
+  async actualizarDatos(obj: PrevObjeto) {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -130,11 +121,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   async agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
-      this.prevMed = new PreventivoMedio();
-      this.prevMed = this.items[index];
-      if (this.prevMed.id == undefined) {
-        this.item = new PreventivoMedio();
-        this.item = this.prevMed;
+      this.prevObj = new PrevObjeto();
+      this.prevObj = this.items[index];
+      if (this.prevObj.id == undefined) {
+        this.item = new PrevObjeto();
+        this.item = this.prevObj;
         this.guardar();
       }
     }
@@ -176,14 +167,14 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
-  async filtrarMedio() {
+  async filtrarObjeto() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlMedio.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Mitems = [];
-          this.Mitems = result.data;
+          this.Oitems = [];
+          this.Oitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
         }
@@ -191,12 +182,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
     } catch (error) {}
   }
 
-  capturar(event: Medio) {
+  capturar(event: Objeto) {
     if (event != undefined) {
       this.busqueda = event.descripcion;
-      this.item.medioUtilizado = event.id;
-      this.item.capturaDescripcion = event.descripcion;
-      this.item.codigo = event.codTipo + '-' + event.codMedio;
+      this.item.objeto = event.id;
+      this.item.capturaObj = event.descripcion;
+      this.item.codigo = event.codTipo + '-' + event.codSubTipo;
     }
   }
 
@@ -204,7 +195,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   addRow() {
     this.busqueda = '';
     this.items.unshift(this.item);
-    this.item = new PreventivoMedio();
+    this.item = new PrevObjeto();
   }
 
   //elimina la fila en memoria
@@ -213,7 +204,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   }
 
   // se utiliza para pintar la fila en memoria
-  colores(item: PreventivoMedio) {
+  colores(item: PrevObjeto) {
     let color = '';
 
     if (item.id == undefined) {
@@ -225,15 +216,15 @@ export class AbmPreventivoMedioComponent implements OnInit {
     return color;
   }
 
-  preDelete(item: PreventivoMedio) {
-    this.item = new PreventivoMedio();
+  preDelete(item: PrevObjeto) {
+    this.item = new PrevObjeto();
     this.item = item;
 
     Swal.fire({
       title: 'Esta Seguro?',
       text:
         '¡No podrás recuperar este archivo ' +
-        item.medioNavigation.descripcion +
+        item.objetoNavigation.descripcion +
         '!',
       icon: 'warning',
       showCancelButton: true,
@@ -280,4 +271,5 @@ export class AbmPreventivoMedioComponent implements OnInit {
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
+
 }

@@ -1,4 +1,11 @@
 #pol{
-    color: black; 
+    color: black !important; 
+    font-weight: bold !important; 
     //margin-top: -80px !important;
+}
+.img{
+    background-image: url("../../../../assets/img/0.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
 }
