@@ -18,6 +18,7 @@ import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-mo
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
+import { AbmPrevModalidadComponent } from "./frm-abm/abm-prev-modalidad/abm-prev-modalidad.component";
 import { AbmPrevObjetoComponent } from "./frm-abm/abm-prev-objeto/abm-prev-objeto.component";
 import { AbmPreventivoMedioComponent } from "./frm-abm/abm-preventivo-medio/abm-preventivo-medio.component";
 import { AbmPreventivoComponent } from "./frm-abm/abm-preventivo/abm-preventivo.component";
@@ -54,36 +55,6 @@ const routes: Routes = [
       component: PagesComponent,
       children: [
         { path: 'principal', component: PantallaPrincipalComponent},
-        // {
-        //   path: 'lst-demorados',
-        //   children: [
-        //     {
-        //       path: 'abm/:id',
-        //       component: AbmDemoradosComponent,
-        //      canActivate: [AuthGuard],
-        //     },
-        //    {
-        //       path: '',
-        //       component: LstDemoradosComponent,
-        //       canActivate: [AuthGuard],
-        //     },
-        //     {
-        //       path: 'abmPertenencias/:id',
-        //       component: AbmPertenenciaComponent,
-        //       canActivate: [AuthGuard],
-        //     },
-        //     {
-        //       path: 'abmFotos/:id',
-        //       component: AbmFotosComponent,
-        //       canActivate: [AuthGuard],
-        //     },
-        //     {
-        //       path: 'abmRegreso/:id',
-        //       component: AbmRegresoComponent,
-        //       canActivate: [AuthGuard],
-        //     },
-        //   ],
-        // },
           {
           path: 'lst-departamento',
           children: [
@@ -405,6 +376,11 @@ const routes: Routes = [
             {
               path: 'objeto/:id',
               component: AbmPrevObjetoComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'modalidad/:id',
+              component: AbmPrevModalidadComponent,
              //canActivate: [AuthGuard],
             },
           ],

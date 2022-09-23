@@ -252,10 +252,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   async delete() {
     try {
-      let res = await this.wsdl.doUpdate(this.item, this.item.id).then();
+      let res = await this.wsdl.doDelete(this.item.id).then();
       const result = JSON.parse(JSON.stringify(res));
 
       if (result.code == 200) {
+        location.reload();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');
