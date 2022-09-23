@@ -75,6 +75,9 @@ export class LstPreventivoComponent implements OnInit {
 
   seleccion(id: any) {
     switch (this.seleccionAccion.length > 0) {
+      case this.seleccionAccion == 'caratula':
+        this.router.navigateByUrl('lst-preventivo/caratulas/' + id);
+        break;
       case this.seleccionAccion == 'medio':
         this.router.navigateByUrl('lst-preventivo/medioUtilizado/' + id);
         break;

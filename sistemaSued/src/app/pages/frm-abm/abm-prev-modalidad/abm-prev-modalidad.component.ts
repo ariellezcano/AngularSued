@@ -79,12 +79,11 @@ export class AbmPrevModalidadComponent implements OnInit {
 
   async obtenerDetalle() {
     try {
-      let data = await this.wsdl.getList(1, 1000).then();
+      let data = await this.wsdl.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        console.log("items",this.items)
         this.items = result.data;
-        //this.codigo = result.data[0].medioNavigation.codMedio +'-'+ result.data.medioNavigation.codTipo
-        //this.captura = result.data[0].medioNavigation.descripcion;
       } else {
         this.items = [];
       }
@@ -134,7 +133,7 @@ export class AbmPrevModalidadComponent implements OnInit {
   }
 
   async guardar() {
-    this.item.preventivo = Number(this.id);
+    this.item.preventivo = this.id;
     console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(

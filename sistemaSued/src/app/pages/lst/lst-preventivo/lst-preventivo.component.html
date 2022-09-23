@@ -27,7 +27,6 @@
           <thead class="border border-dark">
             <tr>
               <th>Fecha</th>
-             
               <th>Preventivo N°</th>
               <th>Intervencion Pol.</th>
               <th>Fecha Hecho</th>
@@ -38,6 +37,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of items">
+              <td>{{item.id}}</td>
               <td class="text-primary">{{ item.fechaPreventivo |date: 'dd/MM/yyyy' }}</td>
               <td class="text-primary">{{ item.anio}} - {{ item.nro}} - {{ item.letra}}</td>
               <td class="text-primary">{{ valor(item.intervencionPol) }}</td>
@@ -54,6 +54,7 @@
                     aria-label="Default select example"
                   >
                     <option id="opt" selected>Seleccione:</option>
+                    <option value="caratula">Carátulas Secundarias</option>
                     <option value="medio">Medio Utilizado</option>
                     <option value="objeto">Objeto</option>
                     <option value="modalidad">Modalidad</option>
