@@ -22,3 +22,5 @@ export {LugarService} from './component/lugar.service';
 export {PreventivoMedioService} from './component/preventivo-medio.service';
 export {PrevObjetoService} from './component/prev-objeto.service';
 export {PrevModalidadService} from './component/prev-modalidad.service';
+export {PrevCaratulaService} from './component/prev-caratula.service';
+export {PreSnicService} from './component/pre-snic.service';

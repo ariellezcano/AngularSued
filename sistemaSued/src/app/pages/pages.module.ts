@@ -82,6 +82,8 @@ import { AbmPreventivoComponent } from './frm-abm/abm-preventivo/abm-preventivo.
 import { AbmPreventivoMedioComponent } from './frm-abm/abm-preventivo-medio/abm-preventivo-medio.component';
 import { AbmPrevObjetoComponent } from './frm-abm/abm-prev-objeto/abm-prev-objeto.component';
 import { AbmPrevModalidadComponent } from './frm-abm/abm-prev-modalidad/abm-prev-modalidad.component';
+import { AbmPrevCaratulaComponent } from './frm-abm/abm-prev-caratula/abm-prev-caratula.component';
+import { AbmSnicComponent } from './frm-abm/abm-snic/abm-snic.component';
 
 @NgModule({
     declarations: [
@@ -163,6 +165,8 @@ import { AbmPrevModalidadComponent } from './frm-abm/abm-prev-modalidad/abm-prev
       AbmPreventivoMedioComponent,
       AbmPrevObjetoComponent,
       AbmPrevModalidadComponent,
+      AbmPrevCaratulaComponent,
+      AbmSnicComponent,
     ],
     exports: [],
     imports: [

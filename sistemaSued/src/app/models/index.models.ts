@@ -22,3 +22,5 @@ export {Preventivo} from './component/preventivo';
 export {PreventivoMedio} from './component/preventivo-medio';
 export {PrevObjeto} from './component/prev-objeto';
 export {PrevModalidad} from './component/prev-modalidad';
+export {PrevCaratula} from './component/prev-caratula';
+export {PrevSnic} from './component/prev-snic';

@@ -18,12 +18,14 @@ import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-mo
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
+import { AbmPrevCaratulaComponent } from "./frm-abm/abm-prev-caratula/abm-prev-caratula.component";
 import { AbmPrevModalidadComponent } from "./frm-abm/abm-prev-modalidad/abm-prev-modalidad.component";
 import { AbmPrevObjetoComponent } from "./frm-abm/abm-prev-objeto/abm-prev-objeto.component";
 import { AbmPreventivoMedioComponent } from "./frm-abm/abm-preventivo-medio/abm-preventivo-medio.component";
 import { AbmPreventivoComponent } from "./frm-abm/abm-preventivo/abm-preventivo.component";
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
 import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
+import { AbmSnicComponent } from "./frm-abm/abm-snic/abm-snic.component";
 import { AbmVehiculoMarcaComponent } from "./frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component";
 import { AbmVinculoComponent } from "./frm-abm/abm-vinculo/abm-vinculo.component";
 import { LstArmaMarcaComponent } from "./lst/lst-arma-marca/lst-arma-marca.component";
@@ -381,6 +383,16 @@ const routes: Routes = [
             {
               path: 'modalidad/:id',
               component: AbmPrevModalidadComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'caratula/:id',
+              component: AbmPrevCaratulaComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'snic/:id',
+              component: AbmSnicComponent,
              //canActivate: [AuthGuard],
             },
           ],
