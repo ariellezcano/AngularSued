@@ -33,8 +33,8 @@ export class AbmSnicComponent implements OnInit {
   ngOnInit(): void {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
-      codigo: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      //codigo: ['', Validators.required],
+      //descripcion: ['', Validators.required]
       });
 
     //captura el id que viene en el url
@@ -61,14 +61,14 @@ export class AbmSnicComponent implements OnInit {
 
   doAction() {
     this.enviado = true;
-    if (this.form.valid) {
-      if (this.id > 0) {
-        this.actualizarDatos(this.item);
-      } else {
+    //if (this.form.valid) {
+      //if (this.id > 0) {
+       // this.actualizarDatos(this.item);
+      //} else {
         //console.log("datos enviados", this.item)
         this.guardar();
-      }
-    }
+     // }
+    //}
   }
 
   async actualizarDatos(obj: PrevSnic) {
@@ -93,7 +93,8 @@ export class AbmSnicComponent implements OnInit {
 
 
   async guardar() {
-    //console.log("items", this.item);
+    console.log("items", this.item);
+    this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {

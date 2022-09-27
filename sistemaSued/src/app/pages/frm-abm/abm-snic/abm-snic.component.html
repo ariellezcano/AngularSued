@@ -1,50 +1,619 @@
 <div class="container">
-    <h3 class="alert alert-info text-center" role="alert">Panel ABM Vinculos</h3>
+  <h3 class="alert alert-info text-center" role="alert">Panel S.N.I.C.</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <h4>
+      <b> <u> Siniestros Viales</u></b>
+    </h4>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Lugar:</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Urbano:</label>
+        <input
+          [(ngModel)]="item.urbano"
+          name="urbano"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Sub-Urbanos:</label
+        >
+        <input
+          [(ngModel)]="item.subUrbano"
+          name="subUrbano"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Rural:</label>
+        <input
+          [(ngModel)]="item.rural"
+          name="subUrbano"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
     <hr />
-    <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
-      <div class="form-group row">
-        <div class="col-md-6">
-          <label for="Nombre" class="col-sm-12 col-form-label">
-            Código:</label
-          >
-          <input
-            [(ngModel)]="item.codigo"
-            id="codigo"
-            type="text"
-            class="form-control"
-            formControlName="codigo"
-            [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
-          />
-          <div *ngIf="enviado && f['codigo'].errors" class="invalid-feedback">
-            <div *ngIf="f['codigo'].errors['required']">
-              Campo obligatorio
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-            <label for="Nombre" class="col-sm-12 col-form-label"> Descripción:</label>
-            <input
-              [(ngModel)]="item.descripcion"
-              type="text"
-              class="form-control"
-              formControlName="descripcion"
-              [ngClass]="{ 'is-invalid': enviado && f['descripcion'].errors }"
-            />
-            <div *ngIf="enviado && f['descripcion'].errors" class="invalid-feedback">
-              <div *ngIf="f['descripcion'].errors['required']">Campo obligatorio</div>
-            </div> 
-        </div>
+    <div class="form-group row">
+      <legend><b>Horario:</b></legend>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Diurno:</label>
+        <input
+          [(ngModel)]="item.diurno"
+          name="diurno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <br />
-      <hr />
-      <div class="row">
-        <button class="btn btn-dark" type="submit">Guardar</button>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Nocturno:</label>
+        <input
+          [(ngModel)]="item.nocturno"
+          name="nocturno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Victimas:</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Leves:</label>
+        <input
+          [(ngModel)]="item.leves"
+          name="leves"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Graves:</label>
+        <input
+          [(ngModel)]="item.graves"
+          name="graves"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Fallecidos:</label
+        >
+        <input
+          [(ngModel)]="item.fallecidos"
+          name="fallecidos"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Vehículos Intervinientes (Indicar cantidad):</b></legend>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Particulares:</label
+        >
+        <input
+          [(ngModel)]="item.particulares"
+          name="particulares"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Carga:</label>
+        <input
+          [(ngModel)]="item.carga"
+          name="carga"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Pasajeros:</label>
+        <input
+          [(ngModel)]="item.pasajeros"
+          name="pasajeros"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Otros:</label>
+        <input
+          [(ngModel)]="item.otros"
+          name="pasajeros"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Modo Producción del Hecho:</b></legend>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Peatón:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoPeaton"
+          name="vehiculoPeaton"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Vehículo:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoVehiculo"
+          name="vehiculoVehiculo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Objeto fijo:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoObjeto"
+          name="vehiculoObjeto"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Bicicleta:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoBici"
+          name="vehiculoBici"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Motocicleta - Bicicleta:</label
+        >
+        <input
+          [(ngModel)]="item.motoBici"
+          name="motoBici"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Bicicleta sola:</label
+        >
+        <input
+          [(ngModel)]="item.bicicleta"
+          name="bicicleta"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo solo:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculo"
+          name="vehiculo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Motocicleta:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoMoto"
+          name="vehiculoMoto"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - T. a sangre:</label
+        >
+        <input
+          [(ngModel)]="item.vehiculoTsangre"
+          name="vehiculoTsangre"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Motocicleta - Motocicleta:</label
+        >
+        <input
+          [(ngModel)]="item.motoMoto"
+          name="motoMoto"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Motocicleta - T. a sangre:</label
+        >
+        <input
+          [(ngModel)]="item.motoTsangre"
+          name="motoTsangre"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Motocicleta - Peatón:</label
+        >
+        <input
+          [(ngModel)]="item.motoPeaton"
+          name="motoPeaton"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Múltiple:</label>
+        <input
+          [(ngModel)]="item.multiple"
+          name="multiple"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Tren:</label>
+        <input
+          [(ngModel)]="item.tren"
+          name="tren"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Atropello Animal:</label
+        >
+        <input
+          [(ngModel)]="item.atropelloAnimal"
+          name="atropelloAnimal"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Otro Modo:</label>
+        <input
+          [(ngModel)]="item.otroModo"
+          name="otroModo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-2">
+        <label for="" class="col-sm-12 col-form-label">Especificar:</label>
+      </div>
+      <div class="col-md-10">
+        <input
+          [(ngModel)]="item.modoEspecificar"
+          name="modoEspecificar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Tipo de Hecho:</b></legend>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Colisión:</label>
+        <input
+          [(ngModel)]="item.colision"
+          name="colision"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Vuelco:</label>
+        <input
+          [(ngModel)]="item.vuelco"
+          name="vuelco"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Inmersión:</label>
+        <input
+          [(ngModel)]="item.inmersion"
+          name="inmersion"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Incendio:</label>
+        <input
+          [(ngModel)]="item.incendio"
+          name="incendio"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Caidas ocupantes:</label
+        >
+        <input
+          [(ngModel)]="item.caidaOcupante"
+          name="caidaOcupante"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Otros:</label>
+        <input
+          [(ngModel)]="item.otro"
+          name="otro"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Se ignora:</label>
+        <input
+          [(ngModel)]="item.ignoraTh"
+          name="ignoraTh"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Ubicación de la calzada:</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Dentro de la calzada:</label
+        >
+        <input
+          [(ngModel)]="item.dentroCalzada"
+          name="dentroCalzada"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Fuera de la calzada:</label
+        >
+        <input
+          [(ngModel)]="item.fueraCalzada"
+          name="fueraCalzada"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Se ignora:</label>
+        <input
+          [(ngModel)]="item.ignoraCalzada"
+          name="ignoraCalzada"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Condiciones Climáticas:</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Clima Normal:</label
+        >
+        <input
+          [(ngModel)]="item.climaNormal"
+          name="climaNormal"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Niebla:</label>
+        <input
+          [(ngModel)]="item.niebla"
+          name="niebla"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Lluvia - Llovizna:</label
+        >
+        <input
+          [(ngModel)]="item.lluviaLlovizna"
+          name="lluviaLlovizna"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Nieve - granizo:</label
+        >
+        <input
+          [(ngModel)]="item.nieveGranizo"
+          name="nieveGranizo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Otra condición:</label
+        >
+        <input
+          [(ngModel)]="item.otraCondicion"
+          name="otraCondicion"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Intersección:</b></legend>
+      <div class="col-md-12">
         &nbsp;
-        <button class="btn btn-info" type="button" (click)="back()">
-          Cancelar
-        </button>
+        <label class="col-sm-12 col-form-label" for=""
+          >Seleccione si pasó en una intersección:</label
+        >
+        <input
+          [(ngModel)]="item.interseccion"
+          name="interseccion"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-    </form>
-  </div>
-  <br />
-  
+    </div>
+    <hr />
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <Legend><b>Semáforo:</b></Legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Funciona bien:</label
+        >
+        <input
+          [(ngModel)]="item.funcionaB"
+          name="funcionaB"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          No funciona:</label
+        >
+        <input
+          [(ngModel)]="item.noFunciona"
+          name="noFunciona"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> No hay:</label>
+        <input
+          [(ngModel)]="item.noHaySemaforo"
+          name="noHaySemaforo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />
