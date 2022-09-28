@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   URL: 'https://localhost:7033/api/',
+  URLGeolocalizacion: 'https://api.geoapify.com/v1/geocode/search?text=',
 };
 
 /*

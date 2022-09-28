@@ -48,7 +48,12 @@
           </div>
           <div class="col-md-4">
             <label for="">Letra:</label>
-            <select [ngModelOptions]="{ standalone: true }" [(ngModel)]="item.letra" class="form-select" aria-label="Default select example">
+            <select
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="item.letra"
+              class="form-select"
+              aria-label="Default select example"
+            >
               <option value="LGTB+">LGTB+</option>
               <option value="P">P</option>
               <option value="B">B</option>
@@ -77,7 +82,7 @@
               [ngModelOptions]="{ standalone: true }"
             />
           </div>
-        <div class="col-md-6">
+          <div class="col-md-6">
             <label for="">Hora:</label> &nbsp;
             <input
               [(ngModel)]="item.hora"
@@ -214,36 +219,87 @@
         </div>
       </div>
     </div>
-    <br>
+    <br />
     <div class="row">
-      <span> <b><u> Coordenadas:</u></b></span>
+      <legend><b>GEOLOCALIZACION</b></legend>
+    </div>
+    <div class="row">
       <div class="col-md-4">
-        <a class="btn btn-success" target="_blank" href="https://policiadigital.chaco.gob.ar/mapa/">
+        <label for="">Nombre de calle </label>
+        <legend>{{ Citem.nombre }}</legend>
+      </div>
+      <div class="col-md-4">
+        <label for="">Número</label>
+        <legend>{{ item.dirNro }}</legend>
+      </div>
+      <div class="col-md-4">
+        <app-combo-localidad
+          [dibujar]="item"
+          (emitir)="seleccionLocalidad($event)"
+        ></app-combo-localidad>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-outline-warning" (click)="buscarCoordenadas()">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          Buscar Coordenadas
+        </button>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <span>
+        <b><u> Coordenadas:</u></b></span
+      >
+      <div class="col-md-4">
+        <label for="">Latitud:</label> &nbsp;
+        <input
+          [(ngModel)]="item.latitud"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="">Longitud:</label> &nbsp;
+        <input
+          [(ngModel)]="item.longitud"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <a
+          class="btn btn-success"
+          target="_blank"
+          href="https://policiadigital.chaco.gob.ar/mapa/"
+        >
           <i class="fa fa-street-view" aria-hidden="true"></i>
           Ver Mapa
         </a>
       </div>
-      <div class="col-md-4">
-        <label for="">Latitud:</label> &nbsp;
-          <input
-            [(ngModel)]="item.latitud"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-      </div>
-      <div class="col-md-4">
-        <label for="">Longitud:</label> &nbsp;
-          <input
-            [(ngModel)]="item.longitud"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-      </div>
     </div>
-    <br />
-    <hr />
+    <hr>
+    <div class="row">
+      <legend><b>Mapa:</b></legend>
+      <app-geo-map [latitud]="latitud" [longitud]="longitud"></app-geo-map>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <hr>
     <div class="row">
       <button class="btn btn-dark" type="submit">Guardar</button>
       &nbsp;

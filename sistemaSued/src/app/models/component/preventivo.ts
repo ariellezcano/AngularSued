@@ -26,5 +26,10 @@ export class Preventivo {
     barrioNavigation: any;
     delitoNavigation: any;
 
+
+    localidad: any;
+    cp: any;
+    pais: any;
+    
     constructor(){}
 }

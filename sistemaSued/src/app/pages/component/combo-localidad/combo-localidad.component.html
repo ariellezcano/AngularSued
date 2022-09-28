@@ -1,0 +1,18 @@
+<div class="col-md-12">
+    <div class="control-group">
+      <div class="form-group controls">
+        <label>Seleccione Localidad</label>
+        <select
+          (ngModelChange)="capturar($event)"
+          name="item"
+          [(ngModel)]="item"
+          [compareWith]="compareWitch"
+          class="form-control form-sm"
+        >
+          <option *ngFor="let item of items" [ngValue]="item">
+            {{ item.codPostal }} - {{ item.nombre }} - {{item.nacionNavigation.nacion}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>

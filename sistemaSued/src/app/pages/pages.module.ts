@@ -84,6 +84,8 @@ import { AbmPrevObjetoComponent } from './frm-abm/abm-prev-objeto/abm-prev-objet
 import { AbmPrevModalidadComponent } from './frm-abm/abm-prev-modalidad/abm-prev-modalidad.component';
 import { AbmPrevCaratulaComponent } from './frm-abm/abm-prev-caratula/abm-prev-caratula.component';
 import { AbmSnicComponent } from './frm-abm/abm-snic/abm-snic.component';
+import { ComboLocalidadComponent } from './component/combo-localidad/combo-localidad.component';
+import { GeoMapComponent } from './component/geo-map/geo-map.component';
 
 @NgModule({
     declarations: [
@@ -167,6 +169,8 @@ import { AbmSnicComponent } from './frm-abm/abm-snic/abm-snic.component';
       AbmPrevModalidadComponent,
       AbmPrevCaratulaComponent,
       AbmSnicComponent,
+      ComboLocalidadComponent,
+      GeoMapComponent,
     ],
     exports: [],
     imports: [

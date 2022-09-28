@@ -1,5 +1,5 @@
 import { IfStmt } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -12,6 +12,7 @@ import {
   Barrio,
   Calle,
   Delito,
+  Localidad,
   Lugar,
   Preventivo,
 } from 'src/app/models/index.models';
@@ -19,6 +20,7 @@ import {
   BarrioService,
   CalleService,
   DelitoService,
+  GeolocalizacionService,
   LugarService,
   PreventivoService,
 } from 'src/app/services/index.service';
@@ -30,6 +32,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
+ 
+  @Output() emmit: EventEmitter<Preventivo> = new EventEmitter();
+  
+  latitud: any;
+  longitud: any;
+ 
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -58,6 +66,7 @@ export class AbmPreventivoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private wsdlGeo: GeolocalizacionService,
     private wsdl: PreventivoService,
     private wsdlLugar: LugarService,
     private wsdlDelito: DelitoService,
@@ -174,11 +183,7 @@ export class AbmPreventivoComponent implements OnInit {
     try {
       let data = await this.wsdl
         .doInsert(this.item)
-        .then
-        // data => {
-        //   console.log("data de data", data)
-        // }
-        ();
+        .then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -298,6 +303,31 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
     }
+  }
+
+  seleccionLocalidad(event: Localidad) {
+    if (event != undefined) {
+      this.item.localidad = event.nombre;
+      this.item.cp = event.codPostal;
+      this.item.pais = event.nacionNavigation?.nacion;
+    }
+  }
+
+  async buscarCoordenadas(){
+    try {
+      let data = await this.wsdlGeo.geolocalizacion(this.Citem.nombre, this.item.dirNro, this.item.cp, this.item.localidad, this.item.pais).then();
+      const result = JSON.parse(JSON.stringify(data)); 
+      console.log(result)
+      if(result.results != undefined){
+        this.item.latitud = result.results[0].lat;
+        this.latitud = this.item.latitud;
+        this.item.longitud = result.results[0].lon;
+        this.longitud = this.item.longitud;
+      }          
+    } catch (error) {
+      Swal.fire('Error al obtener el dato');
+    }
+
   }
 
   back() {

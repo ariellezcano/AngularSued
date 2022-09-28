@@ -24,3 +24,4 @@ export {PrevObjetoService} from './component/prev-objeto.service';
 export {PrevModalidadService} from './component/prev-modalidad.service';
 export {PrevCaratulaService} from './component/prev-caratula.service';
 export {PreSnicService} from './component/pre-snic.service';
+export {GeolocalizacionService} from './component/geolocalizacion.service';
