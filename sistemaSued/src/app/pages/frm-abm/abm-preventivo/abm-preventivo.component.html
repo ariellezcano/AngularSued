@@ -276,7 +276,7 @@
           (click)="enviarCoordenadas()"
           >
           <i class="fa fa-street-view" aria-hidden="true"></i>
-          Ver Mapa
+          Verificar coordenadas
         </a>
       </div>
     </div>
@@ -285,20 +285,20 @@
       <legend><b>Mapa:</b></legend>
       <app-geo-map [latitud]="latitud" [longitud]="longitud"></app-geo-map>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <hr>
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <br *ngIf="map">
+    <hr *ngIf="map">
     <div class="row">
       <button class="btn btn-dark" type="submit">Guardar</button>
       &nbsp;

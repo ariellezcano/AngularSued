@@ -56,10 +56,10 @@ export class GeolocalizacionService {
   obtenerGeo(lat: any, lon: any) {
     return fetch(
       `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=`+this.apiKey)
-      .then((response) => response.json())
+      .then((response) =>  response.json())
       .then((result) => {
         if (result.features.length) {
-          console.log(result.features[0].properties.formatted);
+          alert(result.features[0].properties.formatted);
         } else {
           console.log('No address found');
         }

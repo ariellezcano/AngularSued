@@ -345,7 +345,6 @@ export class AbmPreventivoComponent implements OnInit {
         .obtenerGeo(this.item.latitud, this.item.longitud)
         .then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log(result);
     } catch (error) {
       if (
         this.latitud == undefined ||
