@@ -92,7 +92,7 @@ export class AbmLocalidadComponent implements OnInit {
 
 
   async guardar() {
-    //console.log("items", this.item);
+    console.log("items", this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {

@@ -273,16 +273,15 @@
       <div class="col-md-4">
         <a
           class="btn btn-success"
-          target="_blank"
-          href="https://policiadigital.chaco.gob.ar/mapa/"
-        >
+          (click)="enviarCoordenadas()"
+          >
           <i class="fa fa-street-view" aria-hidden="true"></i>
           Ver Mapa
         </a>
       </div>
     </div>
     <hr>
-    <div class="row">
+    <div *ngIf="map" class="row">
       <legend><b>Mapa:</b></legend>
       <app-geo-map [latitud]="latitud" [longitud]="longitud"></app-geo-map>
     </div>

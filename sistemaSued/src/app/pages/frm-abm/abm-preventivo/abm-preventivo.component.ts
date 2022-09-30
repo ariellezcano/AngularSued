@@ -1,5 +1,4 @@
-import { IfStmt } from '@angular/compiler';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -32,12 +31,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
- 
-  @Output() emmit: EventEmitter<Preventivo> = new EventEmitter();
-  
-  latitud: any;
-  longitud: any;
- 
+  @Output() 
+  latitud?: string;
+  @Output()
+  longitud?: string;
+
+
+  map: boolean;
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -79,6 +79,8 @@ export class AbmPreventivoComponent implements OnInit {
     this.busquedaLugar = '';
     this.busquedaCalle = '';
     this.busquedaBarrio = '';
+    this.latitud = '';
+    this.longitud = '';
     this.ditems = [];
     this.ditem = new Delito();
     this.lugarItems = [];
@@ -87,6 +89,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.Citem = new Calle();
     this.BItems = [];
     this.Bitem = new Barrio();
+    this.map = false;
   }
 
   ngOnInit(): void {
@@ -124,16 +127,16 @@ export class AbmPreventivoComponent implements OnInit {
               this.item.fechaPreventivo
             ).format('YYYY-MM-DD');
           }
-          if(this.item.barrio != undefined){
+          if (this.item.barrio != undefined) {
             this.busquedaBarrio = this.item.barrioNavigation.nombre;
           }
-          if(this.item.delito != undefined){
+          if (this.item.delito != undefined) {
             this.busqueda = this.item.delitoNavigation.descripcion;
           }
-          if(this.item.lugar != undefined){
+          if (this.item.lugar != undefined) {
             this.busquedaLugar = this.item.lugarNavigation.descripcion;
           }
-          if(this.item.calle != undefined){
+          if (this.item.calle != undefined) {
             this.busquedaCalle = this.item.calleNavigation.nombre;
           }
         }
@@ -181,9 +184,7 @@ export class AbmPreventivoComponent implements OnInit {
     console.log(this.item);
 
     try {
-      let data = await this.wsdl
-        .doInsert(this.item)
-        .then();
+      let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -313,21 +314,47 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  async buscarCoordenadas(){
+  async buscarCoordenadas() {
     try {
-      let data = await this.wsdlGeo.geolocalizacion(this.Citem.nombre, this.item.dirNro, this.item.cp, this.item.localidad, this.item.pais).then();
-      const result = JSON.parse(JSON.stringify(data)); 
-      console.log(result)
-      if(result.results != undefined){
+      let data = await this.wsdlGeo
+        .geolocalizacion(
+          this.Citem.nombre,
+          this.item.dirNro,
+          this.item.cp,
+          this.item.localidad,
+          this.item.pais
+        )
+        .then();
+      const result = JSON.parse(JSON.stringify(data));
+      console.log(result);
+      if (result.results != undefined) {
         this.item.latitud = result.results[0].lat;
         this.latitud = this.item.latitud;
         this.item.longitud = result.results[0].lon;
         this.longitud = this.item.longitud;
-      }          
+        this.map = true;
+      }
     } catch (error) {
       Swal.fire('Error al obtener el dato');
     }
+  }
 
+  async enviarCoordenadas() {
+    try {
+      let data = await this.wsdlGeo
+        .obtenerGeo(this.item.latitud, this.item.longitud)
+        .then();
+      const result = JSON.parse(JSON.stringify(data));
+      console.log(result);
+    } catch (error) {
+      if (
+        this.latitud == undefined ||
+        (this.latitud == '' && this.longitud == undefined) ||
+        this.longitud == ''
+      ) {
+        Swal.fire('No se pudo capturar el dato');
+      }
+    }
   }
 
   back() {

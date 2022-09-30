@@ -6,7 +6,7 @@ export class Localidad {
     provincia!: number;
     nacion!: number;
     codPostal!: string;
-    codProv!: string;
+    codProv: any;
     codDto!: string;
     codLoc!: string;
 

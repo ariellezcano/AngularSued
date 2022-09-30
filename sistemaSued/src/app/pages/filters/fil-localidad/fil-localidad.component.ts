@@ -64,7 +64,7 @@ export class FilLocalidadComponent implements OnInit {
           this.items = result.data;
           this.totalRegistros = result.totalRegistros;
           this.totalPaginas = result.totalPaginas;
-          //console.log("result", result)
+          console.log("result", result)
           this.emmit.emit(this.items);
         }
       } else if (this.busqueda != undefined && this.busqueda != '') {
