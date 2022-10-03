@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -24,21 +25,11 @@ export class GeolocalizacionService {
     var requestOptions = {
       method: 'GET',
     };
-
+    let data = this.api+calle +','+nro +','+cp +','+localidad +','+pais+'&format=json&apiKey='+this.apiKey;
+    console.log("datass", data)
     return (
       fetch(
-        this.api +
-          calle +
-          ',' +
-          nro +
-          ',' +
-          cp +
-          ',' +
-          localidad +
-          ',' +
-          pais +
-          '&format=json&apiKey=' +
-          this.apiKey,
+        data,
         requestOptions
       )
         .then((response) => {
@@ -59,7 +50,7 @@ export class GeolocalizacionService {
       .then((response) =>  response.json())
       .then((result) => {
         if (result.features.length) {
-          alert(result.features[0].properties.formatted);
+          Swal.fire(result.features[0].properties.formatted);
         } else {
           console.log('No address found');
         }

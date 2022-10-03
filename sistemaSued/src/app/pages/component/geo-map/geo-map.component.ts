@@ -51,10 +51,10 @@ export class GeoMapComponent implements OnInit, AfterViewInit {
 
     const isRetina = L.Browser.retina;
     const baseUrl =
-      'https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}.png?apiKey=' +
+      'https://maps.geoapify.com/v1/tile/osm-carto/{z}/{x}/{y}.png?apiKey=' +
       myAPIKey;
     const retinaUrl =
-      'https://maps.geoapify.com/v1/tile/osm-bright/{z}/{x}/{y}@2x.png?apiKey=' +
+      'https://maps.geoapify.com/v1/tile/osm-carto/{z}/{x}/{y}@2x.png?apiKey=' +
       myAPIKey;
 
     L.tileLayer(isRetina ? retinaUrl : baseUrl, {

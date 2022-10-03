@@ -328,6 +328,8 @@ export class AbmPreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log(result);
       if (result.results != undefined) {
+        this.latitud = '';
+        this.longitud = '';
         this.item.latitud = result.results[0].lat;
         this.latitud = this.item.latitud;
         this.item.longitud = result.results[0].lon;
@@ -344,7 +346,7 @@ export class AbmPreventivoComponent implements OnInit {
       let data = await this.wsdlGeo
         .obtenerGeo(this.item.latitud, this.item.longitud)
         .then();
-      const result = JSON.parse(JSON.stringify(data));
+      //const result = JSON.parse(JSON.stringify(data));
     } catch (error) {
       if (
         this.latitud == undefined ||
