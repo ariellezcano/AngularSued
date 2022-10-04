@@ -18,6 +18,7 @@ import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-mo
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
+import { AbmPreVictimaComponent } from "./frm-abm/abm-pre-victima/abm-pre-victima.component";
 import { AbmPrevCaratulaComponent } from "./frm-abm/abm-prev-caratula/abm-prev-caratula.component";
 import { AbmPrevModalidadComponent } from "./frm-abm/abm-prev-modalidad/abm-prev-modalidad.component";
 import { AbmPrevObjetoComponent } from "./frm-abm/abm-prev-objeto/abm-prev-objeto.component";
@@ -393,6 +394,11 @@ const routes: Routes = [
             {
               path: 'snic/:id',
               component: AbmSnicComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'victimas/:id',
+              component: AbmPreVictimaComponent,
              //canActivate: [AuthGuard],
             },
           ],

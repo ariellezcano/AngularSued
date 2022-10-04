@@ -91,7 +91,7 @@ export class LstPreventivoComponent implements OnInit {
         this.router.navigateByUrl('lst-preventivo/modalidad/' + id);
         break;
       case this.seleccionAccion == 'victimas':
-        this.router.navigateByUrl('lst-preventivo/abmlibTransitoria/' + id);
+        this.router.navigateByUrl('lst-preventivo/victimas/' + id);
         break;
       case this.seleccionAccion == 'inculpados':
         this.router.navigateByUrl('lst-preventivo/abmTraslado/' + id);

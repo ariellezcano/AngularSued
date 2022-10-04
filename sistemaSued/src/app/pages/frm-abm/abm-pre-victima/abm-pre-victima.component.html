@@ -1,0 +1,204 @@
+<div class="container">
+    <h3 class="alert alert-info text-center" role="alert">
+      Panel Victimas
+    </h3>
+    <hr />
+  
+    <div class="row">
+      <div class="col-md-12">
+        <span>
+          <b
+            ><em><u>DETALLES DEL PREVENTIVO:</u></em>
+          </b>
+        </span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label for=""> <b>Fecha Hecho.:</b></label>
+            {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Hora hecho:</b></label>
+            {{ prev.hora }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Barrio:</b></label>
+            {{ prev.barrioNavigation?.nombre }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for=""> <b>Delito:</b></label>
+            {{ prev.delitoNavigation?.descripcion }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Año:</b></label>
+            {{ prev.anio }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Intervención Policial:</b></label>
+            {{ valor(prev.intervencionPol) }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <center>
+          <h5>
+            <b
+              ><em><u>DATOS A CARGAR:</u></em></b
+            >
+          </h5>
+        </center>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
+        <input
+          [(ngModel)]="item.fecha"
+          id="codigo"
+          type="date"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
+        <input
+          (change)="filtrarNacionalidad()"
+          [(ngModel)]="busqueda"
+          name="busqueda"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <select
+          *ngIf="Mitems.length > 0 && this.busqueda"
+          name="Mitem"
+          [(ngModel)]="Mitem"
+          class="form-control"
+          (ngModelChange)="capturar($event)"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option *ngFor="let Mitem of Mitems" [ngValue]="Mitem">
+            {{ Mitem.descripcion }}
+          </option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <center>
+          <label for="Nombre" class="col-sm-12 col-form-label"> Secuestro:</label>
+          <input
+            [(ngModel)]="item.secuestro"
+            type="checkbox"
+            class="form-sm-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </center>
+      </div>
+      <div class="col-md-3">
+        <center>
+          <button
+            id="boton"
+            type="button"
+            title="Guardar"
+            placement="top"
+            (click)="addRow()"
+            show-delay="10"
+            class="btn btn-outline-info"
+          >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Agregar a tabla
+          </button>
+        </center>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <table id="tabla" class="table">
+        <thead class="text-center table-primary">
+          <tr>
+            <th>Código Medio</th>
+            <th>Descripción</th>
+            <th>Secuestro</th>
+            <th>Fecha</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
+            <ng-container *ngIf="i.id > 0; then thenTemplate; else elseTemplate"></ng-container>
+            <ng-template #thenTemplate>
+              <td>{{ i.medioNavigation.codMedio }} - {{ i.medioNavigation.codTipo }}</td>
+              <td>{{ i.medioNavigation.descripcion }}</td>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <td>{{ i.codigo }}</td>
+              <td>{{ i.capturaDescripcion }}</td>
+            </ng-template>
+            <td>{{ valor(i.secuestro) }}</td>
+            <td>{{ i.fecha |date:"dd/MM/yyyy" }}</td>
+  
+            <!-- editar y guardar -->
+            <ng-container
+              *ngIf="i.id > 0; then mostrar; else noMostrar"
+            ></ng-container>
+            <ng-template #mostrar>
+              <!-- muestra el eliminar -->
+              <td>
+                <button
+                  type="button"
+                  title="Eliminar"
+                  placement="top"
+                  show-delay="10"
+                  (click)="preDelete(i)"
+                  class="btn btn-danger btn-circle"
+                >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
+            <ng-template #noMostrar>
+              <!-- saca de la lista -->
+              <td>
+                <button
+                  type="button"
+                  title="Eliminar de la lista"
+                  placement="top"
+                  show-delay="10"
+                  (click)="deleteRow(i)"
+                  class="btn btn-info btn-circle"
+                >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      *ngIf="items.length === 0"
+      class="alert alert-primary alert-dismissible fade show"
+      role="alert"
+    >
+      <center>
+        <strong>No hay datos</strong>
+      </center>
+    </div>
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="button" (click)="agregarDato()">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+  <br>
