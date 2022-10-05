@@ -1,8 +1,9 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Naciones, Preventivo, PrevVictima } from 'src/app/models/index.models';
-import { NacionesService, PreventivoService, PrevVictimaService } from 'src/app/services/index.service';
+import { Estudio, Naciones, Ocupacion, Preventivo, PrevVictima, Sexo } from 'src/app/models/index.models';
+import { NacionesService, OcupacionService, PreventivoService, PrevVictimaService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 
@@ -20,32 +21,45 @@ export class AbmPreVictimaComponent implements OnInit {
   //variable para verificar si fue enviado los datos
   enviado = false;
 
+  //input de busqueda de los filtros
   busqueda;
+  busquedaOc;
 
+ //vista previa del preventivo
   prev: Preventivo;
-  prevMed: PrevVictima;
+  prevVic: PrevVictima;
 
+   //Se usa para la carga en tabla de prevVictima
   item: PrevVictima;
   items: PrevVictima[];
 
-  Mitems: Medio[];
-  Mitem: Medio;
+   //ocupado en el filtro naciones
+  Nitems: Naciones[];
+  Nitem: Naciones;
+
+  //ocupado en el filtro ocupacion
+  Oitems: Ocupacion[];
+  Oitem: Ocupacion;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevVictimaService,
     private wsdlPreventivo: PreventivoService,
+    private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevVictima();
     this.items = [];
     this.prev = new Preventivo();
-    this.prevMed = new PreventivoMedio();
+    this.prevVic = new PrevVictima();
     this.busqueda = '';
-    this.Mitem = new Medio();
-    this.Mitems = [];
+    this.busquedaOc = '';
+    this.Nitem = new Naciones();
+    this.Nitems = [];
+    this.Oitem = new Ocupacion();
+    this.Oitems = [];
   }
 
   ngOnInit(): void {
@@ -122,11 +136,11 @@ export class AbmPreVictimaComponent implements OnInit {
 
   async agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
-      this.prevMed = new PrevVictima();
-      this.prevMed = this.items[index];
-      if (this.prevMed.id == undefined) {
+      this.prevVic = new PrevVictima();
+      this.prevVic = this.items[index];
+      if (this.prevVic.id == undefined) {
         this.item = new PrevVictima();
-        this.item = this.prevMed;
+        this.item = this.prevVic;
         this.guardar();
       }
     }
@@ -163,15 +177,15 @@ export class AbmPreVictimaComponent implements OnInit {
       });
     }
   }
-
+//filtra y captura nacionalidad
   async filtrarNacionalidad() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Mitems = [];
-          this.Mitems = result.data;
+          this.Nitems = [];
+          this.Nitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
         }
@@ -183,14 +197,38 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
-      this.item.capturaDescripcion = event.nacionalidad;
-      this.item.codigo = event.codTipo + '-' + event.codMedio;
+      this.item.capturaNacionalidad = event.nacionalidad;
+    }
+  }
+  //filtra y captura ocupacion
+  async filtrarOcupacion() {
+    try {
+      if (this.busquedaOc != '' && this.busquedaOc != undefined) {
+        let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.Oitems = [];
+          this.Oitems = result.data;
+        } else if (result.code == 204) {
+          Swal.fire('No existe la busqueda realizada');
+        }
+      }
+    } catch (error) {}
+  }
+
+  capturarOc(event: Ocupacion) {
+    if (event != undefined) {
+      this.busquedaOc = event.descripcion;
+      this.item.ocupacion = event.id;
+      this.item.capturaOcupacion = event.descripcion;
     }
   }
 
   //agrega fila en memoria
   addRow() {
+    console.log("items en memoria", this.item);
     this.busqueda = '';
+    this.busquedaOc = '';
     this.items.unshift(this.item);
     this.item = new PrevVictima();
   }
@@ -221,7 +259,7 @@ export class AbmPreVictimaComponent implements OnInit {
       title: 'Esta Seguro?',
       text:
         '¡No podrás recuperar este archivo ' +
-        item.medioNavigation.descripcion +
+        // item.medioNavigation.descripcion +
         '!',
       icon: 'warning',
       showCancelButton: true,
@@ -255,6 +293,22 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
+  //captura el dato del combo
+  seleccionSexo(event: Sexo) {
+    if (event != undefined) {
+      this.item.sexo = event.id;
+      this.item.capturaSexo = event.descripcion;
+    }
+  }
+  //captura el dato del combo
+  seleccionEstudio(event: Estudio) {
+    if (event != undefined) {
+      this.item.estudios = event.id;
+      this.item.capturaEstudio = event.descripcion;
+    }
+  }
+
+  //cambia el valor del booleano para mostrar en la vista
   valor(item: any) {
     item = item;
     let valor = '';

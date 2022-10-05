@@ -1,204 +1,316 @@
 <div class="container">
-    <h3 class="alert alert-info text-center" role="alert">
-      Panel Victimas
-    </h3>
-    <hr />
-  
-    <div class="row">
-      <div class="col-md-12">
-        <span>
-          <b
-            ><em><u>DETALLES DEL PREVENTIVO:</u></em>
-          </b>
-        </span>
-      </div>
+  <h3 class="alert alert-info text-center" role="alert">Panel Victimas</h3>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-12">
+      <span>
+        <b
+          ><em><u>DETALLES DEL PREVENTIVO:</u></em>
+        </b>
+      </span>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-md-4">
-            <label for=""> <b>Fecha Hecho.:</b></label>
-            {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
-          </div>
-          <div class="col-md-4">
-            <label for=""> <b>Hora hecho:</b></label>
-            {{ prev.hora }}
-          </div>
-          <div class="col-md-4">
-            <label for=""> <b>Barrio:</b></label>
-            {{ prev.barrioNavigation?.nombre }}
-          </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <label for=""> <b>Fecha Hecho.:</b></label>
+          {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <label for=""> <b>Delito:</b></label>
-            {{ prev.delitoNavigation?.descripcion }}
-          </div>
-          <div class="col-md-4">
-            <label for=""> <b>Año:</b></label>
-            {{ prev.anio }}
-          </div>
-          <div class="col-md-4">
-            <label for=""> <b>Intervención Policial:</b></label>
-            {{ valor(prev.intervencionPol) }}
-          </div>
+        <div class="col-md-4">
+          <label for=""> <b>Hora hecho:</b></label>
+          {{ prev.hora }}
+        </div>
+        <div class="col-md-4">
+          <label for=""> <b>Barrio:</b></label>
+          {{ prev.barrioNavigation?.nombre }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for=""> <b>Delito:</b></label>
+          {{ prev.delitoNavigation?.descripcion }}
+        </div>
+        <div class="col-md-4">
+          <label for=""> <b>Año:</b></label>
+          {{ prev.anio }}
+        </div>
+        <div class="col-md-4">
+          <label for=""> <b>Intervención Policial:</b></label>
+          {{ valor(prev.intervencionPol) }}
         </div>
       </div>
     </div>
-    <hr />
-    <div class="row">
-      <div class="col-md-12">
-        <center>
-          <h5>
-            <b
-              ><em><u>DATOS A CARGAR:</u></em></b
-            >
-          </h5>
-        </center>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
-        <input
-          [(ngModel)]="item.fecha"
-          id="codigo"
-          type="date"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="col-md-4">
-        <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
-        <input
-          (change)="filtrarNacionalidad()"
-          [(ngModel)]="busqueda"
-          name="busqueda"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
-        <select
-          *ngIf="Mitems.length > 0 && this.busqueda"
-          name="Mitem"
-          [(ngModel)]="Mitem"
-          class="form-control"
-          (ngModelChange)="capturar($event)"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <option *ngFor="let Mitem of Mitems" [ngValue]="Mitem">
-            {{ Mitem.descripcion }}
-          </option>
-        </select>
-      </div>
-      <div class="col-md-2">
-        <center>
-          <label for="Nombre" class="col-sm-12 col-form-label"> Secuestro:</label>
-          <input
-            [(ngModel)]="item.secuestro"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </center>
-      </div>
-      <div class="col-md-3">
-        <center>
-          <button
-            id="boton"
-            type="button"
-            title="Guardar"
-            placement="top"
-            (click)="addRow()"
-            show-delay="10"
-            class="btn btn-outline-info"
-          >
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            Agregar a tabla
-          </button>
-        </center>
-      </div>
-    </div>
-    <hr>
-    <div class="row">
-      <table id="tabla" class="table">
-        <thead class="text-center table-primary">
-          <tr>
-            <th>Código Medio</th>
-            <th>Descripción</th>
-            <th>Secuestro</th>
-            <th>Fecha</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
-            <ng-container *ngIf="i.id > 0; then thenTemplate; else elseTemplate"></ng-container>
-            <ng-template #thenTemplate>
-              <td>{{ i.medioNavigation.codMedio }} - {{ i.medioNavigation.codTipo }}</td>
-              <td>{{ i.medioNavigation.descripcion }}</td>
-            </ng-template>
-            <ng-template #elseTemplate>
-              <td>{{ i.codigo }}</td>
-              <td>{{ i.capturaDescripcion }}</td>
-            </ng-template>
-            <td>{{ valor(i.secuestro) }}</td>
-            <td>{{ i.fecha |date:"dd/MM/yyyy" }}</td>
-  
-            <!-- editar y guardar -->
-            <ng-container
-              *ngIf="i.id > 0; then mostrar; else noMostrar"
-            ></ng-container>
-            <ng-template #mostrar>
-              <!-- muestra el eliminar -->
-              <td>
-                <button
-                  type="button"
-                  title="Eliminar"
-                  placement="top"
-                  show-delay="10"
-                  (click)="preDelete(i)"
-                  class="btn btn-danger btn-circle"
-                >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-              </td>
-            </ng-template>
-            <ng-template #noMostrar>
-              <!-- saca de la lista -->
-              <td>
-                <button
-                  type="button"
-                  title="Eliminar de la lista"
-                  placement="top"
-                  show-delay="10"
-                  (click)="deleteRow(i)"
-                  class="btn btn-info btn-circle"
-                >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
-              </td>
-            </ng-template>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div
-      *ngIf="items.length === 0"
-      class="alert alert-primary alert-dismissible fade show"
-      role="alert"
-    >
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
       <center>
-        <strong>No hay datos</strong>
+        <h5>
+          <b
+            ><em><u>DATOS A CARGAR:</u></em></b
+          >
+        </h5>
       </center>
     </div>
-    <hr />
-    <div class="row">
-      <button class="btn btn-dark" type="button" (click)="agregarDato()">Guardar</button>
-      &nbsp;
-      <button class="btn btn-info" type="button" (click)="back()">
-        Cancelar
-      </button>
+  </div>
+  <div class="row">
+    <legend><u> Identificación de la Persona:</u></legend>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Nombre:</label>
+      <input
+        [(ngModel)]="item.nombre"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Apellido:</label>
+      <input
+        [(ngModel)]="item.apellido"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> D.N.I:</label>
+      <input
+        [(ngModel)]="item.dni"
+        type="number"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Edad:</label>
+      <input
+        [(ngModel)]="item.edad"
+        type="number"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <legend><u>General:</u></legend>
+    <div class="col-md-4">
+      <app-combo-sexo
+        [dibujar]="item"
+        (emitir)="seleccionSexo($event)"
+      ></app-combo-sexo>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
+      <input
+        (change)="filtrarNacionalidad()"
+        [(ngModel)]="busqueda"
+        name="busqueda"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese criterio de búsqueda"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="Nitems.length > 0 && this.busqueda"
+        name="Nitem"
+        [(ngModel)]="Nitem"
+        class="form-control"
+        (ngModelChange)="capturar($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
+          {{ Nitem.nacionalidad }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <app-combo-estudio
+        [dibujar]="item"
+        (emitir)="seleccionEstudio($event)"
+      ></app-combo-estudio>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
+      <input
+        (change)="filtrarOcupacion()"
+        [(ngModel)]="busquedaOc"
+        name="busquedaOc"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese criterio de búsqueda"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="Oitems.length > 0 && this.busquedaOc"
+        name="Oitem"
+        [(ngModel)]="Oitem"
+        class="form-control"
+        (ngModelChange)="capturarOc($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let Oitem of Oitems" [ngValue]="Oitem">
+          {{ Oitem.descripcion }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="" class="col-sm-12 col-form-label"
+        >Situación Ocupacional:</label
+      >
+      <select class="form-select" [(ngModel)]="item.sitOcup">
+        <option value="Desocupado">Desocupado</option>
+        <option value="Jub/Pensionado">Jub/Pensionado</option>
+        <option value="Rentista">Rentista</option>
+        <option value="Estudiante">Estudiante</option>
+        <option value="Ama de casa">Ama de casa</option>
+        <option value="Empleado Med. Comun.">Empleado Med. Comun.</option>
+        <option value="Empleado Otros">Empleado Otros</option>
+        <option value="Trabajador Cta. Propia">Trabajador Cta. Propia</option>
+        <option value="Changarin">Changarin</option>
+        <option value="Ama de casa">Ama de casa</option>
+        <option value="Patrón - Empleador">Patrón - Empleador</option>
+        <option value="Trabajador/a Sexual">Trabajador/a Sexual</option>
+        <option value="Representante Sindical">Representante Sindical</option>
+        <option value="Activista DD HH">Activista DD HH</option>
+        <option value="Otro">Otro ("Especificar")</option>
+        <option value="Sin determinar">Sin determinar</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <center>
+        <label for="Nombre" class="col-sm-12 col-form-label"> Falleció:</label>
+        <input
+          [(ngModel)]="item.fallecio"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </center>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="" class="col-sm-12 col-form-label">Especificar:</label>
+      <input
+        [(ngModel)]="item.especificar"
+        type="Text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </div>
   </div>
   <br>
+  <div class="row">
+    <div class="col-md-12">
+      <center>
+        <button
+          id="boton"
+          type="button"
+          title="Guardar"
+          placement="top"
+          (click)="addRow()"
+          show-delay="10"
+          class="btn btn-outline-info"
+        >
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Agregar a tabla
+        </button>
+      </center>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <table id="tabla" class="table">
+      <thead class="text-center table-primary">
+        <tr>
+          <th>Sexo</th>
+          <th>Nacionalidad</th>
+          <th>Edad</th>
+          <th>Estudios</th>
+          <th>Fallecio</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
+          <ng-container
+            *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            <td>{{ i.sexoNavigation.descripcion }}</td>
+            <td>{{ i.nacionNavigation.nacionalidad }}</td>
+            <td>{{ i.edad }}</td>
+            <td>{{ i.estudioNavigation.descripcion }}</td>
+            <td>{{ valor(i.fallecio) }}</td>
+          </ng-template>
+          <ng-template #elseTemplate>
+            <td>{{ i.capturaSexo }}</td>
+            <td>{{ i.capturaNacionalidad }}</td>
+            <td>{{ i.edad }}</td>
+            <td>{{ i.capturaEstudio }}</td>
+            <td>{{ valor(i.fallecio) }}</td>
+          </ng-template>
+          <!-- editar y guardar -->
+          <ng-container
+            *ngIf="i.id > 0; then mostrar; else noMostrar"
+          ></ng-container>
+          <ng-template #mostrar>
+            <!-- muestra el eliminar -->
+            <td>
+              <button
+                type="button"
+                title="Eliminar"
+                placement="top"
+                show-delay="10"
+                (click)="preDelete(i)"
+                class="btn btn-danger btn-circle"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </ng-template>
+          <ng-template #noMostrar>
+            <!-- saca de la lista -->
+            <td>
+              <button
+                type="button"
+                title="Eliminar de la lista"
+                placement="top"
+                show-delay="10"
+                (click)="deleteRow(i)"
+                class="btn btn-info btn-circle"
+              >
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    *ngIf="items.length === 0"
+    class="alert alert-primary alert-dismissible fade show"
+    role="alert"
+  >
+    <center>
+      <strong>No hay datos</strong>
+    </center>
+  </div>
+  <hr />
+  <div class="row">
+    <button class="btn btn-dark" type="button" (click)="agregarDato()">
+      Guardar
+    </button>
+    &nbsp;
+    <button class="btn btn-info" type="button" (click)="back()">
+      Cancelar
+    </button>
+  </div>
+</div>
+<br />

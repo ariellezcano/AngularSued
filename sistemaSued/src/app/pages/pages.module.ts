@@ -87,6 +87,8 @@ import { AbmSnicComponent } from './frm-abm/abm-snic/abm-snic.component';
 import { ComboLocalidadComponent } from './component/combo-localidad/combo-localidad.component';
 import { GeoMapComponent } from './component/geo-map/geo-map.component';
 import { AbmPreVictimaComponent } from './frm-abm/abm-pre-victima/abm-pre-victima.component';
+import { ComboSexoComponent } from './component/combo-sexo/combo-sexo.component';
+import { ComboEstudioComponent } from './component/combo-estudio/combo-estudio.component';
 
 @NgModule({
     declarations: [
@@ -173,6 +175,8 @@ import { AbmPreVictimaComponent } from './frm-abm/abm-pre-victima/abm-pre-victim
       ComboLocalidadComponent,
       GeoMapComponent,
       AbmPreVictimaComponent,
+      ComboSexoComponent,
+      ComboEstudioComponent,
     ],
     exports: [],
     imports: [

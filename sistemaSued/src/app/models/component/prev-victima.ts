@@ -16,6 +16,12 @@ export class PrevVictima {
     nacionNavigation: any;
     estudioNavigation: any;
     ocupacionNavigation: any;
+    sexoNavigation: any;
+
+    capturaSexo: any;
+    capturaNacionalidad: any;
+    capturaEstudio: any;
+    capturaOcupacion: any;
     constructor(){
 
     }
