@@ -26,3 +26,5 @@ export {PrevCaratulaService} from './component/prev-caratula.service';
 export {PreSnicService} from './component/pre-snic.service';
 export {GeolocalizacionService} from './component/geolocalizacion.service';
 export {PrevVictimaService} from './component/prev-victima.service';
+export {PrevInculpadoService} from './component/prev-inculpado.service';
+export {PrevAmpliacionService} from './component/prev-ampliacion.service';

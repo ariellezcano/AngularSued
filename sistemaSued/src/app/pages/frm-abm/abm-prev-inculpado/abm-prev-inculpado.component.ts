@@ -1,19 +1,19 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Estudio, Naciones, Ocupacion, Preventivo, PrevVictima, Sexo } from 'src/app/models/index.models';
-import { NacionesService, OcupacionService, PreventivoService, PrevVictimaService } from 'src/app/services/index.service';
+import { Calle, Estudio, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Sexo } from 'src/app/models/index.models';
+import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-abm-pre-victima',
-  templateUrl: './abm-pre-victima.component.html',
-  styleUrls: ['./abm-pre-victima.component.scss']
+  selector: 'app-abm-prev-inculpado',
+  templateUrl: './abm-prev-inculpado.component.html',
+  styleUrls: ['./abm-prev-inculpado.component.scss']
 })
-export class AbmPreVictimaComponent implements OnInit {
+export class AbmPrevInculpadoComponent implements OnInit {
 
+ 
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -24,18 +24,22 @@ export class AbmPreVictimaComponent implements OnInit {
   //input de busqueda de los filtros
   busqueda;
   busquedaOc;
-
+  busquedaCalle;
  //vista previa del preventivo
   prev: Preventivo;
-  prevVic: PrevVictima;
+  prevInc: PrevInculpado;
 
    //Se usa para la carga en tabla de prevVictima
-  item: PrevVictima;
-  items: PrevVictima[];
+  item: PrevInculpado;
+  items: PrevInculpado[];
 
    //ocupado en el filtro naciones
   Nitems: Naciones[];
   Nitem: Naciones;
+
+  //ocupado en el filtro calle
+  CItems: Calle[];
+  Citem: Calle;
 
   //ocupado en el filtro ocupacion
   Oitems: Ocupacion[];
@@ -44,22 +48,26 @@ export class AbmPreVictimaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private wsdl: PrevVictimaService,
+    private wsdl: PrevInculpadoService,
     private wsdlPreventivo: PreventivoService,
     private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
+    private wsdlCalle: CalleService,
     private formBuilder: FormBuilder
   ) {
-    this.item = new PrevVictima();
+    this.item = new PrevInculpado();
     this.items = [];
     this.prev = new Preventivo();
-    this.prevVic = new PrevVictima();
+    this.prevInc = new PrevInculpado();
     this.busqueda = '';
     this.busquedaOc = '';
+    this.busquedaCalle = '';
     this.Nitem = new Naciones();
     this.Nitems = [];
     this.Oitem = new Ocupacion();
     this.Oitems = [];
+    this.Citem = new Calle();
+    this.CItems = [];
   }
 
   ngOnInit(): void {
@@ -115,7 +123,7 @@ export class AbmPreVictimaComponent implements OnInit {
   //   }
   // }
 
-  async actualizarDatos(obj: PrevVictima) {
+  async actualizarDatos(obj: PrevInculpado) {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -136,11 +144,11 @@ export class AbmPreVictimaComponent implements OnInit {
 
   async agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
-      this.prevVic = new PrevVictima();
-      this.prevVic = this.items[index];
-      if (this.prevVic.id == undefined) {
-        this.item = new PrevVictima();
-        this.item = this.prevVic;
+      this.prevInc = new PrevInculpado();
+      this.prevInc = this.items[index];
+      if (this.prevInc.id == undefined) {
+        this.item = new PrevInculpado();
+        this.item = this.prevInc;
         this.guardar();
       }
     }
@@ -229,8 +237,9 @@ export class AbmPreVictimaComponent implements OnInit {
     console.log("items en memoria", this.item);
     this.busqueda = '';
     this.busquedaOc = '';
+    this.busquedaCalle = '';
     this.items.unshift(this.item);
-    this.item = new PrevVictima();
+    this.item = new PrevInculpado();
   }
 
   //elimina la fila en memoria
@@ -239,7 +248,7 @@ export class AbmPreVictimaComponent implements OnInit {
   }
 
   // se utiliza para pintar la fila en memoria
-  colores(item: PrevVictima) {
+  colores(item: PrevInculpado) {
     let color = '';
 
     if (item.id == undefined) {
@@ -251,8 +260,8 @@ export class AbmPreVictimaComponent implements OnInit {
     return color;
   }
 
-  preDelete(item: PrevVictima) {
-    this.item = new PrevVictima();
+  preDelete(item: PrevInculpado) {
+    this.item = new PrevInculpado();
     this.item = item;
 
     Swal.fire({
@@ -293,6 +302,31 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
+  //filtro calle
+  async filtrarCalle() {
+    try {
+      if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
+        let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.CItems = [];
+          this.CItems = result.data;
+        } else if (result.code == 204) {
+          Swal.fire('No existe la búsqueda realizada');
+        }
+      }
+    } catch (error) {
+      Swal.fire('Error al obtener el dato');
+    }
+  }
+//captura el dato
+  capturarCalle(event: Calle) {
+    if (event != undefined) {
+      this.item.calle = event.id;
+      this.busquedaCalle = event.nombre;
+    }
+  }
+
   //captura el dato del combo
   seleccionSexo(event: Sexo) {
     if (event != undefined) {
@@ -307,7 +341,21 @@ export class AbmPreVictimaComponent implements OnInit {
       this.item.capturaEstudio = event.descripcion;
     }
   }
-  
+
+  //captura el dato del combo
+  seleccionVinculo(event: Estudio) {
+    if (event != undefined) {
+      this.item.vinculo = event.id;
+      this.item.capturaVinculo = event.descripcion;
+    }
+  }
+  //captura el dato del combo
+  seleccionLocalidad(event: Localidad) {
+    if (event != undefined) {
+      this.item.localidad = event.id;
+      this.item.capturaLocalidad = event.nombre;
+    }
+  }
 
   //cambia el valor del booleano para mostrar en la vista
   valor(item: any) {

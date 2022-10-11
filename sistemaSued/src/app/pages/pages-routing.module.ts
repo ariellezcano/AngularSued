@@ -20,6 +20,7 @@ import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
 import { AbmOcupacionComponent } from "./frm-abm/abm-ocupacion/abm-ocupacion.component";
 import { AbmPreVictimaComponent } from "./frm-abm/abm-pre-victima/abm-pre-victima.component";
 import { AbmPrevCaratulaComponent } from "./frm-abm/abm-prev-caratula/abm-prev-caratula.component";
+import { AbmPrevInculpadoComponent } from "./frm-abm/abm-prev-inculpado/abm-prev-inculpado.component";
 import { AbmPrevModalidadComponent } from "./frm-abm/abm-prev-modalidad/abm-prev-modalidad.component";
 import { AbmPrevObjetoComponent } from "./frm-abm/abm-prev-objeto/abm-prev-objeto.component";
 import { AbmPreventivoMedioComponent } from "./frm-abm/abm-preventivo-medio/abm-preventivo-medio.component";
@@ -399,6 +400,11 @@ const routes: Routes = [
             {
               path: 'victimas/:id',
               component: AbmPreVictimaComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'inculpados/:id',
+              component: AbmPrevInculpadoComponent,
              //canActivate: [AuthGuard],
             },
           ],

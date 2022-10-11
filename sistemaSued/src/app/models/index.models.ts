@@ -25,3 +25,5 @@ export {PrevModalidad} from './component/prev-modalidad';
 export {PrevCaratula} from './component/prev-caratula';
 export {PrevSnic} from './component/prev-snic';
 export {PrevVictima} from './component/prev-victima';
+export {PrevInculpado} from './component/prev-inculpado';
+export {PrevAmpliacion} from './component/prev-ampliacion';

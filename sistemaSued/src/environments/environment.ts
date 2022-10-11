@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  URL:'http://192.168.5.252/apiSued/api/',
-  //URL: 'https://localhost:7033/api/',
+  //URL:'http://192.168.5.252/apiSued/api/',
+  URL: 'https://localhost:7033/api/',
   URLGeolocalizacion: 'https://api.geoapify.com/v1/geocode/search?text=',
 };
 

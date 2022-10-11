@@ -89,6 +89,8 @@ import { GeoMapComponent } from './component/geo-map/geo-map.component';
 import { AbmPreVictimaComponent } from './frm-abm/abm-pre-victima/abm-pre-victima.component';
 import { ComboSexoComponent } from './component/combo-sexo/combo-sexo.component';
 import { ComboEstudioComponent } from './component/combo-estudio/combo-estudio.component';
+import { AbmPrevInculpadoComponent } from './frm-abm/abm-prev-inculpado/abm-prev-inculpado.component';
+import { ComboVinculoComponent } from './component/combo-vinculo/combo-vinculo.component';
 
 @NgModule({
     declarations: [
@@ -177,6 +179,8 @@ import { ComboEstudioComponent } from './component/combo-estudio/combo-estudio.c
       AbmPreVictimaComponent,
       ComboSexoComponent,
       ComboEstudioComponent,
+      AbmPrevInculpadoComponent,
+      ComboVinculoComponent,
     ],
     exports: [],
     imports: [
