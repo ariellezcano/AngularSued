@@ -21,6 +21,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
   enviado = false;
 
   busqueda;
+  idSeleccion!: number;
 
   prev: Preventivo;
   prevCad: PrevCaratula;
@@ -31,6 +32,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
   Ditems: Delito[];
   Ditem: Delito;
 
+  mostrarBtnModif: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +48,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
     this.busqueda = '';
     this.Ditem = new Delito();
     this.Ditems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -90,6 +93,21 @@ export class AbmPrevCaratulaComponent implements OnInit {
     } catch (error) {}
   }
 
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+          this.idSeleccion = result.dato.id;
+          this.busqueda = result.dato.delitoNavigation.descripcion;
+          this.mostrarBtnModif = true;
+        }
+      } catch (error) {}
+    }
+  }
   // doAction() {
   //   this.enviado = true;
   //   if (this.form.valid) {
@@ -103,7 +121,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
 
   async actualizarDatos(obj: PrevCaratula) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -215,6 +233,12 @@ export class AbmPrevCaratulaComponent implements OnInit {
     return color;
   }
 
+  //cancelar modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.item = new PrevCaratula();
+    this.mostrarBtnModif = false;
+  }
 
   preDelete(item: PrevCaratula) {
     this.item = new PrevCaratula();

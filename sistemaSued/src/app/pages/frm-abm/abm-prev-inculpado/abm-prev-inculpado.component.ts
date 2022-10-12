@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment';
 import { Calle, Estudio, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Sexo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
@@ -20,7 +21,11 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   //variable para verificar si fue enviado los datos
   enviado = false;
+//boton
+  mostrarBtnModif: boolean;
 
+  //id seleccion tabla
+  idSeleccion!: number;
   //input de busqueda de los filtros
   busqueda;
   busquedaOc;
@@ -45,6 +50,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
   Oitems: Ocupacion[];
   Oitem: Ocupacion;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -68,6 +74,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     this.Oitems = [];
     this.Citem = new Calle();
     this.CItems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -185,6 +192,38 @@ export class AbmPrevInculpadoComponent implements OnInit {
       });
     }
   }
+
+//trae los datos para modificar
+async traerDatos(id: number) {
+  if (this.id > 0) {
+    try {
+      let data = await this.wsdl.getFindId(id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        console.log(result.dato)
+        this.item = result.dato;
+        if(this.item.fechaDetencion != null){
+          this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');
+        }
+        this.idSeleccion = result.dato.id;
+        this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+        this.busqueda = result.dato.nacionalidadNavigation.nacionalidad;
+        this.busquedaCalle = result.dato.calleNavigation.nombre;
+
+
+        this.mostrarBtnModif = true;
+      }
+    } catch (error) {}
+  }
+}
+
+//cancelar modificacion
+cancelarModificacion() {
+  this.busqueda = '';
+  this.item = new PrevInculpado();
+  this.mostrarBtnModif = false;
+}
+
 //filtra y captura nacionalidad
   async filtrarNacionalidad() {
     try {

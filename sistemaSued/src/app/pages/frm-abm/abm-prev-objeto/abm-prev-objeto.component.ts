@@ -1,6 +1,8 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment';
 import { Objeto, Preventivo, PrevObjeto } from 'src/app/models/index.models';
 import { ObjetoService, PreventivoService, PrevObjetoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
@@ -21,6 +23,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   enviado = false;
 
   busqueda;
+  idSeleccion!: number;
   
   prev: Preventivo;
   prevObj: PrevObjeto;
@@ -30,6 +33,8 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   Oitems: Objeto[];
   Oitem: Objeto;
+
+  mostrarBtnModif: Boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +51,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.busqueda = '';
     this.Oitem = new Objeto();
     this.Oitems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -102,7 +108,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   async actualizarDatos(obj: PrevObjeto) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -167,6 +173,25 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+          this.idSeleccion = result.dato.id;
+          if(this.item.fecha != undefined){
+            this.item.fecha = moment(this.item.fecha).format('YYYY-MM-DD');
+          }
+          this.busqueda = result.dato.objetoNavigation.descripcion;
+          this.mostrarBtnModif = true;
+        }
+      } catch (error) {}
+    }
+  }
+
   async filtrarObjeto() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -203,16 +228,21 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.items.splice(indice, 1);
   }
 
+//cancela modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.item = new PrevObjeto();
+    this.mostrarBtnModif = false;
+  }
+
   // se utiliza para pintar la fila en memoria
   colores(item: PrevObjeto) {
     let color = '';
-
     if (item.id == undefined) {
       color = 't-success';
     } else {
       color = 't-default';
     }
-
     return color;
   }
 

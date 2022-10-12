@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment';
 import {
   Medio,
   Preventivo,
@@ -38,6 +39,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
   Mitems: Medio[];
   Mitem: Medio;
 
+  idSeleccion!: number;
+  mostrarBtnModif: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -53,6 +56,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.busqueda = '';
     this.Mitem = new Medio();
     this.Mitems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -97,6 +101,25 @@ export class AbmPreventivoMedioComponent implements OnInit {
     } catch (error) {}
   }
 
+
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+          this.idSeleccion = result.dato.id;
+          this.busqueda = result.dato.medioNavigation.descripcion;
+          if(this.item.fecha != undefined){
+            this.item.fecha = moment(this.item.fecha).format('YYYY-MM-DD');
+          }
+          this.mostrarBtnModif = true;
+        }
+      } catch (error) {}
+    }
+  }
   // doAction() {
   //   this.enviado = true;
   //   if (this.form.valid) {
@@ -110,7 +133,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   async actualizarDatos(obj: PreventivoMedio) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -218,6 +241,13 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
 
     return color;
+  }
+
+  //cancelar modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.item = new PreventivoMedio();
+    this.mostrarBtnModif = false;
   }
 
   preDelete(item: PreventivoMedio) {

@@ -25,6 +25,7 @@ export class AbmPreVictimaComponent implements OnInit {
   busqueda;
   busquedaOc;
 
+  idSeleccion!: number;
  //vista previa del preventivo
   prev: Preventivo;
   prevVic: PrevVictima;
@@ -41,6 +42,7 @@ export class AbmPreVictimaComponent implements OnInit {
   Oitems: Ocupacion[];
   Oitem: Ocupacion;
 
+  mostrarBtnModif: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -60,6 +62,7 @@ export class AbmPreVictimaComponent implements OnInit {
     this.Nitems = [];
     this.Oitem = new Ocupacion();
     this.Oitems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -177,6 +180,24 @@ export class AbmPreVictimaComponent implements OnInit {
       });
     }
   }
+
+//trae los datos para modificar
+async traerDatos(id: number) {
+  if (this.id > 0) {
+    try {
+      let data = await this.wsdl.getFindId(id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.item = result.dato;
+        this.idSeleccion = result.dato.id;
+        this.busqueda = result.dato.nacionNavigation.nacionalidad;
+        this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+        this.mostrarBtnModif = true;
+      }
+    } catch (error) {}
+  }
+}
+
 //filtra y captura nacionalidad
   async filtrarNacionalidad() {
     try {
@@ -249,6 +270,14 @@ export class AbmPreVictimaComponent implements OnInit {
     }
 
     return color;
+  }
+
+  //cancelar modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.busquedaOc = '';
+    this.item = new PrevVictima();
+    this.mostrarBtnModif = false;
   }
 
   preDelete(item: PrevVictima) {

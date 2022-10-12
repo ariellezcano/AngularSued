@@ -21,6 +21,7 @@ export class AbmPrevModalidadComponent implements OnInit {
   enviado = false;
 
   busqueda;
+  idSeleccion!: number;
 
   prev: Preventivo;
   prevMod: PrevModalidad;
@@ -31,6 +32,7 @@ export class AbmPrevModalidadComponent implements OnInit {
   Mitems: Modalidad[];
   Mitem: Modalidad;
 
+  mostrarBtnModif: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +48,7 @@ export class AbmPrevModalidadComponent implements OnInit {
     this.busqueda = '';
     this.Mitem = new Modalidad();
     this.Mitems = [];
+    this.mostrarBtnModif = false;
   }
 
   ngOnInit(): void {
@@ -101,9 +104,9 @@ export class AbmPrevModalidadComponent implements OnInit {
   //   }
   // }
 
-  async actualizarDatos(obj: PrevObjeto) {
+  async actualizarDatos(obj: PrevModalidad) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
@@ -168,6 +171,22 @@ export class AbmPrevModalidadComponent implements OnInit {
     }
   }
 
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+          this.idSeleccion = result.dato.id;
+          this.busqueda = result.dato.modalidadNavigation.descripcion;
+          this.mostrarBtnModif = true;
+        }
+      } catch (error) {}
+    }
+  }
+
   async filtrarModalidad() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -197,6 +216,13 @@ export class AbmPrevModalidadComponent implements OnInit {
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PrevModalidad();
+  }
+
+  //cancelar modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.item = new PrevModalidad();
+    this.mostrarBtnModif = false;
   }
 
   //elimina la fila en memoria

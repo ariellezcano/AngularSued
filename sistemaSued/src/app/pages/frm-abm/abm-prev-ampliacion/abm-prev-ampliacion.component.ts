@@ -25,13 +25,14 @@ export class AbmPrevAmpliacionComponent implements OnInit {
 
   busqueda;
 
+  idSeleccion!: number;
+  
   prev: Preventivo;
   prevAmp: PrevAmpliacion;
 
   item: PrevAmpliacion;
   items: PrevAmpliacion[];
 
-  modificar: boolean;
   mostrarBtnModif: boolean;
 
   constructor(
@@ -46,7 +47,6 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     this.prev = new Preventivo();
     this.prevAmp = new PrevAmpliacion();
     this.busqueda = '';
-    this.modificar = false;
     this.mostrarBtnModif = false;
   }
 
@@ -111,6 +111,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
+          this.idSeleccion = result.dato.id;
           if (this.item.fechaAmpliacion != undefined) {
             this.item.fechaAmpliacion = moment(
               this.item.fechaAmpliacion
@@ -244,7 +245,6 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     try {
       let res = await this.wsdl.doDelete(this.item.id).then();
       const result = JSON.parse(JSON.stringify(res));
-
       if (result.code == 200) {
         location.reload();
         Utils.showToas('Eliminado exitosamente!', 'success');

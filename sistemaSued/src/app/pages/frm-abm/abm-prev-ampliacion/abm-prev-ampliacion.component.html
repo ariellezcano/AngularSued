@@ -173,7 +173,7 @@
           <ng-template #mostrar>
             <!-- muestra el modificar y eliminar -->
             <ng-container
-              *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+              *ngIf="mostrarBtnModif && idSeleccion == i.id; then thenTemplate; else elseTemplate"
             ></ng-container>
             <ng-template #thenTemplate>
               <td>
