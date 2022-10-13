@@ -92,6 +92,7 @@ import { ComboEstudioComponent } from './component/combo-estudio/combo-estudio.c
 import { AbmPrevInculpadoComponent } from './frm-abm/abm-prev-inculpado/abm-prev-inculpado.component';
 import { ComboVinculoComponent } from './component/combo-vinculo/combo-vinculo.component';
 import { AbmPrevAmpliacionComponent } from './frm-abm/abm-prev-ampliacion/abm-prev-ampliacion.component';
+import { AbmDetallePreventivoComponent } from './frm-abm/abm-detalle-preventivo/abm-detalle-preventivo.component';
 
 @NgModule({
     declarations: [
@@ -183,6 +184,7 @@ import { AbmPrevAmpliacionComponent } from './frm-abm/abm-prev-ampliacion/abm-pr
       AbmPrevInculpadoComponent,
       ComboVinculoComponent,
       AbmPrevAmpliacionComponent,
+      AbmDetallePreventivoComponent,
     ],
     exports: [],
     imports: [

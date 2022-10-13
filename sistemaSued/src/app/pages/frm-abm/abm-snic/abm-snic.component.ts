@@ -51,7 +51,6 @@ export class AbmSnicComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
         }
@@ -62,12 +61,11 @@ export class AbmSnicComponent implements OnInit {
   doAction() {
     this.enviado = true;
     //if (this.form.valid) {
-      //if (this.id > 0) {
-       // this.actualizarDatos(this.item);
-      //} else {
-        //console.log("datos enviados", this.item)
+      if (this.id > 0 && this.item.preventivo > 0) {
+        this.actualizarDatos(this.item);
+      } else {
         this.guardar();
-     // }
+      }
     //}
   }
 
@@ -76,7 +74,7 @@ export class AbmSnicComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
+      console.log('actualiar', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({

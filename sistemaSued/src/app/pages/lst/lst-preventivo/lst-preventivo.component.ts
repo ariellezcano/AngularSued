@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
@@ -16,6 +16,12 @@ export class LstPreventivoComponent implements OnInit {
 
   seleccionAccion: any;
 
+  @Output()
+  id: number;
+
+  proccess: boolean;
+  selectedRowIndex: number = -1;
+
   item!: Preventivo;
   items: Preventivo[];
 
@@ -24,6 +30,8 @@ export class LstPreventivoComponent implements OnInit {
   constructor(private wsdl: PreventivoService, private router: Router) {
     this.item = new Preventivo();
     this.items = [];
+    this.proccess = false;
+    this.id = 0;
   }
 
   ngOnInit(): void {}
@@ -113,6 +121,18 @@ export class LstPreventivoComponent implements OnInit {
     return valor;
   }
 
+
+  clickRow(item: any) {
+    this.id = 0;
+    this.selectedRowIndex = item.id;
+    this.id = this.selectedRowIndex;
+    this.proccess = true;
+  }
+
+  vaciarDatos(){
+    this.id = 0;
+  }
+
   linkear(id?: Number) {
     this.router.navigateByUrl('lst-preventivo/abm/' + id);
   }
@@ -120,4 +140,5 @@ export class LstPreventivoComponent implements OnInit {
   back() {
     this.router.navigate(['principal']);
   }
+
 }

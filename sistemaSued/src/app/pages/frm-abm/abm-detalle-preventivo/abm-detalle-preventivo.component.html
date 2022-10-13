@@ -1,0 +1,26 @@
+<div class="container">
+  <legend>Preventivo</legend>
+  <div class="row">
+    <h4>{{ itemPrev.fechaHecho | date: "dd/MM/yyyy" }}</h4>
+  </div>
+  <br />
+  <legend>Medio Utilizado</legend>
+  <div class="row" *ngFor="let itemMedio of itemsMedio">
+    <h4>{{ itemMedio.medioNavigation.descripcion }}</h4>
+  </div>
+  <br />
+  <legend>Carátula Secundaria</legend>
+  <div class="row" *ngFor="let itemCaratula of itemsCaratula">
+    <h4>{{ itemCaratula.delitoNavigation.descripcion }}</h4>
+  </div>
+  <br>
+  <legend>Ampliaciones</legend>
+  <div class="row" *ngFor="let itemAmpliacion of itemsAmpliacion">
+    <h4>{{ itemAmpliacion.nroNota }}</h4>
+  </div>
+  <br>
+  <legend>Objetos</legend>
+  <div class="row" *ngFor="let itemObjeto of itemsObjeto">
+    <h4>{{ itemObjeto.objetoNavigation.descripcion }}</h4>
+  </div>
+</div>
