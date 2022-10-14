@@ -1,26 +1,292 @@
 <div class="container">
-  <legend>Preventivo</legend>
   <div class="row">
-    <h4>{{ itemPrev.fechaHecho | date: "dd/MM/yyyy" }}</h4>
+    <center>
+      <b> <legend>Preventivo</legend> </b>
+    </center>
+    <div class="col-md-4">
+      <label
+        >Fecha del Preventivo:
+        <b>{{ itemPrev.fechaPreventivo | date: "dd/MM/yyyy" }}</b></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Fecha del Hecho&nbsp;
+        <b>{{ itemPrev.fechaHecho | date: "dd/MM/yyyy" }}</b></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Hora del Hecho&nbsp; <b>{{ itemPrev.hora }}</b></label
+      >
+    </div>
   </div>
-  <br />
-  <legend>Medio Utilizado</legend>
-  <div class="row" *ngFor="let itemMedio of itemsMedio">
-    <h4>{{ itemMedio.medioNavigation.descripcion }}</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <label for=""
+        >Preventivo N°&nbsp;
+        <b
+          >{{ itemPrev.anio }} - {{ itemPrev.nro }} - {{ itemPrev.letra }}</b
+        ></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Intervencion Policial:&nbsp;
+        <b>{{ valor(itemPrev.intervencionPol) }}</b></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Delito:&nbsp;
+        <b>{{ itemPrev.delitoNavigation?.descripcion }}</b></label
+      >
+    </div>
   </div>
-  <br />
-  <legend>Carátula Secundaria</legend>
-  <div class="row" *ngFor="let itemCaratula of itemsCaratula">
-    <h4>{{ itemCaratula.delitoNavigation.descripcion }}</h4>
+  <div class="row">
+    <div class="col-md-4">
+      <label for=""
+        >Lugar:&nbsp; <b>{{ itemPrev.lugarNavigation?.descripcion }}</b></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Calle y nro.:&nbsp;
+        <b>{{ itemPrev.calleNavigation?.nombre }} {{ itemPrev.nro }}</b></label
+      >
+    </div>
+    <div class="col-md-4">
+      <label for=""
+        >Barrio:&nbsp; <b>{{ itemPrev.barrioNavigation?.nombre }}</b></label
+      >
+    </div>
   </div>
-  <br>
-  <legend>Ampliaciones</legend>
-  <div class="row" *ngFor="let itemAmpliacion of itemsAmpliacion">
-    <h4>{{ itemAmpliacion.nroNota }}</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <label for=""
+        >Localidad:&nbsp;
+        <b>{{ itemPrev.localidadNavigation?.nombre }}</b></label
+      >
+    </div>
   </div>
-  <br>
-  <legend>Objetos</legend>
-  <div class="row" *ngFor="let itemObjeto of itemsObjeto">
-    <h4>{{ itemObjeto.objetoNavigation.descripcion }}</h4>
+  <div class="row">
+    <center>
+      <legend>Coordenadas:</legend>
+      <div class="col-md-6">
+        <label for=""
+          >Latitud:&nbsp; <b>{{ itemPrev.latitud }}</b></label
+        >
+      </div>
+      <div class="col-md-6">
+        <label for="">
+          Longitud:&nbsp;
+          <b>{{ itemPrev.longitud }}</b></label
+        >
+      </div>
+    </center>
+  </div>
+  <hr>
+  <div class="row">
+    <legend>Medios Utilizados:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Medio</th>
+            <th>Secuestro</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let itemMedio of itemsMedio">
+            <td>{{itemMedio.medioNavigation?.descripcion}}</td>
+            <td>{{ valor(itemMedio.secuestro)}}</td>
+            <td>{{itemMedio.fecha |date:"dd/MM/yyyy"}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Carátulas Secundarias:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemCaratula of itemsCaratula">
+            <td>{{ itemCaratula.delitoNavigation?.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Medios Utilizados:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Medio</th>
+            <th>Secuestro</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemMedio of itemsMedio">
+            <td>{{ itemMedio.medioNavigation?.descripcion }}</td>
+            <td>{{ valor(itemMedio.secuestro) }}</td>
+            <td>{{ itemMedio.fecha | date: "dd/MM/yyyy" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Objetos:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Valor</th>
+            <th>Secuestro</th>
+            <th>Fecha</th>
+            <th>Cantidad Secuestro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemObjeto of itemsObjeto">
+            <td>{{ itemObjeto.objetoNavigation?.descripcion }}</td>
+            <td>{{ itemObjeto.cantidad }}</td>
+            <td>{{ itemObjeto.valor }}</td>
+            <td>{{ valor(itemObjeto.secuestro) }}</td>
+            <td>{{ itemObjeto.fecha | date: "dd/MM/yyyy" }}</td>
+            <td>{{ itemObjeto.cantSecuestro }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Modalidad:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemModal of itemsModal">
+            <td>{{ itemModal.modalidadNavigation?.descripcion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Victimas:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Edad</th>
+            <th>Género</th>
+            <th>Nacionalidad</th>
+            <th>Estudio</th>
+            <th>Sit. Ocup.</th>
+            <th>Falleció</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemVict of itemsVict">
+            <td>{{ itemVict.nombre }}</td>
+            <td>{{ itemVict.apellido }}</td>
+            <td>{{ itemVict.dni }}</td>
+            <td>{{ itemVict.edad }}</td>
+            <td>{{ itemVict.sexoNavigation?.descripcion }}</td>
+            <td>{{ itemVict.nacionNavigation?.nacionalidad }}</td>
+            <td>{{ itemVict.estudioNavigation?.descripcion }}</td>
+            <td>{{ itemVict.sitOcup }}</td>
+            <td>{{ valor(itemVict.fallecio) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <legend>Inculpados:</legend>
+    <div class="col-md-12">
+      <table class="table text-center">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Edad</th>
+            <th>Género</th>
+            <th>Nacionalidad</th>
+            <th>Estudio</th>
+            <th>Ocupación</th>
+            <th>Vínculo</th>
+            <th>Detenido</th>
+            <th>Fecha Detención</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let itemInculpado of itemsInculpado">
+            <td>{{ itemInculpado.nombre }}</td>
+            <td>{{ itemInculpado.apellido }}</td>
+            <td>{{ itemInculpado.dni }}</td>
+            <td>{{ itemInculpado.edad }}</td>
+            <td>{{ itemInculpado.sexoNavigation?.descripcion }}</td>
+            <td>{{ itemInculpado.nacionalidadNavigation?.nacionalidad }}</td>
+            <td>{{ itemInculpado.estudiosNavigation?.descripcion }}</td>
+            <td>{{ itemInculpado.ocupacionNavigation?.descripcion }}</td>
+            <td>{{ itemInculpado.vinculoNavigation?.descripcion }}</td>
+            <td>{{ valor(itemInculpado.detenido) }}</td>
+            <td>{{ itemInculpado.fechaDetencion | date: "dd/MM/yyyy" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <legend>Ampliaciones:</legend>
+    <div class="col-md-12">
+      <table class="table text-center" >
+        <thead>
+          <tr>
+            <th>Fecha Ampliación</th>
+            <th>Nro. nota</th>
+            <th>Unidad</th>
+            <th>Observaciones</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let itemAmpliacion of itemsAmpliacion">
+            <td>{{itemAmpliacion.fechaAmpliacion | date:"dd/MM/yyyy"}}</td>
+            <td>{{itemAmpliacion.nroNota}}</td>
+            <td>{{itemAmpliacion.unidad}}</td>
+            <td>{{itemAmpliacion.observacion}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

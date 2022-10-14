@@ -87,6 +87,9 @@ export class AbmDetallePreventivoComponent implements OnInit {
     this.obtenerCaratulas();
     this.obtenerAmpliaciones();
     this.obtenerObjeto();
+    this.obtenerModalidad();
+    this.obtenerVictimas();
+    this.obtenerInculpados();
   }
 
  async obtenerPreventivo() {
@@ -100,13 +103,23 @@ export class AbmDetallePreventivoComponent implements OnInit {
     }
   }
 
+  valor(item: any) {
+    item = item;
+    let valor = '';
+    if (item) {
+      valor = 'Si';
+    } else {
+      valor = 'No';
+    }
+    return valor;
+  }
+
   async obtenerMedio() {
     try {
       let data = await this.wsdlMedio.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemsMedio = result.data;
-        console.log("medio",this.itemsMedio)
       }
     } catch (error) {
     }
@@ -118,7 +131,6 @@ export class AbmDetallePreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemsCaratula = result.data;
-        console.log("ampliacion",this.itemsCaratula)
       }
     } catch (error) {
     }
@@ -130,7 +142,6 @@ export class AbmDetallePreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemsAmpliacion = result.data;
-        console.log("medio",this.itemsAmpliacion)
       }
     } catch (error) {
     }
@@ -141,7 +152,36 @@ export class AbmDetallePreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemsObjeto = result.data;
-        console.log("obj",this.itemsObjeto)
+      }
+    } catch (error) {
+    }
+  }
+  async obtenerModalidad() {
+    try {
+      let data = await this.wsdlModalidad.doFilter(this.id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if(result.code == 200){
+        this.itemsModal = result.data;
+      }
+    } catch (error) {
+    }
+  }
+  async obtenerVictimas() {
+    try {
+      let data = await this.wsdlVictimas.doFilter(this.id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if(result.code == 200){
+        this.itemsVict = result.data;
+      }
+    } catch (error) {
+    }
+  }
+  async obtenerInculpados() {
+    try {
+      let data = await this.wsdlInculpado.doFilter(this.id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if(result.code == 200){
+        this.itemsInculpado = result.data;
       }
     } catch (error) {
     }

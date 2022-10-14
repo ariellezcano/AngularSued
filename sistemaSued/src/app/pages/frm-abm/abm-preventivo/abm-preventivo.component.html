@@ -3,7 +3,7 @@
     Panel ABM Preventivos
   </h3>
   <hr />
-  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+  <form class="text-center" [formGroup]="form">
     <div class="form-group row">
       <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
@@ -300,7 +300,13 @@
     <br *ngIf="map">
     <hr *ngIf="map">
     <div class="row">
-      <button class="btn btn-dark" type="submit">Guardar</button>
+    <ng-container *ngIf="this.id > 0; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      <button class="btn btn-success" type="button" (click)="actualizarDatos(this.item)">Editar registro</button>
+    </ng-template>
+    <ng-template #elseTemplate>
+      <button class="btn btn-dark" type="button" (click)="guardar()">Guardar</button>
+    </ng-template>
       &nbsp;
       <button class="btn btn-info" type="button" (click)="back()">
         Cancelar

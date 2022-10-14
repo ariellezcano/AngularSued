@@ -12,24 +12,29 @@ export class Preventivo {
     dirNro!: number;
     dirAdic!: string;
     barrio!: number;
-    maps!: string;
+    localidad!: number;
     latitud!: string;
     longitud!: string;
     anio!: number;
     nro!: number;
     letra!: string;
     intervencionPol!: boolean;
+    fechaBaja: any;
+    activo: boolean;
 
 
     lugarNavigation: any;
     calleNavigation: any;
     barrioNavigation: any;
     delitoNavigation: any;
+    localidadNavigation: any;
 
 
-    localidad: any;
+    localidadCoordenada: any;
     cp: any;
     pais: any;
     
-    constructor(){}
+    constructor(){
+        this.activo = true;
+    }
 }

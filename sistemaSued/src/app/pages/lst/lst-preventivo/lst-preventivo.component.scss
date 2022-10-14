@@ -12,3 +12,14 @@
     text-transform: uppercase;
     font-weight: bold;
 }
+
+.logo-img {
+    height: 25px;
+    display: block;
+    left: 20px;
+    position: absolute;
+    top: 5px;
+    img {
+      width: 35px;
+    }
+  }

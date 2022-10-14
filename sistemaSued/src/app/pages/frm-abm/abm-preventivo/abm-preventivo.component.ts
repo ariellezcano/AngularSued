@@ -113,9 +113,9 @@ export class AbmPreventivoComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-        // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
+         console.log('find',  this.item);
 
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
@@ -144,19 +144,19 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  doAction() {
-    this.enviado = true;
-    //if (this.form.valid) {
-    if (this.id > 0) {
-      this.actualizarDatos(this.item);
-    } else {
-      this.guardar();
-    }
-    //}
-  }
+  // doAction() {
+  //   this.enviado = true;
+  //   //if (this.form.valid) {
+  //   if (this.id > 0) {
+  //     this.actualizarDatos(this.item);
+  //   } else {
+  //     this.guardar();
+  //   }
+  //   //}
+  // }
 
   async actualizarDatos(obj: Preventivo) {
-    //console.log("enviado modificar", this.item)
+    alert(this.item.calle)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -278,6 +278,7 @@ export class AbmPreventivoComponent implements OnInit {
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
+      alert(this.item.calle)
       this.busquedaCalle = event.nombre;
     }
   }
@@ -308,7 +309,8 @@ export class AbmPreventivoComponent implements OnInit {
 
   seleccionLocalidad(event: Localidad) {
     if (event != undefined) {
-      this.item.localidad = event.nombre;
+      this.item.localidad = event.id;
+      this.item.localidadCoordenada = event.nombre;
       this.item.cp = event.codPostal;
       this.item.pais = event.nacionNavigation?.nacion;
     }
@@ -321,7 +323,7 @@ export class AbmPreventivoComponent implements OnInit {
           this.Citem.nombre,
           this.item.dirNro,
           this.item.cp,
-          this.item.localidad,
+          this.item.localidadCoordenada,
           this.item.pais
         )
         .then();
@@ -348,8 +350,7 @@ export class AbmPreventivoComponent implements OnInit {
         .then();
       //const result = JSON.parse(JSON.stringify(data));
     } catch (error) {
-      if (
-        this.latitud == undefined ||
+      if (this.latitud == undefined ||
         (this.latitud == '' && this.longitud == undefined) ||
         this.longitud == ''
       ) {
