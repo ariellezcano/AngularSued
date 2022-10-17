@@ -27,3 +27,6 @@ export {PrevSnic} from './component/prev-snic';
 export {PrevVictima} from './component/prev-victima';
 export {PrevInculpado} from './component/prev-inculpado';
 export {PrevAmpliacion} from './component/prev-ampliacion';
+export {Contravencion} from './component/contravencion';
+export {ArticuloContravencion} from './component/articulo-contravencion';
+export {ImpContravencion} from './component/imp-contravencion';

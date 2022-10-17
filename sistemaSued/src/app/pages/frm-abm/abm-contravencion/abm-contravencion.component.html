@@ -1,0 +1,67 @@
+<div class="container">
+    <h3 class="alert alert-info text-center" role="alert">Panel ABM Contravenciones</h3>
+    <hr />
+    <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
+          <div class="col-sm-12">
+            <input
+              [(ngModel)]="item.fechaContravencion"
+              id="codigo"
+              type="date"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+              />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Nombre" class="col-sm-12 col-form-label">Hora:</label>
+          <div class="col-sm-12">
+            <input
+              [(ngModel)]="item.hora"
+              id="descripcion"
+              type="time"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="Nombre" class="col-sm-12 col-form-label">
+            Expediente:</label
+          >
+          <input
+              [(ngModel)]="item.expediente"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+        </div>
+        <div class="col-md-6">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Unidad:</label
+            >
+            <input
+                [(ngModel)]="item.unidad"
+                type="text"
+                class="form-control"
+                [ngModelOptions]="{ standalone: true }"
+              />
+          </div>
+      </div>
+      <br />
+      <hr />
+      <div class="row">
+        <button class="btn btn-dark" type="submit">Guardar</button>
+        &nbsp;
+        <button class="btn btn-info" type="button" (click)="back()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+  <br />

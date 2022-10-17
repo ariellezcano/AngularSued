@@ -28,3 +28,6 @@ export {GeolocalizacionService} from './component/geolocalizacion.service';
 export {PrevVictimaService} from './component/prev-victima.service';
 export {PrevInculpadoService} from './component/prev-inculpado.service';
 export {PrevAmpliacionService} from './component/prev-ampliacion.service';
+export {ContravencionService} from './component/contravencion.service';
+export {ArtContravencionService} from './component/art-contravencion.service';
+export {ImpContravencionService} from './component/imp-contravencion.service';

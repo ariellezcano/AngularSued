@@ -93,6 +93,10 @@ import { AbmPrevInculpadoComponent } from './frm-abm/abm-prev-inculpado/abm-prev
 import { ComboVinculoComponent } from './component/combo-vinculo/combo-vinculo.component';
 import { AbmPrevAmpliacionComponent } from './frm-abm/abm-prev-ampliacion/abm-prev-ampliacion.component';
 import { AbmDetallePreventivoComponent } from './frm-abm/abm-detalle-preventivo/abm-detalle-preventivo.component';
+import { LstContravencionComponent } from './lst/lst-contravencion/lst-contravencion.component';
+import { FilContravencionComponent } from './filters/fil-contravencion/fil-contravencion.component';
+import { AbmContravencionComponent } from './frm-abm/abm-contravencion/abm-contravencion.component';
+import { AbmArtContravencionComponent } from './frm-abm/abm-art-contravencion/abm-art-contravencion.component';
 
 @NgModule({
     declarations: [
@@ -185,6 +189,10 @@ import { AbmDetallePreventivoComponent } from './frm-abm/abm-detalle-preventivo/
       ComboVinculoComponent,
       AbmPrevAmpliacionComponent,
       AbmDetallePreventivoComponent,
+      LstContravencionComponent,
+      FilContravencionComponent,
+      AbmContravencionComponent,
+      AbmArtContravencionComponent,
     ],
     exports: [],
     imports: [

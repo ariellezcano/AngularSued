@@ -90,18 +90,9 @@ export class AbmDetallePreventivoComponent implements OnInit {
     this.obtenerModalidad();
     this.obtenerVictimas();
     this.obtenerInculpados();
+    this.obtenerSnic();
   }
 
- async obtenerPreventivo() {
-    try {
-      let data = await this.wsdlPreventivo.getFindId(this.id).then();
-      const result = JSON.parse(JSON.stringify(data));
-      if(result.code == 200){
-        this.itemPrev = result.dato;
-      }
-    } catch (error) {
-    }
-  }
 
   valor(item: any) {
     item = item;
@@ -112,6 +103,18 @@ export class AbmDetallePreventivoComponent implements OnInit {
       valor = 'No';
     }
     return valor;
+  }
+
+
+ async obtenerPreventivo() {
+    try {
+      let data = await this.wsdlPreventivo.getFindId(this.id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if(result.code == 200){
+        this.itemPrev = result.dato;
+      }
+    } catch (error) {
+    }
   }
 
   async obtenerMedio() {
@@ -182,6 +185,17 @@ export class AbmDetallePreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemsInculpado = result.data;
+      }
+    } catch (error) {
+    }
+  }
+
+  async obtenerSnic() {
+    try {
+      let data = await this.wsdlSnic.getFindId(this.id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if(result.code == 200){
+        this.itemSnic = result.data;
       }
     } catch (error) {
     }

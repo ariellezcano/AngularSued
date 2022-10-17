@@ -3,9 +3,11 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { PantallaPrincipalComponent } from "./component/pantalla-principal/pantalla-principal.component";
 import { AbmArmaMarcaComponent } from "./frm-abm/abm-arma-marca/abm-arma-marca.component";
+import { AbmArtContravencionComponent } from "./frm-abm/abm-art-contravencion/abm-art-contravencion.component";
 import { AbmArticuloComponent } from "./frm-abm/abm-articulo/abm-articulo.component";
 import { AbmBarrioComponent } from "./frm-abm/abm-barrio/abm-barrio.component";
 import { AbmCalleComponent } from "./frm-abm/abm-calle/abm-calle.component";
+import { AbmContravencionComponent } from "./frm-abm/abm-contravencion/abm-contravencion.component";
 import { AbmDelitoComponent } from "./frm-abm/abm-delito/abm-delito.component";
 import { AbmDepartamentoComponent } from "./frm-abm/abm-departamento/abm-departamento.component";
 import { AbmDncpComponent } from "./frm-abm/abm-dncp/abm-dncp.component";
@@ -35,6 +37,7 @@ import { LstArmaMarcaComponent } from "./lst/lst-arma-marca/lst-arma-marca.compo
 import { LstArticuloComponent } from "./lst/lst-articulo/lst-articulo.component";
 import { LstBarrioComponent } from "./lst/lst-barrio/lst-barrio.component";
 import { LstCalleComponent } from "./lst/lst-calle/lst-calle.component";
+import { LstContravencionComponent } from "./lst/lst-contravencion/lst-contravencion.component";
 import { LstDelitoComponent } from "./lst/lst-delito/lst-delito.component";
 import { LstDepartamentoComponent } from "./lst/lst-departamento/lst-departamento.component";
 import { LstDncpComponent } from "./lst/lst-dncp/lst-dncp.component";
@@ -411,6 +414,26 @@ const routes: Routes = [
             {
               path: 'ampliacion/:id',
               component: AbmPrevAmpliacionComponent,
+             //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-contravencion',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmContravencionComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstContravencionComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'articulado/:id',
+              component: AbmArtContravencionComponent,
              //canActivate: [AuthGuard],
             },
           ],
