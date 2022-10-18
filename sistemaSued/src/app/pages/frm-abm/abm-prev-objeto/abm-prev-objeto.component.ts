@@ -63,25 +63,25 @@ export class AbmPrevObjetoComponent implements OnInit {
 
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
-    this.findId();
+    this.obtenerDetalle();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  async findId() {
-    if (this.id > 0) {
-      try {
-        let data = await this.wsdlPreventivo.getFindId(this.id).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.prev = result.dato;
-          this.obtenerDetalle()
-        }
-      } catch (error) {}
-    }
-  }
+  // async findId() {
+  //   if (this.id > 0) {
+  //     try {
+  //       let data = await this.wsdlPreventivo.getFindId(this.id).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.prev = result.dato;
+  //         this.obtenerDetalle()
+  //       }
+  //     } catch (error) {}
+  //   }
+  // }
 
   async obtenerDetalle() {
     try {

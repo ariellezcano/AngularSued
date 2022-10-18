@@ -72,6 +72,9 @@ export class LstPreventivoComponent implements OnInit {
             );
           }
         } else if (result.dismiss === Swal.DismissReason.cancel) {
+          this.proccess = false;
+          this.id = 0;
+          this.selectedRowIndex = 0;
           swalWithBootstrapButtons.fire(
             'Cancelado',
             'Su registro está seguro :)',
@@ -131,10 +134,15 @@ export class LstPreventivoComponent implements OnInit {
 
   vaciarDatos(){
     this.id = 0;
+    this.selectedRowIndex = 0;
+    this.proccess = false;
   }
 
   linkear(id?: Number) {
     this.router.navigateByUrl('lst-preventivo/abm/' + id);
+  }
+  linkearDetalle(id: Number) {
+    this.router.navigateByUrl('lst-preventivo/detalle/' + id);
   }
 
   back() {

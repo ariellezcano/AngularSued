@@ -11,6 +11,7 @@ import { AbmContravencionComponent } from "./frm-abm/abm-contravencion/abm-contr
 import { AbmDelitoComponent } from "./frm-abm/abm-delito/abm-delito.component";
 import { AbmDepartamentoComponent } from "./frm-abm/abm-departamento/abm-departamento.component";
 import { AbmDncpComponent } from "./frm-abm/abm-dncp/abm-dncp.component";
+import { AbmDtallePreventivoComponent } from "./frm-abm/abm-dtalle-preventivo/abm-dtalle-preventivo.component";
 import { AbmEstudioComponent } from "./frm-abm/abm-estudio/abm-estudio.component";
 import { AbmLocalidadComponent } from "./frm-abm/abm-localidad/abm-localidad.component";
 import { AbmLugarComponent } from "./frm-abm/abm-lugar/abm-lugar.component";
@@ -414,6 +415,11 @@ const routes: Routes = [
             {
               path: 'ampliacion/:id',
               component: AbmPrevAmpliacionComponent,
+             //canActivate: [AuthGuard],
+            },
+            {
+              path: 'detalle/:id',
+              component: AbmDtallePreventivoComponent,
              //canActivate: [AuthGuard],
             },
           ],

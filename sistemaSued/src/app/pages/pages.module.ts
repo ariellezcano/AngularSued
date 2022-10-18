@@ -97,6 +97,7 @@ import { LstContravencionComponent } from './lst/lst-contravencion/lst-contraven
 import { FilContravencionComponent } from './filters/fil-contravencion/fil-contravencion.component';
 import { AbmContravencionComponent } from './frm-abm/abm-contravencion/abm-contravencion.component';
 import { AbmArtContravencionComponent } from './frm-abm/abm-art-contravencion/abm-art-contravencion.component';
+import { AbmDtallePreventivoComponent } from './frm-abm/abm-dtalle-preventivo/abm-dtalle-preventivo.component';
 
 @NgModule({
     declarations: [
@@ -193,6 +194,7 @@ import { AbmArtContravencionComponent } from './frm-abm/abm-art-contravencion/ab
       FilContravencionComponent,
       AbmContravencionComponent,
       AbmArtContravencionComponent,
+      AbmDtallePreventivoComponent,
     ],
     exports: [],
     imports: [

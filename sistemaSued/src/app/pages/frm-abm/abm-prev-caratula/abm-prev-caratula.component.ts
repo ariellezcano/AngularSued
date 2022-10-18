@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Delito, PrevCaratula, Preventivo } from 'src/app/models/index.models';
@@ -13,7 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class AbmPrevCaratulaComponent implements OnInit {
 
-  public id!: number;
+  @Input()
+  public id: number;
   //valida el formulario
   form!: FormGroup;
 
@@ -49,6 +50,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
     this.Ditem = new Delito();
     this.Ditems = [];
     this.mostrarBtnModif = false;
+    this.id = 0;
   }
 
   ngOnInit(): void {
@@ -60,25 +62,26 @@ export class AbmPrevCaratulaComponent implements OnInit {
 
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
-    this.findId();
+    this.obtenerDetalle();
+    
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  async findId() {
-    if (this.id > 0) {
-      try {
-        let data = await this.wsdlPreventivo.getFindId(this.id).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.prev = result.dato;
-          this.obtenerDetalle()
-        }
-      } catch (error) {}
-    }
-  }
+  // async findId() {
+  //   if (this.id > 0) {
+  //     try {
+  //       let data = await this.wsdlPreventivo.getFindId(this.id).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.prev = result.dato;
+  //         this.obtenerDetalle()
+  //       }
+  //     } catch (error) {}
+  //   }
+  // }
 
   async obtenerDetalle() {
     try {
@@ -162,14 +165,15 @@ export class AbmPrevCaratulaComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log("result", result);
       if (result.code == 200) {
-        this.back();
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Dato guardado correctamente!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        //this.back();
+        this.obtenerDetalle();
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //   title: 'Dato guardado correctamente!',
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
       } else if(result.code == 204) {
         Swal.fire({
           icon: 'info',
