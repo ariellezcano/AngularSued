@@ -41,7 +41,7 @@ export class GeoMapComponent implements OnInit, AfterViewInit {
     const initialState = {
       lng: this.longitud,
       lat: this.latitud,
-      zoom: 4,
+      zoom: 5,
     };
 
     const map = L.map(this.mapContainer.nativeElement).setView(

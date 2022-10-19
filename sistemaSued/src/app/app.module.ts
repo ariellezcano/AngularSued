@@ -20,7 +20,7 @@ import { PagesModule } from './pages/pages.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

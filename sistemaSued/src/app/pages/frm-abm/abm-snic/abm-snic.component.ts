@@ -102,7 +102,7 @@ export class AbmSnicComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log("result", result);
       if (result.code == 200) {
-        this.back();
+        this.findId();
         Swal.fire({
           position: 'top-end',
           icon: 'success',

@@ -98,6 +98,8 @@ import { FilContravencionComponent } from './filters/fil-contravencion/fil-contr
 import { AbmContravencionComponent } from './frm-abm/abm-contravencion/abm-contravencion.component';
 import { AbmArtContravencionComponent } from './frm-abm/abm-art-contravencion/abm-art-contravencion.component';
 import { AbmDtallePreventivoComponent } from './frm-abm/abm-dtalle-preventivo/abm-dtalle-preventivo.component';
+import { GeoLocalizacionInversaComponent } from './component/geo-localizacion-inversa/geo-localizacion-inversa.component';
+ 
 
 @NgModule({
     declarations: [
@@ -195,6 +197,7 @@ import { AbmDtallePreventivoComponent } from './frm-abm/abm-dtalle-preventivo/ab
       AbmContravencionComponent,
       AbmArtContravencionComponent,
       AbmDtallePreventivoComponent,
+      GeoLocalizacionInversaComponent,
     ],
     exports: [],
     imports: [

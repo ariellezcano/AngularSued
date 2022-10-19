@@ -162,13 +162,14 @@ export class AbmPrevAmpliacionComponent implements OnInit {
       console.log('result', result);
       if (result.code == 200) {
         //this.back();
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Dato guardado correctamente!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        this.obtenerDetalle();
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //   title: 'Dato guardado correctamente!',
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
       } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',

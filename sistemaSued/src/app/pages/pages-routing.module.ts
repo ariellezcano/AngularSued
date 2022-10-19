@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { GeoLocalizacionInversaComponent } from "./component/geo-localizacion-inversa/geo-localizacion-inversa.component";
 import { PantallaPrincipalComponent } from "./component/pantalla-principal/pantalla-principal.component";
 import { AbmArmaMarcaComponent } from "./frm-abm/abm-arma-marca/abm-arma-marca.component";
 import { AbmArtContravencionComponent } from "./frm-abm/abm-art-contravencion/abm-art-contravencion.component";
@@ -442,6 +443,17 @@ const routes: Routes = [
               component: AbmArtContravencionComponent,
              //canActivate: [AuthGuard],
             },
+          ],
+        },
+        {
+          path: 'geolocalizacion',
+          children: [
+            {
+              path: 'geo',
+              component: GeoLocalizacionInversaComponent,
+              //canActivate: [AuthGuard],
+            },
+            
           ],
         },
       ],

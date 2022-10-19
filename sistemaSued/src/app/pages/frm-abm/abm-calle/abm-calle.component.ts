@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Barrio, Calle } from 'src/app/models/index.models';
+import { Barrio, Calle, Localidad } from 'src/app/models/index.models';
 import { CalleService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
@@ -93,7 +93,7 @@ export class AbmCalleComponent implements OnInit {
 
 
   async guardar() {
-    //console.log("items", this.item);
+    console.log("items", this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
@@ -127,9 +127,9 @@ export class AbmCalleComponent implements OnInit {
     }
   }
 
-  seleccionBarrio(event: Barrio) {
+  seleccionlocalidad(event: Localidad) {
     if (event != undefined) {
-      this.item.barrio = event.id;
+      this.item.localidad = event.id;
     }
   }
 

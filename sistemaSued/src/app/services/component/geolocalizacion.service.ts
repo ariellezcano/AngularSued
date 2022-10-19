@@ -25,13 +25,22 @@ export class GeolocalizacionService {
     var requestOptions = {
       method: 'GET',
     };
-    let data = this.api+calle +','+nro +','+cp +','+localidad +','+pais+'&format=json&apiKey='+this.apiKey;
-    console.log("datass", data)
+    let data =
+      this.api +
+      calle +
+      ',' +
+      nro +
+      ',' +
+      cp +
+      ',' +
+      localidad +
+      ',' +
+      pais +
+      '&format=json&apiKey=' +
+      this.apiKey;
+    console.log('datass', data);
     return (
-      fetch(
-        data,
-        requestOptions
-      )
+      fetch(data, requestOptions)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -46,8 +55,10 @@ export class GeolocalizacionService {
 
   obtenerGeo(lat: any, lon: any) {
     return fetch(
-      `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=`+this.apiKey)
-      .then((response) =>  response.json())
+      `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=` +
+        this.apiKey
+    )
+      .then((response) => response.json())
       .then((result) => {
         if (result.features.length) {
           Swal.fire(result.features[0].properties.formatted);
@@ -56,5 +67,18 @@ export class GeolocalizacionService {
         }
       });
   }
-}
 
+  geolocalizacionInversa(lat: any, lon: any) {
+    fetch(
+      `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lon}&apiKey=`+this.apiKey
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.features.length) {
+          console.log(result.features[0].properties.formatted);
+        } else {
+          console.log('No address found');
+        }
+      });
+  }
+}
