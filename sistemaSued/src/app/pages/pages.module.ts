@@ -99,7 +99,12 @@ import { AbmContravencionComponent } from './frm-abm/abm-contravencion/abm-contr
 import { AbmArtContravencionComponent } from './frm-abm/abm-art-contravencion/abm-art-contravencion.component';
 import { AbmDtallePreventivoComponent } from './frm-abm/abm-dtalle-preventivo/abm-dtalle-preventivo.component';
 import { GeoLocalizacionInversaComponent } from './component/geo-localizacion-inversa/geo-localizacion-inversa.component';
- 
+import { LstUnidadesComponent } from './lst/lst-unidades/lst-unidades.component';
+import { AbmUnidadesComponent } from './frm-abm/abm-unidades/abm-unidades.component';
+import { FilUnidadesComponent } from './filters/fil-unidades/fil-unidades.component';
+import { FilUnidadAutocompletadoComponent } from "./component/fil-unidad-autocompletado/fil-unidad-autocompletado.component";
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 @NgModule({
     declarations: [
@@ -198,6 +203,10 @@ import { GeoLocalizacionInversaComponent } from './component/geo-localizacion-in
       AbmArtContravencionComponent,
       AbmDtallePreventivoComponent,
       GeoLocalizacionInversaComponent,
+      LstUnidadesComponent,
+      AbmUnidadesComponent,
+      FilUnidadesComponent,
+      FilUnidadAutocompletadoComponent,
     ],
     exports: [],
     imports: [
@@ -207,6 +216,7 @@ import { GeoLocalizacionInversaComponent } from './component/geo-localizacion-in
       ReactiveFormsModule,
       HttpClientModule,
       PagesRoutingModule,
+      AutocompleteLibModule,
     ],
     providers: [],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],

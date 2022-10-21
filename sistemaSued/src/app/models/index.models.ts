@@ -30,3 +30,6 @@ export {PrevAmpliacion} from './component/prev-ampliacion';
 export {Contravencion} from './component/contravencion';
 export {ArticuloContravencion} from './component/articulo-contravencion';
 export {ImpContravencion} from './component/imp-contravencion';
+export {Unidad} from './component/unidad';
+export {Regional} from './component/regional';
+export {UnidadesSued} from './component/unidades-sued';

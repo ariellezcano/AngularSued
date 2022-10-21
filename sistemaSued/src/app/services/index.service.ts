@@ -31,3 +31,5 @@ export {PrevAmpliacionService} from './component/prev-ampliacion.service';
 export {ContravencionService} from './component/contravencion.service';
 export {ArtContravencionService} from './component/art-contravencion.service';
 export {ImpContravencionService} from './component/imp-contravencion.service';
+export {UnidadService} from './component/unidad.service';
+export {UnidadesSuedService} from './component/unidades-sued.service';

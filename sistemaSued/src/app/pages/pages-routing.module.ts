@@ -33,6 +33,7 @@ import { AbmPreventivoComponent } from "./frm-abm/abm-preventivo/abm-preventivo.
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
 import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
 import { AbmSnicComponent } from "./frm-abm/abm-snic/abm-snic.component";
+import { AbmUnidadesComponent } from "./frm-abm/abm-unidades/abm-unidades.component";
 import { AbmVehiculoMarcaComponent } from "./frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component";
 import { AbmVinculoComponent } from "./frm-abm/abm-vinculo/abm-vinculo.component";
 import { LstArmaMarcaComponent } from "./lst/lst-arma-marca/lst-arma-marca.component";
@@ -55,6 +56,7 @@ import { LstOcupacionComponent } from "./lst/lst-ocupacion/lst-ocupacion.compone
 import { LstPreventivoComponent } from "./lst/lst-preventivo/lst-preventivo.component";
 import { LstProvinciaComponent } from "./lst/lst-provincia/lst-provincia.component";
 import { LstSexoComponent } from "./lst/lst-sexo/lst-sexo.component";
+import { LstUnidadesComponent } from "./lst/lst-unidades/lst-unidades.component";
 import { LstVehiculoMarcaComponent } from "./lst/lst-vehiculo-marca/lst-vehiculo-marca.component";
 import { LstVinculoComponent } from "./lst/lst-vinculo/lst-vinculo.component";
 import { PagesComponent } from "./pages.component";
@@ -454,6 +456,21 @@ const routes: Routes = [
               //canActivate: [AuthGuard],
             },
             
+          ],
+        },
+        {
+          path: 'lst-unidades',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmUnidadesComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstUnidadesComponent,
+             //canActivate: [AuthGuard],
+            },
           ],
         },
       ],

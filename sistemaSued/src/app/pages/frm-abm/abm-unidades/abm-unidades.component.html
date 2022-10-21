@@ -1,0 +1,148 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">Panel ABM Unidades</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Código:</label>
+        <input
+          [(ngModel)]="item.codigo"
+          id="codigo"
+          type="text"
+          class="form-control"
+          formControlName="codigo"
+          [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
+        />
+        <div *ngIf="enviado && f['codigo'].errors" class="invalid-feedback">
+          <div *ngIf="f['codigo'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+      <div id="autocompletado" class="col-md-6">
+        <label for="" class="col-sm-12 col-form-label">Unidad:</label>
+        <app-fil-unidad-autocompletado (unidadSeleccionada)="unidad($event)">
+        </app-fil-unidad-autocompletado>
+      </div>
+    </div>
+    <br>
+    <div *ngIf="item.unidad" class="row">
+      <div class="col-md-12 alert alert-info">
+       Unidad Seleccionada:&nbsp;&nbsp;<b>{{item.nombre}}</b>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Dirección:</label>
+        <input
+          [(ngModel)]="item.direccion"
+          id="codigo"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <app-combo-localidad
+          [dibujar]="item"
+          (emitir)="seleccionLocalidad($event)"
+        ></app-combo-localidad>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <app-combo-departamento
+          [dibujar]="item"
+          (emitir)="seleccionDpto($event)"
+        ></app-combo-departamento>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <label for="Nombre" class="col-sm-12 col-form-label"> Area:</label>
+            <input
+              [(ngModel)]="item.area"
+              type="number"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-9">
+            <label for="Nombre" class="col-sm-12 col-form-label"> TE:</label>
+            <input
+              [(ngModel)]="item.telefono"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Centrex:</label>
+        <input
+          [(ngModel)]="item.centrex"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Ex Regional:</label
+        >
+        <input
+          [(ngModel)]="item.exRegional"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <legend><b> Nueva Estructura</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Dirección Gral.:</label
+        >
+        <input
+          [(ngModel)]="item.dirGeneral"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Dirección de Zona:</label
+        >
+        <input
+          [(ngModel)]="item.dirZona"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Supervisión de Zona:</label
+        >
+        <input
+          [(ngModel)]="item.supZona"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div> -->
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />
