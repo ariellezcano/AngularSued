@@ -17,9 +17,17 @@
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
-      <div class="col-md-6">
-        <label for="">unidad</label>
-        <input type="text" />
+      <div id="autocompletado" class="col-md-6">
+        <label for="" class="col-sm-12 col-form-label">Unidad:</label>
+        <app-fil-autocompletado-unidad-sued
+          (unidadSeleccionada)="unidad($event)"
+        >
+        </app-fil-autocompletado-unidad-sued>
+      </div>
+    </div>
+    <div *ngIf="item.unidad > 0" class="row">
+      <div class="col-md-12 alert alert-info">
+        Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombreUnidad }}</b>
       </div>
     </div>
     <div class="form-group row">
@@ -58,6 +66,7 @@
               <option value="P">P</option>
               <option value="B">B</option>
               <option value="B">C</option>
+              <option value="B">G</option>
             </select>
           </div>
         </div>
@@ -200,7 +209,7 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <label for="">Nro.:</label> &nbsp;
+          <label for="">Altura:</label> &nbsp;
           <input
             [(ngModel)]="item.dirNro"
             type="text"
@@ -218,95 +227,182 @@
           />
         </div>
       </div>
-    </div>
-    <br />
-    <div class="row">
-      <legend><b>GEOLOCALIZACION</b></legend>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <label for="">Nombre de calle </label>
-        <legend>{{ Citem.nombre }}</legend>
-      </div>
-      <div class="col-md-4">
-        <label for="">Número</label>
-        <legend>{{ item.dirNro }}</legend>
-      </div>
-      <div class="col-md-4">
-        <app-combo-localidad
-          [dibujar]="item"
-          (emitir)="seleccionLocalidad($event)"
-        ></app-combo-localidad>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <button class="btn btn-outline-warning" (click)="buscarCoordenadas()">
-          <i class="fa fa-search" aria-hidden="true"></i>
-          Buscar Coordenadas
-        </button>
+      <div class="row">
+        <div class="col-md-4">
+          <app-combo-localidad
+            [dibujar]="item"
+            (emitir)="seleccionLocalidad($event)"
+          ></app-combo-localidad>
+        </div>
+        <div  class="col-md-6">
+          <br>
+            <label *ngIf="this.item.localidadNavigation != undefined" class="col-sm-12 col-form-label alert alert-success" for="">Localidad Seleccionada: &nbsp;<b>{{this.item.localidadNavigation.codPostal}} - {{this.item.localidadNavigation?.nombre}}</b></label>
+        </div>
       </div>
     </div>
     <br />
     <div class="row">
-      <span>
-        <b><u> Coordenadas:</u></b></span
-      >
-      <div class="col-md-4">
-        <label for="">Latitud:</label> &nbsp;
-        <input
-          [(ngModel)]="item.latitud"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="col-md-4">
-        <label for="">Longitud:</label> &nbsp;
-        <input
-          [(ngModel)]="item.longitud"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
-      </div>
-      <div class="col-md-4">
-        <a
-          class="btn btn-success"
-          (click)="enviarCoordenadas()"
-          >
-          <i class="fa fa-street-view" aria-hidden="true"></i>
-          Verificar coordenadas
-        </a>
-      </div>
+      <label for="">Coordenadas Manuales</label>&nbsp;
+      <center>
+        <div class="col-md-6">
+          <label for="">Si</label>&nbsp;
+          <input
+            (click)="ActivarCasilla(1)"
+            type="checkbox"
+            class="form-sm-control"
+            [(ngModel)]="manual"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          &nbsp;
+          <label *ngIf="this.item.localidad != undefined && this.item.calle != undefined && this.item.dirNro" for="">No</label>&nbsp;
+          <input
+          (click)="ActivarCasilla(2)"
+          *ngIf="this.item.localidad != undefined && this.item.calle != undefined && this.item.dirNro"
+            type="checkbox"
+            class="form-sm-control"
+            [(ngModel)]="automatico"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </center>
     </div>
-    <hr>
+    <ng-container *ngIf="automatico">
+      <div class="row">
+        <legend><b>GEOLOCALIZACION</b></legend>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">Calle seleccionada </label>
+          <legend>{{ Citem.nombre }}</legend>
+        </div>
+        <div class="col-md-4">
+          <label for="">Altura ingresada:</label>
+          <legend>{{ item.dirNro }}</legend>
+        </div>
+        <div class="col-md-4">
+          <label for="">Localidad Seleccionada:</label>
+          <legend>
+            {{ item?.localidadCoordenada }} - {{ item.cp }} - {{ item.pais }}
+          </legend>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-outline-warning" (click)="buscarCoordenadas()">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            Buscar Coordenadas
+          </button>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <span>
+          <b><u> Coordenadas:</u></b></span
+        >
+        <div class="col-md-4">
+          <label for="">Latitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.latitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            disabled
+          />
+        </div>
+        <div class="col-md-4">
+          <label for="">Longitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.longitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            disabled
+          />
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-success" (click)="enviarCoordenadas()">
+            <i class="fa fa-street-view" aria-hidden="true"></i>
+            Verificar coordenadas
+          </a>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="manual">
+      <div class="row">
+        <span>
+          <b><u> Coordenadas:</u></b></span
+        >
+        <div class="col-md-6">
+          <label for="">Latitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.latitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="">Longitud:</label> &nbsp;
+          <input
+            [(ngModel)]="item.longitud"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+      <br />
+      <div class="row border border-primary">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14163.773525075312!2d-59.00090795!3d-27.4398752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1666610681032!5m2!1ses!2sar"
+          width="500"
+          height="350"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </ng-container>
+
+    <hr />
     <div *ngIf="map" class="row">
       <legend><b>Mapa:</b></legend>
       <app-geo-map [latitud]="latitud" [longitud]="longitud"></app-geo-map>
     </div>
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <br *ngIf="map">
-    <hr *ngIf="map">
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <br *ngIf="map" />
+    <hr *ngIf="map" />
     <div class="row">
-    <ng-container *ngIf="this.id > 0; then thenTemplate; else elseTemplate"></ng-container>
-    <ng-template #thenTemplate>
-      <button class="btn btn-success" type="button" (click)="actualizarDatos(this.item)">Editar registro</button>
-    </ng-template>
-    <ng-template #elseTemplate>
-      <button class="btn btn-dark" type="button" (click)="guardar()">Guardar</button>
-    </ng-template>
+      <ng-container
+        *ngIf="this.id > 0; then thenTemplate; else elseTemplate"
+      ></ng-container>
+      <ng-template #thenTemplate>
+        <button
+          class="btn btn-success"
+          type="button"
+          (click)="actualizarDatos(this.item)"
+        >
+          Editar registro
+        </button>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <button class="btn btn-dark" type="button" (click)="guardar()">
+          Guardar
+        </button>
+      </ng-template>
       &nbsp;
       <button class="btn btn-info" type="button" (click)="back()">
         Cancelar

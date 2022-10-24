@@ -104,6 +104,7 @@ import { AbmUnidadesComponent } from './frm-abm/abm-unidades/abm-unidades.compon
 import { FilUnidadesComponent } from './filters/fil-unidades/fil-unidades.component';
 import { FilUnidadAutocompletadoComponent } from "./component/fil-unidad-autocompletado/fil-unidad-autocompletado.component";
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { FilAutocompletadoUnidadSuedComponent } from './component/fil-autocompletado-unidad-sued/fil-autocompletado-unidad-sued.component';
 
 
 @NgModule({
@@ -207,6 +208,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
       AbmUnidadesComponent,
       FilUnidadesComponent,
       FilUnidadAutocompletadoComponent,
+      FilAutocompletadoUnidadSuedComponent,
     ],
     exports: [],
     imports: [

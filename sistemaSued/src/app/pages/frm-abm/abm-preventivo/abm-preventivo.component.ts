@@ -14,6 +14,7 @@ import {
   Localidad,
   Lugar,
   Preventivo,
+  UnidadesSued,
 } from 'src/app/models/index.models';
 import {
   BarrioService,
@@ -31,11 +32,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
-  @Output() 
+  @Output()
   latitud?: string;
   @Output()
   longitud?: string;
-
 
   map: boolean;
   public id!: number;
@@ -47,7 +47,9 @@ export class AbmPreventivoComponent implements OnInit {
   busquedaCalle;
   busquedaBarrio;
   //variable para verificar si fue enviado los datos
-  enviado = false;
+  enviado: boolean = false;
+  automatico: boolean;
+  manual: boolean;
 
   item!: Preventivo;
 
@@ -90,6 +92,8 @@ export class AbmPreventivoComponent implements OnInit {
     this.BItems = [];
     this.Bitem = new Barrio();
     this.map = false;
+    this.automatico = false;
+    this.manual = true;
   }
 
   ngOnInit(): void {
@@ -115,8 +119,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-         console.log('find',  this.item);
-
+          console.log('find', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'YYYY-MM-DD'
@@ -138,6 +141,13 @@ export class AbmPreventivoComponent implements OnInit {
           }
           if (this.item.calle != undefined) {
             this.busquedaCalle = this.item.calleNavigation.nombre;
+            this.Citem.nombre = this.item.calleNavigation.nombre;
+          }
+          if(this.item.unidad != undefined){
+            this.item.nombreUnidad = this.item.unidadNavigation.nombre;
+          }
+          if(this.item.localidad != undefined){
+            this.item.localidadNavigation
           }
         }
       } catch (error) {}
@@ -156,7 +166,7 @@ export class AbmPreventivoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: Preventivo) {
-    alert(this.item.calle)
+    alert(this.item.calle);
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -176,39 +186,55 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async guardar() {
-    var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
-    //var convert = hora;
-    //var Format = hora.replace(/[:]/g, '');
-    this.item.hora = hora;
+    if (
+      this.item.unidad != undefined &&
+      this.item.anio != undefined &&
+      this.item.nro != undefined &&
+      this.item.fechaPreventivo != undefined &&
+      this.item.hora != undefined &&
+      this.item.delito != undefined
+    ) {
+      var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
+      //var convert = hora;
+      //var Format = hora.replace(/[:]/g, '');
+      this.item.hora = hora;
 
-    console.log(this.item);
+      console.log(this.item);
 
-    try {
-      let data = await this.wsdl.doInsert(this.item).then();
-      const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
-      if (result.code == 200) {
-        this.back();
+      try {
+        let data = await this.wsdl.doInsert(this.item).then();
+        const result = JSON.parse(JSON.stringify(data));
+        console.log('result', result);
+        if (result.code == 200) {
+          this.back();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Dato guardado correctamente!',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else if (result.code == 204) {
+          Swal.fire({
+            icon: 'info',
+            title: 'Alerta...',
+            text: 'El dato ya existe en la base de datos',
+          });
+        }
+      } catch (error) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Dato guardado correctamente!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      } else if (result.code == 204) {
-        Swal.fire({
-          icon: 'info',
+          icon: 'error',
           title: 'Alerta...',
-          text: 'El dato ya existe en la base de datos',
+          text: 'No se pudo insertar los datos',
         });
       }
-    } catch (error) {
+    } else {
       Swal.fire({
         icon: 'error',
-        title: 'Alerta...',
-        text: 'No se pudo insertar los datos',
-      });
+        title: 'Oops...',
+        text: '¡No se pudo validar los datos ingresados!',
+        footer: '<CENTER><label><b>Recuerde que los datos obligatorios son: UNIDAD, AÑO, NRO., FECHA PREVENTIVO, HORA Y DELITO. </b></label></CENTER>'
+      })
     }
   }
 
@@ -278,7 +304,6 @@ export class AbmPreventivoComponent implements OnInit {
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
-      alert(this.item.calle)
       this.busquedaCalle = event.nombre;
     }
   }
@@ -310,6 +335,7 @@ export class AbmPreventivoComponent implements OnInit {
   seleccionLocalidad(event: Localidad) {
     if (event != undefined) {
       this.item.localidad = event.id;
+      console.log(event);
       this.item.localidadCoordenada = event.nombre;
       this.item.cp = event.codPostal;
       this.item.pais = event.nacionNavigation?.nacion;
@@ -350,12 +376,28 @@ export class AbmPreventivoComponent implements OnInit {
         .then();
       //const result = JSON.parse(JSON.stringify(data));
     } catch (error) {
-      if (this.latitud == undefined ||
+      if (
+        this.latitud == undefined ||
         (this.latitud == '' && this.longitud == undefined) ||
         this.longitud == ''
       ) {
         Swal.fire('No se pudo capturar el dato');
       }
+    }
+  }
+
+  unidad(event: UnidadesSued) {
+    this.item.unidad = event.id;
+    this.item.nombreUnidad = event.nombre;
+  }
+
+  ActivarCasilla(num: number){
+    if(num == 1){
+      this.manual = true;
+      this.automatico = false;
+    }else if(num == 2){
+      this.manual = false;
+      this.automatico = true;
     }
   }
 

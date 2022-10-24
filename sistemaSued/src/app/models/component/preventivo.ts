@@ -28,13 +28,16 @@ export class Preventivo {
     barrioNavigation: any;
     delitoNavigation: any;
     localidadNavigation: any;
+    unidadNavigation: any;
 
 
+    nombreUnidad: string
     localidadCoordenada: any;
     cp: any;
     pais: any;
     
     constructor(){
         this.activo = true;
+        this.nombreUnidad = '';
     }
 }
