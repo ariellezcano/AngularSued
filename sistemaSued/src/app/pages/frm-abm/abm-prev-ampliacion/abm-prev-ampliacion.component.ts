@@ -129,6 +129,11 @@ export class AbmPrevAmpliacionComponent implements OnInit {
       console.log('result', result);
       if (result.code == 200) {
         //this.back();
+        this.idSeleccion=0;
+        this.mostrarBtnModif =false;
+        this.busqueda = '';
+        this.item = new PrevAmpliacion();
+        this.obtenerDetalle();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -162,6 +167,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
       console.log('result', result);
       if (result.code == 200) {
         //this.back();
+        this.item = new PrevAmpliacion();
         this.obtenerDetalle();
         // Swal.fire({
         //   position: 'top-end',
@@ -246,7 +252,8 @@ export class AbmPrevAmpliacionComponent implements OnInit {
       let res = await this.wsdl.doDelete(this.item.id).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.code == 200) {
-        location.reload();
+        this.item = new PrevAmpliacion();
+        this.obtenerDetalle();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');

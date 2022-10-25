@@ -132,11 +132,18 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   async actualizarDatos(obj: PrevInculpado) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(obj.id, obj).then();
+      console.log(data)
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
-        this.back();
+        this.idSeleccion=0;
+        this.mostrarBtnModif=false;
+        this.busqueda = '';
+        this.busquedaCalle = '';
+        this.busquedaOc = '';
+        this.item = new PrevInculpado();
+        this.obtenerDetalle();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -170,6 +177,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
       console.log("result", result);
       if (result.code == 200) {
         // this.back();
+        this.item = new PrevInculpado();
         this.obtenerDetalle()
         // Swal.fire({
         //   position: 'top-end',
@@ -331,7 +339,8 @@ cancelarModificacion() {
       const result = JSON.parse(JSON.stringify(res));
 
       if (result.code == 200) {
-        location.reload();
+        this.item = new PrevInculpado();
+        this.obtenerDetalle();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');

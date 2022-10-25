@@ -124,7 +124,12 @@ export class AbmPreVictimaComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
-        this.back();
+        //this.back();
+        this.idSeleccion=0;
+        this.mostrarBtnModif =false;
+        this.busqueda = '';
+        this.item = new PrevVictima();
+        this.obtenerDetalle();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -158,6 +163,7 @@ export class AbmPreVictimaComponent implements OnInit {
       console.log("result", result);
       if (result.code == 200) {
         // this.back();
+        this.item = new PrevVictima();
         this.obtenerDetalle();
         // Swal.fire({
         //   position: 'top-end',
@@ -312,7 +318,8 @@ async traerDatos(id: number) {
       const result = JSON.parse(JSON.stringify(res));
 
       if (result.code == 200) {
-        location.reload();
+        this.item = new PrevVictima();
+        this.obtenerDetalle();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');

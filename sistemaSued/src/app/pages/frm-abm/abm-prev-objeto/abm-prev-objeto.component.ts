@@ -112,7 +112,11 @@ export class AbmPrevObjetoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
-        this.back();
+        this.idSeleccion=0;
+        this.mostrarBtnModif =false;
+        this.busqueda = '';
+        this.item = new PrevObjeto();
+        this.obtenerDetalle();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -139,7 +143,6 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
@@ -147,9 +150,9 @@ export class AbmPrevObjetoComponent implements OnInit {
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         // this.back();
+        this.item = new PrevObjeto();
         this.obtenerDetalle()
         // Swal.fire({
         //   position: 'top-end',
@@ -250,7 +253,6 @@ export class AbmPrevObjetoComponent implements OnInit {
   preDelete(item: PrevObjeto) {
     this.item = new PrevObjeto();
     this.item = item;
-
     Swal.fire({
       title: 'Esta Seguro?',
       text:
@@ -277,9 +279,9 @@ export class AbmPrevObjetoComponent implements OnInit {
       
       let res = await this.wsdl.doDelete(this.item.id).then();
       const result = JSON.parse(JSON.stringify(res));
-
       if (result.code == 200) {
-        location. reload()
+        this.item = new PrevObjeto();
+        this.obtenerDetalle();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');
