@@ -8,8 +8,7 @@ export class Localidad {
     codPostal!: string;
     codProv: any;
     codDto!: string;
-    codLoc!: string;
-
+    codNac!: string;
 
     provinciaNavigation: any;
     dptoNavigation: any;

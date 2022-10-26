@@ -54,6 +54,15 @@ export class AbmLocalidadComponent implements OnInit {
        // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
+          if(this.item.nacion != undefined){
+            this.item.codNac = this.item.nacionNavigation.codigo;
+          }
+          if(this.item.provincia != undefined){
+            this.item.codProv = this.item.provinciaNavigation.codigo;
+          }
+          if(this.item.departamento != undefined){
+            this.item.codDto = this.item.dptoNavigation.codigo;
+          }
         }
       } catch (error) {}
     }
@@ -134,6 +143,7 @@ export class AbmLocalidadComponent implements OnInit {
   seleccionNac(event: Naciones) {
     if (event != undefined) {
       this.item.nacion = event.id;
+      this.item.codNac = event.codigo;
     }
   }
   seleccionProv(event: Provincia) {

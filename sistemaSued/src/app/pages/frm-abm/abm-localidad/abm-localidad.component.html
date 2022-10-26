@@ -65,6 +65,21 @@
     <div class="form-group row">
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
+            Código Nación:</label
+          >
+          <div class="col-sm-12">
+            <input
+              disabled
+              [(ngModel)]="item.codNac"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+  
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
           Código Provincia:</label
         >
         <div class="col-sm-12">
@@ -90,20 +105,6 @@
             [ngModelOptions]="{ standalone: true }"
           />
         </div>
-      </div>
-      <div class="col-md-4">
-        <label for="Nombre" class="col-sm-12 col-form-label">
-            Código Localidad:</label
-          >
-          <div class="col-sm-12">
-            <input
-              [(ngModel)]="item.codLoc"
-              type="text"
-              class="form-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-  
       </div>
     </div>
     <br />

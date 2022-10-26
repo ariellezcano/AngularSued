@@ -41,7 +41,7 @@ export class PrevSnic {
     inmersion: boolean;
     incendio: boolean;
     caidaOcupante: boolean;
-    otro: boolean;//ocupado TIPO DE HECHO
+    otroTh: boolean;//ocupado TIPO DE HECHO
     ignoraTh: boolean;
     //Ubicacion de la calzada
     dentroCalzada: boolean;
@@ -87,7 +87,7 @@ export class PrevSnic {
         this.inmersion = false;
         this.incendio = false;
         this.caidaOcupante = false;
-        this.otro = false;
+        this.otroTh = false;
         this.ignoraTh = false;
         this.dentroCalzada = false;
         this.fueraCalzada = false;

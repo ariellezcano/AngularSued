@@ -85,34 +85,253 @@
       </div>
     </center>
   </div>
-  <hr>
+  <hr />
   <div class="row">
     <legend>S.N.I.C.:</legend>
     <div class="col-md-12">
-      <table class="table text-center">
-        <thead>
-          <tr>
-            <th>Medio</th>
-            <th>Secuestro</th>
-            <th>Fecha</th>
-          </tr>
-        </thead>
-        <tbody >
-          <tr *ngFor="let itemMedio of itemsMedio">
-            <td>{{itemMedio.medioNavigation?.descripcion}}</td>
-            <td>{{ valor(itemMedio.secuestro)}}</td>
-            <td>{{itemMedio.fecha |date:"dd/MM/yyyy"}}</td>
-          </tr>
-        </tbody>
-      </table>
+      <center>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Lugar:</u></b></label>
+          <div class="col-md-4">
+            <label for="">Urbano: {{ valor(itemSnic.urbano) }}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Suburbano: {{ valor(itemSnic.subUrbano) }}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Rural: {{ valor(itemSnic.rural) }}</label>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Horario:</u></b></label>
+          
+          <div class="col-md-6">
+            <label for="">Diurno: {{ valor(itemSnic.diurno) }}</label>
+          </div>
+          <div class="col-md-6">
+            <label for="">Nocturno: {{ valor(itemSnic.nocturno) }}</label>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Victimas:</u></b></label>
+          <div class="col-md-4">
+            <label for="">Leves: {{ itemSnic.leves }}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Graves: {{ itemSnic.graves }}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Fallecidos: {{ itemSnic.fallecidos }}</label>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <hr>
+          <label for=""><b><u> Vehículo Interviniente (Cantidad)</u>:</b></label>
+          <div class="col-md-3">
+            <label for="">Particulares: {{ itemSnic.particulares }}</label>
+          </div>
+          <div class="col-md-3">
+            <label for="">Carga: {{ itemSnic.carga }}</label>
+          </div>
+          <div class="col-md-3">
+            <label for="">Pasajeros: {{ itemSnic.pasajeros }}</label>
+          </div>
+          <div class="col-md-3">
+            <label for="">otros:{{ itemSnic.otros }}</label>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <hr>
+          <label for=""><b><u> Modo Producción del Hecho:</u></b></label>
+          <div class="row">
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - Peatón: {{ valor(itemSnic.vehiculoPeaton) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - Vehículo:
+                {{ valor(itemSnic.vehiculoVehiculo) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - Objeto Fijo:
+                {{ valor(itemSnic.vehiculoObjeto) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - Bicicleta: {{ valor(itemSnic.vehiculoBici) }}</label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <label for=""
+                >Motocicleta - Bicicleta: {{ valor(itemSnic.motoBici) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Bicicleta Sola: {{ valor(itemSnic.bicicleta) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo Solo: {{ valor(itemSnic.vehiculo) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - Motocicleta:
+                {{ valor(itemSnic.vehiculoMoto) }}</label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <label for=""
+                >Vehículo - T. a sangre:
+                {{ valor(itemSnic.vehiculoTsangre) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Motocicleta - Motocicleta:
+                {{ valor(itemSnic.motoMoto) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Motocicleta - T. a sangre:
+                {{ valor(itemSnic.motoTsangre) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Motocicleta - Peatón: {{ valor(itemSnic.motoPeaton) }}</label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <label for="">Múltiple: {{ valor(itemSnic.multiple) }}</label>
+            </div>
+            <div class="col-md-3">
+              <label for="">Tren: {{ valor(itemSnic.tren) }}</label>
+            </div>
+            <div class="col-md-3">
+              <label for=""
+                >Atropello Animal: {{ valor(itemSnic.atropelloAnimal) }}</label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for="">Otro Modo: {{ valor(itemSnic.otroModo) }}</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <label for="">Especificar: {{ itemSnic.modoEspecificar }}</label>
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Tipo de hecho:</u></b></label>
+          <div class="col-md-3">
+            <label for="">Colisión: {{ valor(itemSnic.colision) }}</label>
+          </div>
+          <div class="col-md-3">
+            <label for=""> Vuelco: {{ valor(itemSnic.vuelco)}}</label>
+          </div>
+          <div class="col-md-3">
+            <label for="">Inmersión: {{ valor(itemSnic.inmersion)}}</label>
+          </div>
+          <div class="col-md-3">
+            <label for="">Incendio: {{ valor(itemSnic.incendio)}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for="">Caidas Ocupantes: {{ valor(itemSnic.caidaOcupante)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Otros: {{ valor(itemSnic.otroTh)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Se ignora: {{ valor(itemSnic.ignoraTh)}}</label>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Ubicación de la calzada:</u></b></label>
+          <div class="col-md-4">
+            <label for="">Dentro de la calzada: {{ valor(itemSnic.dentroCalzada)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for=""> Fuera de la calzada: {{ valor(itemSnic.fueraCalzada)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Se ignora: {{ valor(itemSnic.ignoraCalzada)}}</label>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Condiciones Climáticas:</u></b></label>
+          <div class="col-md-4">
+            <label for="">Clima normal: {{ valor(itemSnic.climaNormal)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for=""> Niebla: {{ valor(itemSnic.niebla)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Lluvia - Llovizna: {{ valor(itemSnic.lluviaLlovizna)}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label for="">Nieve - Granizo: {{ valor(itemSnic.nieveGranizo)}}</label>
+          </div>          
+          <div class="col-md-6">
+            <label for="">Otra condición: {{ valor(itemSnic.otraCondicion)}}</label>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Intersección:</u></b></label>
+          <div class="col-md-12">
+            <label for="">Intersección de calles: {{ valor(itemSnic.interseccion)}}</label>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <hr>
+          <label for=""><b><u>Semáforo:</u></b></label>
+          <div class="col-md-4">
+            <label for="">Funciona bien: {{ valor(itemSnic.funcionaB)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">No funciona: {{ valor(itemSnic.noFunciona)}}</label>
+          </div>
+          <div class="col-md-4">
+            <label for="">Sin semáforo: {{ valor(itemSnic.noHaySemaforo)}}</label>
+          </div>
+        </div>
+      </center>
     </div>
-    <div
-        *ngIf="itemsMedio.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
   </div>
   <hr />
   <div class="row">
@@ -132,12 +351,12 @@
       </table>
     </div>
     <div
-        *ngIf="itemsCaratula.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsCaratula.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
   <hr />
   <div class="row">
@@ -161,12 +380,12 @@
       </table>
     </div>
     <div
-        *ngIf="itemsMedio.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsMedio.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
   <hr />
   <div class="row">
@@ -196,12 +415,12 @@
       </table>
     </div>
     <div
-        *ngIf="itemsObjeto.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsObjeto.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
   <hr />
   <div class="row">
@@ -221,12 +440,12 @@
       </table>
     </div>
     <div
-        *ngIf="itemsModal.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsModal.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
   <hr />
   <div class="row">
@@ -262,12 +481,12 @@
       </table>
     </div>
     <div
-        *ngIf="itemsVict.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsVict.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
   <hr />
   <div class="row">
@@ -307,18 +526,18 @@
       </table>
     </div>
     <div
-        *ngIf="itemsInculpado.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsInculpado.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
-  <hr>
+  <hr />
   <div class="row">
     <legend>Ampliaciones:</legend>
     <div class="col-md-12">
-      <table class="table text-center" >
+      <table class="table text-center">
         <thead>
           <tr>
             <th>Fecha Ampliación</th>
@@ -327,22 +546,22 @@
             <th>Observaciones</th>
           </tr>
         </thead>
-        <tbody >
+        <tbody>
           <tr *ngFor="let itemAmpliacion of itemsAmpliacion">
-            <td>{{itemAmpliacion.fechaAmpliacion | date:"dd/MM/yyyy"}}</td>
-            <td>{{itemAmpliacion.nroNota}}</td>
-            <td>{{itemAmpliacion.unidad}}</td>
-            <td>{{itemAmpliacion.observacion}}</td>
+            <td>{{ itemAmpliacion.fechaAmpliacion | date: "dd/MM/yyyy" }}</td>
+            <td>{{ itemAmpliacion.nroNota }}</td>
+            <td>{{ itemAmpliacion.unidad }}</td>
+            <td>{{ itemAmpliacion.observacion }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div
-        *ngIf="itemsAmpliacion.length === 0"
-        class="alert alert-info alert-dismissible fade show text-center"
-        role="alert"
-      >
-        <strong>No hay datos</strong>
-      </div>
+      *ngIf="itemsAmpliacion.length === 0"
+      class="alert alert-info alert-dismissible fade show text-center"
+      role="alert"
+    >
+      <strong>No hay datos</strong>
+    </div>
   </div>
 </div>
