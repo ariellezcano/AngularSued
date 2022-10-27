@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="col-md-12">
+    <label for="" class="col-sm-12 col-form-label">Marca de arma:</label>
+    <input
+      (change)="filtrar()"
+      [(ngModel)]="busqueda"
+      name="busqueda"
+      type="text"
+      class="form-control"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <select
+      *ngIf="items.length > 0 && this.busqueda"
+      name="Mitem"
+      [(ngModel)]="item"
+      class="form-control"
+      (ngModelChange)="capturar($event)"
+      [ngModelOptions]="{ standalone: true }"
+    >
+      <option *ngFor="let item of items" [ngValue]="item">
+        {{ item.descripcion }}
+      </option>
+    </select>
+  </div>
+</div>

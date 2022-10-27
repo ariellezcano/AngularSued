@@ -56,7 +56,12 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div id="autocompletado" class="col-md-6">
+      <label for="" class="col-sm-12 col-form-label">Unidad:</label>
+      <app-fil-autocompletado-unidad-sued (unidadSeleccionada)="unidad($event)">
+      </app-fil-autocompletado-unidad-sued>
+    </div>
+    <div class="col-md-3">
       <label for="Nombre" class="col-sm-12 col-form-label">
         Fecha Ampliación:</label
       >
@@ -68,7 +73,7 @@
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <label for="Nombre" class="col-sm-12 col-form-label"> Nota n°:</label>
       <input
         [(ngModel)]="item.nroNota"
@@ -77,14 +82,10 @@
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
-    <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Unidad:</label>
-      <input
-        [(ngModel)]="item.unidad"
-        type="text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+  </div>
+  <div *ngIf="item.unidad > 0" class="row">
+    <div class="col-md-12 alert alert-info">
+      Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombreUnidad }}</b>
     </div>
   </div>
   <div class="row">
@@ -157,13 +158,13 @@
           <ng-template #thenTemplate>
             <td>{{ i.fechaAmpliacion | date: "dd/MM/yyyy" }}</td>
             <td>{{ i.nroNota }}</td>
-            <td>{{ i.unidad }}</td>
+            <td>{{ i?.unidadNavigation.nombre }}</td>
             <td>{{ i.observacion }}</td>
           </ng-template>
           <ng-template #elseTemplate>
             <td>{{ i.fechaAmpliacion | date: "dd/MM/yyyy" }}</td>
             <td>{{ i.nroNota }}</td>
-            <td>{{ i.unidad }}</td>
+            <td>{{ i.nombreUnidad }}</td>
             <td>{{ i.observacion }}</td>
           </ng-template>
           <!-- editar y guardar -->
@@ -173,7 +174,11 @@
           <ng-template #mostrar>
             <!-- muestra el modificar y eliminar -->
             <ng-container
-              *ngIf="mostrarBtnModif && idSeleccion == i.id; then thenTemplate; else elseTemplate"
+              *ngIf="
+                mostrarBtnModif && idSeleccion == i.id;
+                then thenTemplate;
+                else elseTemplate
+              "
             ></ng-container>
             <ng-template #thenTemplate>
               <td>
@@ -185,7 +190,7 @@
                   (click)="cancelarModificacion()"
                   class="btn btn-success btn-circle"
                 >
-                <i class="fa fa-times" aria-hidden="true"></i>
+                  <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
               </td>
             </ng-template>
@@ -245,7 +250,12 @@
   </div>
   <hr />
   <div class="row">
-    <button *ngIf="!mostrarBtnModif" class="btn btn-dark" type="button" (click)="agregarDato()">
+    <button
+      *ngIf="!mostrarBtnModif"
+      class="btn btn-dark"
+      type="button"
+      (click)="agregarDato()"
+    >
       Guardar
     </button>
     &nbsp;

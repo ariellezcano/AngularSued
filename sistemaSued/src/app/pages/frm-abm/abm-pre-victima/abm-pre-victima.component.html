@@ -134,7 +134,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
       <input
         (change)="filtrarOcupacion()"
@@ -158,30 +158,7 @@
         </option>
       </select>
     </div>
-    <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label"
-        >Situación Ocupacional:</label
-      >
-      <select class="form-select" [(ngModel)]="item.sitOcup">
-        <option value="Desocupado">Desocupado</option>
-        <option value="Jub/Pensionado">Jub/Pensionado</option>
-        <option value="Rentista">Rentista</option>
-        <option value="Estudiante">Estudiante</option>
-        <option value="Ama de casa">Ama de casa</option>
-        <option value="Empleado Med. Comun.">Empleado Med. Comun.</option>
-        <option value="Empleado Otros">Empleado Otros</option>
-        <option value="Trabajador Cta. Propia">Trabajador Cta. Propia</option>
-        <option value="Changarin">Changarin</option>
-        <option value="Ama de casa">Ama de casa</option>
-        <option value="Patrón - Empleador">Patrón - Empleador</option>
-        <option value="Trabajador/a Sexual">Trabajador/a Sexual</option>
-        <option value="Representante Sindical">Representante Sindical</option>
-        <option value="Activista DD HH">Activista DD HH</option>
-        <option value="Otro">Otro ("Especificar")</option>
-        <option value="Sin determinar">Sin determinar</option>
-      </select>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <center>
         <label for="Nombre" class="col-sm-12 col-form-label"> Falleció:</label>
         <input
@@ -191,17 +168,6 @@
           [ngModelOptions]="{ standalone: true }"
         />
       </center>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <label for="" class="col-sm-12 col-form-label">Especificar:</label>
-      <input
-        [(ngModel)]="item.especificar"
-        type="Text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
     </div>
   </div>
   <br />

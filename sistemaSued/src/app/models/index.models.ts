@@ -33,3 +33,6 @@ export {ImpContravencion} from './component/imp-contravencion';
 export {Unidad} from './component/unidad';
 export {Regional} from './component/regional';
 export {UnidadesSued} from './component/unidades-sued';
+export {PrevMedioArma} from './component/prev-medio-arma';
+export {PrevObjArma} from './component/prev-obj-arma';
+export {PrevObjAuto} from './component/prev-obj-auto';

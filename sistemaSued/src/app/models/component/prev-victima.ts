@@ -9,8 +9,6 @@ export class PrevVictima {
     nombre!: string;
     apellido!: string;
     dni!: number;
-    sitOcup!: string;
-    especificar!: string;
     fallecio!: boolean;
 
     nacionNavigation: any;

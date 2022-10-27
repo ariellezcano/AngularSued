@@ -33,3 +33,6 @@ export {ArtContravencionService} from './component/art-contravencion.service';
 export {ImpContravencionService} from './component/imp-contravencion.service';
 export {UnidadService} from './component/unidad.service';
 export {UnidadesSuedService} from './component/unidades-sued.service';
+export {PrevMedioArmaService} from './component/prev-medio-arma.service';
+export {PrevObjAutoService} from './component/prev-obj-auto.service';
+export {PrevObjetoArmaService} from './component/prev-objeto-arma.service';

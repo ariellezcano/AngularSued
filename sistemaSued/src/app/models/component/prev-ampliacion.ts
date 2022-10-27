@@ -5,7 +5,10 @@ export class PrevAmpliacion {
     nroNota!: string;
     observacion!: string;
     unidad!: number;
+    
+    unidadNavigation: any
 
+    nombreUnidad!: string;
     constructor(){
 
     }

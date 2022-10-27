@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import {
+  ArmaMarca,
   Medio,
   Preventivo,
   PreventivoMedio,
+  PrevMedioArma,
 } from 'src/app/models/index.models';
 import {
   MedioService,
@@ -14,6 +16,7 @@ import {
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
 
 @Component({
   selector: 'app-abm-preventivo-medio',
@@ -21,12 +24,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-preventivo-medio.component.scss'],
 })
 export class AbmPreventivoMedioComponent implements OnInit {
+
+  @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
+
   public id!: number;
   //valida el formulario
   form!: FormGroup;
 
   //variable para verificar si fue enviado los datos
   enviado = false;
+  mostrar: boolean;
+  mostrarTabla: boolean;
 
   busqueda;
 
@@ -38,6 +46,9 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   Mitems: Medio[];
   Mitem: Medio;
+
+  itemsArma:PrevMedioArma[];
+  itemArma: PrevMedioArma;
 
   idSeleccion!: number;
   mostrarBtnModif: boolean;
@@ -56,7 +67,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.busqueda = '';
     this.Mitem = new Medio();
     this.Mitems = [];
+    this.itemArma = new PrevMedioArma();
+    this.itemsArma = [];
     this.mostrarBtnModif = false;
+    this.mostrar = false;
+    this.mostrarTabla = false;
   }
 
   ngOnInit(): void {
@@ -174,13 +189,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
       if (result.code == 200) {
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
       } else if(result.code == 204) {
         Swal.fire({
           icon: 'info',
@@ -218,7 +226,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.medioUtilizado = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
+
+      if(this.item.capturaDescripcion == "REVOLVER"){
+        this.mostrar=true;
+      }
     }
+  }
+
+  //captura el arma
+  doFound(event: ArmaMarca){
+    this.itemArma.arma = event.id;
+    this.itemArma.nombreArma = event.descripcion;
   }
 
   //agrega fila en memoria
@@ -226,6 +244,13 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PreventivoMedio();
+    if(this.itemArma.arma > 0){
+      this.itemsArma.unshift(this.itemArma)
+      this.itemArma = new PrevMedioArma();
+      this.mostrar = false;
+      this.mostrarTabla = true
+      this.fil.busqueda = '';
+    }
   }
 
   //elimina la fila en memoria
@@ -233,8 +258,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.items.splice(indice, 1);
   }
 
+  deleteRowArma(indice: any) {
+    this.itemsArma.splice(indice, 1);
+  }
   // se utiliza para pintar la fila en memoria
-  colores(item: PreventivoMedio) {
+  colores(item: any) {
     let color = '';
 
     if (item.id == undefined) {

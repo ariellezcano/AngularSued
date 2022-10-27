@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { PrevAmpliacion, Preventivo } from 'src/app/models/index.models';
+import { PrevAmpliacion, Preventivo, UnidadesSued } from 'src/app/models/index.models';
 import {
   PrevAmpliacionService,
   PreventivoService,
@@ -115,6 +115,9 @@ export class AbmPrevAmpliacionComponent implements OnInit {
             this.item.fechaAmpliacion = moment(
               this.item.fechaAmpliacion
             ).format('YYYY-MM-DD');
+          }
+          if(this.item.unidad != undefined){
+            this.item.nombreUnidad = this.item.unidadNavigation.nombre;
           }
           this.mostrarBtnModif = true;
         }
@@ -274,6 +277,11 @@ export class AbmPrevAmpliacionComponent implements OnInit {
       valor = 'No';
     }
     return valor;
+  }
+
+  unidad(event: UnidadesSued) {
+    this.item.unidad = event.id;
+    this.item.nombreUnidad = event.nombre;
   }
 
   //vuelve al listado de preventivo
