@@ -7,7 +7,6 @@ import {
   Medio,
   Preventivo,
   PreventivoMedio,
-  PrevMedioArma,
 } from 'src/app/models/index.models';
 import {
   MedioService,
@@ -31,10 +30,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
   //valida el formulario
   form!: FormGroup;
 
+  idPrevMed!: number;
   //variable para verificar si fue enviado los datos
   enviado = false;
   mostrar: boolean;
-  mostrarTabla: boolean;
+  arma: boolean;
 
   busqueda;
 
@@ -47,16 +47,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
   Mitems: Medio[];
   Mitem: Medio;
 
-  itemsArma:PrevMedioArma[];
-  itemArma: PrevMedioArma;
-
   idSeleccion!: number;
   mostrarBtnModif: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PreventivoMedioService,
-    private wsdlPreventivo: PreventivoService,
     private wsdlMedio: MedioService,
     private formBuilder: FormBuilder
   ) {
@@ -67,11 +63,9 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.busqueda = '';
     this.Mitem = new Medio();
     this.Mitems = [];
-    this.itemArma = new PrevMedioArma();
-    this.itemsArma = [];
     this.mostrarBtnModif = false;
     this.mostrar = false;
-    this.mostrarTabla = false;
+    this.arma = false;
   }
 
   ngOnInit(): void {
@@ -90,18 +84,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
     return this.form.controls;
   }
 
-  // async findId() {
-  //   if (this.id > 0) {
-  //     try {
-  //       let data = await this.wsdlPreventivo.getFindId(this.id).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         this.prev = result.dato;
-  //         this.obtenerDetalle()
-  //       }
-  //     } catch (error) {}
-  //   }
-  // }
+  async findId(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+        }
+      } catch (error) {}
+    }
+  }
 
   async obtenerDetalle() {
     try {
@@ -124,6 +117,10 @@ export class AbmPreventivoMedioComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
+          if(this.item.arma != undefined){
+            this.mostrar = true;
+            this.arma = true;
+          }
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.medioNavigation.descripcion;
           if(this.item.fecha != undefined){
@@ -168,6 +165,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     } catch (error) {}
   }
 
+  //recorre el bucle para insertar los datos de preventivo medio
   async agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
       this.prevMed = new PreventivoMedio();
@@ -180,12 +178,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
+
   async guardar() {
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
@@ -205,6 +203,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
+  //filtro de medios
   async filtrarMedio() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -235,31 +234,22 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   //captura el arma
   doFound(event: ArmaMarca){
-    this.itemArma.arma = event.id;
-    this.itemArma.nombreArma = event.descripcion;
+    this.item.arma = event.id;
   }
 
   //agrega fila en memoria
   addRow() {
+    if(this.fil.busqueda != ''){
+    this.fil.busqueda = '';
+    }
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PreventivoMedio();
-    if(this.itemArma.arma > 0){
-      this.itemsArma.unshift(this.itemArma)
-      this.itemArma = new PrevMedioArma();
-      this.mostrar = false;
-      this.mostrarTabla = true
-      this.fil.busqueda = '';
-    }
   }
 
   //elimina la fila en memoria
   deleteRow(indice: any) {
     this.items.splice(indice, 1);
-  }
-
-  deleteRowArma(indice: any) {
-    this.itemsArma.splice(indice, 1);
   }
   // se utiliza para pintar la fila en memoria
   colores(item: any) {
@@ -312,6 +302,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(res));
 
       if (result.code == 200) {
+        this.item = new PreventivoMedio();
         this.obtenerDetalle();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {

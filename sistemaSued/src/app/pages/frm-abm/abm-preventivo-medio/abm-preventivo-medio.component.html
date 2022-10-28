@@ -72,7 +72,7 @@
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label"> Calibre:</label>
         <input
-          [(ngModel)]="itemArma.calibre"
+          [(ngModel)]="item.calibre"
           type="text"
           class="form-control"
           [ngModelOptions]="{ standalone: true }"
@@ -81,12 +81,17 @@
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label"> Serie n°:</label>
         <input
-          [(ngModel)]="itemArma.serie"
+          [(ngModel)]="item.serie"
           type="text"
           class="form-control"
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
+    </div>
+  </div>
+  <div *ngIf="mostrar && arma" class="row">
+    <div class="col-md-12">
+      Arma seleccionada: <b>{{item.armaNavigation?.descripcion}}</b>
     </div>
   </div>
   <br>
@@ -149,8 +154,8 @@
         <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
           <ng-container *ngIf="i.id > 0; then thenTemplate; else elseTemplate"></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.medioNavigation.codMedio }} - {{ i.medioNavigation.codTipo }}</td>
-            <td>{{ i.medioNavigation.descripcion }}</td>
+            <td>{{ i.medioNavigation?.codMedio }} - {{ i.medioNavigation?.codTipo }}</td>
+            <td>{{ i.medioNavigation?.descripcion }}</td>
           </ng-template>
           <ng-template #elseTemplate>
             <td>{{ i.codigo }}</td>
@@ -184,6 +189,19 @@
               </ng-template>
               <ng-template #elseTemplate>
                 <td>
+                  <button 
+                    type="button"
+                    title="Ver detalle"
+                    placement="top"
+                    show-delay="10"
+                    (click)="findId(i.id)"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#exampleModal"
+                    class="btn btn-success btn-circle"
+                  >
+                  <i class="fa fa-info" aria-hidden="true"></i>
+                </button>
+                  &nbsp;
                   <button
                     type="button"
                     title="Modificar"
@@ -237,107 +255,6 @@
     </center>
   </div>
   <hr>
-  <div *ngIf="mostrarTabla" class="row">
-    <table id="tabla" class="table">
-      <thead class="text-center table-primary">
-        <tr>
-          <th>Marca</th>
-          <th>Calibre</th>
-          <th>Serie</th>
-          <th>Acción</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let itemArma of itemsArma" class="text-center {{ colores(itemArma) }}">
-          <ng-container *ngIf="itemArma.id > 0; then thenTemplate; else elseTemplate"></ng-container>
-          <ng-template #thenTemplate>
-            <td>{{ itemArma.armaNavigation?.descripcion }}</td>
-            <td>{{ itemArma.calibre }}</td>
-            <td>{{ itemArma.serie }}</td>
-          </ng-template>
-          <ng-template #elseTemplate>
-            <td>{{ itemArma.nombreArma }}</td>
-            <td>{{ itemArma.calibre }}</td>
-            <td>{{ itemArma.serie }}</td>
-          </ng-template>
-          <!-- editar y guardar -->
-          <ng-container
-            *ngIf="itemArma.id > 0; then mostrar; else noMostrar"
-          ></ng-container>
-          <ng-template #mostrar>
-            <!-- muestra el eliminar -->
-            <ng-container
-                *ngIf="mostrarBtnModif && idSeleccion == itemArma.id; then thenTemplate; else elseTemplate"
-              ></ng-container>
-              <ng-template #thenTemplate>
-                <td>
-                  <button
-                    type="button"
-                    title="Cancelar Modificación"
-                    placement="top"
-                    show-delay="10"
-                    (click)="cancelarModificacion()"
-                    class="btn btn-success btn-circle"
-                  >
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </ng-template>
-              <ng-template #elseTemplate>
-                <td>
-                  <button
-                    type="button"
-                    title="Modificar"
-                    placement="top"
-                    show-delay="10"
-                    (click)="traerDatos(itemArma.id)"
-                    class="btn btn-warning btn-circle"
-                  >
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </button>
-                  &nbsp;
-                  <!-- <button
-                    type="button"
-                    title="Eliminar"
-                    placement="top"
-                    show-delay="10"
-                    (click)="preDelete(itemArma)"
-                    class="btn btn-danger btn-circle"
-                  >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button> -->
-                </td>
-              </ng-template>
-          </ng-template>
-          <ng-template #noMostrar>
-            <!-- saca de la lista -->
-            <td>
-              <button
-                type="button"
-                title="Eliminar de la lista"
-                placement="top"
-                show-delay="10"
-                (click)="deleteRowArma(itemArma)"
-                class="btn btn-info btn-circle"
-              >
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            </td>
-          </ng-template>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div
-    *ngIf="itemsArma.length === 0 && mostrarTabla"
-    class="alert alert-primary alert-dismissible fade show"
-    role="alert"
-  >
-    <center>
-      <strong>No hay datos</strong>
-    </center>
-  </div>
-  <hr />
   <div class="row">
     <button *ngIf="!mostrarBtnModif" class="btn btn-dark" type="button" (click)="agregarDato()">Guardar</button>
     &nbsp;
@@ -347,3 +264,27 @@
   </div>
 </div>
 <br>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle del arma agregada:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            Marca: <b> {{item?.armaNavigation?.descripcion}} </b>
+          </div>
+          <div class="col-md-4">Calibre: <b> {{item?.calibre}}</b></div>
+          <div class="col-md-4">Serie: <b>{{item?.serie}}</b></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Finalizar revisión</button>
+      </div>
+    </div>
+  </div>
+</div>

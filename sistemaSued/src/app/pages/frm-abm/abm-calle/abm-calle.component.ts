@@ -127,11 +127,11 @@ export class AbmCalleComponent implements OnInit {
     }
   }
 
-  seleccionlocalidad(event: Localidad) {
-    if (event != undefined) {
-      this.item.localidad = event.id;
-    }
-  }
+  // seleccionlocalidad(event: Localidad) {
+  //   if (event != undefined) {
+  //     this.item.localidad = event.id;
+  //   }
+  // }
 
   
   back() {

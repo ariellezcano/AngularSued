@@ -2,9 +2,9 @@ export class Calle {
     id!: number;
     codigo!: string;
     nombre!: string;
-    localidad!: number;
+    //localidad!: number;
 
-    localidadNavigation: any
+    //localidadNavigation: any
 
     constructor(){}
 }

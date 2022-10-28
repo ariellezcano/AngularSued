@@ -28,7 +28,7 @@
             <tr>
               <th>Código</th>
               <th>Nombre</th>
-              <th>Barrio</th>
+              <!-- <th>Barrio</th> -->
               <th>Acción</th>
             </tr>
           </thead>
@@ -36,7 +36,7 @@
             <tr *ngFor="let item of items">
               <td class="text-primary">{{ item.codigo }}</td>
               <td class="text-primary">{{ item.nombre}}</td>
-              <td class="text-primary">{{ item?.localidadNavigation?.nombre}}</td>
+              <!-- <td class="text-primary">{{ item?.localidadNavigation?.nombre}}</td> -->
               <td>
                 <button
                   (click)="linkear(item.id)"
