@@ -4,15 +4,17 @@ export class PreventivoMedio {
     medioUtilizado!: number;
     secuestro: boolean;
     fecha: any;
-    arma!: number;
-    calibre!: string;
-    serie!: string;
+    //arma!: number;
+    //calibre!: string;
+    //serie!: string;
 
     medioNavigation: any;
-    armaNavigation: any;
+    //armaNavigation: any;
     //usados para vista
     capturaDescripcion: any;
-    codigo: any
+    codigo: any;
+    tipoArma: any;
+    
     constructor(){
         this.secuestro = false;
     }

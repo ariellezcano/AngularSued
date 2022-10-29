@@ -35,3 +35,4 @@ export {UnidadService} from './component/unidad.service';
 export {UnidadesSuedService} from './component/unidades-sued.service';
 export {PrevObjAutoService} from './component/prev-obj-auto.service';
 export {PrevObjetoArmaService} from './component/prev-objeto-arma.service';
+export {PrevMedArmaService} from './component/prev-med-arma.service';

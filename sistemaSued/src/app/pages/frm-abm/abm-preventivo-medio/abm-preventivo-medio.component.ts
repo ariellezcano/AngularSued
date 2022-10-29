@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -7,11 +8,13 @@ import {
   Medio,
   Preventivo,
   PreventivoMedio,
+  PrevMedioArma,
 } from 'src/app/models/index.models';
 import {
   MedioService,
   PreventivoMedioService,
   PreventivoService,
+  PrevMedArmaService,
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
@@ -23,7 +26,6 @@ import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
   styleUrls: ['./abm-preventivo-medio.component.scss'],
 })
 export class AbmPreventivoMedioComponent implements OnInit {
-
   @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
 
   public id!: number;
@@ -31,6 +33,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   form!: FormGroup;
 
   idPrevMed!: number;
+  idMedio!: number;
   //variable para verificar si fue enviado los datos
   enviado = false;
   mostrar: boolean;
@@ -49,9 +52,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   idSeleccion!: number;
   mostrarBtnModif: boolean;
+
+  prevArma: PrevMedioArma;
+  itemArma: PrevMedioArma;
+  itemsArma: PrevMedioArma[];
+
+  mostrarTabla: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private wsdlMedioArma: PrevMedArmaService,
     private wsdl: PreventivoMedioService,
     private wsdlMedio: MedioService,
     private formBuilder: FormBuilder
@@ -66,6 +77,10 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.mostrarBtnModif = false;
     this.mostrar = false;
     this.arma = false;
+    this.prevArma = new PrevMedioArma();
+    this.itemArma = new PrevMedioArma();
+    this.itemsArma = [];
+    this.mostrarTabla = false;
   }
 
   ngOnInit(): void {
@@ -84,17 +99,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
     return this.form.controls;
   }
 
-  async findId(id: number) {
-    if (id > 0) {
-      try {
-        let data = await this.wsdl.getFindId(id).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.item = result.dato;
-        }
-      } catch (error) {}
-    }
-  }
+  // async findId(id: number) {
+  //   if (id > 0) {
+  //     try {
+  //       let data = await this.wsdl.getFindId(id).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.item = result.dato;
+  //       }
+  //     } catch (error) {}
+  //   }
+  // }
 
   async obtenerDetalle() {
     try {
@@ -102,12 +117,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
+        console.log("items", this.items)
       } else {
         this.items = [];
       }
     } catch (error) {}
   }
-
 
   //trae los datos para modificar
   async traerDatos(id: number) {
@@ -117,13 +132,13 @@ export class AbmPreventivoMedioComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          if(this.item.arma != undefined){
-            this.mostrar = true;
-            this.arma = true;
-          }
+          // if(this.item.arma != undefined){
+          //   this.mostrar = true;
+          //   this.arma = true;
+          // }
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.medioNavigation.descripcion;
-          if(this.item.fecha != undefined){
+          if (this.item.fecha != undefined) {
             this.item.fecha = moment(this.item.fecha).format('YYYY-MM-DD');
           }
           this.mostrarBtnModif = true;
@@ -148,8 +163,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
-        this.idSeleccion=0;
-        this.mostrarBtnModif =false;
+        this.idSeleccion = 0;
+        this.mostrarBtnModif = false;
         this.busqueda = '';
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
@@ -178,6 +193,19 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
+  async agregarDatoArma() {
+    for (let index = 0; index < this.itemsArma.length; index++) {
+      this.prevArma = new PrevMedioArma();
+      this.prevArma = this.itemsArma[index];
+      if (this.prevArma.id == undefined) {
+        if(this.prevArma.tipoArma){
+        this.itemArma = new PrevMedioArma();
+        this.itemArma = this.prevArma;
+       // this.guardarArma();
+      }
+      }
+    }
+  }
 
   async guardar() {
     this.item.preventivo = this.id;
@@ -185,9 +213,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.prevMed = result.dato.id;
+        this.traerData(this.prevMed);
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
-      } else if(result.code == 204) {
+      } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -200,6 +230,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
         title: 'Alerta...',
         text: 'No se pudo insertar los datos',
       });
+    }
+  }
+
+ async traerData(id: any){
+    let data = await this.wsdl.getFindId(id).then();
+    let result = JSON.parse(JSON.stringify(data));
+    if(result.code == 200){
+      if(result.dato.medioNavigation == 'REVOLVER'){
+        console.log(result.dato);
+        this.idMedio = result.dato.medioNavigation.id;
+      }
     }
   }
 
@@ -226,30 +267,40 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
 
-      if(this.item.capturaDescripcion == "REVOLVER"){
-        this.mostrar=true;
+      if (this.item.capturaDescripcion == 'REVOLVER') {
+        this.mostrar = true;
       }
     }
   }
 
   //captura el arma
-  doFound(event: ArmaMarca){
-    this.item.arma = event.id;
+  doFound(event: ArmaMarca) {
+    this.itemArma.arma = event.id;
+    this.itemArma.marcaArma = event.descripcion;
   }
 
   //agrega fila en memoria
   addRow() {
-    if(this.fil.busqueda != ''){
-    this.fil.busqueda = '';
-    }
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PreventivoMedio();
+    if (this.itemArma.arma != undefined || this.itemArma.calibre != undefined) {
+      this.itemsArma.unshift(this.itemArma);
+      this.itemArma = new PrevMedioArma();
+      this.mostrarTabla = true;
+      if (this.fil.busqueda != '') {
+        this.fil.busqueda = '';
+      }
+    }
   }
 
   //elimina la fila en memoria
   deleteRow(indice: any) {
     this.items.splice(indice, 1);
+  }
+
+  deleteRowArma(indice: any) {
+    this.itemsArma.splice(indice, 1);
   }
   // se utiliza para pintar la fila en memoria
   colores(item: any) {
@@ -319,7 +370,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     let valor = '';
     if (item) {
       valor = 'Si';
-    }else{
+    } else {
       valor = 'No';
     }
     return valor;

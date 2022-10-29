@@ -35,3 +35,4 @@ export {Regional} from './component/regional';
 export {UnidadesSued} from './component/unidades-sued';
 export {PrevObjArma} from './component/prev-obj-arma';
 export {PrevObjAuto} from './component/prev-obj-auto';
+export {PrevMedioArma} from './component/prev-medio-arma'
