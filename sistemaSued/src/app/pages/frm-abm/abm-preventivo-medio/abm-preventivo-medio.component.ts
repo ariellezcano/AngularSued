@@ -1,4 +1,5 @@
 import { NgIf } from '@angular/common';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -92,24 +93,26 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
+
     this.obtenerDetalle();
+    this.obtenerDetalleArma();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  // async findId(id: number) {
-  //   if (id > 0) {
-  //     try {
-  //       let data = await this.wsdl.getFindId(id).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         this.item = result.dato;
-  //       }
-  //     } catch (error) {}
-  //   }
-  // }
+  async findId(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+        }
+      } catch (error) {}
+    }
+  }
 
   async obtenerDetalle() {
     try {
@@ -117,7 +120,18 @@ export class AbmPreventivoMedioComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
-        console.log("items", this.items)
+      } else {
+        this.items = [];
+      }
+    } catch (error) {}
+  }
+
+  async obtenerDetalleArma() {
+    try {
+      let data = await this.wsdlMedioArma.getList(1,25).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.itemArma = result.data;
       } else {
         this.items = [];
       }
@@ -181,7 +195,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   }
 
   //recorre el bucle para insertar los datos de preventivo medio
-  async agregarDato() {
+  agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
       this.prevMed = new PreventivoMedio();
       this.prevMed = this.items[index];
@@ -193,28 +207,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
-  async agregarDatoArma() {
-    for (let index = 0; index < this.itemsArma.length; index++) {
-      this.prevArma = new PrevMedioArma();
-      this.prevArma = this.itemsArma[index];
-      if (this.prevArma.id == undefined) {
-        if(this.prevArma.tipoArma){
-        this.itemArma = new PrevMedioArma();
-        this.itemArma = this.prevArma;
-       // this.guardarArma();
-      }
-      }
-    }
-  }
-
   async guardar() {
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.prevMed = result.dato.id;
-        this.traerData(this.prevMed);
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
       } else if (result.code == 204) {
@@ -233,14 +231,58 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
- async traerData(id: any){
-    let data = await this.wsdl.getFindId(id).then();
-    let result = JSON.parse(JSON.stringify(data));
-    if(result.code == 200){
-      if(result.dato.medioNavigation == 'REVOLVER'){
-        console.log(result.dato);
-        this.idMedio = result.dato.medioNavigation.id;
+  // async traerData(id: any) {
+  //   try {
+  //     let data = await this.wsdl.getFindId(id).then();
+  //     let result = JSON.parse(JSON.stringify(data));
+  //     console.log('result traer data', result);
+  //     if (result.code == 200) {
+  //       if (result.dato.medioNavigation.descripcion == 'REVOLVER') {
+  //         console.log('data', result.dato);
+  //         this.idPrevMed = result.dato.id;
+  //         //this.itemArma.tipoArma = result.dato.medioNavigation.descripcion;
+  //         this.agregarDatoArma();
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
+
+  // agregarDatoArma() {
+  //   for (let index = 0; index < this.itemsArma.length; index++) {
+  //     this.prevArma = new PrevMedioArma();
+  //     this.prevArma = this.itemsArma[index];
+  //     if (this.prevArma.id == undefined) {
+  //       if (this.prevArma.tipoArma == 'REVOLVER') {
+  //         this.itemArma = new PrevMedioArma();
+  //         this.itemArma = this.prevArma;
+  //         this.guardarArma();
+  //         //break;
+  //       }
+  //     }
+  //   }
+  // }
+
+  async guardarArma() {
+    this.itemArma.prevMedio = this.idPrevMed;
+    console.log('id medio Preventivo', this.itemArma.prevMedio);
+    try {
+      let data = await this.wsdlMedioArma.doInsert(this.itemArma).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.itemArma = new PrevMedioArma();
+      } else if (result.code == 204) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Alerta...',
+          text: 'El dato ya existe en la base de datos',
+        });
       }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Alerta...',
+        text: 'No se pudo insertar los datos',
+      });
     }
   }
 
@@ -281,6 +323,9 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   //agrega fila en memoria
   addRow() {
+    if(this.item.capturaDescripcion == 'REVOLVER'){
+    this.itemArma.tipoArma = this.item.capturaDescripcion;
+    }
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PreventivoMedio();
@@ -288,6 +333,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.itemsArma.unshift(this.itemArma);
       this.itemArma = new PrevMedioArma();
       this.mostrarTabla = true;
+      this.mostrar = false;
       if (this.fil.busqueda != '') {
         this.fil.busqueda = '';
       }
