@@ -261,7 +261,7 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
@@ -276,12 +276,10 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-4">
             <app-fil-arma (emmit)="doFound($event)"></app-fil-arma>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-4">
             <label for="Nombre" class="col-sm-12 col-form-label">
               Calibre:</label
             >
@@ -292,9 +290,7 @@
               [ngModelOptions]="{ standalone: true }"
             />
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-4">
             <label for="Nombre" class="col-sm-12 col-form-label">
               Serie n°:</label
             >
@@ -305,7 +301,6 @@
               [ngModelOptions]="{ standalone: true }"
             />
           </div>
-        
         </div>
       </div>
       <div class="modal-footer">
