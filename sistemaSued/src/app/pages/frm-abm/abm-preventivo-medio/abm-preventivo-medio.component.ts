@@ -53,6 +53,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   idSeleccion!: number;
   mostrarBtnModif: boolean;
+  idPrevMedio: any;
 
   prevArma: PrevMedioArma;
   itemArma: PrevMedioArma;
@@ -95,24 +96,37 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.obtenerDetalle();
-    this.obtenerDetalleArma();
+    //this.obtenerDetalleArma();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  async findId(id: number) {
+  async findIdArma(id: number) {
     if (id > 0) {
       try {
-        let data = await this.wsdl.getFindId(id).then();
+        let data = await this.wsdlMedioArma.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.item = result.dato;
+          this.itemArma = result.dato;
+          alert("sE RELLENO LOS DATOS")
+        }else{
+          alert("VA A INSERTAR")
+          this.itemArma.prevMedio = this.item.id
         }
       } catch (error) {}
     }
   }
+
+
+  seleccionado(medio: PreventivoMedio){
+      this.item = medio;
+      if(this.item.id != undefined){
+        console.log("id medio",this.item.id)
+        this.findIdArma(this.item.id);
+      }
+    }
 
   async obtenerDetalle() {
     try {
@@ -126,17 +140,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
     } catch (error) {}
   }
 
-  async obtenerDetalleArma() {
-    try {
-      let data = await this.wsdlMedioArma.getList(1,25).then();
-      const result = JSON.parse(JSON.stringify(data));
-      if (result.code == 200) {
-        this.itemArma = result.data;
-      } else {
-        this.items = [];
-      }
-    } catch (error) {}
-  }
+  // async obtenerDetalleArma() {
+  //   try {
+  //     let data = await this.wsdlMedioArma.getList(1,25).then();
+  //     const result = JSON.parse(JSON.stringify(data));
+  //     if (result.code == 200) {
+  //       this.itemArma = result.dato;
+  //     } else {
+  //       this.items = [];
+  //     }
+  //   } catch (error) {}
+  // }
 
   //trae los datos para modificar
   async traerDatos(id: number) {
@@ -160,6 +174,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
       } catch (error) {}
     }
   }
+
+
   // doAction() {
   //   this.enviado = true;
   //   if (this.form.valid) {
@@ -263,8 +279,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
   // }
 
   async guardarArma() {
-    this.itemArma.prevMedio = this.idPrevMed;
-    console.log('id medio Preventivo', this.itemArma.prevMedio);
+    //this.itemArma.prevMedio = this.item.id;
+    alert(this.itemArma.prevMedio);
     try {
       let data = await this.wsdlMedioArma.doInsert(this.itemArma).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -319,6 +335,12 @@ export class AbmPreventivoMedioComponent implements OnInit {
   doFound(event: ArmaMarca) {
     this.itemArma.arma = event.id;
     this.itemArma.marcaArma = event.descripcion;
+  }
+
+  cancelar(){
+    this.itemArma = new PrevMedioArma();
+    this.fil.busqueda='';
+    this.fil.item = new ArmaMarca();
   }
 
   //agrega fila en memoria

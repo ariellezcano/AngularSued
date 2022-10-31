@@ -171,10 +171,10 @@
               <td>
                 <button
                   type="button"
-                  title="Ver detalle"
+                  title="Agregar detalle"
                   placement="top"
                   show-delay="10"
-                  (click)="findId(i.id)"
+                  (click)="seleccionado(i)"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   class="btn btn-success btn-circle"
@@ -304,16 +304,16 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button
+          <button
           type="button"
           class="btn btn-primary"
           (click)="guardarArma()"
           data-bs-dismiss="modal"
         >
           Guardar
-        </button>
+        </button>  
         &nbsp;
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-danger" (click)="cancelar()" data-bs-dismiss="modal">
           Cancelar
         </button>
       </div>
