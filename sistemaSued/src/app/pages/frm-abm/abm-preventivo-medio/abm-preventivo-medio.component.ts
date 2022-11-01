@@ -1,5 +1,3 @@
-import { NgIf } from '@angular/common';
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +12,6 @@ import {
 import {
   MedioService,
   PreventivoMedioService,
-  PreventivoService,
   PrevMedArmaService,
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
@@ -39,6 +36,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   enviado = false;
   mostrar: boolean;
   arma: boolean;
+  botonModifArma: boolean;
 
   busqueda;
 
@@ -47,6 +45,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   item: PreventivoMedio;
   items: PreventivoMedio[];
+  itemsPM: PreventivoMedio[];
 
   Mitems: Medio[];
   Mitem: Medio;
@@ -59,7 +58,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   itemArma: PrevMedioArma;
   itemsArma: PrevMedioArma[];
 
-  mostrarTabla: boolean;
+  seleccionID: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -82,7 +81,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.prevArma = new PrevMedioArma();
     this.itemArma = new PrevMedioArma();
     this.itemsArma = [];
-    this.mostrarTabla = false;
+    this.itemsPM = [];
+    this.botonModifArma = false;
   }
 
   ngOnInit(): void {
@@ -96,13 +96,21 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.obtenerDetalle();
-    //this.obtenerDetalleArma();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
+  //selecciona el id del medio y envia el id a la funcion de busqueda del arma
+  seleccionado(id: number){
+    this.arma = true;
+    if(id != undefined){
+      this.findIdArma(id);
+    }
+  }
+
+  //realiza la busqueda del arma con el id del medio
   async findIdArma(id: number) {
     if (id > 0) {
       try {
@@ -110,47 +118,25 @@ export class AbmPreventivoMedioComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemArma = result.dato;
-          alert("sE RELLENO LOS DATOS")
+          this.itemArma.marcaArma = result.dato.armaNavigation?.descripcion;
         }else{
-          alert("VA A INSERTAR")
-          this.itemArma.prevMedio = this.item.id
+          this.itemArma.prevMedio = id
         }
       } catch (error) {}
     }
   }
 
-
-  seleccionado(medio: PreventivoMedio){
-      this.item = medio;
-      if(this.item.id != undefined){
-        console.log("id medio",this.item.id)
-        this.findIdArma(this.item.id);
-      }
-    }
-
   async obtenerDetalle() {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
-      if (result.code == 200) {
+      if (result.code == 200) { 
         this.items = result.data;
       } else {
         this.items = [];
       }
     } catch (error) {}
   }
-
-  // async obtenerDetalleArma() {
-  //   try {
-  //     let data = await this.wsdlMedioArma.getList(1,25).then();
-  //     const result = JSON.parse(JSON.stringify(data));
-  //     if (result.code == 200) {
-  //       this.itemArma = result.dato;
-  //     } else {
-  //       this.items = [];
-  //     }
-  //   } catch (error) {}
-  // }
 
   //trae los datos para modificar
   async traerDatos(id: number) {
@@ -160,10 +146,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          // if(this.item.arma != undefined){
-          //   this.mostrar = true;
-          //   this.arma = true;
-          // }
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.medioNavigation.descripcion;
           if (this.item.fecha != undefined) {
@@ -210,6 +192,26 @@ export class AbmPreventivoMedioComponent implements OnInit {
     } catch (error) {}
   }
 
+  async actualizarArmas(obj: PrevMedioArma) {
+    try {
+      let data = await this.wsdlMedioArma.doUpdate(this.itemArma.id, obj).then();
+      const result = JSON.parse(JSON.stringify(data));
+      console.log('result', result);
+      if (result.code == 200) {
+        this.fil.busqueda='';
+        this.itemArma = new PrevMedioArma();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
+      }
+    } catch (error) {}
+  }
+
   //recorre el bucle para insertar los datos de preventivo medio
   agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
@@ -223,12 +225,15 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
+  //guarda el preventivo medio en la base de datos
   async guardar() {
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.fil.busqueda='';
+        this.fil.item = new ArmaMarca();
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
       } else if (result.code == 204) {
@@ -247,40 +252,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
-  // async traerData(id: any) {
-  //   try {
-  //     let data = await this.wsdl.getFindId(id).then();
-  //     let result = JSON.parse(JSON.stringify(data));
-  //     console.log('result traer data', result);
-  //     if (result.code == 200) {
-  //       if (result.dato.medioNavigation.descripcion == 'REVOLVER') {
-  //         console.log('data', result.dato);
-  //         this.idPrevMed = result.dato.id;
-  //         //this.itemArma.tipoArma = result.dato.medioNavigation.descripcion;
-  //         this.agregarDatoArma();
-  //       }
-  //     }
-  //   } catch (error) {}
-  // }
-
-  // agregarDatoArma() {
-  //   for (let index = 0; index < this.itemsArma.length; index++) {
-  //     this.prevArma = new PrevMedioArma();
-  //     this.prevArma = this.itemsArma[index];
-  //     if (this.prevArma.id == undefined) {
-  //       if (this.prevArma.tipoArma == 'REVOLVER') {
-  //         this.itemArma = new PrevMedioArma();
-  //         this.itemArma = this.prevArma;
-  //         this.guardarArma();
-  //         //break;
-  //       }
-  //     }
-  //   }
-  // }
-
+  //inserta el arma en la base de datos
   async guardarArma() {
-    //this.itemArma.prevMedio = this.item.id;
-    alert(this.itemArma.prevMedio);
     try {
       let data = await this.wsdlMedioArma.doInsert(this.itemArma).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -302,7 +275,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     }
   }
 
-  //filtro de medios
+  //filtro de medios y captura
   async filtrarMedio() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -345,21 +318,9 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   //agrega fila en memoria
   addRow() {
-    if(this.item.capturaDescripcion == 'REVOLVER'){
-    this.itemArma.tipoArma = this.item.capturaDescripcion;
-    }
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PreventivoMedio();
-    if (this.itemArma.arma != undefined || this.itemArma.calibre != undefined) {
-      this.itemsArma.unshift(this.itemArma);
-      this.itemArma = new PrevMedioArma();
-      this.mostrarTabla = true;
-      this.mostrar = false;
-      if (this.fil.busqueda != '') {
-        this.fil.busqueda = '';
-      }
-    }
   }
 
   //elimina la fila en memoria
@@ -367,19 +328,14 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.items.splice(indice, 1);
   }
 
-  deleteRowArma(indice: any) {
-    this.itemsArma.splice(indice, 1);
-  }
   // se utiliza para pintar la fila en memoria
   colores(item: any) {
     let color = '';
-
     if (item.id == undefined) {
       color = 't-success';
-    } else {
+    }else {
       color = 't-default';
     }
-
     return color;
   }
 

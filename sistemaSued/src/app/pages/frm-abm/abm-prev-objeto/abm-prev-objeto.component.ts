@@ -1,12 +1,13 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { Objeto, Preventivo, PrevObjeto } from 'src/app/models/index.models';
-import { ObjetoService, PreventivoService, PrevObjetoService } from 'src/app/services/index.service';
+import { ArmaMarca, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto } from 'src/app/models/index.models';
+import { ObjetoService, PreventivoService, PrevMedArmaService, PrevObjAutoService, PrevObjetoArmaService, PrevObjetoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
 
 @Component({
   selector: 'app-abm-prev-objeto',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-prev-objeto.component.scss']
 })
 export class AbmPrevObjetoComponent implements OnInit {
+  @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
 
   public id!: number;
   //valida el formulario
@@ -21,6 +23,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //variable para verificar si fue enviado los datos
   enviado = false;
+  arma: boolean
 
   busqueda;
   idSeleccion!: number;
@@ -31,8 +34,12 @@ export class AbmPrevObjetoComponent implements OnInit {
   item: PrevObjeto;
   items: PrevObjeto[];
 
+  itemAuto: PrevObjAuto;
+
   Oitems: Objeto[];
   Oitem: Objeto;
+
+  itemArma: PrevObjArma;
 
   mostrarBtnModif: Boolean;
 
@@ -40,7 +47,8 @@ export class AbmPrevObjetoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevObjetoService,
-    private wsdlPreventivo: PreventivoService,
+    private wsdlObjArma: PrevObjetoArmaService,
+    private wsdlObjAuto: PrevObjAutoService,
     private wsdlMedio: ObjetoService,
     private formBuilder: FormBuilder
   ) {
@@ -52,6 +60,9 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.Oitem = new Objeto();
     this.Oitems = [];
     this.mostrarBtnModif = false;
+    this.arma = false;
+    this.itemArma = new PrevObjArma();
+    this.itemAuto = new PrevObjAuto();
   }
 
   ngOnInit(): void {
@@ -82,6 +93,53 @@ export class AbmPrevObjetoComponent implements OnInit {
   //     } catch (error) {}
   //   }
   // }
+
+  //selecciona el id del medio y envia el id a la funcion de busqueda del arma
+  seleccionado(id: number){
+    this.arma = true;
+    if(id != undefined){
+      this.findIdArma(id);
+    }
+  }
+
+  //realiza la busqueda del arma con el id del medio
+  async findIdArma(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdlObjArma.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemArma = result.dato;
+          this.itemArma.marcaArma = result.dato.armaNavigation?.descripcion;
+        }else{
+          this.itemArma.prevObjeto = id
+        }
+      } catch (error) {}
+    }
+  }
+
+  seleccionadoAuto(id: number){
+    this.arma = true;
+    if(id != undefined){
+      this.findIdAuto(id);
+    }
+  }
+
+  //realiza la busqueda del arma con el id del medio
+  async findIdAuto(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdlObjAuto.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemAuto = result.dato;
+          this.itemAuto.marcaModeloAuto = result.dato.armaNavigation?.descripcion;
+        }else{
+          this.itemAuto.prevObjeto = id
+        }
+      } catch (error) {}
+    }
+  }
 
   async obtenerDetalle() {
     try {
@@ -129,6 +187,26 @@ export class AbmPrevObjetoComponent implements OnInit {
     } catch (error) {}
   }
 
+  async actualizarArmas(obj: PrevObjArma) {
+    try {
+      let data = await this.wsdlObjArma.doUpdate(this.itemArma.id, obj).then();
+      const result = JSON.parse(JSON.stringify(data));
+      console.log('result', result);
+      if (result.code == 200) {
+        this.fil.busqueda='';
+        this.itemArma = new PrevObjArma();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
+      }
+    } catch (error) {}
+  }
+
   async agregarDato() {
     for (let index = 0; index < this.items.length; index++) {
       this.prevObj = new PrevObjeto();
@@ -151,17 +229,40 @@ export class AbmPrevObjetoComponent implements OnInit {
       );
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        // this.back();
         this.item = new PrevObjeto();
-        this.obtenerDetalle()
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
+        this.obtenerDetalle();
       } else if(result.code == 204) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Alerta...',
+          text: 'El dato ya existe en la base de datos',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Alerta...',
+        text: 'No se pudo insertar los datos',
+      });
+    }
+  }
+  
+  async guardarArma() {
+    try {
+      let data = await this.wsdlObjArma.doInsert(this.itemArma).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.fil.busqueda='';
+        this.fil.item = new ArmaMarca();
+        this.itemArma = new PrevObjArma();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato creado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -225,6 +326,25 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.busqueda = '';
     this.items.unshift(this.item);
     this.item = new PrevObjeto();
+  }
+
+  //captura el arma
+  doFound(event: ArmaMarca) {
+    this.itemArma.arma = event.id;
+    this.itemArma.marcaArma = event.descripcion;
+  }
+
+  //captura el modelo
+  doFoundModelo(event: ModeloVehiculo){
+    this.itemAuto.modelo = event.id;
+    this.itemAuto.marcaModeloAuto = event.descripcion;
+  }
+
+  //cancela el modal
+  cancelar(){
+    this.itemArma = new PrevObjArma();
+    this.fil.busqueda='';
+    this.fil.item = new ArmaMarca();
   }
 
   //elimina la fila en memoria

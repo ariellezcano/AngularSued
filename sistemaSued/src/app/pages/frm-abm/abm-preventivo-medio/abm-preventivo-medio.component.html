@@ -95,7 +95,7 @@
               type="button"
               title="Guardar"
               placement="top"
-              (click)="addRow()"
+              (click)="guardar()"
               show-delay="10"
               class="btn btn-outline-info"
             >
@@ -169,18 +169,29 @@
             </ng-template>
             <ng-template #elseTemplate>
               <td>
-                <button
-                  type="button"
-                  title="Agregar detalle"
-                  placement="top"
-                  show-delay="10"
-                  (click)="seleccionado(i)"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  class="btn btn-success btn-circle"
+                <ng-container
+                  *ngIf="
+                    i.medioNavigation?.descripcion == 'REVOLVER' ||
+                    i.medioNavigation?.descripcion == 'PISTOLA' ||
+                    i.medioNavigation?.descripcion == 'OTRAS ARMAS DE PUÑO' ||
+                    i.medioNavigation?.descripcion == 'ESCOPETA' ||
+                    i.medioNavigation?.descripcion == 'OTRAS ARMAS LARGAS' ||
+                    i.medioNavigation?.descripcion == 'RIFLE'
+                  "
                 >
-                  <i class="fa fa-info" aria-hidden="true"></i>
-                </button>
+                   <button
+                      type="button"
+                      title="Agregar detalle del arma"
+                      placement="top"
+                      show-delay="10"
+                      (click)="seleccionado(i.id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      class="color btn-circle"
+                    >
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                </ng-container>
                 &nbsp;
                 <button
                   type="button"
@@ -237,7 +248,7 @@
   <hr />
 
   <div class="row">
-    <button
+    <!-- <button
       *ngIf="!mostrarBtnModif"
       class="btn btn-dark"
       type="button"
@@ -245,7 +256,7 @@
     >
       Guardar
     </button>
-    &nbsp;
+    &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
       Cancelar
     </button>
@@ -264,9 +275,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          Detalle del arma agregada:
-        </h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detalle del Arma:</h5>
         <button
           type="button"
           class="btn-close"
@@ -302,18 +311,64 @@
             />
           </div>
         </div>
+        <br />
+        <div
+          *ngIf="
+            itemArma.marcaArma != undefined || itemArma.calibre != undefined
+          "
+          class="row alert alert-info"
+          role="alert"
+        >
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              Marca del Arma: <b>{{ itemArma?.marcaArma }}</b></label
+            >
+          </div>
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              Calibre: <b>{{ itemArma?.calibre }}</b></label
+            >
+          </div>
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              N° serie: <b>{{ itemArma?.serie }}</b></label
+            >
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-          <button
+        <ng-container *ngIf="arma">
+          <ng-container
+            *ngIf="itemArma.id > 0; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="actualizarArmas(itemArma)"
+              data-bs-dismiss="modal"
+            >
+              Modificar datos
+            </button>
+          </ng-template>
+          <ng-template #elseTemplate>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="guardarArma()"
+              data-bs-dismiss="modal"
+            >
+              Guardar
+            </button>
+          </ng-template>
+        </ng-container>
+        &nbsp;
+        <button
           type="button"
-          class="btn btn-primary"
-          (click)="guardarArma()"
+          class="btn btn-danger"
+          (click)="cancelar()"
           data-bs-dismiss="modal"
         >
-          Guardar
-        </button>  
-        &nbsp;
-        <button type="button" class="btn btn-danger" (click)="cancelar()" data-bs-dismiss="modal">
           Cancelar
         </button>
       </div>

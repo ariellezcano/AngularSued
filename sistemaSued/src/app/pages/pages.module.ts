@@ -106,6 +106,7 @@ import { FilUnidadAutocompletadoComponent } from "./component/fil-unidad-autocom
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { FilAutocompletadoUnidadSuedComponent } from './component/fil-autocompletado-unidad-sued/fil-autocompletado-unidad-sued.component';
 import { FilArmaComponent } from './component/fil-arma/fil-arma.component';
+import { FilModeloAutoComponent } from './component/fil-modelo-auto/fil-modelo-auto.component';
 
 
 @NgModule({
@@ -211,6 +212,7 @@ import { FilArmaComponent } from './component/fil-arma/fil-arma.component';
       FilUnidadAutocompletadoComponent,
       FilAutocompletadoUnidadSuedComponent,
       FilArmaComponent,
+      FilModeloAutoComponent,
     ],
     exports: [],
     imports: [

@@ -136,44 +136,44 @@
     <div class="row">
       <div class="col-md-12">
         <ng-container
-        *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
-      ></ng-container>
-      <ng-template #thenTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Modificar datos"
-              placement="top"
-              (click)="actualizarDatos(this.item)"
-              show-delay="10"
-              class="btn btn-primary"
-            >
-              <i class="fa fa-edit" aria-hidden="true"></i>
-              Guardar modificación
-            </button>
-          </center>
-        </div>
-      </ng-template>
-      <ng-template #elseTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Guardar"
-              placement="top"
-              (click)="addRow()"
-              show-delay="10"
-              class="btn btn-outline-info"
-            >
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              Agregar a tabla
-            </button>
-          </center>
-        </div>
-      </ng-template>
+          *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+        ></ng-container>
+        <ng-template #thenTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Modificar datos"
+                placement="top"
+                (click)="actualizarDatos(this.item)"
+                show-delay="10"
+                class="btn btn-primary"
+              >
+                <i class="fa fa-edit" aria-hidden="true"></i>
+                Guardar modificación
+              </button>
+            </center>
+          </div>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Guardar"
+                placement="top"
+                (click)="guardar()"
+                show-delay="10"
+                class="btn btn-outline-info"
+              >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Agregar a tabla
+              </button>
+            </center>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -182,6 +182,7 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
+          <th>Id</th>
           <th>Código Objeto</th>
           <th>Descripción</th>
           <th>Secuestro</th>
@@ -196,6 +197,7 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
+            <td>{{i.id}}</td>
             <td>
               {{ i.objetoNavigation.codTipo }} -
               {{ i.objetoNavigation.codSubTipo }}
@@ -217,47 +219,99 @@
           <ng-template #mostrar>
             <!-- muestra el eliminar -->
             <ng-container
-            *ngIf="mostrarBtnModif && idSeleccion == i.id; then thenTemplate; else elseTemplate"
-          ></ng-container>
-          <ng-template #thenTemplate>
-            <td>
-              <button
-                type="button"
-                title="Cancelar Modificación"
-                placement="top"
-                show-delay="10"
-                (click)="cancelarModificacion()"
-                class="btn btn-success btn-circle"
-              >
-                <i class="fa fa-times" aria-hidden="true"></i>
-              </button>
-            </td>
-          </ng-template>
-          <ng-template #elseTemplate>
-            <td>
-              <button
-                type="button"
-                title="Modificar"
-                placement="top"
-                show-delay="10"
-                (click)="traerDatos(i.id)"
-                class="btn btn-warning btn-circle"
-              >
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </button>
-              &nbsp;
-              <button
-                type="button"
-                title="Eliminar"
-                placement="top"
-                show-delay="10"
-                (click)="preDelete(i)"
-                class="btn btn-danger btn-circle"
-              >
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </button>
-            </td>
-          </ng-template>
+              *ngIf="
+                mostrarBtnModif && idSeleccion == i.id;
+                then thenTemplate;
+                else elseTemplate
+              "
+            ></ng-container>
+            <ng-template #thenTemplate>
+              <td>
+                <button
+                  type="button"
+                  title="Cancelar Modificación"
+                  placement="top"
+                  show-delay="10"
+                  (click)="cancelarModificacion()"
+                  class="btn btn-success btn-circle"
+                >
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <td>
+                <ng-container
+                  *ngIf="
+                    i.objetoNavigation?.descripcion == 'REVOLVER' ||
+                    i.objetoNavigation?.descripcion == 'PISTOLA' ||
+                    i.objetoNavigation?.descripcion == 'OTRAS ARMAS DE PUÑO' ||
+                    i.objetoNavigation?.descripcion == 'ESCOPETA' ||
+                    i.objetoNavigation?.descripcion == 'OTRAS ARMAS LARGAS' ||
+                    i.objetoNavigation?.descripcion == 'RIFLE'
+                  "
+                >
+                  <button
+                    type="button"
+                    title="Agregar detalle del arma"
+                    placement="top"
+                    show-delay="10"
+                    (click)="seleccionado(i.id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal1"
+                    class="color btn-circle"
+                  >
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                  </button>
+                </ng-container>
+                <ng-container
+                  *ngIf="
+                    i.objetoNavigation?.descripcion == 'AUTO' ||
+                    i.objetoNavigation?.descripcion == 'CAMIONETA' ||
+                    i.objetoNavigation?.descripcion == 'CAMION' ||
+                    i.objetoNavigation?.descripcion == 'COLECTIVO' ||
+                    i.objetoNavigation?.descripcion == 'MICRO LARGA DISTANCIA' ||
+                    i.objetoNavigation?.descripcion == 'TREN' ||
+                    i.objetoNavigation?.descripcion == 'TRACTOR'
+                  "
+                >
+                  <button
+                    type="button"
+                    title="Agregar detalle del automóvil"
+                    placement="top"
+                    show-delay="10"
+                    (click)="seleccionadoAuto(i.id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal2"
+                    class="colorAuto btn-circle"
+                  >
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                  </button>
+                </ng-container>
+                &nbsp;
+                <button
+                  type="button"
+                  title="Modificar"
+                  placement="top"
+                  show-delay="10"
+                  (click)="traerDatos(i.id)"
+                  class="btn btn-warning btn-circle"
+                >
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                &nbsp;
+                <button
+                  type="button"
+                  title="Eliminar"
+                  placement="top"
+                  show-delay="10"
+                  (click)="preDelete(i)"
+                  class="btn btn-danger btn-circle"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
           </ng-template>
           <ng-template #noMostrar>
             <!-- saca de la lista -->
@@ -289,13 +343,225 @@
   </div>
   <hr />
   <div class="row">
-    <button *ngIf="!mostrarBtnModif" class="btn btn-dark" type="button" (click)="agregarDato()">
+    <!-- <button
+      class="btn btn-dark"
+      type="button"
+      (click)="agregarDato()"
+    >
       Guardar
-    </button>
-    &nbsp;
+    </button> -->
+    
     <button class="btn btn-info" type="button" (click)="back()">
       Cancelar
     </button>
   </div>
 </div>
 <br />
+
+<!-- Modal Arma-->
+<div
+  class="modal fade"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle del Arma:</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <app-fil-arma (emmit)="doFound($event)"></app-fil-arma>
+          </div>
+          <div class="col-md-4">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Calibre:</label
+            >
+            <input
+              [(ngModel)]="itemArma.calibre"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Serie n°:</label
+            >
+            <input
+              [(ngModel)]="itemArma.serie"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+        <br />
+        <div
+          *ngIf="
+            itemArma.marcaArma != undefined || itemArma.calibre != undefined
+          "
+          class="row alert alert-info"
+          role="alert"
+        >
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              Marca del Arma: <b>{{ itemArma?.marcaArma }}</b></label
+            >
+          </div>
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              Calibre: <b>{{ itemArma?.calibre }}</b></label
+            >
+          </div>
+          <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              N° serie: <b>{{ itemArma?.serie }}</b></label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <ng-container *ngIf="arma">
+          <ng-container
+            *ngIf="itemArma.id > 0; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="actualizarArmas(itemArma)"
+              data-bs-dismiss="modal"
+            >
+              Modificar datos
+            </button>
+          </ng-template>
+          <ng-template #elseTemplate>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="guardarArma()"
+              data-bs-dismiss="modal"
+            >
+              Guardar
+            </button>
+          </ng-template>
+        </ng-container>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="cancelar()"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal auto-->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalle del Automóvil:</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <app-fil-modelo-auto (emmit)="doFoundModelo($event)"></app-fil-modelo-auto>
+          </div>
+          <div class="col-md-6">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Dominio:</label
+            >
+            <input
+              [(ngModel)]="itemAuto.patente"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+        </div>
+        <br />
+        <div
+          *ngIf="
+            itemAuto.marcaModeloAuto != undefined || itemAuto.patente != undefined
+          "
+          class="row alert alert-info"
+          role="alert"
+        >
+          <div class="col-md-6">
+            <label for="" class="col-sm-12 col-form-label">
+              Modelo del vehículo: <b>{{ itemAuto.marcaModeloAuto }}</b></label
+            >
+          </div>
+          <div class="col-md-6">
+            <label for="" class="col-sm-12 col-form-label">
+              Calibre: <b>{{ itemAuto?.patente }}</b></label
+            >
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <ng-container *ngIf="arma">
+          <ng-container
+            *ngIf="itemAuto.id > 0; then thenTemplate; else elseTemplate"
+          ></ng-container>
+          <ng-template #thenTemplate>
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="actualizarArmas(itemArma)"
+              data-bs-dismiss="modal"
+            >
+              Modificar datos
+            </button>
+          </ng-template>
+          <ng-template #elseTemplate>
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="guardarArma()"
+              data-bs-dismiss="modal"
+            >
+              Guardar
+            </button>
+          </ng-template>
+        </ng-container>
+        &nbsp;
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="cancelar()"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

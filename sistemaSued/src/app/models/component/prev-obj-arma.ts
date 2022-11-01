@@ -8,6 +8,7 @@ export class PrevObjArma {
     prevObjNavigation: any
     armaNavigation: any;
     
+    marcaArma!: string;
     constructor(){
 
     }

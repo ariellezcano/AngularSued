@@ -6,5 +6,7 @@ export class PrevObjAuto {
 
     prevObjNavigation: any;
     modeloNavigation: any;
+
+    marcaModeloAuto!: string;
     constructor(){}
 }
