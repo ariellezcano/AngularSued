@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Sexo } from 'src/app/models/index.models';
 import { SexoService } from 'src/app/services/index.service';
@@ -8,10 +13,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-abm-sexo',
   templateUrl: './abm-sexo.component.html',
-  styleUrls: ['./abm-sexo.component.scss']
+  styleUrls: ['./abm-sexo.component.scss'],
 })
 export class AbmSexoComponent implements OnInit {
-
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -34,8 +38,8 @@ export class AbmSexoComponent implements OnInit {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
       codigo: ['', Validators.required],
-      descripcion: ['', Validators.required]
-      });
+      descripcion: ['', Validators.required],
+    });
 
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
@@ -51,7 +55,7 @@ export class AbmSexoComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
+        // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
         }
@@ -76,7 +80,6 @@ export class AbmSexoComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -91,17 +94,17 @@ export class AbmSexoComponent implements OnInit {
     } catch (error) {}
   }
 
-
   async guardar() {
     //console.log("items", this.item);
     try {
-      let data = await this.wsdl.doInsert(this.item).then(
+      let data = await this.wsdl
+        .doInsert(this.item)
+        .then
         /*data => {
           console.log("data de data", data)
         }*/
-      );
+        ();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -111,7 +114,7 @@ export class AbmSexoComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-      } else if(result.code == 204) {
+      } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -127,10 +130,7 @@ export class AbmSexoComponent implements OnInit {
     }
   }
 
-  
   back() {
     this.router.navigate(['/lst-sexo']);
   }
-
-
 }

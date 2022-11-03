@@ -173,7 +173,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
@@ -196,7 +195,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
     try {
       let data = await this.wsdlMedioArma.doUpdate(this.itemArma.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.fil.busqueda='';
         this.itemArma = new PrevMedioArma();
@@ -232,10 +230,10 @@ export class AbmPreventivoMedioComponent implements OnInit {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.fil.busqueda='';
-        this.fil.item = new ArmaMarca();
+        this.busqueda='';
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
+        
       } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
@@ -258,7 +256,16 @@ export class AbmPreventivoMedioComponent implements OnInit {
       let data = await this.wsdlMedioArma.doInsert(this.itemArma).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.fil.busqueda='';
+        this.fil.item = new ArmaMarca();
         this.itemArma = new PrevMedioArma();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato guardado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',

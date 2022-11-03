@@ -32,7 +32,6 @@ export class GeoMapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    console.log('lat:', this.latitud, 'long:', this.longitud);
   }
 
   ngAfterViewInit() {

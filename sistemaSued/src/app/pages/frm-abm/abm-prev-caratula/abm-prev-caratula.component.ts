@@ -38,7 +38,6 @@ export class AbmPrevCaratulaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevCaratulaService,
-    private wsdlPreventivo: PreventivoService,
     private wsdlModalidad: DelitoService,
     private formBuilder: FormBuilder
   ) {
@@ -125,7 +124,6 @@ export class AbmPrevCaratulaComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.idSeleccion=0;
         this.mostrarBtnModif =false;
@@ -158,26 +156,13 @@ export class AbmPrevCaratulaComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
-      let data = await this.wsdl.doInsert(this.item).then(
-        /*data => {
-          console.log("data de data", data)
-        }*/
-      );
+      let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
-        //this.back();
+        this.busqueda='';
         this.item = new PrevCaratula();
         this.obtenerDetalle();
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
       } else if(result.code == 204) {
         Swal.fire({
           icon: 'info',

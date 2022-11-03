@@ -4,7 +4,7 @@ export class PreventivoMedio {
     medioUtilizado!: number;
     secuestro: boolean;
     fecha: any;
-    //arma!: number;
+    //activo!: boolean;
     //calibre!: string;
     //serie!: string;
 

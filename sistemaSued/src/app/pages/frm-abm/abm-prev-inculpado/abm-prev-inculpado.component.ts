@@ -55,7 +55,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevInculpadoService,
-    private wsdlPreventivo: PreventivoService,
     private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
     private wsdlCalle: CalleService,
@@ -110,7 +109,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.items = result.data;
       } else {
@@ -135,7 +133,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
       console.log(data)
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.idSeleccion=0;
         this.mostrarBtnModif=false;
@@ -170,22 +167,16 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
-        // this.back();
+        this.busqueda = '';
+        this.busquedaOc = '';
+        this.busquedaCalle = '';
         this.item = new PrevInculpado();
         this.obtenerDetalle()
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
+       
       } else if(result.code == 204) {
         Swal.fire({
           icon: 'info',
@@ -209,7 +200,6 @@ async traerDatos(id: number) {
       let data = await this.wsdl.getFindId(id).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        console.log(result.dato)
         this.item = result.dato;
         if(this.item.fechaDetencion != null){
           this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');
@@ -218,7 +208,6 @@ async traerDatos(id: number) {
         this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
         this.busqueda = result.dato.nacionalidadNavigation.nacionalidad;
         this.busquedaCalle = result.dato.calleNavigation.nombre;
-
 
         this.mostrarBtnModif = true;
       }
@@ -229,6 +218,8 @@ async traerDatos(id: number) {
 //cancelar modificacion
 cancelarModificacion() {
   this.busqueda = '';
+  this.busquedaOc = '';
+  this.busquedaCalle = '';
   this.item = new PrevInculpado();
   this.mostrarBtnModif = false;
 }
@@ -282,7 +273,6 @@ cancelarModificacion() {
 
   //agrega fila en memoria
   addRow() {
-    console.log("items en memoria", this.item);
     this.busqueda = '';
     this.busquedaOc = '';
     this.busquedaCalle = '';
@@ -326,6 +316,9 @@ cancelarModificacion() {
       cancelButtonColor: '#d33',
     }).then((result) => {
       if (result.value) {
+        this.busqueda = '';
+        this.busquedaOc = '';
+        this.busquedaCalle = '';
         this.delete();
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Utils.showToas('Tu archivo esta seguro :)', 'warning');

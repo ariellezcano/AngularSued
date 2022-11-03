@@ -31,7 +31,7 @@
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Medio:</label>
       <input
-        (change)="filtrarMedio()"
+        (ngModelChange)="filtrarMedio()"
         [(ngModel)]="busqueda"
         name="busqueda"
         type="text"

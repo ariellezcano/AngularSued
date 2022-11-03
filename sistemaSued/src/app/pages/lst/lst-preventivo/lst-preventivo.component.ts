@@ -64,6 +64,9 @@ export class LstPreventivoComponent implements OnInit {
           let data = await this.wsdl.doDelete(id).then();
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
+            this.proccess = false;
+            this.id = 0;
+            this.selectedRowIndex = 0;
             this.fil.filter();
             swalWithBootstrapButtons.fire(
               'Eliminado exitosamente!',

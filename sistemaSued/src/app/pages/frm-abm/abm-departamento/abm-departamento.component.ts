@@ -75,7 +75,6 @@ export class AbmDepartamentoComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -100,7 +99,6 @@ export class AbmDepartamentoComponent implements OnInit {
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.back();
         Swal.fire({

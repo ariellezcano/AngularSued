@@ -83,7 +83,6 @@ export class AbmContravencionComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -105,10 +104,7 @@ export class AbmContravencionComponent implements OnInit {
     this.item.personaCrea = 1;  
     try {
       let data = await this.wsdl.doInsert(this.item).then();
-      console.log(data);
       const result = JSON.parse(JSON.stringify(data));
-      console.log(result);
-      console.log("result", result);
       if (result.code == 200) {
         this.back();
         Swal.fire({

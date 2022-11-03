@@ -119,7 +119,6 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          console.log('find', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'YYYY-MM-DD'
@@ -170,7 +169,6 @@ export class AbmPreventivoComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -204,7 +202,6 @@ export class AbmPreventivoComponent implements OnInit {
       try {
         let data = await this.wsdl.doInsert(this.item).then();
         const result = JSON.parse(JSON.stringify(data));
-        console.log('result', result);
         if (result.code == 200) {
           this.back();
           Swal.fire({
@@ -335,7 +332,6 @@ export class AbmPreventivoComponent implements OnInit {
   seleccionLocalidad(event: Localidad) {
     if (event != undefined) {
       this.item.localidad = event.id;
-      console.log(event);
       this.item.localidadCoordenada = event.nombre;
       this.item.cp = event.codPostal;
       this.item.pais = event.nacionNavigation?.nacion;

@@ -193,7 +193,6 @@ export class AbmDetallePreventivoComponent implements OnInit {
   async obtenerSnic() {
     try {
       let data = await this.wsdlSnic.getFindId(this.id).then();
-      console.log("SNIC",data)
       const result = JSON.parse(JSON.stringify(data));
       if(result.code == 200){
         this.itemSnic = result.dato;

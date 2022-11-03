@@ -1,8 +1,10 @@
 <div class="container">
   <div class="col-md-12">
+    <!-- (keyup.enter)="filtrar()"
+    (change)="filtrar()" -->
     <label for="" class="col-sm-12 col-form-label">Marca de arma:</label>
     <input
-      (change)="filtrar()"
+      (ngModelChange)="filtrar()"
       [(ngModel)]="busqueda"
       name="busqueda"
       type="text"

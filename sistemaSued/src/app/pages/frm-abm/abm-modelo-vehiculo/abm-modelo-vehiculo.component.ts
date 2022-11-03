@@ -51,7 +51,6 @@ export class AbmModeloVehiculoComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
         }
@@ -65,7 +64,6 @@ export class AbmModeloVehiculoComponent implements OnInit {
       if (this.id > 0) {
         this.actualizarDatos(this.item);
       } else {
-        //console.log("datos enviados", this.item)
         this.guardar();
       }
     }
@@ -76,7 +74,6 @@ export class AbmModeloVehiculoComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.back();
         Swal.fire({
@@ -101,7 +98,6 @@ export class AbmModeloVehiculoComponent implements OnInit {
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.back();
         Swal.fire({

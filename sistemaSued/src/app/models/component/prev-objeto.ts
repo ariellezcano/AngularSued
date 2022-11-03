@@ -7,6 +7,7 @@ export class PrevObjeto {
     valor: any;
     cantSecuestro!: number;
     fecha: any;
+    //activo!: boolean;
 
     objetoNavigation: any
     

@@ -60,7 +60,6 @@ export class FilPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.items = result.data;
-          console.log('result', this.items);
           this.totalRegistros = result.totalRegistros;
           this.totalPaginas = result.totalPaginas;
           //console.log("result", result)

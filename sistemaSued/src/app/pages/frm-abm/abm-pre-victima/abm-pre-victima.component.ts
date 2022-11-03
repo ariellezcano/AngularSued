@@ -98,7 +98,6 @@ export class AbmPreVictimaComponent implements OnInit {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
         this.items = result.data;
       } else {
@@ -122,7 +121,6 @@ export class AbmPreVictimaComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         //this.back();
         this.idSeleccion=0;
@@ -156,13 +154,12 @@ export class AbmPreVictimaComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
-        // this.back();
+        this.busqueda = '';
+        this.busquedaOc = '';    
         this.item = new PrevVictima();
         this.obtenerDetalle();
         // Swal.fire({
@@ -254,7 +251,6 @@ async traerDatos(id: number) {
 
   //agrega fila en memoria
   addRow() {
-    console.log("items en memoria", this.item);
     this.busqueda = '';
     this.busquedaOc = '';
     this.items.unshift(this.item);
@@ -316,7 +312,6 @@ async traerDatos(id: number) {
     try {
       let res = await this.wsdl.doDelete(this.item.id).then();
       const result = JSON.parse(JSON.stringify(res));
-
       if (result.code == 200) {
         this.item = new PrevVictima();
         this.obtenerDetalle();

@@ -37,7 +37,6 @@ export class AbmPrevModalidadComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevModalidadService,
-    private wsdlPreventivo: PreventivoService,
     private wsdlModalidad: ModalidadService,
     private formBuilder: FormBuilder
   ) {
@@ -85,7 +84,6 @@ export class AbmPrevModalidadComponent implements OnInit {
       let data = await this.wsdl.doFilter(this.id).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        console.log("items",this.items)
         this.items = result.data;
       } else {
         this.items = [];
@@ -108,7 +106,6 @@ export class AbmPrevModalidadComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         this.idSeleccion=0;
         this.mostrarBtnModif =false;
@@ -141,26 +138,14 @@ export class AbmPrevModalidadComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
-      let data = await this.wsdl.doInsert(this.item).then(
-        /*data => {
-          console.log("data de data", data)
-        }*/
-      );
+      let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("result", result);
       if (result.code == 200) {
-       // this.back();
+       this.busqueda = '';
+       this.Mitems = [];
        this.item = new PrevModalidad();
        this.obtenerDetalle();
-       // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        //});
       } else if(result.code == 204) {
         Swal.fire({
           icon: 'info',

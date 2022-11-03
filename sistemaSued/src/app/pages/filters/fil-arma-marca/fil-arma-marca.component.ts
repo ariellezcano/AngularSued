@@ -58,9 +58,7 @@ export class FilArmaMarcaComponent implements OnInit {
           .getList(this.paginaActual, this.limit)
           .then();
         const result = JSON.parse(JSON.stringify(data));
-        console.log('result', result);
         if (result.code == 200) {
-          console.log('code', result.code);
           this.items = result.data;
           this.totalRegistros = result.totalRegistros;
           this.totalPaginas = result.totalPaginas;
@@ -68,11 +66,8 @@ export class FilArmaMarcaComponent implements OnInit {
           this.emmit.emit(this.items);
         }
       } else if (this.busqueda != undefined && this.busqueda != '') {
-        console.log("busqueda", this.busqueda)
         let data = await this.wsdl.doFilter(this.busqueda).then();
-        console.log('data', data);
         const result = JSON.parse(JSON.stringify(data));
-        //console.log('result', result);
         if (result.code == 200) {
           // this.items = [];
           // result.res.data.forEach((element: any) => {

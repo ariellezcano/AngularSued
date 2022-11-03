@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
@@ -9,6 +9,7 @@ import {
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { FilAutocompletadoUnidadSuedComponent } from '../../component/fil-autocompletado-unidad-sued/fil-autocompletado-unidad-sued.component';
 
 @Component({
   selector: 'app-abm-prev-ampliacion',
@@ -16,6 +17,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-prev-ampliacion.component.scss'],
 })
 export class AbmPrevAmpliacionComponent implements OnInit {
+  @ViewChild(FilAutocompletadoUnidadSuedComponent, { static: false }) fil!: FilAutocompletadoUnidadSuedComponent;
+
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -39,7 +42,6 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevAmpliacionService,
-    private wsdlPreventivo: PreventivoService,
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevAmpliacion();
@@ -129,7 +131,6 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
         //this.back();
         this.idSeleccion=0;
@@ -163,22 +164,14 @@ export class AbmPrevAmpliacionComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
-    console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
       if (result.code == 200) {
-        //this.back();
+        //this.fil.keyword = '';
         this.item = new PrevAmpliacion();
         this.obtenerDetalle();
-        // Swal.fire({
-        //   position: 'top-end',
-        //   icon: 'success',
-        //   title: 'Dato guardado correctamente!',
-        //   showConfirmButton: false,
-        //   timer: 1500,
-        // });
+       
       } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
