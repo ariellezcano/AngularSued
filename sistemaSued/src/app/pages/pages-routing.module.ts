@@ -8,6 +8,7 @@ import { AbmArtContravencionComponent } from "./frm-abm/abm-art-contravencion/ab
 import { AbmArticuloComponent } from "./frm-abm/abm-articulo/abm-articulo.component";
 import { AbmBarrioComponent } from "./frm-abm/abm-barrio/abm-barrio.component";
 import { AbmCalleComponent } from "./frm-abm/abm-calle/abm-calle.component";
+import { AbmConsultaUsuarioComponent } from "./frm-abm/abm-consulta-usuario/abm-consulta-usuario.component";
 import { AbmContravencionComponent } from "./frm-abm/abm-contravencion/abm-contravencion.component";
 import { AbmDelitoComponent } from "./frm-abm/abm-delito/abm-delito.component";
 import { AbmDepartamentoComponent } from "./frm-abm/abm-departamento/abm-departamento.component";
@@ -31,6 +32,7 @@ import { AbmPrevObjetoComponent } from "./frm-abm/abm-prev-objeto/abm-prev-objet
 import { AbmPreventivoMedioComponent } from "./frm-abm/abm-preventivo-medio/abm-preventivo-medio.component";
 import { AbmPreventivoComponent } from "./frm-abm/abm-preventivo/abm-preventivo.component";
 import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.component";
+import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-registro-civil.component";
 import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
 import { AbmSnicComponent } from "./frm-abm/abm-snic/abm-snic.component";
 import { AbmUnidadesComponent } from "./frm-abm/abm-unidades/abm-unidades.component";
@@ -57,6 +59,7 @@ import { LstPreventivoComponent } from "./lst/lst-preventivo/lst-preventivo.comp
 import { LstProvinciaComponent } from "./lst/lst-provincia/lst-provincia.component";
 import { LstSexoComponent } from "./lst/lst-sexo/lst-sexo.component";
 import { LstUnidadesComponent } from "./lst/lst-unidades/lst-unidades.component";
+import { LstUsuariosComponent } from "./lst/lst-usuarios/lst-usuarios.component";
 import { LstVehiculoMarcaComponent } from "./lst/lst-vehiculo-marca/lst-vehiculo-marca.component";
 import { LstVinculoComponent } from "./lst/lst-vinculo/lst-vinculo.component";
 import { PagesComponent } from "./pages.component";
@@ -470,6 +473,31 @@ const routes: Routes = [
               path: '',
               component: LstUnidadesComponent,
              //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'lst-usuarios',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmRegistroCivilComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstUsuariosComponent,
+              //canActivate: [AuthGuard],
+            },
+          ],
+        },
+        {
+          path: 'busqueda-usuario',
+          children: [
+            {
+              path: 'abm',
+              component: AbmConsultaUsuarioComponent,
+              //canActivate: [AuthGuard],
             },
           ],
         },

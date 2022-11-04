@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <h3><b>Habilitar Usuarios para uso del Sistema</b></h3>
+    <br />
+    <hr />
+    <div class="col-md-12">
+      <app-fil-usuarios (filter)="doFound($event)"></app-fil-usuarios>
+    </div>
+  </div>
+    <form *ngIf="proceso" (ngSubmit)="pregunta()">
+      <div class="row">
+        <div class="col-md-12 alert alert-info text-center">
+          <h3>
+            <u><em>{{ dtSued.tipoPersona }}</em></u>
+          </h3>
+          <h4>
+            <b
+              >{{ dtSued.apellido }},
+              {{ dtSued.nombre }}</b
+            >
+            Dni n°: <b>{{ dtSued.norDni }}</b>
+          </h4>
+          <br>
+          <ng-container *ngIf="dtSued.rolNavigation.nombre != 'MANAGER'; then thenTemplate; else elseTemplate"></ng-container>
+          <ng-template #thenTemplate>
+            <h5> Rol Vista: <input [(ngModel)]="rol" type="checkbox" name="rol" id=""> </h5>
+          </ng-template>
+          <ng-template #elseTemplate>
+           <h4> Rol Personal: <b>{{ dtSued.rol }}</b></h4>
+          </ng-template>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-info btn-block">Guardar Usuario</button>
+      &nbsp;
+    </form>
+    <button (click)="back()" type="submit" class="btn btn-outline-warning btn-block">Volver</button>
+</div>

@@ -107,6 +107,11 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { FilAutocompletadoUnidadSuedComponent } from './component/fil-autocompletado-unidad-sued/fil-autocompletado-unidad-sued.component';
 import { FilArmaComponent } from './component/fil-arma/fil-arma.component';
 import { FilModeloAutoComponent } from './component/fil-modelo-auto/fil-modelo-auto.component';
+import { LstUsuariosComponent } from "./lst/lst-usuarios/lst-usuarios.component";
+import { FiUsuariosSuedComponent } from './filters/fi-usuarios-sued/fi-usuarios-sued.component';
+import { FilUsuariosComponent } from "./filters/fil-usuarios/fil-usuarios.component";
+import { AbmConsultaUsuarioComponent } from "./frm-abm/abm-consulta-usuario/abm-consulta-usuario.component";
+import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-registro-civil.component";
 
 
 @NgModule({
@@ -213,6 +218,12 @@ import { FilModeloAutoComponent } from './component/fil-modelo-auto/fil-modelo-a
       FilAutocompletadoUnidadSuedComponent,
       FilArmaComponent,
       FilModeloAutoComponent,
+      LstUsuariosComponent,
+      FiUsuariosSuedComponent,
+      FilUsuariosComponent,
+      AbmConsultaUsuarioComponent,
+      AbmRegistroCivilComponent,
+
     ],
     exports: [],
     imports: [

@@ -36,3 +36,8 @@ export {UnidadesSuedService} from './component/unidades-sued.service';
 export {PrevObjAutoService} from './component/prev-obj-auto.service';
 export {PrevObjetoArmaService} from './component/prev-objeto-arma.service';
 export {PrevMedArmaService} from './component/prev-med-arma.service';
+export {UsuariosSuedService} from './component/usuarios-sued.service';
+export {PersonaService} from './component/persona.service';
+export {RegistroUsuarioService} from './component/registro-usuario.service';
+//export {SexoService} from './component/sexoUsuario.service';
+export {UsuarioCivilService} from './component/usuario-civil.service';

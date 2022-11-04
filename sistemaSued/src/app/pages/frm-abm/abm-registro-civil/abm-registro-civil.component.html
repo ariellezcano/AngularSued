@@ -1,0 +1,209 @@
+<div class="container">
+  <h3>Registro de Personal Civil</h3>
+  <hr />
+  <form [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label">
+        <b> Apellido: </b></label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.apellido"
+          id="apellido"
+          type="text"
+          name="apellido"
+          class="form-control"
+          placeholder="Apellido"
+          formControlName="apellido"
+          [ngClass]="{ 'is-invalid': enviado && f['apellido'].errors }"
+        />
+        <div *ngIf="enviado && f['apellido'].errors" class="invalid-feedback">
+          <div *ngIf="f['apellido'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label">
+        <b> Nombre: </b></label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.nombre"
+          id="Nombre"
+          name="nombre"
+          type="text"
+          class="form-control"
+          placeholder="Nombre"
+          formControlName="nombre"
+          [ngClass]="{ 'is-invalid': enviado && f['nombre'].errors }"
+        />
+        <div *ngIf="enviado && f['nombre'].errors" class="invalid-feedback">
+          <div *ngIf="f['nombre'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label"
+        ><b> D.N.I.: </b></label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.norDni"
+          id="norDni"
+          type="text"
+          name="norDni"
+          class="form-control"
+          placeholder="DNI"
+          formControlName="norDni"
+          [ngClass]="{ 'is-invalid': enviado && f['norDni'].errors }"
+        />
+        <div *ngIf="enviado && f['norDni'].errors" class="invalid-feedback">
+          <div *ngIf="f['norDni'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label">
+        <b> Género: </b></label
+      >
+      <div class="col-sm-10">
+        <!-- <app-combo-sexo [dibujar]="item.sexo" (emmit)="seleccion($event)">
+        </app-combo-sexo> -->
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label">
+        <b> Grupo Sanguíneo: </b></label
+      >
+      <div class="col-sm-10">
+        <select
+          [(ngModel)]="item.grupoS"
+          formControlName="grupoS"
+          [ngClass]="{ 'is-invalid': enviado && f['grupoS'].errors }"
+          class="form-select form-control"
+          aria-label="Default select example"
+          name="grupoS"
+          id="grupoS"
+        >
+          <option value="Seleccione una opción" selected>
+            Seleccione una opción
+          </option>
+          <option value="A">A</option>
+          <option value="O">O</option>
+          <option value="B">B</option>
+          <option value="AB">AB</option>
+        </select>
+        <div *ngIf="enviado && f['grupoS'].errors" class="invalid-feedback">
+          <div *ngIf="f['grupoS'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="Nombre" class="col-sm-2 col-form-label">
+        <b> Factor: </b></label
+      >
+      <div class="col-sm-10">
+        <select
+          [(ngModel)]="item.factor"
+          formControlName="factor"
+          [ngClass]="{ 'is-invalid': enviado && f['factor'].errors }"
+          class="form-select form-control"
+          name="factor"
+          id="factor"
+        >
+          <option selected>Seleccione una opción</option>
+          <option value="RH+">RH +</option>
+          <option value="RH-">RH -</option>
+        </select>
+        <div *ngIf="enviado && f['factor'].errors" class="invalid-feedback">
+          <div *ngIf="f['factor'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">
+        <b> Fecha de Nacimiento: </b></label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.fechaNacimiento"
+          id="fechaNacimiento"
+          name="fechaNacimiento"
+          type="date"
+          class="form-control"
+          formControlName="fechaNacimiento"
+          [ngClass]="{ 'is-invalid': enviado && f['fechaNacimiento'].errors }"
+        />
+        <div
+          *ngIf="enviado && f['fechaNacimiento'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f['fechaNacimiento'].errors['required']">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">
+        <b> Fecha Finalización de Contrato: </b></label
+      >
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.fechaFinContrato"
+          id="fechaNacimiento"
+          name="fechaFinContrato"
+          type="date"
+          class="form-control"
+          formControlName="fechaFinContrato"
+          [ngClass]="{ 'is-invalid': enviado && f['fechaFinContrato'].errors }"
+        />
+        <div
+          *ngIf="enviado && f['fechaFinContrato'].errors"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f['fechaFinContrato'].errors['required']">
+            Campo obligatorio
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row">
+      <label for="domicilio" class="col-sm-2 col-form-label"
+        ><b> Domicilio: </b>
+      </label>
+      <div class="col-sm-10">
+        <input
+          [(ngModel)]="item.domicilio"
+          id="domicilio"
+          name="domicilio"
+          type="text"
+          class="form-control"
+          placeholder="Domicilio"
+          formControlName="domicilio"
+          [ngClass]="{ 'is-invalid': enviado && f['domicilio'].errors }"
+        />
+        <div *ngIf="enviado && f['domicilio'].errors" class="invalid-feedback">
+          <div *ngIf="f['domicilio'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark btn-block" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info btn-block" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

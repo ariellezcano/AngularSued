@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a (click)="pase(1)" class="page-link" href="javascript:void(0)">
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item"><a (click)="pase(anterior)" class="page-link" href="javascript:void(0)">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                        Previo
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="javascript:void(0)">{{actual}}</a>
+                </li>
+                <li class="page-item">
+                    <a (click)="pase(siguiente)" class="page-link" href="javascript:void(0)">
+                        Siguiente
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a (click)="pase(final)" class="page-link" href="javascript:void(0)">
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

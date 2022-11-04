@@ -35,4 +35,10 @@ export {Regional} from './component/regional';
 export {UnidadesSued} from './component/unidades-sued';
 export {PrevObjArma} from './component/prev-obj-arma';
 export {PrevObjAuto} from './component/prev-obj-auto';
-export {PrevMedioArma} from './component/prev-medio-arma'
+export {PrevMedioArma} from './component/prev-medio-arma';
+export {Civil} from './component/civil';
+export {Persona} from './component/persona';
+export {Rol} from './component/rol';
+export {SexoUsuario} from './component/SexoUsuario';
+export {UsuarioSued} from './component/usuarioSued';
+export {Usuario_repo} from './component/usuario_repo';
