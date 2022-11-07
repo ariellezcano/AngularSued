@@ -182,7 +182,15 @@
       >
         <br />
         <section class="tab-panel">
+          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMA' || prev.delitoNavigation?.descripcion == 'LESIONES CULPOSAS POR ACC. TRANSITO LEVES'">
             <app-abm-snic [id]="this.id"></app-abm-snic>
+          </ng-container>
+          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO TENTATIVO' || prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO CONSUMADO'">
+            <app-abm-prev-homicidio [id]="this.id"></app-abm-prev-homicidio>
+          </ng-container>
+          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO CONSUMADO' || prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO TENTATIVA'">
+            <app-abm-prev-suicidio></app-abm-prev-suicidio>
+          </ng-container>
         </section>
       </div>
       <div

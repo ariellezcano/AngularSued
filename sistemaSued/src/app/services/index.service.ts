@@ -41,3 +41,8 @@ export {PersonaService} from './component/persona.service';
 export {RegistroUsuarioService} from './component/registro-usuario.service';
 //export {SexoService} from './component/sexoUsuario.service';
 export {UsuarioCivilService} from './component/usuario-civil.service';
+export {PrevObjMotoService} from './component/prev-obj-moto.service';
+export {ModeloMotoService} from './component/modelo-moto.service';
+export {MarcaMotoService} from './component/marca-moto.service';
+export {SnicSuicidioService} from './component/snic-suicidio.service';
+export {SnicHomicidioService} from './component/snic-homicidio.service';

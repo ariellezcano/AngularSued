@@ -112,6 +112,8 @@ import { FiUsuariosSuedComponent } from './filters/fi-usuarios-sued/fi-usuarios-
 import { FilUsuariosComponent } from "./filters/fil-usuarios/fil-usuarios.component";
 import { AbmConsultaUsuarioComponent } from "./frm-abm/abm-consulta-usuario/abm-consulta-usuario.component";
 import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-registro-civil.component";
+import { AbmPrevHomicidioComponent } from './frm-abm/abm-prev-homicidio/abm-prev-homicidio.component';
+import { AbmPrevSuicidioComponent } from './frm-abm/abm-prev-suicidio/abm-prev-suicidio.component';
 
 
 @NgModule({
@@ -223,6 +225,8 @@ import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-regi
       FilUsuariosComponent,
       AbmConsultaUsuarioComponent,
       AbmRegistroCivilComponent,
+      AbmPrevHomicidioComponent,
+      AbmPrevSuicidioComponent,
 
     ],
     exports: [],

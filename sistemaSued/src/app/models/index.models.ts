@@ -42,3 +42,8 @@ export {Rol} from './component/rol';
 export {SexoUsuario} from './component/SexoUsuario';
 export {UsuarioSued} from './component/usuarioSued';
 export {Usuario_repo} from './component/usuario_repo';
+export {PrevObjMoto} from './component/prev-obj-moto';
+export {ModeloMoto} from './component/modelo-moto';
+export {MarcaMoto} from './component/marca-moto';
+export {PrevSnicSuicidio} from './component/prev-snic-suicidio';
+export {PrevSnicHomicidio} from './component/prev-snic-homicidio'
