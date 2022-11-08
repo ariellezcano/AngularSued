@@ -114,6 +114,14 @@ import { AbmConsultaUsuarioComponent } from "./frm-abm/abm-consulta-usuario/abm-
 import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-registro-civil.component";
 import { AbmPrevHomicidioComponent } from './frm-abm/abm-prev-homicidio/abm-prev-homicidio.component';
 import { AbmPrevSuicidioComponent } from './frm-abm/abm-prev-suicidio/abm-prev-suicidio.component';
+import { FilMarcaMotoComponent } from './filters/fil-marca-moto/fil-marca-moto.component';
+import { FilModeloMotoComponent } from './filters/fil-modelo-moto/fil-modelo-moto.component';
+import { LstMarcaMotoComponent } from './lst/lst-marca-moto/lst-marca-moto.component';
+import { LstModeloMotoComponent } from './lst/lst-modelo-moto/lst-modelo-moto.component';
+import { AbmMarcaMotoComponent } from './frm-abm/abm-marca-moto/abm-marca-moto.component';
+import { AbmModeloMotoComponent } from './frm-abm/abm-modelo-moto/abm-modelo-moto.component';
+import { ComboMarcaMotoComponent } from './component/combo-marca-moto/combo-marca-moto.component';
+import { FilBuscadorModeloMotoComponent } from './component/fil-buscador-modelo-moto/fil-buscador-modelo-moto.component';
 
 
 @NgModule({
@@ -227,6 +235,14 @@ import { AbmPrevSuicidioComponent } from './frm-abm/abm-prev-suicidio/abm-prev-s
       AbmRegistroCivilComponent,
       AbmPrevHomicidioComponent,
       AbmPrevSuicidioComponent,
+      FilMarcaMotoComponent,
+      FilModeloMotoComponent,
+      LstMarcaMotoComponent,
+      LstModeloMotoComponent,
+      AbmMarcaMotoComponent,
+      AbmModeloMotoComponent,
+      ComboMarcaMotoComponent,
+      FilBuscadorModeloMotoComponent,
 
     ],
     exports: [],

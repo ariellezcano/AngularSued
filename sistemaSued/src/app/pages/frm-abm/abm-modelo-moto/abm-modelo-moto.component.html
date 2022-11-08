@@ -1,0 +1,42 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">
+    Panel ABM Modelo de motovehiculos
+  </h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+      <div class="col-md-6">
+        <app-combo-marca-moto
+          [dibujar]="item"
+          (emitir)="seleccion($event)"
+        ></app-combo-marca-moto>
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"
+          >Nombre del modelo:</label
+        >
+        <input
+          [(ngModel)]="item.nombre"
+          id="descripcion"
+          type="text"
+          class="form-control"
+          placeholder="Nombre"
+          formControlName="nombre"
+          [ngClass]="{ 'is-invalid': enviado && f['nombre'].errors }"
+        />
+        <div *ngIf="enviado && f['nombre'].errors" class="invalid-feedback">
+          <div *ngIf="f['nombre'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

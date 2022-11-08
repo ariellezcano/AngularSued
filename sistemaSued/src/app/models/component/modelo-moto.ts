@@ -3,5 +3,6 @@ export class ModeloMoto {
     nombre!: string;
     marca!: number;
 
-    marcaNavigation: any;
+    marcaMotoNavigation: any;
+    marcaSeleccionada!: string
 }

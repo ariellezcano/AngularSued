@@ -8,4 +8,6 @@ export class PrevObjMoto {
     dominio!: string;
 
     modeloMotoNavigation: any;
+
+    marcaModeloMoto: any;
 }

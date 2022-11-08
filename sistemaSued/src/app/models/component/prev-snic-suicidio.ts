@@ -2,7 +2,7 @@ export class PrevSnicSuicidio {
     id!: number;
     preventivo!: number;
     armaFuego: boolean;
-    armaBlanca: boolean;
+    armaBlElcontundente: boolean;
     sumersion: boolean;
     envenenamiento: boolean;
     ahorcamiento: boolean;
@@ -18,7 +18,7 @@ export class PrevSnicSuicidio {
 
     constructor(){
         this.armaFuego = false;
-        this.armaBlanca = false;
+        this.armaBlElcontundente = false;
         this.sumersion = false;
         this.envenenamiento = false;
         this.ahorcamiento = false;

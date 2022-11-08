@@ -249,6 +249,24 @@
                   </ng-container>
                   <ng-container
                     *ngIf="
+                      i.objetoNavigation?.descripcion == 'CUATRICICLO' ||
+                      i.objetoNavigation?.descripcion == 'MOTOCICLETA'"
+                  >
+                    <button
+                      type="button"
+                      title="Agregar detalle de la motocicleta"
+                      placement="top"
+                      show-delay="10"
+                      (click)="seleccionadoMoto(i.id)"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal3"
+                      class="colorMoto btn-circle"
+                    >
+                      <i class="fa fa-info" aria-hidden="true"></i>
+                    </button>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="
                       i.objetoNavigation?.descripcion == 'AUTO' ||
                       i.objetoNavigation?.descripcion == 'CAMIONETA' ||
                       i.objetoNavigation?.descripcion == 'CAMION' ||
@@ -555,3 +573,155 @@
       </div>
     </div>
   </div>
+
+   <!-- Modal Moto-->
+   <div
+   class="modal fade"
+   id="exampleModal3"
+   tabindex="-1"
+   aria-labelledby="exampleModalLabel"
+   aria-hidden="true"
+ >
+   <div class="modal-dialog modal-lg">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">
+           Detalle de la motocicleta:
+         </h5>
+         <button
+           type="button"
+           class="btn-close"
+           data-bs-dismiss="modal"
+           aria-label="Close"
+         ></button>
+       </div>
+       <div class="modal-body">
+         <div class="row">
+           <div class="col-md-4">
+             <app-fil-buscador-modelo-moto
+               (emmit)="doFoundModeloMoto($event)"
+             ></app-fil-buscador-modelo-moto>
+           </div>
+           <div class="col-md-4">
+             <label for="Nombre" class="col-sm-12 col-form-label">
+               Cilindrada:</label
+             >
+             <input
+               [(ngModel)]="itemMoto.cilindrada"
+               type="text"
+               class="form-control"
+               [ngModelOptions]="{ standalone: true }"
+             />
+           </div>
+           <div class="col-md-4">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Patente:</label
+            >
+            <input
+              [(ngModel)]="itemMoto.dominio"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-md-6">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Nro. Motor:</label
+            >
+            <input
+              [(ngModel)]="itemMoto.nroMotor"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="Nombre" class="col-sm-12 col-form-label">
+              Nro. Cuadro:</label
+            >
+            <input
+              [(ngModel)]="itemMoto.nroCuadro"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+         </div>
+         <br />
+         <div
+           *ngIf="
+             itemMoto.marcaModeloMoto != undefined && itemMoto.dominio != undefined"
+           class="row alert alert-info"
+           role="alert"
+         >
+           <div class="col-md-4">
+             <label for="" class="col-sm-12 col-form-label">
+               Modelo del vehículo:
+               <b>{{ itemMoto.marcaModeloMoto }}</b></label
+             >
+           </div>
+           <div class="col-md-4">
+             <label for="" class="col-sm-12 col-form-label">
+               Cilindrada: <b>{{ itemMoto?.cilindrada }}</b></label
+             >
+           </div>
+           <div class="col-md-4">
+            <label for="" class="col-sm-12 col-form-label">
+              Patente: <b>{{ itemMoto?.dominio }}</b></label
+            >
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-md-6">
+            <label for="" class="col-sm-12 col-form-label">
+              Número Motor: <b>{{ itemMoto?.nroMotor }}</b></label
+            >
+          </div>
+          <div class="col-md-6">
+            <label for="" class="col-sm-12 col-form-label">
+              Número Cuadro: <b>{{ itemMoto?.nroCuadro }}</b></label
+            >
+          </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <ng-container *ngIf="moto">
+           <ng-container
+             *ngIf="itemMoto.id > 0; then thenTemplate; else elseTemplate"
+           ></ng-container>
+           <ng-template #thenTemplate>
+             <button
+               type="button"
+               class="btn btn-warning"
+               (click)="actualizarMoto(itemMoto)"
+               data-bs-dismiss="modal"
+             >
+               Modificar datos
+             </button>
+           </ng-template>
+           <ng-template #elseTemplate>
+             <button
+               type="button"
+               class="btn btn-primary"
+               (click)="guardarMoto()"
+               data-bs-dismiss="modal"
+             >
+               Guardar
+             </button>
+           </ng-template>
+         </ng-container>
+         &nbsp;
+         <button
+           type="button"
+           class="btn btn-danger"
+           (click)="cancelarAuto()"
+           data-bs-dismiss="modal"
+         >
+           Cancelar
+         </button>
+       </div>
+     </div>
+   </div>
+ </div>

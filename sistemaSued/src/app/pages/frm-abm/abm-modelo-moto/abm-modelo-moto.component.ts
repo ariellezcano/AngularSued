@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PrevSnicHomicidio } from 'src/app/models/index.models';
-import { SnicHomicidioService } from 'src/app/services/index.service';
+import { MarcaMoto, ModeloMoto } from 'src/app/models/index.models';
+import { ModeloMotoService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-abm-prev-homicidio',
-  templateUrl: './abm-prev-homicidio.component.html',
-  styleUrls: ['./abm-prev-homicidio.component.scss']
+  selector: 'app-abm-modelo-moto',
+  templateUrl: './abm-modelo-moto.component.html',
+  styleUrls: ['./abm-modelo-moto.component.scss']
 })
-export class AbmPrevHomicidioComponent implements OnInit {
-
+export class AbmModeloMotoComponent implements OnInit {
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -19,22 +18,21 @@ export class AbmPrevHomicidioComponent implements OnInit {
   //variable para verificar si fue enviado los datos
   enviado = false;
 
-  item: PrevSnicHomicidio;
+  item!: ModeloMoto;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private wsdl: SnicHomicidioService,
+    private wsdl: ModeloMotoService,
     private formBuilder: FormBuilder
   ) {
-    this.item = new PrevSnicHomicidio();
+    this.item = new ModeloMoto();
   }
 
   ngOnInit(): void {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
-      //codigo: ['', Validators.required],
-      //descripcion: ['', Validators.required]
+      nombre: ['', Validators.required]
       });
 
     //captura el id que viene en el url
@@ -51,6 +49,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
+       // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
         }
@@ -59,23 +58,24 @@ export class AbmPrevHomicidioComponent implements OnInit {
   }
 
   doAction() {
-    //this.enviado = true;
-    //if (this.form.valid) {
-      if (this.id > 0 && this.item.preventivo > 0) {
+    this.enviado = true;
+    if (this.form.valid) {
+      if (this.id > 0) {
         this.actualizarDatos(this.item);
       } else {
+        //console.log("datos enviados", this.item)
         this.guardar();
       }
-    //}
+    }
   }
 
-  async actualizarDatos(obj: PrevSnicHomicidio) {
-    console.log("enviado modificar", this.item)
+  async actualizarDatos(obj: ModeloMoto) {
+    //console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-       this.findId();
+        this.back();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -90,7 +90,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
 
 
   async guardar() {
-    this.item.preventivo = this.id;
+    //console.log("items", this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
@@ -99,7 +99,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
       );
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.findId();
+        this.back();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -123,8 +123,15 @@ export class AbmPrevHomicidioComponent implements OnInit {
     }
   }
 
-  
-  back() {
-    this.router.navigate(['/lst-preventivo']);
+  seleccion(event: MarcaMoto) {
+    if (event != undefined) {
+      this.item.marca = event.id;
+      this.item.marcaSeleccionada = event.nombre;
+    }
   }
+
+  back() {
+    this.router.navigate(['/lst-modelosMoto']);
+  }
+
 }

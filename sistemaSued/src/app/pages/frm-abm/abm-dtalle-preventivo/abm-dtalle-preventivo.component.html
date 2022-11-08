@@ -189,7 +189,7 @@
             <app-abm-prev-homicidio [id]="this.id"></app-abm-prev-homicidio>
           </ng-container>
           <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO CONSUMADO' || prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO TENTATIVA'">
-            <app-abm-prev-suicidio></app-abm-prev-suicidio>
+            <app-abm-prev-suicidio [id]="this.id"></app-abm-prev-suicidio>
           </ng-container>
         </section>
       </div>

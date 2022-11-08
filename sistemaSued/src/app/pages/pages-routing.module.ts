@@ -17,8 +17,10 @@ import { AbmDtallePreventivoComponent } from "./frm-abm/abm-dtalle-preventivo/ab
 import { AbmEstudioComponent } from "./frm-abm/abm-estudio/abm-estudio.component";
 import { AbmLocalidadComponent } from "./frm-abm/abm-localidad/abm-localidad.component";
 import { AbmLugarComponent } from "./frm-abm/abm-lugar/abm-lugar.component";
+import { AbmMarcaMotoComponent } from "./frm-abm/abm-marca-moto/abm-marca-moto.component";
 import { AbmMedioComponent } from "./frm-abm/abm-medio/abm-medio.component";
 import { AbmModalidadComponent } from "./frm-abm/abm-modalidad/abm-modalidad.component";
+import { AbmModeloMotoComponent } from "./frm-abm/abm-modelo-moto/abm-modelo-moto.component";
 import { AbmModeloVehiculoComponent } from "./frm-abm/abm-modelo-vehiculo/abm-modelo-vehiculo.component";
 import { AbmNacionesComponent } from "./frm-abm/abm-naciones/abm-naciones.component";
 import { AbmObjetoComponent } from "./frm-abm/abm-objeto/abm-objeto.component";
@@ -49,8 +51,10 @@ import { LstDncpComponent } from "./lst/lst-dncp/lst-dncp.component";
 import { LstEstudioComponent } from "./lst/lst-estudio/lst-estudio.component";
 import { LstLocalidadComponent } from "./lst/lst-localidad/lst-localidad.component";
 import { LstLugarComponent } from "./lst/lst-lugar/lst-lugar.component";
+import { LstMarcaMotoComponent } from "./lst/lst-marca-moto/lst-marca-moto.component";
 import { LstMedioComponent } from "./lst/lst-medio/lst-medio.component";
 import { LstModalidadComponent } from "./lst/lst-modalidad/lst-modalidad.component";
+import { LstModeloMotoComponent } from "./lst/lst-modelo-moto/lst-modelo-moto.component";
 import { LstModeloVehiculoComponent } from "./lst/lst-modelo-vehiculo/lst-modelo-vehiculo.component";
 import { LstNacionesComponent } from "./lst/lst-naciones/lst-naciones.component";
 import { LstObjetoComponent } from "./lst/lst-objeto/lst-objeto.component";
@@ -448,6 +452,36 @@ const routes: Routes = [
               component: AbmArtContravencionComponent,
              //canActivate: [AuthGuard],
             },
+          ],
+        },
+        {
+          path: 'lst-marcasMoto',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmMarcaMotoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstMarcaMotoComponent,
+             //canActivate: [AuthGuard],
+            }
+          ],
+        },
+        {
+          path: 'lst-modelosMoto',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmModeloMotoComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstModeloMotoComponent,
+             //canActivate: [AuthGuard],
+            }
           ],
         },
         {

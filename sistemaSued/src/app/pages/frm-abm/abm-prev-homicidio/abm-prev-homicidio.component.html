@@ -1,217 +1,250 @@
 <div class="container">
-    <h3 class="alert alert-info text-center" role="alert">Panel S.N.I.C.</h3>
+  <h3 class="alert alert-info text-center" role="alert">Panel S.N.I.C.</h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <h4>
+      <b> <u> Homicidios Dolosos</u></b>
+    </h4>
+    <div class="form-group row">
+      <!-- alert alert-success -->
+      <legend><b>Tipo de lugar:</b></legend>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          1 - Via Pública:</label
+        >
+        <input
+          [(ngModel)]="item.viaPublica"
+          name="viaPublica"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          2 - Domicilio Particular:</label
+        >
+        <input
+          [(ngModel)]="item.domParticular"
+          name="domParticular"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          3 - Comercio:</label
+        >
+        <input
+          [(ngModel)]="item.comercio"
+          name="subUrbano"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          4 - Interior de rodados:</label
+        >
+        <input
+          [(ngModel)]="item.intRodados"
+          name="diurno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          5 - Carcel o Comisaría:</label
+        >
+        <input
+          [(ngModel)]="item.carcelComisaria"
+          name="intRodados"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          6 - Otro lugar (especificar):</label
+        >
+        <input
+          [(ngModel)]="item.otroLugar"
+          name="otroLugar"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Especificar lugar:</label
+        >
+        <input
+          [(ngModel)]="item.especifLugar"
+          name="otroLugar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
     <hr />
-    <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
-      <h4>
-        <b> <u> Homicidios Dolosos</u></b>
-      </h4>
-      <div class="form-group row">
-        <!-- alert alert-success -->
-        <legend><b>Tipo de lugar:</b></legend>
-        <div class="col-md-4">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 1 - Via Pública:</label>
-          <input
-            [(ngModel)]="item.viaPublica"
-            name="viaPublica"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-4">
-          <label for="Nombre" class="col-sm-12 col-form-label">
-            2 - Domicilio Particular:</label
-          >
-          <input
-            [(ngModel)]="item.domParticular"
-            name="domParticular"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-4">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 3 - Comercio:</label>
-          <input
-            [(ngModel)]="item.comercio"
-            name="subUrbano"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
+    <div class="form-group row">
+      <legend><b>Clase de Arma:</b></legend>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          1 - Arma de fuego:</label
+        >
+        <input
+          [(ngModel)]="item.armaFuego"
+          name="diurno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <div class="form-group row">
-        <div class="col-md-4">
-            <label for="Nombre" class="col-sm-12 col-form-label"> 4 - Interior de rodados:</label>
-          <input
-            [(ngModel)]="item.intRodados"
-            name="diurno"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-4">
-            <label for="Nombre" class="col-sm-12 col-form-label"> 5 - Carcel o Comisaría:</label>
-          <input
-            [(ngModel)]="item.intRodados"
-            name="intRodados"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-4">
-            <label for="Nombre" class="col-sm-12 col-form-label"> 6 - Otro lugar (especificar):</label>
-          <input
-            [(ngModel)]="item.otroLugar"
-            name="otroLugar"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          2 - Arma Blanca:</label
+        >
+        <input
+          [(ngModel)]="item.armaBlanca"
+          name="nocturno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <div class="row">
-        <div class="col-md-12">
-            <label for="Nombre" class="col-sm-12 col-form-label"> Especificar lugar:</label>
-          <input
-            [(ngModel)]="item.especifLugar"
-            name="otroLugar"
-            type="text"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          3 - Otra arma (cuál):</label
+        >
+        <input
+          [(ngModel)]="item.otraArma"
+          name="nocturno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <hr />
-      <div class="form-group row">
-        <legend><b>Clase de Arma:</b></legend>
-        <div class="col-md-3">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 1 - Arma de fuego:</label>
-          <input
-            [(ngModel)]="item.armaFuego"
-            name="diurno"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-3">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 2 - Arma Blanca:</label>
-          <input
-            [(ngModel)]="item.armaBlanca"
-            name="nocturno"
-            type="checkbox"
-            class="form-sm-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-3">
-            <label for="Nombre" class="col-sm-12 col-form-label"> 3 - Otra arma (cuál):</label>
-            <input
-              [(ngModel)]="item.otraArma"
-              name="nocturno"
-              type="checkbox"
-              class="form-sm-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
-          <div class="col-md-3">
-            <label for="Nombre" class="col-sm-12 col-form-label"> 4 - Sin armas:</label>
-            <input
-              [(ngModel)]="item.sinArma"
-              name="sinArma"
-              type="checkbox"
-              class="form-sm-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          4 - Sin armas:</label
+        >
+        <input
+          [(ngModel)]="item.sinArma"
+          name="sinArma"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <div class="row">
-        <div class="col-md-12">
-            <label for="Nombre" class="col-sm-12 col-form-label"> Especificar arma:</label>
-            <input
-              [(ngModel)]="item.especifArma"
-              name="especifArma"
-              type="text"
-              class="form-sm-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
-        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Especificar arma:</label
+        >
+        <input
+          [(ngModel)]="item.especifArma"
+          name="especifArma"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <hr />
-      <div class="form-group row">
-        <legend><b>Otro delito:</b></legend>
-        <div class="col-md-3">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 1 - Si - Robo:</label>
-          <input
-            [(ngModel)]="item.robo"
-            name="leves"
-            type="checkbox"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-3">
-          <label for="Nombre" class="col-sm-12 col-form-label"> 2 - Si - Violación:</label>
-          <input
-            [(ngModel)]="item.violacion"
-            name="graves"
-            type="checkbox"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-3">
-          <label for="Nombre" class="col-sm-12 col-form-label">
-            3 - Si - Otro delito:</label
-          >
-          <input
-            [(ngModel)]="item.otroDel"
-            name="otroDel"
-            type="checkbox"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-        </div>
-        <div class="col-md-3">
-            <label for="Nombre" class="col-sm-12 col-form-label">
-              4 - No fue en ocasión de otro delito:</label
-            >
-            <input
-              [(ngModel)]="item.noOtrodelito"
-              name="noOtrodelito"
-              type="checkbox"
-              class="form-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
-          </div>
+    </div>
+    <hr />
+    <div class="form-group row">
+      <legend><b>Otro delito:</b></legend>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          1 - Si - Robo:</label
+        >
+        <input
+          [(ngModel)]="item.robo"
+          name="leves"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <div class="row">
-        <div class="col-md-12">
-            <label for="Nombre" class="col-sm-12 col-form-label">
-                Especificar delito:</label
-              >
-              <input
-                [(ngModel)]="item.especifDel"
-                name="especifDel"
-                type="text"
-                class="form-control"
-                [ngModelOptions]="{ standalone: true }"
-              />
-        </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          2 - Si - Violación:</label
+        >
+        <input
+          [(ngModel)]="item.violacion"
+          name="graves"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
-      <hr />
-      <div class="row">
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          3 - Si - Otro delito:</label
+        >
+        <input
+          [(ngModel)]="item.otroDel"
+          name="otroDel"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          4 - No fue en ocasión de otro delito:</label
+        >
+        <input
+          [(ngModel)]="item.noOtrodelito"
+          name="noOtrodelito"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Especificar delito:</label
+        >
+        <input
+          [(ngModel)]="item.especifDel"
+          name="especifDel"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <ng-container
+        *ngIf="item.preventivo > 0; then thenTemplate; else elseTemplate"
+      ></ng-container>
+      <ng-template #thenTemplate>
+        <button class="btn btn-primary" type="submit">Editar registro</button>
+      </ng-template>
+      <ng-template #elseTemplate>
         <button class="btn btn-dark" type="submit">Guardar</button>
-        &nbsp;
-        <button class="btn btn-info" type="button" (click)="back()">
-          Cancelar
-        </button>
-      </div>
-    </form>
-  </div>
-  <br />
-  
+      </ng-template>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

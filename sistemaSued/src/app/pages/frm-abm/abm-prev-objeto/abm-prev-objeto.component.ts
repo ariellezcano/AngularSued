@@ -3,11 +3,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { ArmaMarca, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto } from 'src/app/models/index.models';
-import { ObjetoService, PreventivoService, PrevMedArmaService, PrevObjAutoService, PrevObjetoArmaService, PrevObjetoService } from 'src/app/services/index.service';
+import { ArmaMarca, ModeloMoto, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto, PrevObjMoto } from 'src/app/models/index.models';
+import { ObjetoService, PreventivoService, PrevMedArmaService, PrevObjAutoService, PrevObjetoArmaService, PrevObjetoService, PrevObjMotoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
+import { FilBuscadorModeloMotoComponent } from '../../component/fil-buscador-modelo-moto/fil-buscador-modelo-moto.component';
 import { FilModeloAutoComponent } from '../../component/fil-modelo-auto/fil-modelo-auto.component';
 
 @Component({
@@ -18,7 +19,7 @@ import { FilModeloAutoComponent } from '../../component/fil-modelo-auto/fil-mode
 export class AbmPrevObjetoComponent implements OnInit {
   @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
   @ViewChild(FilModeloAutoComponent, { static: false }) filAuto!: FilModeloAutoComponent;
-
+  @ViewChild(FilBuscadorModeloMotoComponent, { static: false }) filMoto!: FilBuscadorModeloMotoComponent;
 
   public id!: number;
   //valida el formulario
@@ -28,6 +29,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   enviado = false;
   arma: boolean;
   auto: boolean;
+  moto: boolean;
 
   busqueda;
   idSeleccion!: number;
@@ -39,6 +41,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   items: PrevObjeto[];
 
   itemAuto: PrevObjAuto;
+  itemMoto: PrevObjMoto;
 
   Oitems: Objeto[];
   Oitem: Objeto;
@@ -53,6 +56,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     private wsdl: PrevObjetoService,
     private wsdlObjArma: PrevObjetoArmaService,
     private wsdlObjAuto: PrevObjAutoService,
+    private wsdlObjMoto: PrevObjMotoService,
     private wsdlMedio: ObjetoService,
     private formBuilder: FormBuilder
   ) {
@@ -66,8 +70,10 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.mostrarBtnModif = false;
     this.arma = false;
     this.auto = false;
+    this.moto = false;
     this.itemArma = new PrevObjArma();
     this.itemAuto = new PrevObjAuto();
+    this.itemMoto = new PrevObjMoto();
   }
 
   ngOnInit(): void {
@@ -123,6 +129,33 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  
+
+  //selecciona la moto
+  seleccionadoMoto(id: number){
+    this.moto = true;
+    if(id != undefined){
+      this.findIdMoto(id);
+    }
+  }
+
+  //realiza la busqueda del automovil con el id del objeto
+  async findIdMoto(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdlObjMoto.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemMoto = result.dato;
+          this.itemMoto.marcaModeloMoto = result.dato.modeloMotoNavigation?.nombre;
+        }else{
+          this.itemMoto.prevObjeto = id
+        }
+      } catch (error) {}
+    }
+  }
+
+  //selecciona el vehiculo
   seleccionadoAuto(id: number){
     this.auto = true;
     if(id != undefined){
@@ -221,6 +254,27 @@ export class AbmPrevObjetoComponent implements OnInit {
         this.filAuto.busqueda = '';
         this.filAuto.item = new ModeloVehiculo();
         this.itemAuto = new PrevObjAuto();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato actualizado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
+      }
+    } catch (error) {}
+  }
+
+  //actualiza el objeto auto
+  async actualizarMoto(obj: PrevObjMoto) {
+    try {
+      let data = await this.wsdlObjMoto.doUpdate(this.itemMoto.id, obj).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.filMoto.busqueda = '';
+        this.filMoto.item = new ModeloMoto();
+        this.itemMoto = new PrevObjMoto();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -341,6 +395,37 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  //inserta el objeto auto creado a la base de datos
+  async guardarMoto() {
+    try {
+      let data = await this.wsdlObjMoto.doInsert(this.itemMoto).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.filMoto.busqueda='';
+        this.filMoto.item = new ModeloMoto();
+        this.itemMoto = new PrevObjMoto();
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Dato creado correctamente!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
+        Swal.fire({
+          icon: 'info',
+          title: 'Alerta...',
+          text: 'El dato ya existe en la base de datos',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Alerta...',
+        text: 'No se pudo insertar los datos',
+      });
+    }
+  }
 
   //trae los datos para modificar
   async traerDatos(id: number) {
@@ -404,6 +489,12 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.itemAuto.marcaModeloAuto = event.descripcion;
   }
 
+  //captura el modelo
+  doFoundModeloMoto(event: ModeloMoto){
+    this.itemMoto.modelo = event.id;
+    this.itemMoto.marcaModeloMoto = event.nombre;
+  }
+
   //cancela el modal arma
   cancelar(){
     this.itemArma = new PrevObjArma();
@@ -416,6 +507,13 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.itemAuto = new PrevObjAuto();
     this.filAuto.busqueda='';
     this.filAuto.item = new ModeloVehiculo();
+  }
+
+  //cancela el modal moto
+  cancelarMoto(){
+    this.itemMoto = new PrevObjMoto();
+    this.filMoto.busqueda='';
+    this.filMoto.item = new ModeloMoto();
   }
 
   //elimina la fila en memoria
