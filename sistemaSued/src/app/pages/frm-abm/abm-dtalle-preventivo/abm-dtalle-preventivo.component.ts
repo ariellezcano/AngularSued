@@ -7,13 +7,11 @@ import { PreventivoService } from 'src/app/services/index.service';
 @Component({
   selector: 'app-abm-dtalle-preventivo',
   templateUrl: './abm-dtalle-preventivo.component.html',
-  styleUrls: ['./abm-dtalle-preventivo.component.scss']
+  styleUrls: ['./abm-dtalle-preventivo.component.scss'],
 })
 export class AbmDtallePreventivoComponent implements OnInit {
-
   @Output()
   public id!: number;
-  
 
   prev: Preventivo;
 
@@ -49,13 +47,12 @@ export class AbmDtallePreventivoComponent implements OnInit {
     let valor = '';
     if (item) {
       valor = 'Si';
-    }else{
+    } else {
       valor = 'No';
     }
     return valor;
   }
 
-  
   back() {
     this.router.navigate(['/lst-preventivo']);
   }

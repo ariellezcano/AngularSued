@@ -147,6 +147,7 @@ export class AbmPrevObjetoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemMoto = result.dato;
+          console.log("moto",this.itemMoto)
           this.itemMoto.marcaModeloMoto = result.dato.modeloMotoNavigation?.nombre;
         }else{
           this.itemMoto.prevObjeto = id

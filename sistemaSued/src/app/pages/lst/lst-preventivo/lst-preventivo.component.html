@@ -138,12 +138,23 @@
       <div class="col-md-12">
         <CENTER>
           <button
+            (click)="vaciarDatos()"
+            type="button"
+            title="Cancelar selección"
+            placement="top"
+            show-delay="10"
+            class="btn btn-success btn-sm"
+          >
+          <i class="fa fa-ban" aria-hidden="true"></i> Cancelar selección
+          </button>
+          &nbsp;
+          <button
             (click)="linkear(this.id)"
             type="button"
             title="Modificar"
             placement="top"
             show-delay="10"
-            class="btn btn-info btn-sm"
+            class="btn btn-warning btn-sm"
           >
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Modificar
             Datos
@@ -160,6 +171,17 @@
             <i class="fa fa-trash"></i> Eliminar Registro
           </button>
           &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
+          &nbsp;
           <button
           (click)="linkearDetalle(this.id)"
           type="button"
@@ -173,7 +195,7 @@
             title="Ver detalle del preventivo"
             placement="top"
             show-delay="10"
-            class="btn btn-warning btn-sm"
+            class="btn btn-orange btn-sm"
             data-bs-toggle="modal"
             data-bs-target="#staticBackdrop"
           >

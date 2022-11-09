@@ -1,20 +1,33 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Estudio, Naciones, Ocupacion, Preventivo, PrevVictima, Sexo } from 'src/app/models/index.models';
-import { NacionesService, OcupacionService, PreventivoService, PrevVictimaService } from 'src/app/services/index.service';
+import {
+  Estudio,
+  Naciones,
+  Ocupacion,
+  Preventivo,
+  PrevVictima,
+  Provincia,
+  Sexo,
+} from 'src/app/models/index.models';
+import {
+  NacionesService,
+  OcupacionService,
+  PreventivoService,
+  PrevVictimaService,
+} from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-abm-pre-victima',
   templateUrl: './abm-pre-victima.component.html',
-  styleUrls: ['./abm-pre-victima.component.scss']
+  styleUrls: ['./abm-pre-victima.component.scss'],
 })
 export class AbmPreVictimaComponent implements OnInit {
-
+  
   public id!: number;
+
   //valida el formulario
   form!: FormGroup;
 
@@ -26,15 +39,15 @@ export class AbmPreVictimaComponent implements OnInit {
   busquedaOc;
 
   idSeleccion!: number;
- //vista previa del preventivo
+  //vista previa del preventivo
   prev: Preventivo;
   prevVic: PrevVictima;
 
-   //Se usa para la carga en tabla de prevVictima
+  //Se usa para la carga en tabla de prevVictima
   item: PrevVictima;
   items: PrevVictima[];
 
-   //ocupado en el filtro naciones
+  //ocupado en el filtro naciones
   Nitems: Naciones[];
   Nitem: Naciones;
 
@@ -71,28 +84,40 @@ export class AbmPreVictimaComponent implements OnInit {
       //codigo: ['', Validators.required],
       //descripcion: ['', Validators.required]
     });
-
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
     this.obtenerDetalle();
+    this.findId();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  // async findId() {
-  //   if (this.id > 0) {
-  //     try {
-  //       let data = await this.wsdlPreventivo.getFindId(this.id).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         this.prev = result.dato;
-  //         this.obtenerDetalle()
-  //       }
-  //     } catch (error) {}
-  //   }
-  // }
+  async findId() {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdlPreventivo.getFindId(this.id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.prev = result.dato;
+          if (
+            result.dato.delitoNavigation?.descripcion ==
+              'INSTIGACION AL SUICIDIO CONSUMADO' ||
+            result.dato.delitoNavigation?.descripcion ==
+              'INSTIGACION AL SUICIDIO TENTATIVA' ||
+            result.dato.delitoNavigation?.descripcion == 'HOMICIDIO CULPOSO' ||
+            result.dato.delitoNavigation?.descripcion ==
+              'HOMICIDIO DOLOSO CONSUMADO' ||
+            result.dato.delitoNavigation?.descripcion ==
+              'HOMICIDIO DOLOSO TENTATIVO'
+          ) {
+            this.item.fallecio = true;
+          }
+        }
+      } catch (error) {}
+    }
+  }
 
   async obtenerDetalle() {
     try {
@@ -123,8 +148,8 @@ export class AbmPreVictimaComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         //this.back();
-        this.idSeleccion=0;
-        this.mostrarBtnModif =false;
+        this.idSeleccion = 0;
+        this.mostrarBtnModif = false;
         this.busqueda = '';
         this.item = new PrevVictima();
         this.obtenerDetalle();
@@ -159,7 +184,7 @@ export class AbmPreVictimaComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.busqueda = '';
-        this.busquedaOc = '';    
+        this.busquedaOc = '';
         this.item = new PrevVictima();
         this.obtenerDetalle();
         // Swal.fire({
@@ -169,7 +194,7 @@ export class AbmPreVictimaComponent implements OnInit {
         //   showConfirmButton: false,
         //   timer: 1500,
         // });
-      } else if(result.code == 204) {
+      } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -185,24 +210,24 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
-//trae los datos para modificar
-async traerDatos(id: number) {
-  if (this.id > 0) {
-    try {
-      let data = await this.wsdl.getFindId(id).then();
-      const result = JSON.parse(JSON.stringify(data));
-      if (result.code == 200) {
-        this.item = result.dato;
-        this.idSeleccion = result.dato.id;
-        this.busqueda = result.dato.nacionNavigation.nacionalidad;
-        this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
-        this.mostrarBtnModif = true;
-      }
-    } catch (error) {}
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.item = result.dato;
+          this.idSeleccion = result.dato.id;
+          this.busqueda = result.dato.nacionNavigation.nacionalidad;
+          this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+          this.mostrarBtnModif = true;
+        }
+      } catch (error) {}
+    }
   }
-}
 
-//filtra y captura nacionalidad
+  //filtra y captura nacionalidad
   async filtrarNacionalidad() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -339,7 +364,13 @@ async traerDatos(id: number) {
       this.item.capturaEstudio = event.descripcion;
     }
   }
-  
+
+  //captura provincia
+  seleccionProvincia(event: Provincia) {
+    if (event != undefined) {
+      this.item.provincia = event.id;
+    }
+  }
 
   //cambia el valor del booleano para mostrar en la vista
   valor(item: any) {
@@ -347,7 +378,7 @@ async traerDatos(id: number) {
     let valor = '';
     if (item) {
       valor = 'Si';
-    }else{
+    } else {
       valor = 'No';
     }
     return valor;
@@ -356,5 +387,4 @@ async traerDatos(id: number) {
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
-
 }

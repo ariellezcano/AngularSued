@@ -231,15 +231,23 @@
     </div>
   </div>
   <div class="row">
-    <center>
-      <label for="Nombre" class="col-sm-12 col-form-label"> Detenido:</label>
-      <input
-        [(ngModel)]="item.detenido"
-        type="checkbox"
-        class="form-sm-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </center>
+    <div class="col-md-4">
+      <app-combo-provincia
+      [dibujar]="item"
+      (emitir)="seleccionProvincia($event)"
+      ></app-combo-provincia>
+    </div>
+    <div class="col-md-8">
+      <center>
+        <label for="Nombre" class="col-sm-12 col-form-label"> Detenido:</label>
+        <input
+          [(ngModel)]="item.detenido"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </center>
+    </div>
   </div>
   <br />
   <div class="row">

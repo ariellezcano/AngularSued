@@ -15,7 +15,7 @@ export class UsuarioSued {
   usuarioBaja: any;
   baja: boolean; /**baja de usuario del sistema bancaria por defecto false */
   activo: boolean; /**para que el usuario desactive temporalmente su usuario desde el repo */
-  unidadSistema!: UnidadSistema; /*id de unidad*/
+  sistema!: UnidadSistema; /*id de unidad*/
   cifrado: any; /*PARA INGRESAR DESDE EL REPO*/
   fechaVinculacion: any; /*fecha de control para el ingreso*/
   rol: any;

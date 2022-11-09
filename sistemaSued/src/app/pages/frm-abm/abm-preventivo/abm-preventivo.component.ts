@@ -330,6 +330,9 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   seleccionLocalidad(event: Localidad) {
+    this.item.localidadCoordenada = '';
+    this.item.cp = '';
+    this.item.pais = '';
     if (event != undefined) {
       this.item.localidad = event.id;
       this.item.localidadCoordenada = event.nombre;
@@ -339,6 +342,7 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async buscarCoordenadas() {
+    this.map = false;
     try {
       let data = await this.wsdlGeo
         .geolocalizacion(
@@ -352,6 +356,8 @@ export class AbmPreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log(result);
       if (result.results != undefined) {
+        this.item.latitud = '';
+        this.item.longitud = '';
         this.latitud = '';
         this.longitud = '';
         this.item.latitud = result.results[0].lat;
@@ -391,6 +397,7 @@ export class AbmPreventivoComponent implements OnInit {
     if(num == 1){
       this.manual = true;
       this.automatico = false;
+      this.map = false;
     }else if(num == 2){
       this.manual = false;
       this.automatico = true;

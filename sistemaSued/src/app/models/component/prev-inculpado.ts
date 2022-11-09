@@ -19,6 +19,7 @@ export class PrevInculpado {
     dirNro!: number;
     dirAdic!: string;
     localidad!: number;
+    provincia!: number;
     persClase!: number;
 
 
@@ -29,6 +30,7 @@ export class PrevInculpado {
     calleNavigation: any;
     ocupacionNavigation: any;
     localidadNavigation: any;
+    provinciaNavigation: any;
 
 
     capturaSexo: any;
@@ -38,6 +40,7 @@ export class PrevInculpado {
     capturaVinculo: any;
     capturaCalle: any;
     capturaLocalidad: any;
+    capturaProvincia: any;
     
     constructor(){
         this.detenido = false;

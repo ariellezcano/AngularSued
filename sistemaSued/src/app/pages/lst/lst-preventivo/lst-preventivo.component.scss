@@ -1,25 +1,30 @@
-#opt{
-    background-color: blue;
-    color: aliceblue;
+#opt {
+  background-color: blue;
+  color: aliceblue;
 }
 
-.modal-header{
-    background-color: blue;
-    color: white;
+.modal-header {
+  background-color: blue;
+  color: white;
 }
-.proccess{
-    background-color: antiquewhite !important;
-    text-transform: uppercase;
-    font-weight: bold;
+.proccess {
+  background-color: antiquewhite !important;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .logo-img {
-    height: 25px;
-    display: block;
-    left: 20px;
-    position: absolute;
-    top: 5px;
-    img {
-      width: 35px;
-    }
+  height: 25px;
+  display: block;
+  left: 20px;
+  position: absolute;
+  top: 5px;
+  img {
+    width: 35px;
   }
+}
+
+.btn-orange{
+    background-color: #FF4500;
+    color: whitesmoke;
+}

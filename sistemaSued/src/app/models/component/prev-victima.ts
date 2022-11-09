@@ -10,6 +10,7 @@ export class PrevVictima {
     apellido!: string;
     dni!: number;
     fallecio!: boolean;
+    provincia!: number;
 
     nacionNavigation: any;
     estudioNavigation: any;

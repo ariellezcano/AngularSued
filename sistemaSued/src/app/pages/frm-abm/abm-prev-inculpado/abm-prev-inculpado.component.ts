@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { Calle, Estudio, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Sexo } from 'src/app/models/index.models';
+import { Calle, Estudio, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
@@ -201,14 +201,19 @@ async traerDatos(id: number) {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.item = result.dato;
+        this.idSeleccion = result.dato.id;
         if(this.item.fechaDetencion != null){
           this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');
         }
-        this.idSeleccion = result.dato.id;
-        this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
-        this.busqueda = result.dato.nacionalidadNavigation.nacionalidad;
-        this.busquedaCalle = result.dato.calleNavigation.nombre;
-
+        if(result.dato.ocupacion > 0){
+          this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+        }
+        if(result.dato.nacionalidad > 0){
+          this.busqueda = result.dato.nacionalidadNavigation.nacionalidad;
+        }
+        if(result.dato.calle > 0){
+          this.busquedaCalle = result.dato.calleNavigation.nombre;
+        }
         this.mostrarBtnModif = true;
       }
     } catch (error) {}
@@ -396,6 +401,13 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.localidad = event.id;
       this.item.capturaLocalidad = event.nombre;
+    }
+  }
+  //captura el dato del combo
+  seleccionProvincia(event: Provincia) {
+    if (event != undefined) {
+      this.item.provincia = event.id;
+      this.item.capturaProvincia = event.nombre;
     }
   }
 
