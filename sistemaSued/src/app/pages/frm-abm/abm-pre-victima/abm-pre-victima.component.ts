@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   Estudio,
+  IdentidadGenero,
   Naciones,
   Ocupacion,
   Preventivo,
@@ -362,6 +363,12 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.estudios = event.id;
       this.item.capturaEstudio = event.descripcion;
+    }
+  }
+  //captura el dato del combo
+  seleccionIdentidad(event: IdentidadGenero) {
+    if (event != undefined) {
+      this.item.autoPercepcion = event.id;
     }
   }
 

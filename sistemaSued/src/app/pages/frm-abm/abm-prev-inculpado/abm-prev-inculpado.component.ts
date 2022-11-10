@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { Calle, Estudio, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
+import { Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
@@ -386,6 +386,13 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.estudios = event.id;
       this.item.capturaEstudio = event.descripcion;
+    }
+  }
+
+  //captura el dato del combo
+  seleccionIdentidad(event: IdentidadGenero) {
+    if (event != undefined) {
+      this.item.autoPercepcion = event.id;
     }
   }
 

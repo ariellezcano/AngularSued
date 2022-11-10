@@ -172,7 +172,6 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
-          <th>Id</th>
           <th>Código Objeto</th>
           <th>Descripción</th>
           <th>Secuestro</th>
@@ -187,7 +186,6 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.id }}</td>
             <td>
               {{ i.objetoNavigation.codTipo }} -
               {{ i.objetoNavigation.codSubTipo }}
@@ -531,8 +529,10 @@
         >
           <div class="col-md-6">
             <label for="" class="col-sm-12 col-form-label">
-              Modelo del vehículo:
-              <b>{{ itemAuto.marcaModeloAuto }}</b></label
+              Marca - Modelo:
+              <b
+                >{{ itemAuto.marcaAuto }} - {{ itemAuto.marcaModeloAuto }}</b
+              ></label
             >
           </div>
           <div class="col-md-6">
@@ -666,13 +666,15 @@
           class="row alert alert-info"
           role="alert"
         >
-          <div class="col-md-4">
+          <div class="col-md-5">
             <label for="" class="col-sm-12 col-form-label">
-              Modelo:
-              <b>{{ itemMoto.marcaModeloMoto }}</b></label
+              Marca - Modelo:
+              <b
+                >{{ itemMoto.marcaMoto }} - {{ itemMoto.marcaModeloMoto }}</b
+              ></label
             >
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="" class="col-sm-12 col-form-label">
               Cilindrada: <b>{{ itemMoto?.cilindrada }}</b></label
             >
@@ -683,7 +685,12 @@
             >
           </div>
         </div>
-        <div class="row alert alert-info">
+        <div
+          *ngIf="
+            itemMoto.nroMotor != undefined && itemMoto.nroCuadro != undefined
+          "
+          class="row alert alert-info"
+        >
           <div class="col-md-6">
             <label for="" class="col-sm-12 col-form-label">
               Número Motor: <b>{{ itemMoto?.nroMotor }}</b></label

@@ -10,4 +10,5 @@ export class PrevObjMoto {
     modeloMotoNavigation: any;
 
     marcaModeloMoto: any;
+    marcaMoto: any
 }

@@ -11,16 +11,19 @@ export class PrevVictima {
     dni!: number;
     fallecio!: boolean;
     provincia!: number;
+    autoPercepcion!: number;
 
     nacionNavigation: any;
     estudioNavigation: any;
     ocupacionNavigation: any;
     sexoNavigation: any;
+    identidadNavigation: any;
 
     capturaSexo: any;
     capturaNacionalidad: any;
     capturaEstudio: any;
     capturaOcupacion: any;
+    
     constructor(){
 
     }

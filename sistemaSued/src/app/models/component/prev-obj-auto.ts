@@ -8,5 +8,7 @@ export class PrevObjAuto {
     modeloNavigation: any;
 
     marcaModeloAuto!: string;
+    marcaAuto!: string;
+    
     constructor(){}
 }

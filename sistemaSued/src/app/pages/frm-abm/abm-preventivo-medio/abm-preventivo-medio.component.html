@@ -112,7 +112,6 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
-          <th>id</th>
           <th>Código Medio</th>
           <th>Descripción</th>
           <th>Secuestro</th>
@@ -126,7 +125,6 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.id }}</td>
             <td>
               {{ i.medioNavigation?.codMedio }} -
               {{ i.medioNavigation?.codTipo }}

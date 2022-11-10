@@ -52,13 +52,21 @@
     </div>
   </div>
   <div class="row">
-    <legend><u>General:</u></legend>
-    <div class="col-md-4">
-      <app-combo-sexo
-        [dibujar]="item"
-        (emitir)="seleccionSexo($event)"
-      ></app-combo-sexo>
+    <div class="col-md-6">
+        <app-combo-sexo
+          [dibujar]="item"
+          (emitir)="seleccionSexo($event)"
+        ></app-combo-sexo>
     </div>
+    <div class="col-md-6">
+        <app-combo-identidad-genero
+          [dibujar]="item"
+          (emitir)="seleccionIdentidad($event)"
+        ></app-combo-identidad-genero>
+    </div>
+  </div>
+  <div class="row">
+    <legend><u>General:</u></legend>
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
       <input
@@ -89,9 +97,7 @@
         (emitir)="seleccionEstudio($event)"
       ></app-combo-estudio>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
       <input
         (ngModelChange)="filtrarOcupacion()"
@@ -115,13 +121,15 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3">
+  </div>
+  <div class="row">
+    <div class="col-md-4">
       <app-combo-provincia
-      [dibujar]="item"
-      (emitir)="seleccionProvincia($event)"
+        [dibujar]="item"
+        (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-8">
       <center>
         <label for="Nombre" class="col-sm-12 col-form-label"> Falleció:</label>
         <input

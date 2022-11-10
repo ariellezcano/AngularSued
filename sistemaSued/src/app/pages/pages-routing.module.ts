@@ -15,6 +15,7 @@ import { AbmDepartamentoComponent } from "./frm-abm/abm-departamento/abm-departa
 import { AbmDncpComponent } from "./frm-abm/abm-dncp/abm-dncp.component";
 import { AbmDtallePreventivoComponent } from "./frm-abm/abm-dtalle-preventivo/abm-dtalle-preventivo.component";
 import { AbmEstudioComponent } from "./frm-abm/abm-estudio/abm-estudio.component";
+import { AbmIdentidadGeneroComponent } from "./frm-abm/abm-identidad-genero/abm-identidad-genero.component";
 import { AbmLocalidadComponent } from "./frm-abm/abm-localidad/abm-localidad.component";
 import { AbmLugarComponent } from "./frm-abm/abm-lugar/abm-lugar.component";
 import { AbmMarcaMotoComponent } from "./frm-abm/abm-marca-moto/abm-marca-moto.component";
@@ -49,6 +50,7 @@ import { LstDelitoComponent } from "./lst/lst-delito/lst-delito.component";
 import { LstDepartamentoComponent } from "./lst/lst-departamento/lst-departamento.component";
 import { LstDncpComponent } from "./lst/lst-dncp/lst-dncp.component";
 import { LstEstudioComponent } from "./lst/lst-estudio/lst-estudio.component";
+import { LstIdentidadGeneroComponent } from "./lst/lst-identidad-genero/lst-identidad-genero.component";
 import { LstLocalidadComponent } from "./lst/lst-localidad/lst-localidad.component";
 import { LstLugarComponent } from "./lst/lst-lugar/lst-lugar.component";
 import { LstMarcaMotoComponent } from "./lst/lst-marca-moto/lst-marca-moto.component";
@@ -480,6 +482,21 @@ const routes: Routes = [
             {
               path: '',
               component: LstModeloMotoComponent,
+             //canActivate: [AuthGuard],
+            }
+          ],
+        },
+        {
+          path: 'lst-identidadGenero',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmIdentidadGeneroComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstIdentidadGeneroComponent,
              //canActivate: [AuthGuard],
             }
           ],

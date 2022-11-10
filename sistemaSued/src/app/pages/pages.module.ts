@@ -122,6 +122,10 @@ import { AbmMarcaMotoComponent } from './frm-abm/abm-marca-moto/abm-marca-moto.c
 import { AbmModeloMotoComponent } from './frm-abm/abm-modelo-moto/abm-modelo-moto.component';
 import { ComboMarcaMotoComponent } from './component/combo-marca-moto/combo-marca-moto.component';
 import { FilBuscadorModeloMotoComponent } from './component/fil-buscador-modelo-moto/fil-buscador-modelo-moto.component';
+import { FilIdentidadGeneroComponent } from './filters/fil-identidad-genero/fil-identidad-genero.component';
+import { AbmIdentidadGeneroComponent } from './frm-abm/abm-identidad-genero/abm-identidad-genero.component';
+import { LstIdentidadGeneroComponent } from './lst/lst-identidad-genero/lst-identidad-genero.component';
+import { ComboIdentidadGeneroComponent } from './component/combo-identidad-genero/combo-identidad-genero.component';
 
 
 @NgModule({
@@ -243,6 +247,10 @@ import { FilBuscadorModeloMotoComponent } from './component/fil-buscador-modelo-
       AbmModeloMotoComponent,
       ComboMarcaMotoComponent,
       FilBuscadorModeloMotoComponent,
+      FilIdentidadGeneroComponent,
+      AbmIdentidadGeneroComponent,
+      LstIdentidadGeneroComponent,
+      ComboIdentidadGeneroComponent,
 
     ],
     exports: [],

@@ -101,6 +101,16 @@
       />
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <app-combo-identidad-genero
+        [dibujar]="item"
+        (emitir)="seleccionIdentidad($event)"
+      ></app-combo-identidad-genero>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
   <br />
   <div class="row">
     <legend><u>General:</u></legend>
@@ -221,7 +231,9 @@
       />
     </div>
     <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Dirección Adicional:</label>
+      <label for="Nombre" class="col-sm-12 col-form-label">
+        Dirección Adicional:</label
+      >
       <input
         [(ngModel)]="item.dirAdic"
         type="text"
@@ -233,8 +245,8 @@
   <div class="row">
     <div class="col-md-4">
       <app-combo-provincia
-      [dibujar]="item"
-      (emitir)="seleccionProvincia($event)"
+        [dibujar]="item"
+        (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
     <div class="col-md-8">
@@ -335,47 +347,51 @@
           <ng-template #mostrar>
             <!-- muestra el eliminar -->
             <ng-container
-                *ngIf="mostrarBtnModif && idSeleccion == i.id; then thenTemplate; else elseTemplate"
-              ></ng-container>
-              <ng-template #thenTemplate>
-                <td>
-                  <button
-                    type="button"
-                    title="Cancelar Modificación"
-                    placement="top"
-                    show-delay="10"
-                    (click)="cancelarModificacion()"
-                    class="btn btn-success btn-circle"
-                  >
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </ng-template>
-              <ng-template #elseTemplate>
-                <td>
-                  <button
-                    type="button"
-                    title="Modificar"
-                    placement="top"
-                    show-delay="10"
-                    (click)="traerDatos(i.id)"
-                    class="btn btn-warning btn-circle"
-                  >
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </button>
-                  &nbsp;
-                  <button
-                    type="button"
-                    title="Eliminar"
-                    placement="top"
-                    show-delay="10"
-                    (click)="preDelete(i)"
-                    class="btn btn-danger btn-circle"
-                  >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                </td>
-              </ng-template>
+              *ngIf="
+                mostrarBtnModif && idSeleccion == i.id;
+                then thenTemplate;
+                else elseTemplate
+              "
+            ></ng-container>
+            <ng-template #thenTemplate>
+              <td>
+                <button
+                  type="button"
+                  title="Cancelar Modificación"
+                  placement="top"
+                  show-delay="10"
+                  (click)="cancelarModificacion()"
+                  class="btn btn-success btn-circle"
+                >
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
+            <ng-template #elseTemplate>
+              <td>
+                <button
+                  type="button"
+                  title="Modificar"
+                  placement="top"
+                  show-delay="10"
+                  (click)="traerDatos(i.id)"
+                  class="btn btn-warning btn-circle"
+                >
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+                &nbsp;
+                <button
+                  type="button"
+                  title="Eliminar"
+                  placement="top"
+                  show-delay="10"
+                  (click)="preDelete(i)"
+                  class="btn btn-danger btn-circle"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </td>
+            </ng-template>
           </ng-template>
           <ng-template #noMostrar>
             <!-- saca de la lista -->

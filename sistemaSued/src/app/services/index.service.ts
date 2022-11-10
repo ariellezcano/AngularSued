@@ -46,3 +46,4 @@ export {ModeloMotoService} from './component/modelo-moto.service';
 export {MarcaMotoService} from './component/marca-moto.service';
 export {SnicSuicidioService} from './component/snic-suicidio.service';
 export {SnicHomicidioService} from './component/snic-homicidio.service';
+export {IdentidadGeneroService} from './component/identidad-genero.service';

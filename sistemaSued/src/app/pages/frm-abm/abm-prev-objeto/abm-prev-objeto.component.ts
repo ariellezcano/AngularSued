@@ -149,6 +149,7 @@ export class AbmPrevObjetoComponent implements OnInit {
           this.itemMoto = result.dato;
           console.log("moto",this.itemMoto)
           this.itemMoto.marcaModeloMoto = result.dato.modeloMotoNavigation?.nombre;
+          this.itemMoto.marcaMoto = result.dato.modeloMotoNavigation?.marcaMotoNavigation?.nombre;
         }else{
           this.itemMoto.prevObjeto = id
         }
@@ -172,7 +173,9 @@ export class AbmPrevObjetoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemAuto = result.dato;
+          console.log("detalles del auto",this.itemAuto)
           this.itemAuto.marcaModeloAuto = result.dato.modeloNavigation?.descripcion;
+          this.itemAuto.marcaAuto = result.dato.modeloNavigation?.VehiculoMarcaNavigation?.descripcion;
         }else{
           this.itemAuto.prevObjeto = id
         }
