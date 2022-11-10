@@ -145,7 +145,7 @@ export class AbmPreVictimaComponent implements OnInit {
 
   async actualizarDatos(obj: PrevVictima) {
     try {
-      let data = await this.wsdl.doUpdate(this.id, obj).then();
+      let data = await this.wsdl.doUpdate(obj.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         //this.back();
