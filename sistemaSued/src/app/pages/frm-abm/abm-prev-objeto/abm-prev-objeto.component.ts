@@ -416,8 +416,8 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.filAuto.busqueda='';
         this.filAuto.item = new ModeloVehiculo();
-        this.itemAuto = new PrevObjAuto();
         this.filterAuto();
+        this.itemAuto = new PrevObjAuto();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -749,7 +749,6 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   async deleteAuto() {
     try {
-      
       let res = await this.wsdlObjAuto.doDelete(this.itemAuto.id).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.code == 200) {
