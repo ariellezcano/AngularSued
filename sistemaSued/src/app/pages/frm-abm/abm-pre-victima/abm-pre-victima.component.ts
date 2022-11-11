@@ -368,7 +368,7 @@ export class AbmPreVictimaComponent implements OnInit {
   //captura el dato del combo
   seleccionIdentidad(event: IdentidadGenero) {
     if (event != undefined) {
-      this.item.autoPercepcion = event.id;
+      this.item.genero = event.id;
     }
   }
 

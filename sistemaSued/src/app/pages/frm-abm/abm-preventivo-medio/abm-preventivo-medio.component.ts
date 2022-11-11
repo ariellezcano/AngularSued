@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -147,7 +148,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
         if (result.code == 200) {
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
-          this.busqueda = result.dato.medioNavigation.descripcion;
+          this.busqueda = result.dato.medioNavigation?.descripcion;
+          if(this.item.medioNavigation.descripcion == 'GANADO MAYOR Y MENOR'){
+            this.item.capturaDescripcion = this.item.medioNavigation?.descripcion;
+          }
+          
           if (this.item.fecha != undefined) {
             this.item.fecha = moment(this.item.fecha).format('YYYY-MM-DD');
           }
@@ -305,9 +310,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
 
-      if (this.item.capturaDescripcion == 'REVOLVER') {
-        this.mostrar = true;
-      }
     }
   }
 

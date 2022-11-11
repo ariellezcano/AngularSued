@@ -28,6 +28,20 @@ export class PrevObjAutoService {
       });
   }
 
+  getIdObj(id:any){
+    this.other_header = this.other_header;
+    return this.http
+      .get(this.api +"/obtenerdata/"+ id, { headers: this.other_header })
+      .toPromise()
+      .catch((err) => {
+        return {
+          code: 500,
+          data: err.message,
+          msg: 'Error en el servicio',
+        };
+      });
+  }
+
   getList(page: any, cantidad: any) {
     this.other_header = this.other_header;
     return this.http

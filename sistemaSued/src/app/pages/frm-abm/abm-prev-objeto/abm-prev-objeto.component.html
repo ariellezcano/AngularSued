@@ -263,7 +263,7 @@
                     title="Agregar detalle de la motocicleta"
                     placement="top"
                     show-delay="10"
-                    (click)="seleccionadoMoto(i.id)"
+                    (click)="seleccionadoMoto(i)"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal3"
                     class="colorMoto btn-circle"
@@ -288,7 +288,7 @@
                     title="Agregar detalle del automóvil"
                     placement="top"
                     show-delay="10"
-                    (click)="seleccionadoAuto(i.id)"
+                    (click)="seleccionadoAuto(i)"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal2"
                     class="colorAuto btn-circle"
@@ -351,14 +351,6 @@
   </div>
   <hr />
   <div class="row">
-    <!-- <button
-      class="btn btn-dark"
-      type="button"
-      (click)="agregarDato()"
-    >
-      Guardar
-    </button> -->
-
     <button class="btn btn-info" type="button" (click)="back()">
       Cancelar
     </button>
@@ -519,31 +511,158 @@
           </div>
         </div>
         <br />
-        <div
-          *ngIf="
-            itemAuto.marcaModeloAuto != undefined ||
-            itemAuto.patente != undefined
-          "
-          class="row alert alert-info"
-          role="alert"
-        >
-          <div class="col-md-6">
-            <label for="" class="col-sm-12 col-form-label">
-              Marca - Modelo:
-              <b
-                >{{ itemAuto.marcaAuto }} - {{ itemAuto.marcaModeloAuto }}</b
-              ></label
-            >
+        <ng-container *ngIf="cantidadSecuestrada == 1">
+          <div
+            *ngIf="
+              itemAuto.marcaModeloAuto != undefined ||
+              itemAuto.patente != undefined
+            "
+            class="row alert alert-info"
+            role="alert"
+          >
+            <div class="col-md-6">
+              <label for="" class="col-sm-12 col-form-label">
+                Marca - Modelo:
+                <b
+                  >{{ itemAuto.marcaAuto }} - {{ itemAuto.marcaModeloAuto }}</b
+                ></label
+              >
+            </div>
+            <div class="col-md-6">
+              <label for="" class="col-sm-12 col-form-label">
+                Dominio: <b>{{ itemAuto?.patente }}</b></label
+              >
+            </div>
           </div>
-          <div class="col-md-6">
-            <label for="" class="col-sm-12 col-form-label">
-              Dominio: <b>{{ itemAuto?.patente }}</b></label
-            >
+        </ng-container>
+        <ng-container *ngIf="cantidadSecuestrada > 1">
+          <div class="row">
+            <ng-container *ngIf="auto">
+              <ng-container
+                *ngIf="
+                  itemAuto.id > 0 && idSeleccionAuto;
+                  then thenTemplate;
+                  else elseTemplate
+                "
+              ></ng-container>
+              <ng-template #thenTemplate>
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="actualizarAuto(itemAuto)"
+                >
+                  Modificar datos
+                </button>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="guardarAuto()"
+                >
+                  Guardar
+                </button>
+              </ng-template>
+            </ng-container>
           </div>
-        </div>
+          <br />
+          <div class="row">
+            <table class="table table-striped table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Acción</th>
+                  <th scope="col">Marca - Modelo</th>
+                  <th scope="col">Dominio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemsAuto">
+                  <th scope="row">
+                    <ng-container
+                      *ngIf="item.id > 0; then mostrar"
+                    ></ng-container>
+                    <ng-template #mostrar>
+                      <!-- muestra el eliminar -->
+                      <ng-container
+                        *ngIf="
+                          mostrarBtnModifAuto && idSeleccionAuto == item.id;
+                          then thenTemplate;
+                          else elseTemplate
+                        "
+                      ></ng-container>
+                      <ng-template #thenTemplate>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Cancelar Modificación"
+                              placement="top"
+                              show-delay="10"
+                              (click)="cancelarModificacionAuto()"
+                              class="btn btn-success btn-circle"
+                            >
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
+                      </ng-template>
+                      <ng-template #elseTemplate>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Modificar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="traerDatosAuto(item.id)"
+                              class="btn btn-warning btn-circle"
+                            >
+                              <i
+                                class="fa fa-pencil-square-o"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                            &nbsp;
+                            <button
+                              type="button"
+                              title="Eliminar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="preDeleteAuto(item)"
+                              class="btn btn-danger btn-circle"
+                            >
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
+                      </ng-template>
+                    </ng-template>
+                  </th>
+                  <td>
+                    {{
+                      item.modeloNavigation?.VehiculoMarcaNavigation
+                        ?.descripcion
+                    }}
+                    - {{ item.modeloNavigation?.descripcion }}
+                  </td>
+                  <td>{{ item.patente }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div
+            *ngIf="itemsAuto.length === 0"
+            class="alert alert-primary alert-dismissible fade show"
+            role="alert"
+          >
+            <center>
+              <strong>No hay datos</strong>
+            </center>
+          </div>
+        </ng-container>
       </div>
       <div class="modal-footer">
-        <ng-container *ngIf="auto">
+        <ng-container *ngIf="auto && cantidadSecuestrada == 1">
           <ng-container
             *ngIf="itemAuto.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
@@ -590,7 +709,7 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
@@ -658,53 +777,179 @@
           </div>
         </div>
         <br />
-        <div
-          *ngIf="
-            itemMoto.marcaModeloMoto != undefined &&
-            itemMoto.dominio != undefined
-          "
-          class="row alert alert-info"
-          role="alert"
-        >
-          <div class="col-md-5">
-            <label for="" class="col-sm-12 col-form-label">
-              Marca - Modelo:
-              <b
-                >{{ itemMoto.marcaMoto }} - {{ itemMoto.marcaModeloMoto }}</b
-              ></label
-            >
+        <ng-container *ngIf="cantidadSecuestrada == 1">
+          <div
+            *ngIf="
+              itemMoto.marcaModeloMoto != undefined &&
+              itemMoto.dominio != undefined
+            "
+            class="row alert alert-info"
+            role="alert"
+          >
+            <div class="col-md-5">
+              <label for="" class="col-sm-12 col-form-label">
+                Marca - Modelo:
+                <b
+                  >{{ itemMoto.marcaMoto }} - {{ itemMoto.marcaModeloMoto }}</b
+                ></label
+              >
+            </div>
+            <div class="col-md-3">
+              <label for="" class="col-sm-12 col-form-label">
+                Cilindrada: <b>{{ itemMoto?.cilindrada }}</b></label
+              >
+            </div>
+            <div class="col-md-4">
+              <label for="" class="col-sm-12 col-form-label">
+                Patente: <b>{{ itemMoto?.dominio }}</b></label
+              >
+            </div>
           </div>
-          <div class="col-md-3">
-            <label for="" class="col-sm-12 col-form-label">
-              Cilindrada: <b>{{ itemMoto?.cilindrada }}</b></label
-            >
+          <div
+            *ngIf="
+              itemMoto.nroMotor != undefined && itemMoto.nroCuadro != undefined
+            "
+            class="row alert alert-info"
+          >
+            <div class="col-md-6">
+              <label for="" class="col-sm-12 col-form-label">
+                Número Motor: <b>{{ itemMoto?.nroMotor }}</b></label
+              >
+            </div>
+            <div class="col-md-6">
+              <label for="" class="col-sm-12 col-form-label">
+                Número Cuadro: <b>{{ itemMoto?.nroCuadro }}</b></label
+              >
+            </div>
           </div>
-          <div class="col-md-4">
-            <label for="" class="col-sm-12 col-form-label">
-              Patente: <b>{{ itemMoto?.dominio }}</b></label
-            >
+        </ng-container>
+        <ng-container *ngIf="cantidadSecuestrada > 1">
+          <div class="row">
+            <ng-container *ngIf="moto">
+              <ng-container
+                *ngIf="
+                  itemMoto.id > 0 && idSeleccionMoto;
+                  then thenTemplate;
+                  else elseTemplate
+                "
+              ></ng-container>
+              <ng-template #thenTemplate>
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="actualizarMoto(itemMoto)"
+                >
+                  Modificar datos
+                </button>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="guardarMoto()"
+                >
+                  Guardar
+                </button>
+              </ng-template>
+            </ng-container>
           </div>
-        </div>
-        <div
-          *ngIf="
-            itemMoto.nroMotor != undefined && itemMoto.nroCuadro != undefined
-          "
-          class="row alert alert-info"
-        >
-          <div class="col-md-6">
-            <label for="" class="col-sm-12 col-form-label">
-              Número Motor: <b>{{ itemMoto?.nroMotor }}</b></label
-            >
+          <br />
+          <div class="row">
+            <table class="table table-striped table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Acción</th>
+                  <th scope="col">Marca - Modelo</th>
+                  <th scope="col">Cilindrada</th>
+                  <th scope="col">Patente</th>
+                  <th scope="col">Nro. Motor</th>
+                  <th scope="col">Nro. Cuadro</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemsMoto">
+                  <th scope="row">
+                    <ng-container
+                      *ngIf="item.id > 0; then mostrar"
+                    ></ng-container>
+                    <ng-template #mostrar>
+                      <!-- muestra el eliminar -->
+                      <ng-container
+                        *ngIf="
+                          mostrarBtnModifMoto && idSeleccionMoto == item.id;
+                          then thenTemplate;
+                          else elseTemplate
+                        "
+                      ></ng-container>
+                      <ng-template #thenTemplate>
+                        <td>
+                          <button
+                            type="button"
+                            title="Cancelar Modificación"
+                            placement="top"
+                            show-delay="10"
+                            (click)="cancelarModificacionMoto()"
+                            class="btn btn-success btn-circle"
+                          >
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                      </ng-template>
+                      <ng-template #elseTemplate>
+                        <td>
+                          <button
+                            type="button"
+                            title="Modificar"
+                            placement="top"
+                            show-delay="10"
+                            (click)="traerDatosMoto(item.id)"
+                            class="btn btn-warning btn-circle"
+                          >
+                            <i
+                              class="fa fa-pencil-square-o"
+                              aria-hidden="true"
+                            ></i>
+                          </button>
+                          &nbsp;
+                          <button
+                            type="button"
+                            title="Eliminar"
+                            placement="top"
+                            show-delay="10"
+                            (click)="preDeleteMoto(item)"
+                            class="btn btn-danger btn-circle"
+                          >
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                        </td>
+                      </ng-template>
+                    </ng-template>
+                  </th>
+                  <td>
+                    {{ item.modeloMotoNavigation?.marcaMotoNavigation?.nombre }}
+                    - {{ item.modeloMotoNavigation?.nombre }}
+                  </td>
+                  <td>{{ item.cilindrada }}</td>
+                  <td>{{ item.dominio }}</td>
+                  <td>{{ item.nroMotor }}</td>
+                  <td>{{ item.nroCuadro }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="col-md-6">
-            <label for="" class="col-sm-12 col-form-label">
-              Número Cuadro: <b>{{ itemMoto?.nroCuadro }}</b></label
-            >
+          <div
+            *ngIf="itemsMoto.length === 0"
+            class="alert alert-primary alert-dismissible fade show"
+            role="alert"
+          >
+            <center>
+              <strong>No hay datos</strong>
+            </center>
           </div>
-        </div>
+        </ng-container>
       </div>
       <div class="modal-footer">
-        <ng-container *ngIf="moto">
+        <ng-container *ngIf="moto && cantidadSecuestrada == 1">
           <ng-container
             *ngIf="itemMoto.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
@@ -733,7 +978,7 @@
         <button
           type="button"
           class="btn btn-danger"
-          (click)="cancelarAuto()"
+          (click)="cancelarMoto()"
           data-bs-dismiss="modal"
         >
           Cancelar

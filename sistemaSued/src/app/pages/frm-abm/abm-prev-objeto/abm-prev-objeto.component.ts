@@ -3,13 +3,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { ArmaMarca, ModeloMoto, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto, PrevObjMoto } from 'src/app/models/index.models';
+import { ArmaMarca, MarcaMoto, ModeloMoto, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto, PrevObjMoto } from 'src/app/models/index.models';
 import { ObjetoService, PreventivoService, PrevMedArmaService, PrevObjAutoService, PrevObjetoArmaService, PrevObjetoService, PrevObjMotoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
 import { FilBuscadorModeloMotoComponent } from '../../component/fil-buscador-modelo-moto/fil-buscador-modelo-moto.component';
 import { FilModeloAutoComponent } from '../../component/fil-modelo-auto/fil-modelo-auto.component';
+import { FilArmaMarcaComponent } from '../../filters/fil-arma-marca/fil-arma-marca.component';
 
 @Component({
   selector: 'app-abm-prev-objeto',
@@ -33,6 +34,9 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   busqueda;
   idSeleccion!: number;
+  idSeleccionMoto!: number;
+  idSeleccionAuto!: number;
+  idSeleccionArma!: number;
   
   prev: Preventivo;
   prevObj: PrevObjeto;
@@ -40,16 +44,22 @@ export class AbmPrevObjetoComponent implements OnInit {
   item: PrevObjeto;
   items: PrevObjeto[];
 
+  itemArma: PrevObjArma;
+  itemsArma: PrevObjArma[];
   itemAuto: PrevObjAuto;
+  itemsAuto: PrevObjAuto[];
   itemMoto: PrevObjMoto;
+  itemsMoto: PrevObjMoto[];
 
   Oitems: Objeto[];
   Oitem: Objeto;
 
-  itemArma: PrevObjArma;
-
   mostrarBtnModif: Boolean;
+  mostrarBtnModifMoto: Boolean;
+  mostrarBtnModifAuto: Boolean;
+  mostrarBtnModifArma: Boolean;
 
+  cantidadSecuestrada: number;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -68,12 +78,19 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.Oitem = new Objeto();
     this.Oitems = [];
     this.mostrarBtnModif = false;
+    this.mostrarBtnModifMoto = false;
+    this.mostrarBtnModifAuto = false;
+    this.mostrarBtnModifArma = false;
     this.arma = false;
     this.auto = false;
     this.moto = false;
     this.itemArma = new PrevObjArma();
+    this.itemsArma = [];
     this.itemAuto = new PrevObjAuto();
+    this.itemsAuto = [];
     this.itemMoto = new PrevObjMoto();
+    this.itemsMoto = [];
+    this.cantidadSecuestrada = 0;
   }
 
   ngOnInit(): void {
@@ -129,17 +146,34 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
-  
-
   //selecciona la moto
-  seleccionadoMoto(id: number){
+  seleccionadoMoto(item: PrevObjeto){
     this.moto = true;
-    if(id != undefined){
-      this.findIdMoto(id);
+    this.itemMoto.prevObjeto = item.id;
+    this.cantidadSecuestrada = item.cantSecuestro;
+    if(this.cantidadSecuestrada > 1){
+      this.filterMoto();
+    }else if(this.cantidadSecuestrada == 1){
+      this.findIdMoto(item.id);
     }
   }
 
-  //realiza la busqueda del automovil con el id del objeto
+  async filterMoto(){
+    if(this.itemMoto.prevObjeto > 0 && this.itemMoto.prevObjeto != undefined){
+      try {
+        let data = await this.wsdlObjMoto.doFilter(this.itemMoto.prevObjeto).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemsMoto = result.data;
+        }
+      } catch (error) {
+        Swal.fire("Error al obtener los datos," + error);
+      }
+    }
+
+  }
+
+  //realiza la busqueda del moto con el id del objeto
   async findIdMoto(id: number) {
     if (id > 0) {
       try {
@@ -150,21 +184,45 @@ export class AbmPrevObjetoComponent implements OnInit {
           console.log("moto",this.itemMoto)
           this.itemMoto.marcaModeloMoto = result.dato.modeloMotoNavigation?.nombre;
           this.itemMoto.marcaMoto = result.dato.modeloMotoNavigation?.marcaMotoNavigation?.nombre;
-        }else{
-          this.itemMoto.prevObjeto = id
-        }
+        }// else{
+        //   this.itemMoto.prevObjeto = id
+        // }
       } catch (error) {}
     }
   }
 
   //selecciona el vehiculo
-  seleccionadoAuto(id: number){
+  // seleccionadoAuto(id: number){
+  //   this.auto = true;
+  //   if(id != undefined){
+  //     this.findIdAuto(id);
+  //   }
+  // }
+
+  seleccionadoAuto(item: PrevObjeto){
     this.auto = true;
-    if(id != undefined){
-      this.findIdAuto(id);
+    this.itemAuto.prevObjeto = item.id;
+    this.cantidadSecuestrada = item.cantSecuestro;
+    if(this.cantidadSecuestrada > 1){
+      this.filterAuto();
+    }else if(this.cantidadSecuestrada == 1){
+      this.findIdAuto(item.id);
     }
   }
 
+  async filterAuto(){
+    if(this.itemAuto.prevObjeto > 0 && this.itemAuto.prevObjeto != undefined){
+      try {
+        let data = await this.wsdlObjAuto.doFilter(this.itemAuto.prevObjeto).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemsAuto = result.data;
+        }
+      } catch (error) {
+        Swal.fire("Error al obtener los datos," + error);
+      }
+    }
+  }
   //realiza la busqueda del automovil con el id del objeto
   async findIdAuto(id: number) {
     if (id > 0) {
@@ -176,9 +234,9 @@ export class AbmPrevObjetoComponent implements OnInit {
           console.log("detalles del auto",this.itemAuto)
           this.itemAuto.marcaModeloAuto = result.dato.modeloNavigation?.descripcion;
           this.itemAuto.marcaAuto = result.dato.modeloNavigation?.VehiculoMarcaNavigation?.descripcion;
-        }else{
-          this.itemAuto.prevObjeto = id
-        }
+         } //else{
+        //   this.itemAuto.prevObjeto = id
+        // }
       } catch (error) {}
     }
   }
@@ -195,16 +253,6 @@ export class AbmPrevObjetoComponent implements OnInit {
     } catch (error) {}
   }
 
-  // doAction() {
-  //   this.enviado = true;
-  //   if (this.form.valid) {
-  //     if (this.id > 0) {
-  //       this.actualizarDatos(this.item);
-  //     } else {
-  //       this.guardar();
-  //     }
-  //   }
-  // }
 
   async actualizarDatos(obj: PrevObjeto) {
     try {
@@ -257,6 +305,9 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.filAuto.busqueda = '';
         this.filAuto.item = new ModeloVehiculo();
+        this.idSeleccionMoto = 0;
+        this.mostrarBtnModifAuto = false
+        this.filterAuto();
         this.itemAuto = new PrevObjAuto();
         Swal.fire({
           position: 'top-end',
@@ -278,6 +329,9 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.filMoto.busqueda = '';
         this.filMoto.item = new ModeloMoto();
+        this.idSeleccionMoto = 0;
+        this.mostrarBtnModifMoto = false
+        this.filterMoto();
         this.itemMoto = new PrevObjMoto();
         Swal.fire({
           position: 'top-end',
@@ -290,19 +344,6 @@ export class AbmPrevObjetoComponent implements OnInit {
       }
     } catch (error) {}
   }
-
-  //recorria el array cargado
-  // async agregarDato() {
-  //   for (let index = 0; index < this.items.length; index++) {
-  //     this.prevObj = new PrevObjeto();
-  //     this.prevObj = this.items[index];
-  //     if (this.prevObj.id == undefined) {
-  //       this.item = new PrevObjeto();
-  //       this.item = this.prevObj;
-  //       this.guardar();
-  //     }
-  //   }
-  // }
 
   async guardar() {
     this.item.preventivo = this.id;
@@ -376,6 +417,7 @@ export class AbmPrevObjetoComponent implements OnInit {
         this.filAuto.busqueda='';
         this.filAuto.item = new ModeloVehiculo();
         this.itemAuto = new PrevObjAuto();
+        this.filterAuto();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -407,14 +449,8 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.filMoto.busqueda='';
         this.filMoto.item = new ModeloMoto();
+        this.filterMoto();
         this.itemMoto = new PrevObjMoto();
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Dato creado correctamente!',
-          showConfirmButton: false,
-          timer: 1500,
-        });
       } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
@@ -450,6 +486,37 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  //trae los datos para modificar de la moto
+  async traerDatosMoto(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdlObjMoto.getIdObj(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemMoto = result.dato;
+          this.idSeleccionMoto = result.dato.id;
+         // this.busqueda = result.dato.objetoNavigation.descripcion;
+          this.mostrarBtnModifMoto = true;
+        }
+      } catch (error) {}
+    }
+  }
+  //trae los datos para modificar el auto
+  async traerDatosAuto(id: number) {
+    if (id > 0) {
+      try {
+        let data = await this.wsdlObjAuto.getIdObj(id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemAuto = result.dato;
+          this.idSeleccionAuto = result.dato.id;
+         // this.busqueda = result.dato.objetoNavigation.descripcion;
+          this.mostrarBtnModifAuto = true;
+        }
+      } catch (error) {}
+    }
+  }
+
   async filtrarObjeto() {
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
@@ -475,11 +542,11 @@ export class AbmPrevObjetoComponent implements OnInit {
   }
 
   //agrega fila en memoria
-  addRow() {
-    this.busqueda = '';
-    this.items.unshift(this.item);
-    this.item = new PrevObjeto();
-  }
+  // addRow() {
+  //   this.busqueda = '';
+  //   this.items.unshift(this.item);
+  //   this.item = new PrevObjeto();
+  // }
 
   //captura el arma
   doFound(event: ArmaMarca) {
@@ -508,6 +575,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //cancela el modal auto
   cancelarAuto(){
+    this.cantidadSecuestrada = 0;
     this.itemAuto = new PrevObjAuto();
     this.filAuto.busqueda='';
     this.filAuto.item = new ModeloVehiculo();
@@ -515,6 +583,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //cancela el modal moto
   cancelarMoto(){
+    this.cantidadSecuestrada = 0;
     this.itemMoto = new PrevObjMoto();
     this.filMoto.busqueda='';
     this.filMoto.item = new ModeloMoto();
@@ -531,6 +600,24 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.item = new PrevObjeto();
     this.mostrarBtnModif = false;
   }
+
+  //cancela modificacion
+  cancelarModificacionMoto() {
+    this.filMoto.busqueda='';
+    this.filMoto.item = new ModeloMoto();
+    this.itemMoto = new PrevObjMoto();
+    this.idSeleccionMoto = 0;
+    this.mostrarBtnModifMoto = false;
+  }
+
+  cancelarModificacionAuto() {
+    this.filAuto.busqueda='';
+    this.filAuto.item = new ModeloVehiculo();
+    this.itemAuto = new PrevObjAuto();
+    this.idSeleccionAuto = 0;
+    this.mostrarBtnModifAuto = false;
+  }
+
 
   // se utiliza para pintar la fila en memoria
   colores(item: PrevObjeto) {
@@ -575,6 +662,102 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.item = new PrevObjeto();
         this.obtenerDetalle();
+        Utils.showToas('Eliminado exitosamente!', 'success');
+      } else {
+        Utils.showToas(result.msg, 'error');
+      }
+    } catch (error: any) {
+      Utils.showToas('Excepción: ' + error.message, 'error');
+    } finally {
+    }
+  }
+
+  preDeleteMoto(item: PrevObjMoto) {
+    this.itemMoto = new PrevObjMoto();
+    this.itemMoto = item;
+    Swal.fire({
+      title: 'Esta Seguro?',
+      text:
+        '¡No podrás recuperar este archivo ' +
+        '!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '¡Eliminar!',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.value) {
+        this.deleteMoto();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.filMoto.busqueda = '';
+        this.filMoto.item = new ModeloMoto();
+        this.filMoto.items = []; 
+        this.itemMoto = new PrevObjMoto();
+        Utils.showToas('Tu archivo esta seguro :)', 'warning');
+      }
+    });
+  }
+
+  async deleteMoto() {
+    try {
+      
+      let res = await this.wsdlObjMoto.doDelete(this.itemMoto.id).then();
+      const result = JSON.parse(JSON.stringify(res));
+      if (result.code == 200) {
+        this.filMoto.busqueda = '';
+        this.filMoto.item = new ModeloMoto();
+        this.filMoto.items = []; 
+        this.filterMoto();
+        this.itemMoto = new PrevObjMoto();
+        Utils.showToas('Eliminado exitosamente!', 'success');
+      } else {
+        Utils.showToas(result.msg, 'error');
+      }
+    } catch (error: any) {
+      Utils.showToas('Excepción: ' + error.message, 'error');
+    } finally {
+    }
+  }
+
+  preDeleteAuto(item: PrevObjAuto) {
+    this.itemAuto = new PrevObjAuto();
+    this.itemAuto = item;
+    Swal.fire({
+      title: 'Esta Seguro?',
+      text:
+        '¡No podrás recuperar este archivo ' +
+        '!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '¡Eliminar!',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.value) {
+        this.deleteAuto();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.filAuto.busqueda = '';
+        this.filAuto.item = new ModeloVehiculo();
+        this.filAuto.items = []; 
+        this.itemAuto = new PrevObjAuto();
+        Utils.showToas('Tu archivo esta seguro :)', 'warning');
+      }
+    });
+  }
+
+  async deleteAuto() {
+    try {
+      
+      let res = await this.wsdlObjAuto.doDelete(this.itemAuto.id).then();
+      const result = JSON.parse(JSON.stringify(res));
+      if (result.code == 200) {
+        this.filAuto.busqueda = '';
+        this.filAuto.item = new ModeloVehiculo();
+        this.filAuto.items = []; 
+        this.filterAuto();
+        this.itemAuto = new PrevObjAuto();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');

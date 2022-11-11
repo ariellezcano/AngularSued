@@ -392,7 +392,7 @@ cancelarModificacion() {
   //captura el dato del combo
   seleccionIdentidad(event: IdentidadGenero) {
     if (event != undefined) {
-      this.item.autoPercepcion = event.id;
+      this.item.genero = event.id;
     }
   }
 
@@ -415,6 +415,12 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.provincia = event.id;
       this.item.capturaProvincia = event.nombre;
+    }
+  }
+  //seleccion provincia detencion
+  seleccionProvDetencion(event: Provincia) {
+    if (event != undefined) {
+      this.item.provDetencion = event.id;
     }
   }
 

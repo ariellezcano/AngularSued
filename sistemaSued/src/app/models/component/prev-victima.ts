@@ -11,7 +11,7 @@ export class PrevVictima {
     dni!: number;
     fallecio!: boolean;
     provincia!: number;
-    autoPercepcion!: number;
+    genero!: number;
 
     nacionNavigation: any;
     estudioNavigation: any;

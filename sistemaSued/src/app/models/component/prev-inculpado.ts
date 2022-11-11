@@ -21,7 +21,8 @@ export class PrevInculpado {
     localidad!: number;
     provincia!: number;
     persClase!: number;
-    autoPercepcion!: number;
+    genero!: number;
+    provDetencion!: number
 
     nacionalidadNavigation: any;
     sexoNavigation: any;
@@ -32,7 +33,7 @@ export class PrevInculpado {
     localidadNavigation: any;
     provinciaNavigation: any;
     identidadNavigation: any;
-
+    provinciaDetNavigation: any;
 
     capturaSexo: any;
     capturaNacionalidad: any;
