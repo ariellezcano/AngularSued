@@ -37,6 +37,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   idSeleccionMoto!: number;
   idSeleccionAuto!: number;
   idSeleccionArma!: number;
+  idSeleccionado!: number;
   
   prev: Preventivo;
   prevObj: PrevObjeto;
@@ -149,7 +150,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   //selecciona la moto
   seleccionadoMoto(item: PrevObjeto){
     this.moto = true;
-    this.itemMoto.prevObjeto = item.id;
+    this.idSeleccionado = item.id;
     this.cantidadSecuestrada = item.cantSecuestro;
     if(this.cantidadSecuestrada > 1){
       this.filterMoto();
@@ -201,7 +202,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   seleccionadoAuto(item: PrevObjeto){
     this.auto = true;
-    this.itemAuto.prevObjeto = item.id;
+    this.idSeleccionado = item.id;
     this.cantidadSecuestrada = item.cantSecuestro;
     if(this.cantidadSecuestrada > 1){
       this.filterAuto();
@@ -234,9 +235,7 @@ export class AbmPrevObjetoComponent implements OnInit {
           console.log("detalles del auto",this.itemAuto)
           this.itemAuto.marcaModeloAuto = result.dato.modeloNavigation?.descripcion;
           this.itemAuto.marcaAuto = result.dato.modeloNavigation?.VehiculoMarcaNavigation?.descripcion;
-         } //else{
-        //   this.itemAuto.prevObjeto = id
-        // }
+         }
       } catch (error) {}
     }
   }
@@ -305,7 +304,7 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.filAuto.busqueda = '';
         this.filAuto.item = new ModeloVehiculo();
-        this.idSeleccionMoto = 0;
+        this.idSeleccionAuto = 0;
         this.mostrarBtnModifAuto = false
         this.filterAuto();
         this.itemAuto = new PrevObjAuto();
@@ -410,6 +409,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //inserta el objeto auto creado a la base de datos
   async guardarAuto() {
+    this.itemAuto.prevObjeto = this.idSeleccionado;
     try {
       let data = await this.wsdlObjAuto.doInsert(this.itemAuto).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -443,6 +443,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //inserta el objeto auto creado a la base de datos
   async guardarMoto() {
+    this.itemMoto.prevObjeto = this.idSeleccionado;
     try {
       let data = await this.wsdlObjMoto.doInsert(this.itemMoto).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -575,6 +576,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //cancela el modal auto
   cancelarAuto(){
+    this.idSeleccionado = 0;
     this.cantidadSecuestrada = 0;
     this.itemAuto = new PrevObjAuto();
     this.filAuto.busqueda='';
@@ -583,6 +585,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //cancela el modal moto
   cancelarMoto(){
+    this.idSeleccionado = 0;
     this.cantidadSecuestrada = 0;
     this.itemMoto = new PrevObjMoto();
     this.filMoto.busqueda='';
