@@ -124,10 +124,29 @@ export class AbmPrevObjetoComponent implements OnInit {
   // }
 
   //selecciona el id del medio y envia el id a la funcion de busqueda del arma
-  seleccionado(id: number){
+  seleccionado(item: PrevObjeto){
     this.arma = true;
-    if(id != undefined){
-      this.findIdArma(id);
+    this.idSeleccionado = item.id;
+    this.cantidadSecuestrada = item.cantSecuestro;
+    if(this.cantidadSecuestrada > 1){
+      this.filterArma();
+    }else if(this.cantidadSecuestrada == 1){
+      this.findIdArma(item.id);
+    }
+  }
+
+  //filtro de busqueda de  la lista de armas
+  async filterArma(){
+    if(this.idSeleccionado > 0 && this.idSeleccionado != undefined){
+      try {
+        let data = await this.wsdlObjArma.doFilter(this.idSeleccionado).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.itemsArma = result.data;
+        }
+      } catch (error) {
+        Swal.fire("Error al obtener los datos," + error);
+      }
     }
   }
 
@@ -140,8 +159,6 @@ export class AbmPrevObjetoComponent implements OnInit {
         if (result.code == 200) {
           this.itemArma = result.dato;
           this.itemArma.marcaArma = result.dato.armaNavigation?.descripcion;
-        }else{
-          this.itemArma.prevObjeto = id
         }
       } catch (error) {}
     }
@@ -158,11 +175,11 @@ export class AbmPrevObjetoComponent implements OnInit {
       this.findIdMoto(item.id);
     }
   }
-
+//filtras las motos en el modal
   async filterMoto(){
-    if(this.itemMoto.prevObjeto > 0 && this.itemMoto.prevObjeto != undefined){
+    if(this.idSeleccionado > 0 && this.idSeleccionado != undefined){
       try {
-        let data = await this.wsdlObjMoto.doFilter(this.itemMoto.prevObjeto).then();
+        let data = await this.wsdlObjMoto.doFilter(this.idSeleccionado).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemsMoto = result.data;
@@ -173,7 +190,6 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
 
   }
-
   //realiza la busqueda del moto con el id del objeto
   async findIdMoto(id: number) {
     if (id > 0) {
@@ -182,23 +198,13 @@ export class AbmPrevObjetoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemMoto = result.dato;
-          console.log("moto",this.itemMoto)
           this.itemMoto.marcaModeloMoto = result.dato.modeloMotoNavigation?.nombre;
           this.itemMoto.marcaMoto = result.dato.modeloMotoNavigation?.marcaMotoNavigation?.nombre;
-        }// else{
-        //   this.itemMoto.prevObjeto = id
-        // }
+        }
       } catch (error) {}
     }
   }
 
-  //selecciona el vehiculo
-  // seleccionadoAuto(id: number){
-  //   this.auto = true;
-  //   if(id != undefined){
-  //     this.findIdAuto(id);
-  //   }
-  // }
 
   seleccionadoAuto(item: PrevObjeto){
     this.auto = true;
@@ -212,9 +218,9 @@ export class AbmPrevObjetoComponent implements OnInit {
   }
 
   async filterAuto(){
-    if(this.itemAuto.prevObjeto > 0 && this.itemAuto.prevObjeto != undefined){
+    if(this.idSeleccionado > 0 && this.idSeleccionado != undefined){
       try {
-        let data = await this.wsdlObjAuto.doFilter(this.itemAuto.prevObjeto).then();
+        let data = await this.wsdlObjAuto.doFilter(this.idSeleccionado).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemsAuto = result.data;
@@ -240,6 +246,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  //obtiene los datos del prevobjeto
   async obtenerDetalle() {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
@@ -252,7 +259,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     } catch (error) {}
   }
 
-
+//modifica los datos del prevObjeto
   async actualizarDatos(obj: PrevObjeto) {
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
@@ -283,6 +290,9 @@ export class AbmPrevObjetoComponent implements OnInit {
       if (result.code == 200) {
         this.fil.busqueda='';
         this.fil.item = new ArmaMarca();
+        this.idSeleccionArma = 0;
+        this.mostrarBtnModifArma = false
+        this.filterArma();
         this.itemArma = new PrevObjArma();
         Swal.fire({
           position: 'top-end',
@@ -370,12 +380,14 @@ export class AbmPrevObjetoComponent implements OnInit {
   }
   //inserta el arma a la base de datos
   async guardarArma() {
+    this.itemArma.prevObjeto = this.idSeleccionado;
     try {
       let data = await this.wsdlObjArma.doInsert(this.itemArma).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.fil.busqueda='';
         this.fil.item = new ArmaMarca();
+        this.filterArma();
         this.itemArma = new PrevObjArma();
         Swal.fire({
           position: 'top-end',
@@ -487,7 +499,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
-  //trae los datos para modificar de la moto
+  //trae los datos para modificar de la moto en el modal
   async traerDatosMoto(id: number) {
     if (id > 0) {
       try {
@@ -502,7 +514,7 @@ export class AbmPrevObjetoComponent implements OnInit {
       } catch (error) {}
     }
   }
-  //trae los datos para modificar el auto
+  //trae los datos para modificar el auto en el modal
   async traerDatosAuto(id: number) {
     if (id > 0) {
       try {
@@ -517,6 +529,21 @@ export class AbmPrevObjetoComponent implements OnInit {
       } catch (error) {}
     }
   }
+//trae los datos para modificar el auto en el modal
+async traerDatosArma(id: number) {
+  if (id > 0) {
+    try {
+      let data = await this.wsdlObjArma.getIdObj(id).then();
+      const result = JSON.parse(JSON.stringify(data));
+      if (result.code == 200) {
+        this.itemArma = result.dato;
+        this.idSeleccionArma = result.dato.id;
+       // this.busqueda = result.dato.objetoNavigation.descripcion;
+        this.mostrarBtnModifArma = true;
+      }
+    } catch (error) {}
+  }
+}
 
   async filtrarObjeto() {
     try {
@@ -569,6 +596,8 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //cancela el modal arma
   cancelar(){
+    this.idSeleccionado = 0;
+    this.cantidadSecuestrada = 0;
     this.itemArma = new PrevObjArma();
     this.fil.busqueda='';
     this.fil.item = new ArmaMarca();
