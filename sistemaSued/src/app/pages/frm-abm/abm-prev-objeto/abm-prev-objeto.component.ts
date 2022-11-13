@@ -642,6 +642,15 @@ async traerDatosArma(id: number) {
     this.mostrarBtnModifMoto = false;
   }
 
+  //cancela modificacion
+  cancelarModificacionArma() {
+    this.fil.busqueda='';
+    this.fil.item = new ArmaMarca();
+    this.itemArma = new PrevObjArma();
+    this.idSeleccionArma = 0;
+    this.mostrarBtnModifArma = false;
+  }
+
   cancelarModificacionAuto() {
     this.filAuto.busqueda='';
     this.filAuto.item = new ModeloVehiculo();
@@ -789,6 +798,53 @@ async traerDatosArma(id: number) {
         this.filAuto.items = []; 
         this.filterAuto();
         this.itemAuto = new PrevObjAuto();
+        Utils.showToas('Eliminado exitosamente!', 'success');
+      } else {
+        Utils.showToas(result.msg, 'error');
+      }
+    } catch (error: any) {
+      Utils.showToas('Excepción: ' + error.message, 'error');
+    } finally {
+    }
+  }
+
+  preDeleteArma(item: PrevObjArma) {
+    this.itemArma = new PrevObjArma();
+    this.itemArma = item;
+    Swal.fire({
+      title: 'Esta Seguro?',
+      text:
+        '¡No podrás recuperar este archivo ' +
+        '!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: '¡Eliminar!',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.value) {
+        this.deleteArma();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.fil.busqueda = '';
+        this.fil.item = new ArmaMarca();
+        this.fil.items = []; 
+        this.itemArma = new PrevObjArma();
+        Utils.showToas('Tu archivo esta seguro :)', 'warning');
+      }
+    });
+  }
+
+  async deleteArma() {
+    try {
+      let res = await this.wsdlObjArma.doDelete(this.itemArma.id).then();
+      const result = JSON.parse(JSON.stringify(res));
+      if (result.code == 200) {
+        this.fil.busqueda = '';
+        this.fil.item = new ArmaMarca();
+        this.fil.items = []; 
+        this.filterArma();
+        this.itemArma = new PrevObjArma();
         Utils.showToas('Eliminado exitosamente!', 'success');
       } else {
         Utils.showToas(result.msg, 'error');

@@ -367,15 +367,11 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <div id="colorHeader" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Detalle del Arma:</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <h5 class="modal-title" id="exampleModalLabel">
+          <b> Detalle del Arma:</b>
+        </h5>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -406,32 +402,188 @@
           </div>
         </div>
         <br />
-        <div
-          *ngIf="
-            itemArma.marcaArma != undefined || itemArma.calibre != undefined
-          "
-          class="row alert alert-info"
-          role="alert"
-        >
-          <div class="col-md-4">
-            <label for="" class="col-sm-12 col-form-label">
-              Marca del Arma: <b>{{ itemArma?.marcaArma }}</b></label
-            >
+        <ng-container *ngIf="cantidadSecuestrada == 1">
+          <div
+            *ngIf="
+              itemArma.marcaArma != undefined || itemArma.calibre != undefined
+            "
+            class="row alert alert-info"
+            role="alert"
+          >
+            <div class="col-md-4">
+              <label for="" class="col-sm-12 col-form-label">
+                Marca del Arma: <b>{{ itemArma?.marcaArma }}</b></label
+              >
+            </div>
+            <div class="col-md-4">
+              <label for="" class="col-sm-12 col-form-label">
+                Calibre: <b>{{ itemArma?.calibre }}</b></label
+              >
+            </div>
+            <div class="col-md-4">
+              <label for="" class="col-sm-12 col-form-label">
+                N° serie: <b>{{ itemArma?.serie }}</b></label
+              >
+            </div>
           </div>
-          <div class="col-md-4">
-            <label for="" class="col-sm-12 col-form-label">
-              Calibre: <b>{{ itemArma?.calibre }}</b></label
-            >
+        </ng-container>
+        <ng-container *ngIf="cantidadSecuestrada > 1">
+          <div class="row">
+            <ng-container *ngIf="arma">
+              <ng-container
+                *ngIf="
+                  itemArma.id > 0 && idSeleccionArma;
+                  then thenTemplate;
+                  else elseTemplate
+                "
+              ></ng-container>
+              <ng-template #thenTemplate>
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  (click)="actualizarArmas(itemArma)"
+                >
+                  Modificar datos
+                </button>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <ng-container
+                  *ngIf="
+                    itemsArma.length === cantidadSecuestrada;
+                    then thenTemplate;
+                    else elseTemplate
+                  "
+                ></ng-container>
+                <ng-template #thenTemplate>
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      Cantidad Secuestrada: <b>{{ cantidadSecuestrada }}</b>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      Cantidad de datos cargados: <b>{{ itemsArma.length }}</b>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <label for="">
+                        <b>
+                          Si desea seguir agregando datos, debe modificar la
+                          cantidad secuestrada.
+                        </b></label
+                      >
+                    </div>
+                  </div>
+                  <hr />
+                </ng-template>
+                <ng-template #elseTemplate>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="guardarArma()"
+                  >
+                    Guardar
+                  </button>
+                </ng-template>
+              </ng-template>
+            </ng-container>
           </div>
-          <div class="col-md-4">
-            <label for="" class="col-sm-12 col-form-label">
-              N° serie: <b>{{ itemArma?.serie }}</b></label
-            >
+          <br />
+          <div class="row">
+            <table class="table table-striped table-hover text-center">
+              <thead>
+                <tr>
+                  <th scope="col">Acción</th>
+                  <th scope="col">Marca</th>
+                  <th scope="col">Calibre</th>
+                  <th scope="col">Nro. Serie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of itemsArma">
+                  <th scope="row">
+                    <ng-container
+                      *ngIf="item.id > 0; then mostrar"
+                    ></ng-container>
+                    <ng-template #mostrar>
+                      <!-- muestra el eliminar -->
+                      <ng-container
+                        *ngIf="
+                          mostrarBtnModifArma && idSeleccionArma == item.id;
+                          then thenTemplate;
+                          else elseTemplate
+                        "
+                      ></ng-container>
+                      <ng-template #thenTemplate>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Cancelar Modificación"
+                              placement="top"
+                              show-delay="10"
+                              (click)="cancelarModificacionArma()"
+                              class="btn btn-success btn-circle"
+                            >
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
+                      </ng-template>
+                      <ng-template #elseTemplate>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Modificar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="traerDatosArma(item.id)"
+                              class="btn btn-warning btn-circle"
+                            >
+                              <i
+                                class="fa fa-pencil-square-o"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                            &nbsp;
+                            <button
+                              type="button"
+                              title="Eliminar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="preDeleteArma(item)"
+                              class="btn btn-danger btn-circle"
+                            >
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
+                      </ng-template>
+                    </ng-template>
+                  </th>
+                  <td>
+                    {{ item.armaNavigation?.descripcion }}
+                  </td>
+                  <td>{{ item.calibre }}</td>
+                  <td>{{ item.serie }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
+          <div
+            *ngIf="itemsArma.length === 0"
+            class="alert alert-primary alert-dismissible fade show"
+            role="alert"
+          >
+            <center>
+              <strong>No hay datos</strong>
+            </center>
+          </div>
+        </ng-container>
       </div>
       <div class="modal-footer">
-        <ng-container *ngIf="arma">
+        <ng-container *ngIf="arma && cantidadSecuestrada == 1">
           <ng-container
             *ngIf="itemArma.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
@@ -479,17 +631,11 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <div id="colorHeader" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          Detalle del Automóvil:
+          <b> Detalle del Automóvil: </b>
         </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -555,13 +701,44 @@
                 </button>
               </ng-template>
               <ng-template #elseTemplate>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="guardarAuto()"
-                >
-                  Guardar
-                </button>
+                <ng-container
+                  *ngIf="
+                    itemsAuto.length === cantidadSecuestrada;
+                    then thenTemplate;
+                    else elseTemplate
+                  "
+                ></ng-container>
+                <ng-template #thenTemplate>
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      Cantidad Secuestrada: <b>{{ cantidadSecuestrada }}</b>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      Cantidad de datos cargados: <b>{{ itemsAuto.length }}</b>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <label for="">
+                        <b>
+                          Si desea seguir agregando datos, debe modificar la
+                          cantidad secuestrada.
+                        </b></label
+                      >
+                    </div>
+                  </div>
+                  <hr />
+                </ng-template>
+                <ng-template #elseTemplate>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="guardarAuto()"
+                  >
+                    Guardar
+                  </button>
+                </ng-template>
               </ng-template>
             </ng-container>
           </div>
@@ -710,10 +887,10 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-xl">
-    <div class="modal-content">
+    <div id="colorHeader" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          Detalle de la motocicleta:
+          <b> Detalle de la motocicleta:</b>
         </h5>
       </div>
       <div class="modal-body">
@@ -837,13 +1014,44 @@
                 </button>
               </ng-template>
               <ng-template #elseTemplate>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="guardarMoto()"
-                >
-                  Guardar
-                </button>
+                <ng-container
+                  *ngIf="
+                    itemsMoto.length === cantidadSecuestrada;
+                    then thenTemplate;
+                    else elseTemplate
+                  "
+                ></ng-container>
+                <ng-template #thenTemplate>
+                  <hr />
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      Cantidad Secuestrada: <b>{{ cantidadSecuestrada }}</b>
+                    </div>
+                    <div class="col-md-6 text-center">
+                      Cantidad de datos cargados: <b>{{ itemsMoto.length }}</b>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 text-center">
+                      <label for="">
+                        <b
+                          >Si desea seguir agregando datos, debe modificar la
+                          cantidad secuestrada.
+                        </b></label
+                      >
+                    </div>
+                  </div>
+                  <hr />
+                </ng-template>
+                <ng-template #elseTemplate>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="guardarMoto()"
+                  >
+                    Guardar
+                  </button>
+                </ng-template>
               </ng-template>
             </ng-container>
           </div>
@@ -876,46 +1084,50 @@
                         "
                       ></ng-container>
                       <ng-template #thenTemplate>
-                        <td>
-                          <button
-                            type="button"
-                            title="Cancelar Modificación"
-                            placement="top"
-                            show-delay="10"
-                            (click)="cancelarModificacionMoto()"
-                            class="btn btn-success btn-circle"
-                          >
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                          </button>
-                        </td>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Cancelar Modificación"
+                              placement="top"
+                              show-delay="10"
+                              (click)="cancelarModificacionMoto()"
+                              class="btn btn-success btn-circle"
+                            >
+                              <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
                       </ng-template>
                       <ng-template #elseTemplate>
-                        <td>
-                          <button
-                            type="button"
-                            title="Modificar"
-                            placement="top"
-                            show-delay="10"
-                            (click)="traerDatosMoto(item.id)"
-                            class="btn btn-warning btn-circle"
-                          >
-                            <i
-                              class="fa fa-pencil-square-o"
-                              aria-hidden="true"
-                            ></i>
-                          </button>
-                          &nbsp;
-                          <button
-                            type="button"
-                            title="Eliminar"
-                            placement="top"
-                            show-delay="10"
-                            (click)="preDeleteMoto(item)"
-                            class="btn btn-danger btn-circle"
-                          >
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                          </button>
-                        </td>
+                        <center>
+                          <td>
+                            <button
+                              type="button"
+                              title="Modificar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="traerDatosMoto(item.id)"
+                              class="btn btn-warning btn-circle"
+                            >
+                              <i
+                                class="fa fa-pencil-square-o"
+                                aria-hidden="true"
+                              ></i>
+                            </button>
+                            &nbsp;
+                            <button
+                              type="button"
+                              title="Eliminar"
+                              placement="top"
+                              show-delay="10"
+                              (click)="preDeleteMoto(item)"
+                              class="btn btn-danger btn-circle"
+                            >
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </center>
                       </ng-template>
                     </ng-template>
                   </th>
