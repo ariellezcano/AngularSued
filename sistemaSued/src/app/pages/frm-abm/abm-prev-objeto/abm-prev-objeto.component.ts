@@ -60,6 +60,8 @@ export class AbmPrevObjetoComponent implements OnInit {
   mostrarBtnModifAuto: Boolean;
   mostrarBtnModifArma: Boolean;
 
+  verValor: boolean;
+
   cantidadSecuestrada: number;
   constructor(
     private route: ActivatedRoute,
@@ -85,6 +87,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.arma = false;
     this.auto = false;
     this.moto = false;
+    this.verValor = false;
     this.itemArma = new PrevObjArma();
     this.itemsArma = [];
     this.itemAuto = new PrevObjAuto();
@@ -356,6 +359,7 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   async guardar() {
     this.item.preventivo = this.id;
+    console.log("data", this.item)
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));

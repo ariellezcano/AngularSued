@@ -36,7 +36,31 @@
         </option>
       </select>
     </div>
-    <ng-container
+    <ng-container *ngIf="idSeleccion > 0 && this.busqueda == 'DINERO EN EFECTIVO'; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Cantidad:</label>
+        <input
+          id="codigo"
+          type="number"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          disabled
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Valor:</label>
+        <input
+          [(ngModel)]="item.valor"
+          id="codigo"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </ng-template>
+    <ng-template #elseTemplate>
+      <ng-container
       *ngIf="
         item.objeto > 0 && item.capturaObj == 'DINERO EN EFECTIVO';
         then thenTemplate;
@@ -85,6 +109,7 @@
           disabled
         />
       </div>
+    </ng-template>
     </ng-template>
   </div>
   <div class="row">
