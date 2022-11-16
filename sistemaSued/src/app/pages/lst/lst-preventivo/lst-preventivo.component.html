@@ -42,21 +42,21 @@
             [ngClass]="{ proccess: selectedRowIndex == item.id }"
             *ngFor="let item of items"
           >
-            <td class="text-primary">
+            <td>
               {{ item.fechaPreventivo | date: "dd/MM/yyyy" }}
             </td>
-            <td class="text-primary">
+            <td>
               {{ item.anio }} - {{ item.nro }} - {{ item.letra }}
             </td>
-            <td class="text-primary">{{ valor(item.intervencionPol) }}</td>
-            <td class="text-primary">
+            <td>{{ valor(item.intervencionPol) }}</td>
+            <td>
               {{ item.fechaHecho | date: "dd/MM/yyyy" }}
             </td>
-            <td class="text-primary">{{ item.hora }}</td>
-            <td class="text-primary">
+            <td>{{ item.hora }}</td>
+            <td>
               {{ item?.delitoNavigation?.descripcion }}
             </td>
-            <td class="text-primary">
+            <td>
               {{ item?.localidadNavigation?.nombre }}
             </td>
             <!-- <td>
