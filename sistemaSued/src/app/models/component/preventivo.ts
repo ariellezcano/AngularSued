@@ -38,7 +38,7 @@ export class Preventivo {
 
 
     nombreUnidad: string;
-    nombreJurisdiccion: string;
+    nombreUniEspecial: string;
     localidadCoordenada: any;
     cp: any;
     pais: any;
@@ -46,6 +46,6 @@ export class Preventivo {
     constructor(){
         this.activo = true;
         this.nombreUnidad = '';
-        this.nombreJurisdiccion = '';
+        this.nombreUniEspecial = '';
     }
 }

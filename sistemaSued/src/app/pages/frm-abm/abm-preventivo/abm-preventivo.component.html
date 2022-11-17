@@ -30,7 +30,21 @@
         Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombreUnidad }}</b>
       </div>
     </div>
-   
+   <div class="row">
+    <div class="col-md-6">
+      <label for="" class="col-sm-12 col-form-label">Unidad especial interviniente:</label>
+        <app-fil-autocompletado-unidad-sued
+          (unidadSeleccionada)="unidadEspecial($event)"
+        >
+        </app-fil-autocompletado-unidad-sued>
+    </div>
+    <div class="col-md-6">
+      <br>
+      <div *ngIf="item.unidadEspecial > 0" class="col-md-12 alert alert-info">
+        Unidad especial:&nbsp;&nbsp;<b>{{ item.nombreUniEspecial }}</b>
+      </div>
+    </div>
+   </div>
     <div class="form-group row">
       <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
@@ -151,6 +165,28 @@
             {{ litem.descripcion }}
           </option>
         </select>
+      </div>
+    </div>
+    <div *ngIf="busquedaLugar == 'ESTABLECIMIENTOS EDUCATIVOS'" class="row">
+      <div class="col-md-6">
+        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+          <option selected>Seleccione una opción:</option>
+          <option value="primario">Nivel Primario</option>
+          <option value="2">Nivel Secundario</option>
+          <option value="3">Nivel Terciario</option>
+          <option value="3">Nivel Universitario</option>
+        </select>
+        
+      </div>
+      <div class="col-md-6">
+        <label for="">Especificar nombre:</label>
+          <input
+            [(ngModel)]="item.especificarLugar"
+            name="especificarLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
       </div>
     </div>
     <div class="form-group row">

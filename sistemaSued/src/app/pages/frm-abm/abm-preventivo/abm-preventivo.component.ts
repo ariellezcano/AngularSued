@@ -393,10 +393,10 @@ export class AbmPreventivoComponent implements OnInit {
     this.item.nombreUnidad = event.nombre;
   }
 
-  // jurisdiccion(event: UnidadesSued) {
-  //   this.item.unidadJurisdiccion = event.id;
-  //   this.item.nombreJurisdiccion = event.nombre;
-  // }
+  unidadEspecial(event: UnidadesSued) {
+    this.item.unidadEspecial = event.id;
+    this.item.nombreUniEspecial = event.nombre;
+  }
 
   ActivarCasilla(num: number){
     if(num == 1){
