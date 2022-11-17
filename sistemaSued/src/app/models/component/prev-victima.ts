@@ -12,12 +12,17 @@ export class PrevVictima {
     fallecio!: boolean;
     provincia!: number;
     genero!: number;
+    calle!: number;
+    dirNro!: number;
+    barrio!: number;
 
     nacionNavigation: any;
     estudioNavigation: any;
     ocupacionNavigation: any;
     sexoNavigation: any;
     identidadNavigation: any;
+    calleNavigation: any;
+    barrioNavigation: any;
 
     capturaSexo: any;
     capturaNacionalidad: any;

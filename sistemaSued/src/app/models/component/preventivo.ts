@@ -20,6 +20,12 @@ export class Preventivo {
     letra!: string;
     intervencionPol!: boolean;
     fechaBaja: any;
+    unidadEspecial!: number;
+    especificarLugar!: string;
+    nivelEducativo!: string;
+    usuarioCrea!: number;
+    fechaCreacion: any;
+    usuarioBaja!: number;
     activo: boolean;
 
 
@@ -31,7 +37,8 @@ export class Preventivo {
     unidadNavigation: any;
 
 
-    nombreUnidad: string
+    nombreUnidad: string;
+    nombreJurisdiccion: string;
     localidadCoordenada: any;
     cp: any;
     pais: any;
@@ -39,5 +46,6 @@ export class Preventivo {
     constructor(){
         this.activo = true;
         this.nombreUnidad = '';
+        this.nombreJurisdiccion = '';
     }
 }

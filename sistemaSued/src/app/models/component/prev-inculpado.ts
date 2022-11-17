@@ -22,7 +22,10 @@ export class PrevInculpado {
     provincia!: number;
     persClase!: number;
     genero!: number;
-    provDetencion!: number
+    provDetencion!: number;
+    dirCalle!: number;
+    direccionNro!: number;
+    dirBarrio!: number;
 
     nacionalidadNavigation: any;
     sexoNavigation: any;
@@ -34,6 +37,9 @@ export class PrevInculpado {
     provinciaNavigation: any;
     identidadNavigation: any;
     provinciaDetNavigation: any;
+    dirCalleNavigation: any;
+    barrioNavigation: any;
+    
 
     capturaSexo: any;
     capturaNacionalidad: any;
