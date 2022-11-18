@@ -1,7 +1,10 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
+  Barrio,
+  Calle,
   Estudio,
   IdentidadGenero,
   Naciones,
@@ -12,6 +15,8 @@ import {
   Sexo,
 } from 'src/app/models/index.models';
 import {
+  BarrioService,
+  CalleService,
   NacionesService,
   OcupacionService,
   PreventivoService,
@@ -38,6 +43,8 @@ export class AbmPreVictimaComponent implements OnInit {
   //input de busqueda de los filtros
   busqueda;
   busquedaOc;
+  busquedaBarrio;
+  busquedaCalle;
 
   idSeleccion!: number;
   //vista previa del preventivo
@@ -52,6 +59,13 @@ export class AbmPreVictimaComponent implements OnInit {
   Nitems: Naciones[];
   Nitem: Naciones;
 
+  //se ocupa para el filtro calle
+  CItems: Calle[];
+  Citem: Calle;
+
+  BItems: Barrio[];
+  Bitem: Barrio;
+
   //ocupado en el filtro ocupacion
   Oitems: Ocupacion[];
   Oitem: Ocupacion;
@@ -64,6 +78,8 @@ export class AbmPreVictimaComponent implements OnInit {
     private wsdlPreventivo: PreventivoService,
     private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
+    private wsdlBarrio: BarrioService,
+    private wsdlCalle: CalleService,
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevVictima();
@@ -72,10 +88,16 @@ export class AbmPreVictimaComponent implements OnInit {
     this.prevVic = new PrevVictima();
     this.busqueda = '';
     this.busquedaOc = '';
+    this.busquedaBarrio = '';
+    this.busquedaCalle = ''; 
     this.Nitem = new Naciones();
     this.Nitems = [];
     this.Oitem = new Ocupacion();
     this.Oitems = [];
+    this.Bitem = new Barrio()
+    this.BItems = [];
+    this.Citem = new Calle();
+    this.CItems = [];
     this.mostrarBtnModif = false;
   }
 
@@ -152,6 +174,8 @@ export class AbmPreVictimaComponent implements OnInit {
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
         this.busqueda = '';
+        this.busquedaBarrio = '';
+        this.busquedaCalle = '';
         this.item = new PrevVictima();
         this.obtenerDetalle();
         Swal.fire({
@@ -184,6 +208,8 @@ export class AbmPreVictimaComponent implements OnInit {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.busquedaBarrio = '';
+        this.busquedaCalle = '';
         this.busqueda = '';
         this.busquedaOc = '';
         this.item = new PrevVictima();
@@ -222,6 +248,12 @@ export class AbmPreVictimaComponent implements OnInit {
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.nacionNavigation.nacionalidad;
           this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+          if(this.item.barrio != undefined){
+            this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
+          }
+          if(this.item.calle != undefined){
+            this.busquedaCalle = result.dato.calleNavigation?.nombre;
+          }
           this.mostrarBtnModif = true;
         }
       } catch (error) {}
@@ -275,6 +307,56 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
+  //filtro calle
+  async filtrarCalle() {
+    try {
+      if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
+        let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.CItems = [];
+          this.CItems = result.data;
+        } else if (result.code == 204) {
+          Swal.fire('No existe la búsqueda realizada');
+        }
+      }
+    } catch (error) {
+      Swal.fire('Error al obtener el dato');
+    }
+  }
+
+  capturarCalle(event: Calle) {
+    if (event != undefined) {
+      this.item.calle = event.id;
+      this.busquedaCalle = event.nombre;
+    }
+  }
+
+//filtro barrio
+  async filtrarBarrio() {
+    try {
+      if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
+        let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.BItems = [];
+          this.BItems = result.data;
+        } else if (result.code == 204) {
+          Swal.fire('No existe la búsqueda realizada');
+        }
+      }
+    } catch (error) {
+      Swal.fire('Error al obtener el dato');
+    }
+  }
+
+  capturarBarrio(event: Barrio) {
+    if (event != undefined) {
+      this.item.barrio = event.id;
+      this.busquedaBarrio = event.nombre;
+    }
+  }
+
   //agrega fila en memoria
   addRow() {
     this.busqueda = '';
@@ -305,6 +387,8 @@ export class AbmPreVictimaComponent implements OnInit {
   cancelarModificacion() {
     this.busqueda = '';
     this.busquedaOc = '';
+    this.busquedaBarrio = '';
+    this.busquedaCalle = '';
     this.item = new PrevVictima();
     this.mostrarBtnModif = false;
   }
@@ -390,6 +474,8 @@ export class AbmPreVictimaComponent implements OnInit {
     }
     return valor;
   }
+
+  
 
   back() {
     this.router.navigate(['/lst-preventivo']);

@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Call } from '@angular/compiler';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
+import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { FilBuscadorBarrioComponent } from '../../component/fil-buscador-barrio/fil-buscador-barrio.component';
+import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
 
 @Component({
   selector: 'app-abm-prev-inculpado',
@@ -14,6 +17,8 @@ import Swal from 'sweetalert2';
 })
 export class AbmPrevInculpadoComponent implements OnInit {
 
+  @ViewChild(FilBuscadorCalleComponent, { static: false }) filCalle!: FilBuscadorCalleComponent;
+  @ViewChild(FilBuscadorBarrioComponent, { static: false }) filBarrio!: FilBuscadorBarrioComponent;
  
   public id!: number;
   //valida el formulario
@@ -49,7 +54,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
   //ocupado en el filtro ocupacion
   Oitems: Ocupacion[];
   Oitem: Ocupacion;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -139,6 +143,12 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.busqueda = '';
         this.busquedaCalle = '';
         this.busquedaOc = '';
+        this.filBarrio.busqueda = '';
+        this.filBarrio.item = new Barrio();
+        this.filBarrio.items = [];
+        this.filCalle.busqueda = '';
+        this.filCalle.item = new Calle();
+        this.filCalle.items = [];
         this.item = new PrevInculpado();
         this.obtenerDetalle();
         Swal.fire({
@@ -153,17 +163,17 @@ export class AbmPrevInculpadoComponent implements OnInit {
     } catch (error) {}
   }
 
-  async agregarDato() {
-    for (let index = 0; index < this.items.length; index++) {
-      this.prevInc = new PrevInculpado();
-      this.prevInc = this.items[index];
-      if (this.prevInc.id == undefined) {
-        this.item = new PrevInculpado();
-        this.item = this.prevInc;
-        this.guardar();
-      }
-    }
-  }
+  // async agregarDato() {
+  //   for (let index = 0; index < this.items.length; index++) {
+  //     this.prevInc = new PrevInculpado();
+  //     this.prevInc = this.items[index];
+  //     if (this.prevInc.id == undefined) {
+  //       this.item = new PrevInculpado();
+  //       this.item = this.prevInc;
+  //       this.guardar();
+  //     }
+  //   }
+  // }
 
   async guardar() {
     this.item.preventivo = this.id;
@@ -174,6 +184,12 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.busqueda = '';
         this.busquedaOc = '';
         this.busquedaCalle = '';
+        this.filBarrio.busqueda = '';
+        this.filBarrio.item = new Barrio();
+        this.filBarrio.items = [];
+        this.filCalle.busqueda = '';
+        this.filCalle.item = new Calle();
+        this.filCalle.items = [];
         this.item = new PrevInculpado();
         this.obtenerDetalle()
        
@@ -225,6 +241,12 @@ cancelarModificacion() {
   this.busqueda = '';
   this.busquedaOc = '';
   this.busquedaCalle = '';
+  this.filBarrio.busqueda = '';
+  this.filBarrio.item = new Barrio();
+  this.filBarrio.items = [];
+  this.filCalle.busqueda = '';
+  this.filCalle.item = new Calle();
+  this.filCalle.items = [];
   this.item = new PrevInculpado();
   this.mostrarBtnModif = false;
 }
@@ -422,6 +444,18 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.provDetencion = event.id;
     }
+  }
+
+  //captura la calle
+  doFoundCalle(event: Calle){
+    this.item.dirCalle = event.id;
+    this.item.capturadirCalle = event.nombre;
+  }
+
+  //captura el barrio
+  doFoundBarrio(event: Barrio){
+    this.item.dirBarrio = event.id;
+    this.item.capturaBarrio = event.nombre;
   }
 
   //cambia el valor del booleano para mostrar en la vista

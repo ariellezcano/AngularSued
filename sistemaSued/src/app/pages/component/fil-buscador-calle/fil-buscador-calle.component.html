@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="col-md-12">
+      <label for="" class="col-sm-12 col-form-label">Calle:</label>
+      <input
+      (keyup.enter)="filtrar()"
+        [(ngModel)]="busqueda"
+        name="busqueda"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese nombre calle"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="items.length > 0 && this.busqueda"
+        name="item"
+        [(ngModel)]="item"
+        class="form-control"
+        (ngModelChange)="capturar($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let item of items" [ngValue]="item">
+          {{ item?.nombre }}
+        </option>
+      </select>
+    </div>
+  </div>
+  

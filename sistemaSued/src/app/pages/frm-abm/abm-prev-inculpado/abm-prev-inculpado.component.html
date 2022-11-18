@@ -104,7 +104,7 @@
   <div class="row">
     <div class="col-md-4">
       <app-combo-provincia
-      [dibujar]="item"
+        [dibujar]="item"
         (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
@@ -115,6 +115,29 @@
       ></app-combo-identidad-genero>
     </div>
     <div class="col-md-4"></div>
+  </div>
+  <br />
+  <div class="row">
+    <legend><u>Domicilio:</u></legend>
+    <div class="col-md-4">
+      <app-fil-buscador-barrio
+        (emmit)="doFoundBarrio($event)"
+      ></app-fil-buscador-barrio>
+    </div>
+    <div class="col-md-4">
+      <app-fil-buscador-calle
+        (emmit)="doFoundCalle($event)"
+      ></app-fil-buscador-calle>
+    </div>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Nro.:</label>
+      <input
+        [(ngModel)]="item.direccionNro"
+        type="number"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
   </div>
   <br />
   <div class="row">

@@ -126,6 +126,8 @@ import { FilIdentidadGeneroComponent } from './filters/fil-identidad-genero/fil-
 import { AbmIdentidadGeneroComponent } from './frm-abm/abm-identidad-genero/abm-identidad-genero.component';
 import { LstIdentidadGeneroComponent } from './lst/lst-identidad-genero/lst-identidad-genero.component';
 import { ComboIdentidadGeneroComponent } from './component/combo-identidad-genero/combo-identidad-genero.component';
+import { FilBuscadorCalleComponent } from './component/fil-buscador-calle/fil-buscador-calle.component';
+import { FilBuscadorBarrioComponent } from './component/fil-buscador-barrio/fil-buscador-barrio.component';
 
 
 @NgModule({
@@ -251,6 +253,8 @@ import { ComboIdentidadGeneroComponent } from './component/combo-identidad-gener
       AbmIdentidadGeneroComponent,
       LstIdentidadGeneroComponent,
       ComboIdentidadGeneroComponent,
+      FilBuscadorCalleComponent,
+      FilBuscadorBarrioComponent,
 
     ],
     exports: [],

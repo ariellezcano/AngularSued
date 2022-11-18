@@ -49,6 +49,8 @@ export class PrevInculpado {
     capturaCalle: any;
     capturaLocalidad: any;
     capturaProvincia: any;
+    capturadirCalle: any;
+    capturaBarrio: any;
     
     constructor(){
         this.detenido = false;

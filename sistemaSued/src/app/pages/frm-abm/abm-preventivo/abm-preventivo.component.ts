@@ -146,7 +146,12 @@ export class AbmPreventivoComponent implements OnInit {
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;
           }
           if(this.item.localidad != undefined){
-            this.item.localidadNavigation
+            this.item.localidadCoordenada = this.item.localidadNavigation?.nombre;
+            this.item.pais = this.item.localidadNavigation?.nacionNavigation?.nacion;
+            this.item.cp = this.item.localidadNavigation?.codPostal;
+          }
+          if(this.item.unidadEspecial != undefined){
+            this.item.nombreUniEspecial = this.item?.unidadEspecialNavigation?.nombre;
           }
         }
       } catch (error) {}

@@ -35,6 +35,7 @@ export class Preventivo {
     delitoNavigation: any;
     localidadNavigation: any;
     unidadNavigation: any;
+    unidadEspecialNavigation: any
 
 
     nombreUnidad: string;

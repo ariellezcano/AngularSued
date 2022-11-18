@@ -66,38 +66,41 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-md-6">
+        <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
+        <input
+          (ngModelChange)="filtrarNacionalidad()"
+          [(ngModel)]="busqueda"
+          name="busqueda"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese criterio de búsqueda"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <select
+          *ngIf="Nitems.length > 0 && this.busqueda"
+          name="Nitem"
+          [(ngModel)]="Nitem"
+          class="form-control"
+          (ngModelChange)="capturar($event)"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
+            {{ Nitem.nacionalidad }}
+          </option>
+        </select>
+      </div>
+    <div class="col-md-6"></div>
+  </div>
+  <div class="row">
     <legend><u>General:</u></legend>
-    <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
-      <input
-        (ngModelChange)="filtrarNacionalidad()"
-        [(ngModel)]="busqueda"
-        name="busqueda"
-        type="text"
-        class="form-control"
-        placeholder="Ingrese criterio de búsqueda"
-        [ngModelOptions]="{ standalone: true }"
-      />
-      <select
-        *ngIf="Nitems.length > 0 && this.busqueda"
-        name="Nitem"
-        [(ngModel)]="Nitem"
-        class="form-control"
-        (ngModelChange)="capturar($event)"
-        [ngModelOptions]="{ standalone: true }"
-      >
-        <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
-          {{ Nitem.nacionalidad }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <app-combo-estudio
         [dibujar]="item"
         (emitir)="seleccionEstudio($event)"
       ></app-combo-estudio>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
       <input
         (ngModelChange)="filtrarOcupacion()"
@@ -122,14 +125,76 @@
       </select>
     </div>
   </div>
+  <br>
   <div class="row">
-    <div class="col-md-4">
+    <legend><u>Domicilio:</u></legend>
+    <div class="col-md-6">
       <app-combo-provincia
         [dibujar]="item"
         (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
+      <label class="col-sm-12 col-form-label" for="">Barrio:</label>
+      <input
+        (change)="filtrarBarrio()"
+        [(ngModel)]="busquedaBarrio"
+        name="busquedaBarrio"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="BItems.length > 0 && this.busquedaBarrio"
+        name="Bitem"
+        [(ngModel)]="Bitem"
+        class="form-control"
+        (ngModelChange)="capturarBarrio($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let Bitem of BItems" [ngValue]="Bitem">
+          {{ Bitem.nombre }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+        <label class="col-sm-12 col-form-label" for="">Calle:</label>
+        <input
+          (change)="filtrarCalle()"
+          [(ngModel)]="busquedaCalle"
+          name="busquedaCalle"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+        <select
+          *ngIf="CItems.length > 0 && this.busquedaCalle"
+          name="Citem"
+          [(ngModel)]="Citem"
+          class="form-control"
+          (ngModelChange)="capturarCalle($event)"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option *ngFor="let Citem of CItems" [ngValue]="Citem">
+            {{ Citem.nombre }}
+          </option>
+        </select>
+    </div>
+    <div class="col-md-6">
+      <label for="" class="col-sm-12 col-form-label"> Nro.:</label>
+      <input
+        [(ngModel)]="item.dirNro"
+        name="dirNro"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
       <center>
         <label for="Nombre" class="col-sm-12 col-form-label"> Falleció:</label>
         <input

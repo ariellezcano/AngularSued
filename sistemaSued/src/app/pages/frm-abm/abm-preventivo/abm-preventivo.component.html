@@ -30,21 +30,23 @@
         Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombreUnidad }}</b>
       </div>
     </div>
-   <div class="row">
-    <div class="col-md-6">
-      <label for="" class="col-sm-12 col-form-label">Unidad especial interviniente:</label>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="" class="col-sm-12 col-form-label"
+          >Unidad especial interviniente:</label
+        >
         <app-fil-autocompletado-unidad-sued
           (unidadSeleccionada)="unidadEspecial($event)"
         >
         </app-fil-autocompletado-unidad-sued>
-    </div>
-    <div class="col-md-6">
-      <br>
-      <div *ngIf="item.unidadEspecial > 0" class="col-md-12 alert alert-info">
-        Unidad especial:&nbsp;&nbsp;<b>{{ item.nombreUniEspecial }}</b>
+      </div>
+      <div class="col-md-6">
+        <br />
+        <div *ngIf="item.unidadEspecial > 0" class="col-md-12 alert alert-info">
+          Unidad especial:&nbsp;&nbsp;<b>{{ item.nombreUniEspecial }}</b>
+        </div>
       </div>
     </div>
-   </div>
     <div class="form-group row">
       <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
@@ -167,10 +169,18 @@
         </select>
       </div>
     </div>
-    <br>
-    <div *ngIf="busquedaLugar == 'ESTABLECIMIENTOS EDUCATIVOS'" class="row">
+    <div
+      *ngIf="busquedaLugar == 'ESTABLECIMIENTOS EDUCATIVOS' && item.lugar > 0"
+      class="row"
+    >
       <div class="col-md-6">
-        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <label for="" class="col-sm-12 col-form-label">Nivel de estudio:</label>
+        <select
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="item.nivelEducativo"
+          class="form-select"
+          aria-label="Default select example"
+        >
           <option selected>Seleccione una opción:</option>
           <option value="primario">Nivel Primario</option>
           <option value="secundario">Nivel Secundario</option>
@@ -179,14 +189,16 @@
         </select>
       </div>
       <div class="col-md-6">
-        <label for="">Especificar nombre:</label>
-          <input
-            [(ngModel)]="item.especificarLugar"
-            name="especificarLugar"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
+        <label class="col-sm-12 col-form-label" for=""
+          >Especificar nombre del establecimiento:</label
+        >
+        <input
+          [(ngModel)]="item.especificarLugar"
+          name="especificarLugar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
     </div>
     <div class="form-group row">
@@ -199,30 +211,13 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <label for="">Calle:</label>
-          <input
-            (change)="filtrarCalle()"
-            [(ngModel)]="busquedaCalle"
-            name="busquedaCalle"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
-          <select
-            *ngIf="CItems.length > 0 && this.busquedaCalle"
-            name="Citem"
-            [(ngModel)]="Citem"
-            class="form-control"
-            (ngModelChange)="capturarCalle($event)"
-            [ngModelOptions]="{ standalone: true }"
-          >
-            <option *ngFor="let Citem of CItems" [ngValue]="Citem">
-              {{ Citem.nombre }}
-            </option>
-          </select>
+          <app-combo-localidad
+            [dibujar]="item"
+            (emitir)="seleccionLocalidad($event)"
+          ></app-combo-localidad>
         </div>
         <div class="col-md-6">
-          <label for="">Barrio:</label>
+          <label class="col-sm-12 col-form-label" for="">Barrio:</label>
           <input
             (change)="filtrarBarrio()"
             [(ngModel)]="busquedaBarrio"
@@ -246,8 +241,45 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-12">
+          <br>
+          <label
+            *ngIf="this.item.localidadNavigation != undefined"
+            class="col-sm-12 col-form-label alert alert-success"
+            for=""
+            >Localidad Seleccionada: &nbsp;<b
+              >{{ this.item.localidadNavigation.codPostal }} -
+              {{ this.item.localidadNavigation?.nombre }}</b
+            ></label
+          >
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
-          <label for="">Altura:</label> &nbsp;
+          <label class="col-sm-12 col-form-label" for="">Calle:</label>
+          <input
+            (change)="filtrarCalle()"
+            [(ngModel)]="busquedaCalle"
+            name="busquedaCalle"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+          <select
+            *ngIf="CItems.length > 0 && this.busquedaCalle"
+            name="Citem"
+            [(ngModel)]="Citem"
+            class="form-control"
+            (ngModelChange)="capturarCalle($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let Citem of CItems" [ngValue]="Citem">
+              {{ Citem.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="col-sm-12 col-form-label" for="">Altura:</label>
           <input
             [(ngModel)]="item.dirNro"
             type="text"
@@ -255,26 +287,18 @@
             [ngModelOptions]="{ standalone: true }"
           />
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-6">
-          <label for="">Dirección Adicional:</label> &nbsp;
+          <label class="col-sm-12 col-form-label" for=""
+            >Dirección Adicional:</label
+          >
           <input
             [(ngModel)]="item.dirAdic"
             type="text"
             class="form-control"
             [ngModelOptions]="{ standalone: true }"
           />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-4">
-          <app-combo-localidad
-            [dibujar]="item"
-            (emitir)="seleccionLocalidad($event)"
-          ></app-combo-localidad>
-        </div>
-        <div  class="col-md-6">
-          <br>
-            <label *ngIf="this.item.localidadNavigation != undefined" class="col-sm-12 col-form-label alert alert-success" for="">Localidad Seleccionada: &nbsp;<b>{{this.item.localidadNavigation.codPostal}} - {{this.item.localidadNavigation?.nombre}}</b></label>
         </div>
       </div>
     </div>
@@ -292,10 +316,22 @@
             [ngModelOptions]="{ standalone: true }"
           />
           &nbsp;
-          <label *ngIf="this.item.localidad != undefined && this.item.calle != undefined && this.item.dirNro" for="">No</label>&nbsp;
+          <label
+            *ngIf="
+              this.item.localidad != undefined &&
+              this.item.calle != undefined &&
+              this.item.dirNro
+            "
+            for=""
+            >No</label
+          >&nbsp;
           <input
-          (click)="ActivarCasilla(2)"
-          *ngIf="this.item.localidad != undefined && this.item.calle != undefined && this.item.dirNro"
+            (click)="ActivarCasilla(2)"
+            *ngIf="
+              this.item.localidad != undefined &&
+              this.item.calle != undefined &&
+              this.item.dirNro
+            "
             type="checkbox"
             class="form-sm-control"
             [(ngModel)]="automatico"
