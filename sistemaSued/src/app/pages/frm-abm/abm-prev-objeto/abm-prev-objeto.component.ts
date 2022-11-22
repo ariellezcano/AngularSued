@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
-import { ArmaMarca, MarcaMoto, ModeloMoto, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto, PrevObjMoto } from 'src/app/models/index.models';
+import { ArmaMarca, MarcaMoto, ModeloMoto, ModeloVehiculo, Objeto, Preventivo, PrevObjArma, PrevObjAuto, PrevObjeto, PrevObjMoto, TipoMoneda } from 'src/app/models/index.models';
 import { ObjetoService, PreventivoService, PrevMedArmaService, PrevObjAutoService, PrevObjetoArmaService, PrevObjetoService, PrevObjMotoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
@@ -868,6 +868,13 @@ async traerDatosArma(id: number) {
       valor = 'No';
     }
     return valor;
+  }
+
+  //captura provincia
+  seleccionMoneda(event: TipoMoneda) {
+    if (event != undefined) {
+      this.item.moneda = event.id;
+    }
   }
 
   back() {

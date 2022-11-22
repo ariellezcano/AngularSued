@@ -5,11 +5,13 @@ export class PrevObjeto {
     cantidad!: number;
     secuestro: boolean;
     valor: any;
+    moneda!: number;
     cantSecuestro!: number;
     fecha: any;
     //activo!: boolean;
 
-    objetoNavigation: any
+    objetoNavigation: any;
+    monedaNavigation: any;
     
     capturaObj!: string;
     codigo!: string;

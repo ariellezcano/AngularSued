@@ -1,0 +1,37 @@
+<div class="container">
+  <h3 class="alert alert-info text-center" role="alert">
+    Panel ABM Tipo de Moneda
+  </h3>
+  <hr />
+  <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+    <div class="form-group row">
+        <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label"
+          >Tipo de Moneda:</label
+        >
+        <input
+          [(ngModel)]="item.nombre"
+          type="text"
+          class="form-control"
+          formControlName="nombre"
+          [ngClass]="{ 'is-invalid': enviado && f['nombre'].errors }"
+        />
+        <div *ngIf="enviado && f['nombre'].errors" class="invalid-feedback">
+          <div *ngIf="f['nombre'].errors['required']">Campo obligatorio</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+    <br />
+    <hr />
+    <div class="row">
+      <button class="btn btn-dark" type="submit">Guardar</button>
+      &nbsp;
+      <button class="btn btn-info" type="button" (click)="back()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<br />

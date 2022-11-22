@@ -46,5 +46,6 @@ export {PrevObjMoto} from './component/prev-obj-moto';
 export {ModeloMoto} from './component/modelo-moto';
 export {MarcaMoto} from './component/marca-moto';
 export {PrevSnicSuicidio} from './component/prev-snic-suicidio';
-export {PrevSnicHomicidio} from './component/prev-snic-homicidio'
-export {IdentidadGenero} from './component/identidad-genero'
+export {PrevSnicHomicidio} from './component/prev-snic-homicidio';
+export {IdentidadGenero} from './component/identidad-genero';
+export {TipoMoneda} from './component/tipo-moneda'

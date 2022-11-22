@@ -38,6 +38,7 @@ import { AbmProvinciaComponent } from "./frm-abm/abm-provincia/abm-provincia.com
 import { AbmRegistroCivilComponent } from "./frm-abm/abm-registro-civil/abm-registro-civil.component";
 import { AbmSexoComponent } from "./frm-abm/abm-sexo/abm-sexo.component";
 import { AbmSnicComponent } from "./frm-abm/abm-snic/abm-snic.component";
+import { AbmTipoMonedaComponent } from "./frm-abm/abm-tipo-moneda/abm-tipo-moneda.component";
 import { AbmUnidadesComponent } from "./frm-abm/abm-unidades/abm-unidades.component";
 import { AbmVehiculoMarcaComponent } from "./frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component";
 import { AbmVinculoComponent } from "./frm-abm/abm-vinculo/abm-vinculo.component";
@@ -64,6 +65,7 @@ import { LstOcupacionComponent } from "./lst/lst-ocupacion/lst-ocupacion.compone
 import { LstPreventivoComponent } from "./lst/lst-preventivo/lst-preventivo.component";
 import { LstProvinciaComponent } from "./lst/lst-provincia/lst-provincia.component";
 import { LstSexoComponent } from "./lst/lst-sexo/lst-sexo.component";
+import { LstTipoMonedaComponent } from "./lst/lst-tipo-moneda/lst-tipo-moneda.component";
 import { LstUnidadesComponent } from "./lst/lst-unidades/lst-unidades.component";
 import { LstUsuariosComponent } from "./lst/lst-usuarios/lst-usuarios.component";
 import { LstVehiculoMarcaComponent } from "./lst/lst-vehiculo-marca/lst-vehiculo-marca.component";
@@ -497,6 +499,21 @@ const routes: Routes = [
             {
               path: '',
               component: LstIdentidadGeneroComponent,
+             //canActivate: [AuthGuard],
+            }
+          ],
+        },
+        {
+          path: 'lst-tipoMoneda',
+          children: [
+            {
+              path: 'abm/:id',
+              component: AbmTipoMonedaComponent,
+              //canActivate: [AuthGuard],
+            },
+            {
+              path: '',
+              component: LstTipoMonedaComponent,
              //canActivate: [AuthGuard],
             }
           ],

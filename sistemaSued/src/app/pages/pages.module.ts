@@ -128,6 +128,10 @@ import { LstIdentidadGeneroComponent } from './lst/lst-identidad-genero/lst-iden
 import { ComboIdentidadGeneroComponent } from './component/combo-identidad-genero/combo-identidad-genero.component';
 import { FilBuscadorCalleComponent } from './component/fil-buscador-calle/fil-buscador-calle.component';
 import { FilBuscadorBarrioComponent } from './component/fil-buscador-barrio/fil-buscador-barrio.component';
+import { FilTipoMonedaComponent } from './filters/fil-tipo-moneda/fil-tipo-moneda.component';
+import { AbmTipoMonedaComponent } from './frm-abm/abm-tipo-moneda/abm-tipo-moneda.component';
+import { LstTipoMonedaComponent } from './lst/lst-tipo-moneda/lst-tipo-moneda.component';
+import { ComboMonedaComponent } from './component/combo-moneda/combo-moneda.component';
 
 
 @NgModule({
@@ -255,6 +259,10 @@ import { FilBuscadorBarrioComponent } from './component/fil-buscador-barrio/fil-
       ComboIdentidadGeneroComponent,
       FilBuscadorCalleComponent,
       FilBuscadorBarrioComponent,
+      FilTipoMonedaComponent,
+      AbmTipoMonedaComponent,
+      LstTipoMonedaComponent,
+      ComboMonedaComponent,
 
     ],
     exports: [],

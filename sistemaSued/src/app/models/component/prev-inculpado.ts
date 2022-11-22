@@ -20,7 +20,7 @@ export class PrevInculpado {
     dirAdic!: string;
     localidad!: number;
     provincia!: number;
-    persClase!: number;
+    persClase!: string;
     genero!: number;
     provDetencion!: number;
     dirCalle!: number;
