@@ -20,7 +20,6 @@ export class Preventivo {
     letra!: string;
     intervencionPol!: boolean;
     fechaBaja: any;
-    unidadEspecial!: number;
     especificarLugar!: string;
     nivelEducativo!: string;
     usuarioCrea!: number;
@@ -35,7 +34,6 @@ export class Preventivo {
     delitoNavigation: any;
     localidadNavigation: any;
     unidadNavigation: any;
-    unidadEspecialNavigation: any
 
 
     nombreUnidad: string;

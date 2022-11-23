@@ -132,7 +132,7 @@ import { FilTipoMonedaComponent } from './filters/fil-tipo-moneda/fil-tipo-moned
 import { AbmTipoMonedaComponent } from './frm-abm/abm-tipo-moneda/abm-tipo-moneda.component';
 import { LstTipoMonedaComponent } from './lst/lst-tipo-moneda/lst-tipo-moneda.component';
 import { ComboMonedaComponent } from './component/combo-moneda/combo-moneda.component';
-
+import { AbmPrevUnidadEspecialComponent } from './frm-abm/abm-prev-unidad-especial/abm-prev-unidad-especial.component';
 
 @NgModule({
     declarations: [
@@ -263,6 +263,7 @@ import { ComboMonedaComponent } from './component/combo-moneda/combo-moneda.comp
       AbmTipoMonedaComponent,
       LstTipoMonedaComponent,
       ComboMonedaComponent,
+      AbmPrevUnidadEspecialComponent,
 
     ],
     exports: [],

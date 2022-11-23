@@ -24,7 +24,7 @@
   <div class="row">
     <div class="col-md-12">
       <table class="table text-center">
-        <thead class="border border-dark">
+        <thead class="table-dark border border-dark">
           <tr>
             <th>Fecha</th>
             <th>Preventivo N°</th>
@@ -42,21 +42,21 @@
             [ngClass]="{ proccess: selectedRowIndex == item.id }"
             *ngFor="let item of items"
           >
-            <td>
+            <td class="text-primary">
               {{ item.fechaPreventivo | date: "dd/MM/yyyy" }}
             </td>
-            <td>
+            <td class="text-primary">
               {{ item.anio }} - {{ item.nro }} - {{ item.letra }}
             </td>
-            <td>{{ valor(item.intervencionPol) }}</td>
-            <td>
+            <td class="text-primary">{{ valor(item.intervencionPol) }}</td>
+            <td class="text-primary">
               {{ item.fechaHecho | date: "dd/MM/yyyy" }}
             </td>
-            <td>{{ item.hora }}</td>
-            <td>
+            <td class="text-primary">{{ item.hora }}</td>
+            <td class="text-primary">
               {{ item?.delitoNavigation?.descripcion }}
             </td>
-            <td>
+            <td class="text-primary">
               {{ item?.localidadNavigation?.nombre }}
             </td>
             <!-- <td>

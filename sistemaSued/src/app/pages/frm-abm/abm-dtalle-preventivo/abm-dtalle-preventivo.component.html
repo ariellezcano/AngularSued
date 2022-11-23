@@ -1,51 +1,42 @@
 <div class="container">
-  
-    <center>
+  <center>
     <legend>
       <b><u>Panel detalle del Preventivo</u></b>
     </legend>
-    <hr>
-    <!-- <div class="row">
-        <div class="col-md-12">
-          <span>
-            <b
-              ><em><u>DETALLES DEL PREVENTIVO:</u></em>
-            </b>
-          </span>
-        </div>
-      </div> -->
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <label for=""> <b>Fecha Hecho.:</b></label>
-              {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
-            </div>
-            <div class="col-md-4">
-              <label for=""> <b>Hora hecho:</b></label>
-              {{ prev.hora }}
-            </div>
-            <div class="col-md-4">
-              <label for=""> <b>Barrio:</b></label>
-              {{ prev.barrioNavigation?.nombre }}
-            </div>
+    <hr />
+
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label for=""> <b>Fecha Hecho.:</b></label>
+            {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
           </div>
-          <div class="row">
-            <div class="col-md-4">
-              <label for=""> <b>Delito:</b></label>
-              {{ prev.delitoNavigation?.descripcion }}
-            </div>
-            <div class="col-md-4">
-              <label for=""> <b>Año:</b></label>
-              {{ prev.anio }}
-            </div>
-            <div class="col-md-4">
-              <label for=""> <b>Intervención Policial:</b></label>
-              {{ valor(prev.intervencionPol) }}
-            </div>
+          <div class="col-md-4">
+            <label for=""> <b>Hora hecho:</b></label>
+            {{ prev.hora }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Barrio:</b></label>
+            {{ prev.barrioNavigation?.nombre }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label for=""> <b>Delito:</b></label>
+            {{ prev.delitoNavigation?.descripcion }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Año:</b></label>
+            {{ prev.anio }}
+          </div>
+          <div class="col-md-4">
+            <label for=""> <b>Intervención Policial:</b></label>
+            {{ valor(prev.intervencionPol) }}
           </div>
         </div>
       </div>
+    </div>
     <hr />
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
@@ -53,11 +44,25 @@
           class="nav-link active"
           id="home-tab"
           data-bs-toggle="tab"
+          data-bs-target="#unidad"
+          type="button"
+          role="tab"
+          aria-controls="unidad"
+          aria-selected="true"
+        >
+          Unidades Int.
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="home-tab"
+          data-bs-toggle="tab"
           data-bs-target="#home"
           type="button"
           role="tab"
           aria-controls="home"
-          aria-selected="true"
+          aria-selected="false"
         >
           Cáratulas Secundarias
         </button>
@@ -164,13 +169,27 @@
     <div class="tab-content" id="myTabContent">
       <div
         class="tab-pane fade show active"
+        id="unidad"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <br />
+        <section class="tab-panel">
+          <app-abm-prev-unidad-especial
+            [id]="this.id"
+          ></app-abm-prev-unidad-especial>
+        </section>
+        <br />
+      </div>
+      <div
+        class="tab-pane"
         id="home"
         role="tabpanel"
         aria-labelledby="home-tab"
       >
         <br />
         <section class="tab-panel">
-            <app-abm-prev-caratula [id]="this.id"></app-abm-prev-caratula>
+          <app-abm-prev-caratula [id]="this.id"></app-abm-prev-caratula>
         </section>
         <br />
       </div>
@@ -182,13 +201,33 @@
       >
         <br />
         <section class="tab-panel">
-          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMA' || prev.delitoNavigation?.descripcion == 'LESIONES CULPOSAS POR ACC. TRANSITO LEVES'">
+          <ng-container
+            *ngIf="
+              prev.delitoNavigation?.descripcion ==
+                'LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMA' ||
+              prev.delitoNavigation?.descripcion ==
+                'LESIONES CULPOSAS POR ACC. TRANSITO LEVES'
+            "
+          >
             <app-abm-snic [id]="this.id"></app-abm-snic>
           </ng-container>
-          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO TENTATIVO' || prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO CONSUMADO'">
+          <ng-container
+            *ngIf="
+              prev.delitoNavigation?.descripcion ==
+                'HOMICIDIO DOLOSO TENTATIVO' ||
+              prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO CONSUMADO'
+            "
+          >
             <app-abm-prev-homicidio [id]="this.id"></app-abm-prev-homicidio>
           </ng-container>
-          <ng-container *ngIf="prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO CONSUMADO' || prev.delitoNavigation?.descripcion == 'INSTIGACION AL SUICIDIO TENTATIVA'">
+          <ng-container
+            *ngIf="
+              prev.delitoNavigation?.descripcion ==
+                'INSTIGACION AL SUICIDIO CONSUMADO' ||
+              prev.delitoNavigation?.descripcion ==
+                'INSTIGACION AL SUICIDIO TENTATIVA'
+            "
+          >
             <app-abm-prev-suicidio [id]="this.id"></app-abm-prev-suicidio>
           </ng-container>
         </section>
@@ -201,7 +240,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-preventivo-medio [id]="this.id"></app-abm-preventivo-medio>
+          <app-abm-preventivo-medio [id]="this.id"></app-abm-preventivo-medio>
         </section>
       </div>
       <div
@@ -212,7 +251,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-prev-objeto [id]="this.id"></app-abm-prev-objeto>
+          <app-abm-prev-objeto [id]="this.id"></app-abm-prev-objeto>
         </section>
       </div>
       <div
@@ -223,7 +262,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-prev-modalidad [id]="this.id"></app-abm-prev-modalidad>
+          <app-abm-prev-modalidad [id]="this.id"></app-abm-prev-modalidad>
         </section>
       </div>
       <div
@@ -234,7 +273,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-pre-victima [id]="this.id"></app-abm-pre-victima>
+          <app-abm-pre-victima [id]="this.id"></app-abm-pre-victima>
         </section>
       </div>
       <div
@@ -245,7 +284,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-prev-inculpado [id]="this.id"></app-abm-prev-inculpado>
+          <app-abm-prev-inculpado [id]="this.id"></app-abm-prev-inculpado>
         </section>
       </div>
       <div
@@ -256,7 +295,7 @@
       >
         <br />
         <section class="tab-panel">
-            <app-abm-prev-ampliacion [id]="this.id"></app-abm-prev-ampliacion>
+          <app-abm-prev-ampliacion [id]="this.id"></app-abm-prev-ampliacion>
         </section>
       </div>
     </div>

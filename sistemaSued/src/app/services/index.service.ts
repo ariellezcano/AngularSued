@@ -48,4 +48,6 @@ export {SnicSuicidioService} from './component/snic-suicidio.service';
 export {SnicHomicidioService} from './component/snic-homicidio.service';
 export {TipoMonedaService} from './component/tipo-moneda.service';
 export {IdentidadGeneroService} from './component/identidad-genero.service';
+export {PrevUnidadEspecialService} from './component/prev-unidad-especial.service';
+
 

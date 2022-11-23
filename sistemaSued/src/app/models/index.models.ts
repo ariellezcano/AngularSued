@@ -48,4 +48,5 @@ export {MarcaMoto} from './component/marca-moto';
 export {PrevSnicSuicidio} from './component/prev-snic-suicidio';
 export {PrevSnicHomicidio} from './component/prev-snic-homicidio';
 export {IdentidadGenero} from './component/identidad-genero';
-export {TipoMoneda} from './component/tipo-moneda'
+export {TipoMoneda} from './component/tipo-moneda';
+export {PrevUnidadEspecial} from './component/prevUnidadEspecial';

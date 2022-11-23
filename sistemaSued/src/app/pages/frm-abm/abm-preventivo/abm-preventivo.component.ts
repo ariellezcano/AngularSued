@@ -150,9 +150,7 @@ export class AbmPreventivoComponent implements OnInit {
             this.item.pais = this.item.localidadNavigation?.nacionNavigation?.nacion;
             this.item.cp = this.item.localidadNavigation?.codPostal;
           }
-          if(this.item.unidadEspecial != undefined){
-            this.item.nombreUniEspecial = this.item?.unidadEspecialNavigation?.nombre;
-          }
+          
         }
       } catch (error) {}
     }
@@ -398,10 +396,10 @@ export class AbmPreventivoComponent implements OnInit {
     this.item.nombreUnidad = event.nombre;
   }
 
-  unidadEspecial(event: UnidadesSued) {
-    this.item.unidadEspecial = event.id;
-    this.item.nombreUniEspecial = event.nombre;
-  }
+  // unidadEspecial(event: UnidadesSued) {
+  //   this.item.unidadEspecial = event.id;
+  //   this.item.nombreUniEspecial = event.nombre;
+  // }
 
   ActivarCasilla(num: number){
     if(num == 1){

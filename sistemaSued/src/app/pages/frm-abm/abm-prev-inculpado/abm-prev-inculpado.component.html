@@ -53,6 +53,39 @@
   </div>
   <div class="row">
     <div class="col-md-3">
+      <app-combo-sexo
+        [dibujar]="item"
+        (emitir)="seleccionSexo($event)"
+      ></app-combo-sexo>
+    </div>
+    <div class="col-md-3">
+      <app-combo-identidad-genero
+        [dibujar]="item"
+        (emitir)="seleccionIdentidad($event)"
+      ></app-combo-identidad-genero>
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Alias:</label>
+      <input
+        [(ngModel)]="item.alias"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Clase:</label>
+      <input
+        [(ngModel)]="item.persClase"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
       <input
         (ngModelChange)="filtrarNacionalidad()"
@@ -76,45 +109,13 @@
         </option>
       </select>
     </div>
-    <div class="col-md-3">
-      <app-combo-sexo
-        [dibujar]="item"
-        (emitir)="seleccionSexo($event)"
-      ></app-combo-sexo>
-    </div>
-    <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Alias:</label>
-      <input
-        [(ngModel)]="item.alias"
-        type="text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </div>
-    <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Clase:</label>
-      <input
-        [(ngModel)]="item.persClase"
-        type="text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
-    </div>
-  </div>
-  <div class="row">
     <div class="col-md-4">
       <app-combo-provincia
         [dibujar]="item"
         (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
-    <div class="col-md-4">
-      <app-combo-identidad-genero
-        [dibujar]="item"
-        (emitir)="seleccionIdentidad($event)"
-      ></app-combo-identidad-genero>
-    </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-2"></div>
   </div>
   <br />
   <div class="row">
@@ -183,13 +184,10 @@
   <legend><u>Datos Detención:</u></legend>
   <div class="row">
     <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
-      <input
-        [(ngModel)]="item.fechaDetencion"
-        type="date"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <app-combo-provincia
+        [dibujar]="item"
+        (emitir)="seleccionProvDetencion($event)"
+      ></app-combo-provincia>
     </div>
     <div class="col-md-4">
       <app-combo-localidad
@@ -272,10 +270,13 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <app-combo-provincia
-        [dibujar]="item"
-        (emitir)="seleccionProvDetencion($event)"
-      ></app-combo-provincia>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
+      <input
+        [(ngModel)]="item.fechaDetencion"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </div>
     <div class="col-md-8">
       <center>
