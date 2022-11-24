@@ -1,0 +1,70 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <legend class="text-primary"><b> DATOS PARA GENERAR EL REPORTE:</b></legend>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha</label>
+      <input
+        [(ngModel)]="item.fecha1"
+        id="codigo"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha</label>
+      <input
+        [(ngModel)]="item.fecha2"
+        id="codigo"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <app-combo-localidad
+        [dibujar]="item"
+        (emitir)="seleccionLocalidad($event)"
+      ></app-combo-localidad>
+    </div>
+    <div class="col-md-3">
+      <app-combo-departamento
+        [dibujar]="item"
+        (emitir)="seleccionDpto($event)"
+      ></app-combo-departamento>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6">
+      <label class="col-sm-12 col-form-label"> Jurisdicción</label>
+      <app-fil-autocompletado-unidad-sued
+        (unidadSeleccionada)="unidad($event)"
+      ></app-fil-autocompletado-unidad-sued>
+    </div>
+    <div class="col-md-6">
+      <app-fil-buscador-delito
+        (emmit)="delito($event)"
+      ></app-fil-buscador-delito>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div *ngIf="item.unidad > 0" class="col-md-6">
+        <label class="col-sm-12 col-form-label alert alert-info"> {{item.nombreUnidad}}</label>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="row">
+    <div class="col-md-12">
+        <button type="button" class="btn btn-primary" (click)="buscar()">Filtrar dato</button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" (click)="back()">Cancelar</button>
+    </div>
+  </div>
+</div>

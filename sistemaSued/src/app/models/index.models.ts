@@ -50,3 +50,6 @@ export {PrevSnicHomicidio} from './component/prev-snic-homicidio';
 export {IdentidadGenero} from './component/identidad-genero';
 export {TipoMoneda} from './component/tipo-moneda';
 export {PrevUnidadEspecial} from './component/prevUnidadEspecial';
+
+//planillas
+export {PlanillaHD} from './component/models-planillas/planillaHD';

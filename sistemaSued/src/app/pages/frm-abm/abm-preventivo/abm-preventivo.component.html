@@ -169,38 +169,74 @@
         </select>
       </div>
     </div>
-    <div
+    <ng-container
       *ngIf="busquedaLugar == 'ESTABLECIMIENTOS EDUCATIVOS' && item.lugar > 0"
-      class="row"
     >
-      <div class="col-md-6">
-        <label for="" class="col-sm-12 col-form-label">Nivel de estudio:</label>
-        <select
-          [ngModelOptions]="{ standalone: true }"
-          [(ngModel)]="item.nivelEducativo"
-          class="form-select"
-          aria-label="Default select example"
-        >
-          <option selected>Seleccione una opción:</option>
-          <option value="primario">Nivel Primario</option>
-          <option value="secundario">Nivel Secundario</option>
-          <option value="terciario">Nivel Terciario</option>
-          <option value="universitario">Nivel Universitario</option>
-        </select>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="" class="col-sm-12 col-form-label"
+            >Nivel de estudio:</label
+          >
+          <select
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="item.nivelEducativo"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Seleccione una opción:</option>
+            <option value="primario">Nivel Primario</option>
+            <option value="secundario">Nivel Secundario</option>
+            <option value="terciario">Nivel Terciario</option>
+            <option value="universitario">Nivel Universitario</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="col-sm-12 col-form-label" for=""
+            >Especificar nombre del establecimiento:</label
+          >
+          <input
+            [(ngModel)]="item.especificarLugar"
+            name="especificarLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
       </div>
-      <div class="col-md-6">
-        <label class="col-sm-12 col-form-label" for=""
-          >Especificar nombre del establecimiento:</label
-        >
-        <input
-          [(ngModel)]="item.especificarLugar"
-          name="especificarLugar"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+    </ng-container>
+    <ng-container *ngIf="busquedaLugar == 'COMERCIO' && item.lugar > 0">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-sm-12 col-form-label" for=""
+            >Especificar nombre del comercio:</label
+          >
+          <input
+            [(ngModel)]="item.especificarLugar"
+            name="especificarLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="busquedaLugar == 'EDIFICIOS PUBLICOS' && item.lugar > 0">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-sm-12 col-form-label" for=""
+            >Especificar nombre del edificio:</label
+          >
+          <input
+            [(ngModel)]="item.especificarLugar"
+            name="especificarLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </ng-container>
+
     <div class="form-group row">
       <div class="row">
         <legend>

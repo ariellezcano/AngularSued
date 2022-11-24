@@ -133,6 +133,8 @@ import { AbmTipoMonedaComponent } from './frm-abm/abm-tipo-moneda/abm-tipo-moned
 import { LstTipoMonedaComponent } from './lst/lst-tipo-moneda/lst-tipo-moneda.component';
 import { ComboMonedaComponent } from './component/combo-moneda/combo-moneda.component';
 import { AbmPrevUnidadEspecialComponent } from './frm-abm/abm-prev-unidad-especial/abm-prev-unidad-especial.component';
+import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-planilla-hd.component';
+import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-buscador-delito.component';
 
 @NgModule({
     declarations: [
@@ -264,6 +266,8 @@ import { AbmPrevUnidadEspecialComponent } from './frm-abm/abm-prev-unidad-especi
       LstTipoMonedaComponent,
       ComboMonedaComponent,
       AbmPrevUnidadEspecialComponent,
+      AbmPlanillaHDComponent,
+      FilBuscadorDelitoComponent,
 
     ],
     exports: [],
