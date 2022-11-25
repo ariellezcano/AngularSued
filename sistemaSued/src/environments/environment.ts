@@ -6,11 +6,12 @@ export const environment = {
   production: false,
   //URL:'http://192.168.5.252/apiSued/api/',
   //casa
-  URL:'http://192.168.1.106:7033/api/',
-  //trabajo
+  //URL:'http://192.168.1.106:7033/api/',
   
+  //trabajo
   //URL: 'https://localhost:7033/api/',
-  //URL: 'http://192.168.5.252:7033/api/',
+  URL: 'http://192.168.5.252:7033/api/',
+
   URLOci: 'https://policiadigital.chaco.gob.ar:9090/api_oci/',
   URLGeolocalizacion: 'https://api.geoapify.com/v1/geocode/search?text=',
 
