@@ -58,6 +58,22 @@ export class AbmPlanillaHDComponent implements OnInit {
   }
 
   async buscar() {
+    if(this.item.fecha2 == undefined){
+      this.item.fecha2 = this.item.fecha1;
+    }
+    if(this.item.localidad == undefined){
+      this.item.localidad = 0;
+    }
+    if(this.item.departamento == undefined){
+      this.item.departamento = 0;
+    }
+    if(this.item.unidad == undefined){
+      this.item.unidad = 0;
+    }
+    if(this.item.delito == undefined){
+      this.item.delito = 0;
+    }
+
     try {
       let data = await this.wsdl
         .doFilterPlanilla(
