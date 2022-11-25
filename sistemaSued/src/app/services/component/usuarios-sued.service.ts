@@ -11,7 +11,7 @@ export class UsuariosSuedService {
   api: any;
   
   constructor(private http: HttpClient) {   
-    this.api = environment.URL + "UsuarioSued";
+    this.api = environment.URL + "UsuariosSued";
   }
 
   getFindId(id:any){
@@ -93,7 +93,7 @@ export class UsuariosSuedService {
 
   doFilter(criterio: any){
     this.other_header = this.other_header;
-    const ruta = this.api+'/'+'filterUsuarioSistema/';
+    const ruta = this.api+'/'+'filterUsuarioSued/';
     return this.http
       .get(ruta + criterio)
       .toPromise()

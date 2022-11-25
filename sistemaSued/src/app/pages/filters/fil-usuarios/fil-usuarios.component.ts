@@ -23,7 +23,7 @@ export class FilUsuariosComponent implements OnInit {
   public rol: any;
 
   public nombre: string = "OCI";
-  public url: string = "https://policiadigital.chaco.gob.ar/oci/"
+  public url: string = "https://policiadigital.chaco.gob.ar/sued/"
   public activoSistema: boolean = true;
 
 
@@ -49,7 +49,9 @@ export class FilUsuariosComponent implements OnInit {
         this.crit = this.search;
       }
       let data = await this.wsdl.doFindDni(this.crit).then();
+      console.log("data", data);
       this.result = JSON.parse(JSON.stringify(data));
+      console.log("result", this.result);
       if (this.result.code == 200) {
         this.id = this.result.data.id;
         this.verificarUsuario();

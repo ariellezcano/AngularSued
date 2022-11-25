@@ -17,7 +17,7 @@ export const environment = {
 
   URLCivil: 'http://10.125.31.74/api_civil/',
   //URL: 'http://10.125.31.10:8888/api_oci/',
-  URLRegBus: 'http://10.125.31.74/api_registroUsuario/',
+  URLRegBus: 'http://192.168.5.242/api_registroUsuario/',
 
 };
 

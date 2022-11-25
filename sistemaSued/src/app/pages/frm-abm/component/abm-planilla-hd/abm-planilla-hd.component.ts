@@ -58,19 +58,19 @@ export class AbmPlanillaHDComponent implements OnInit {
   }
 
   async buscar() {
-    if(this.item.fecha2 == undefined){
+    if (this.item.fecha2 == undefined) {
       this.item.fecha2 = this.item.fecha1;
     }
-    if(this.item.localidad == undefined){
+    if (this.item.localidad == undefined) {
       this.item.localidad = 0;
     }
-    if(this.item.departamento == undefined){
+    if (this.item.departamento == undefined) {
       this.item.departamento = 0;
     }
-    if(this.item.unidad == undefined){
+    if (this.item.unidad == undefined) {
       this.item.unidad = 0;
     }
-    if(this.item.delito == undefined){
+    if (this.item.delito == undefined) {
       this.item.delito = 0;
     }
 
@@ -88,12 +88,13 @@ export class AbmPlanillaHDComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
-        console.log("items", this.items);
+        console.log('items', this.items);
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
     }
   }
+
   cancelar() {
     this.item = new PlanillaHD();
     this.back();

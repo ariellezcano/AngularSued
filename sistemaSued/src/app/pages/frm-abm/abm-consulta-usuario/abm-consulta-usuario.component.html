@@ -1,37 +1,64 @@
 <div class="container">
-  <div class="row">
+  <br>
+  <div class="row alert alert-info">
     <h3><b>Habilitar Usuarios para uso del Sistema</b></h3>
-    <br />
-    <hr />
+  </div>
+  <hr />
+  <div class="row ">
     <div class="col-md-12">
       <app-fil-usuarios (filter)="doFound($event)"></app-fil-usuarios>
     </div>
   </div>
-    <form *ngIf="proceso" (ngSubmit)="pregunta()">
-      <div class="row">
-        <div class="col-md-12 alert alert-info text-center">
-          <h3>
-            <u><em>{{ dtSued.tipoPersona }}</em></u>
-          </h3>
+  <hr />
+  <form *ngIf="proceso" (ngSubmit)="pregunta()">
+    <div class="row">
+      <div class="col-md-12 alert alert-info text-center">
+        <h3>
+          <u
+            ><em>{{ valor(dtSued.tipoPersona) }}</em></u
+          >
+        </h3>
+        <h4>
+          <b>{{ dtSued.apellido }}, {{ dtSued.nombre }}</b>
+          Dni n°: <b>{{ dtSued.norDni }}</b>
+        </h4>
+        <br />
+        <ng-container
+          *ngIf="dtSued.rol != 'MANAGER'; then thenTemplate; else elseTemplate"
+        ></ng-container>
+        <ng-template #thenTemplate>
+          <h5>
+            Rol Vista:
+            <input [(ngModel)]="rol" type="checkbox" name="rol" id="" />
+          </h5>
+        </ng-template>
+        <ng-template #elseTemplate>
           <h4>
-            <b
-              >{{ dtSued.apellido }},
-              {{ dtSued.nombre }}</b
-            >
-            Dni n°: <b>{{ dtSued.norDni }}</b>
+            Rol del Personal: <b>{{ dtSued.rol }}</b>
           </h4>
-          <br>
-          <ng-container *ngIf="dtSued.rolNavigation.nombre != 'MANAGER'; then thenTemplate; else elseTemplate"></ng-container>
-          <ng-template #thenTemplate>
-            <h5> Rol Vista: <input [(ngModel)]="rol" type="checkbox" name="rol" id=""> </h5>
-          </ng-template>
-          <ng-template #elseTemplate>
-           <h4> Rol Personal: <b>{{ dtSued.rol }}</b></h4>
-          </ng-template>
-        </div>
+        </ng-template>
       </div>
-      <button type="submit" class="btn btn-outline-info btn-block">Guardar Usuario</button>
-      &nbsp;
-    </form>
-    <button (click)="back()" type="submit" class="btn btn-outline-warning btn-block">Volver</button>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-info d-grid gap-2 col-6 mx-auto">
+          <i class="fa fa-thumbs-up" aria-hidden="true">&nbsp;Guardar Usuario</i>
+        </button>
+      </div>
+    </div>
+    &nbsp;
+  </form>
+  <div class="row">
+    <div class="col-md-12 ">
+      <button
+        (click)="back()"
+        type="submit"
+        class="btn btn-danger d-grid gap-2 col-6 mx-auto"
+      >
+      <i class="fa fa-thumbs-down" aria-hidden="true">&nbsp; Cancelar</i>
+        
+      </button>
+    </div>
+  </div>
 </div>

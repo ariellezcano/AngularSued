@@ -81,31 +81,41 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   }
 
   doFound(event: Usuario_repo) {
-    //console.log('Personal Policial', event);
+    console.log('Event', event);
     this.proceso = true;
     //console.log('event', event);
     if (event.civil != null) {
       //console.log('Personal civil', event);
-      //  this.dtSued.tipoPersona = false;
-      //  this.dtSued.civil = event.civil.id;
-      //  this.dtSued.nombre = event.civil.nombre;
-      //  this.dtSued.apellido = event.civil.apellido;
-      //  this.dtSued.datosPersonal.norDni = event.civil.norDni;
-      //  this.dtSued.datosPersonal.usuario = event.usuario;
-      //  this.dtSued.datosPersonal.rol = event.rol.nombre;
-      //  this.dtSued.usuario = event.id;
+        this.dtSued.tipoPersona = false;
+        this.dtSued.civil = event.civil.id;
+        this.dtSued.nombre = event.civil.nombre;
+        this.dtSued.apellido = event.civil.apellido;
+        this.dtSued.norDni = event.civil.norDni;
+        this.dtSued.usuarioRepo = event.usuario;
+        this.dtSued.rol = event.rol.nombre;
+        this.dtSued.userCreaRepo = event.id;
     }
 
     if (event.persona != null) {
-      // this.dtOci.datosPersonal.tipoPersona = 'Personal Policial';
-      // this.dtOci.persona = event.persona.id;
-      // this.dtOci.datosPersonal.nombre = event.persona.nombre;
-      // this.dtOci.datosPersonal.apellido = event.persona.apellido;
-      // this.dtOci.datosPersonal.norDni = event.persona.norDni;
-      // this.dtOci.datosPersonal.usuario = event.usuario;
-      // this.dtOci.datosPersonal.rol = event.rol.nombre;
-      // this.dtOci.usuario = event.id;
+        this.dtSued.tipoPersona = true;
+        this.dtSued.persona = event.persona.id;
+        this.dtSued.nombre = event.persona.nombre;
+        this.dtSued.apellido = event.persona.apellido;
+        this.dtSued.norDni = event.persona.norDni;
+        this.dtSued.usuarioRepo = event.usuario;
+        this.dtSued.rol = event.rol.nombre;
+        this.dtSued.userCreaRepo = event.id;
     }
+  }
+
+  valor(item: any){
+    let dato: string = '';
+    if(item){
+      dato = 'Personal Policial';
+    }else{
+      dato = 'Personal Administrativo';
+    }
+    return dato;
   }
 
   back() {
