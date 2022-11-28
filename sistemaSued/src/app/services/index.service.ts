@@ -49,5 +49,7 @@ export {SnicHomicidioService} from './component/snic-homicidio.service';
 export {TipoMonedaService} from './component/tipo-moneda.service';
 export {IdentidadGeneroService} from './component/identidad-genero.service';
 export {PrevUnidadEspecialService} from './component/prev-unidad-especial.service';
+export {RolService} from './component/rol.service';
+
 
 

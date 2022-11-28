@@ -4,14 +4,14 @@
 
 <div *ngIf="!load">
   <div class="container-xxl">
-    <div class="row">
+    <!-- <div class="row alert alert-success">
       <div class="col-md-12 text-center">
         <b id="titulo2"
           ><em><u> Sistema Estadísticas Policiales</u></em></b
         >
       </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <div class="row alert alert-success">
       <div class="col-md-12">
         <b id="titulo"
           ><em><u>Listado de Usuarios</u></em>
@@ -84,7 +84,7 @@
                       show-delay="10"
                       class="btn btn-outline-info btn-sm"
                     >
-                      <i class="fas fa-edit"></i>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </button>
                     &nbsp;
                     <button
@@ -95,7 +95,7 @@
                       show-delay="10"
                       class="btn btn-outline-danger btn-sm"
                     >
-                      <i class="fas fa-trash"></i>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                   </div>
                 </div>
@@ -110,7 +110,7 @@
                   show-delay="10"
                   class="btn btn-outline-danger btn-sm"
                 >
-                  <i class="fas fa-trash"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </ng-template>
             </td>
@@ -138,7 +138,7 @@
   <hr />
   <div class="row">
     <div class="col-md-12" id="derecha">
-      <button (click)="habilitar()" class="btn btn-outline-info">
+      <button (click)="habilitar()" class="btn btn-info">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Habilitar nuevo usuario
       </button>

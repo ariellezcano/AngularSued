@@ -76,36 +76,34 @@ export class LstUsuariosComponent implements OnInit {
 
   async delete() {
     try {
-      let date = new Date();
       this.procesando = true;
       this.item.baja = true;
-      this.item.fechaBaja = moment(date).format('YYYY-MM-DD');
-      this.item.usuarioBaja = UturuncoUtils.getSession('user');
+      //this.item.usuarioBaja = UturuncoUtils.getSession('user');
       console.log('usuario', this.item);
-      const res = await this.wsdl.doUpdate(this.item.id, this.item).then();
+      const res = await this.wsdl.doUpdateBaja(this.item.id, this.item).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.code == 200) {
-        try {
-          let data = await this.wsdlRegistro
-            .patchSistemaHabilitados(
-              this.item.usuarioRepo,
-              this.nombre,
-              this.url,
-              this.activoSistema
-            )
-            .then();
-          let res = JSON.parse(JSON.stringify(data));
-          console.log('resultadoasa', result);
-          if (res.code == 200) {
-            console.log('Personal inhabilitado');
-          }
-        } catch (error) {
-          console.log('respuestaerror', error);
-        }
-        UturuncoUtils.showToas(result.msg, 'success');
+        // try {
+        //   let data = await this.wsdlRegistro
+        //     .patchSistemaHabilitados(
+        //       this.item.usuarioRepo,
+        //       this.nombre,
+        //       this.url,
+        //       this.activoSistema
+        //     )
+        //     .then();
+        //   let res = JSON.parse(JSON.stringify(data));
+        //   console.log('resultadoasa', result);
+        //   if (res.code == 200) {
+        //     console.log('Personal inhabilitado');
+        //   }
+        // } catch (error) {
+        //   console.log('respuestaerror', error);
+        // }
+        UturuncoUtils.showToas('Usuario inhabilitado correctamente!', 'success');
         this.cancel();
       } else {
-        UturuncoUtils.showToas(result.msg, 'error');
+        UturuncoUtils.showToas('Error al inhabilitar el usuario', 'error');
       }
     } catch (error: any) {
       UturuncoUtils.showToas('Excepción: ' + error.message, 'error');

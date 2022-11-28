@@ -18,12 +18,12 @@ export class UsuarioSued {
   sistema!: number; /*id de unidad*/
   cifrado: any; /*PARA INGRESAR DESDE EL REPO*/
   fechaVinculacion: any; /*fecha de control para el ingreso*/
-  rol: any;
+  rol!: number;
 
+  rolNombre!: string | undefined;
   rolNavigation: any;
   unidadSistemaNavigation: any;
   constructor() {
-    this.rol = new Rol();
     this.baja = false;
     this.activo = true;
   }

@@ -1,6 +1,6 @@
 export class Rol {
     id!: number;
-    nombre: String | undefined;
+    nombre: string | undefined;
     activo: boolean
 
     constructor() {

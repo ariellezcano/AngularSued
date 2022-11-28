@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { UsuarioSued, Usuario_repo } from 'src/app/models/index.models';
+import moment from 'moment';
+import { Rol, UsuarioSued, Usuario_repo } from 'src/app/models/index.models';
 import { RegistroUsuarioService, UsuariosSuedService } from 'src/app/services/index.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
@@ -18,10 +18,10 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   item: Usuario_repo;
   dtSued!: UsuarioSued;
   proceso: Boolean;
-  tipoPersona: string;
+  //tipoPersona: string;
   rol: boolean;
 
-  public nombre: string = "sued";
+  public nombre: string = "SUED";
   public url: string = "https://policiadigital.chaco.gob.ar/sued/"
   public activo: boolean = true;
 
@@ -29,7 +29,7 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   constructor(private route: Router, private wsdl: UsuariosSuedService, private wsdlRegistro: RegistroUsuarioService) {
     this.item = new Usuario_repo();
     this.dtSued = new UsuarioSued();
-    this.tipoPersona = '';
+    //this.tipoPersona = '';
     this.proceso = false;
     this.rol = false;
   }
@@ -37,20 +37,21 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   ngOnInit(): void {}
 
   public async insertSued() {
-
-    this.dtSued.usuarioRepo = UturuncoUtils.getSession('user');
+    this.dtSued.sistema = 1;
+    this.dtSued.userCreaRepo = 1;
+    //this.dtSued.userCreaRepo = UturuncoUtils.getSession('user');
+   
     this.dtSued.fechaAlta = moment(this.dtSued.fechaAlta).format('YYYY-MM-DD');
-    // if (this.rol == true) {
-    //   this.dtOci.datosPersonal.rol = 'VISTA';
-    // }
     try {
       let data = await this.wsdl.doInsert(this.dtSued).then();
+      console.log("data", data)
       let res = JSON.parse(JSON.stringify(data));
+      console.log("res", res)
       if (res.code == 200) {
-        try {
-          let data = await this.wsdlRegistro.patchSistemaHabilitados(this.dtSued.usuarioRepo, this.nombre, this.url, this.activo).then();
-        } catch (error) {
-        }
+        // try {
+        //   let data = await this.wsdlRegistro.patchSistemaHabilitados(this.dtSued.usuarioRepo, this.nombre, this.url, this.activo).then();
+        // } catch (error) {
+        // }
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -67,7 +68,7 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   pregunta() {
     Swal.fire({
       title: 'Estás seguro?',
-      text: 'Usted está por habilitar al usuario!',
+      text: 'Usted está por habilitar un nuevo usuario!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -91,9 +92,10 @@ export class AbmConsultaUsuarioComponent implements OnInit {
         this.dtSued.nombre = event.civil.nombre;
         this.dtSued.apellido = event.civil.apellido;
         this.dtSued.norDni = event.civil.norDni;
-        this.dtSued.usuarioRepo = event.usuario;
-        this.dtSued.rol = event.rol.nombre;
-        this.dtSued.userCreaRepo = event.id;
+        this.dtSued.usuarioRepo = event.id;
+        this.dtSued.rol = event.rol.id;
+        this.dtSued.rolNombre = event.rol.nombre;
+        //this.dtSued.usuarioRepo = event.id;
     }
 
     if (event.persona != null) {
@@ -102,9 +104,16 @@ export class AbmConsultaUsuarioComponent implements OnInit {
         this.dtSued.nombre = event.persona.nombre;
         this.dtSued.apellido = event.persona.apellido;
         this.dtSued.norDni = event.persona.norDni;
-        this.dtSued.usuarioRepo = event.usuario;
-        this.dtSued.rol = event.rol.nombre;
-        this.dtSued.userCreaRepo = event.id;
+        this.dtSued.usuarioRepo = event.id;
+        this.dtSued.rol = event.rol.id;
+        this.dtSued.rolNombre = event.rol.nombre;
+        //this.dtSued.userCreaRepo = event.id;
+    }
+  }
+
+  seleccionRol(event: Rol) {
+    if (event != undefined) {
+      this.dtSued.rol = event.id;
     }
   }
 

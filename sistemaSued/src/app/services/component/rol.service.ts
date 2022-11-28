@@ -5,13 +5,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosSuedService {
+export class RolService {
 
   other_header: any;
   api: any;
   
   constructor(private http: HttpClient) {   
-    this.api = environment.URL + "UsuariosSued";
+    this.api = environment.URL + "Rol";
   }
 
   getFindId(id:any){
@@ -75,23 +75,6 @@ export class UsuariosSuedService {
       });
   }
 
-  doUpdateBaja(id: any, evento: any) {
-    this.other_header = this.other_header;
-
-    return this.http
-      .put(this.api +'/bajaUsuario/'+ id, evento, 
-      { headers: this.other_header })
-      .toPromise()
-      .catch((err) => {
-        console.log(err);
-        return {
-          code: 500,
-          data: err.message,
-          msg: 'Error en el servicio',
-        };
-      });
-  }
-
 
   doDelete(id: number) {
     this.other_header = this.other_header;
@@ -110,7 +93,7 @@ export class UsuariosSuedService {
 
   doFilter(criterio: any){
     this.other_header = this.other_header;
-    const ruta = this.api+'/'+'filterUsuarioSued/';
+    const ruta = this.api+'/'+'filterRol/';
     return this.http
       .get(ruta + criterio)
       .toPromise()

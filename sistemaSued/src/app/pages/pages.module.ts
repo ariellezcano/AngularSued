@@ -135,6 +135,7 @@ import { ComboMonedaComponent } from './component/combo-moneda/combo-moneda.comp
 import { AbmPrevUnidadEspecialComponent } from './frm-abm/abm-prev-unidad-especial/abm-prev-unidad-especial.component';
 import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-planilla-hd.component';
 import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-buscador-delito.component';
+import { ComboRolComponent } from './component/combo-rol/combo-rol.component';
 
 @NgModule({
     declarations: [
@@ -268,6 +269,7 @@ import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-
       AbmPrevUnidadEspecialComponent,
       AbmPlanillaHDComponent,
       FilBuscadorDelitoComponent,
+      ComboRolComponent,
 
     ],
     exports: [],

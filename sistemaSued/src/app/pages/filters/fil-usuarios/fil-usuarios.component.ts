@@ -1,7 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioSued, Usuario_repo } from 'src/app/models/index.models';
-import { RegistroUsuarioService, UsuariosSuedService } from 'src/app/services/index.service';
+import {
+  RegistroUsuarioService,
+  UsuariosSuedService,
+} from 'src/app/services/index.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 
@@ -22,17 +25,16 @@ export class FilUsuariosComponent implements OnInit {
   public result: any;
   public rol: any;
 
-  public nombre: string = "OCI";
-  public url: string = "https://policiadigital.chaco.gob.ar/sued/"
+  public nombre: string = 'SUED';
+  public url: string = 'https://policiadigital.chaco.gob.ar/sued/';
   public activoSistema: boolean = true;
-
 
   item: UsuarioSued;
 
   constructor(
     private route: Router,
     private wsdl: RegistroUsuarioService,
-    private wsdlUsuarioSued: UsuariosSuedService,
+    private wsdlUsuarioSued: UsuariosSuedService
   ) {
     this.procesando = false;
     this.cargando = false;
@@ -49,13 +51,12 @@ export class FilUsuariosComponent implements OnInit {
         this.crit = this.search;
       }
       let data = await this.wsdl.doFindDni(this.crit).then();
-      console.log("data", data);
       this.result = JSON.parse(JSON.stringify(data));
-      console.log("result", this.result);
+      console.log('result', this.result);
       if (this.result.code == 200) {
         this.id = this.result.data.id;
         this.verificarUsuario();
-      }  else if (this.result.code == 204) {
+      } else if (this.result.code == 204) {
         Swal.fire({
           title: 'El usuario no existe!',
           text: 'Si el usuario que está por habilitrar es Personal Policial, por favor comuniquece con el área de Sistemas!, pero si el usuario es Personal Civil, puede crearlo. Al presionar el botón crear, le redirigira al formulario para su creación, pero si ya fue creado debera registrarse en el sistema REPO',
@@ -72,10 +73,11 @@ export class FilUsuariosComponent implements OnInit {
         });
       } else if (this.result.code == 205) {
         this.search = '';
-        Swal.fire({title: 'El usuario no existe!',
-        text: 'Deberá registrarse en el sistema REPO',
-        icon: 'warning',
-      })
+        Swal.fire({
+          title: 'El usuario no existe!',
+          text: 'Deberá registrarse en el sistema REPO',
+          icon: 'warning',
+        });
       } else {
         this.filter.emit();
         this.procesando = false;
@@ -94,10 +96,12 @@ export class FilUsuariosComponent implements OnInit {
 
   async verificarUsuario() {
     let data1 = await this.wsdlUsuarioSued.getFindId(this.id).then();
+    console.log('data1', data1);
     const result1 = JSON.parse(JSON.stringify(data1));
     if (result1.code == 200) {
-      this.item = result1.data;
-      if (result1.data.baja) {
+      this.item = result1.dato;
+      console.log('this.item', this.item);
+      if (this.item.baja) {
         Swal.fire({
           title: 'El usuario se encuentra dado de baja',
           text: 'DESEA HABILITARLO!',
@@ -113,6 +117,7 @@ export class FilUsuariosComponent implements OnInit {
           }
         });
       } else {
+        this.search = '';
         Swal.fire({
           title: 'El usuario ya se encuentra habilitado!',
           showClass: {
@@ -134,19 +139,19 @@ export class FilUsuariosComponent implements OnInit {
     //fecha y id de quien da de baja
     this.item.baja = false;
     let data2 = await this.wsdlUsuarioSued
-      .doUpdate(this.item.id, this.item)
+      .doUpdateBaja(this.item.id, this.item)
       .then();
     const result2 = JSON.parse(JSON.stringify(data2));
     if (result2.code == 200) {
-      try {
-        let data = await this.wsdl.patchSistemaHabilitados(this.item.usuarioRepo, this.nombre, this.url, this.activoSistema).then();
-        let res = JSON.parse(JSON.stringify(data));
-        if(res.code == 200){
-          console.log("Personal Habilitado");
-        }
-      } catch (error) {
-        //console.log("respuestaerror", error);
-      }
+      // try {
+      //   let data = await this.wsdl.patchSistemaHabilitados(this.item.usuarioRepo, this.nombre, this.url, this.activoSistema).then();
+      //   let res = JSON.parse(JSON.stringify(data));
+      //   if(res.code == 200){
+      //     console.log("Personal Habilitado");
+      //   }
+      // } catch (error) {
+      //   //console.log("respuestaerror", error);
+      // }
 
       Swal.fire(
         'Operación Exitosa!',
