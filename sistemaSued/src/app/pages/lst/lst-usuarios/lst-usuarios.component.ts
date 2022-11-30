@@ -47,9 +47,9 @@ export class LstUsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.nombreUsu = JSON.parse(
-    //   '' + UturuncoUtils.getSession('personal')
-    // ).nombre;
+    this.nombreUsu = JSON.parse(
+      '' + UturuncoUtils.getSession('personal')
+    ).nombre;
   }
 
   preDelete(item: UsuarioSued) {

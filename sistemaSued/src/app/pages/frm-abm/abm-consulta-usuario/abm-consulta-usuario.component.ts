@@ -38,8 +38,8 @@ export class AbmConsultaUsuarioComponent implements OnInit {
 
   public async insertSued() {
     this.dtSued.sistema = 1;
-    this.dtSued.userCreaRepo = 1;
-    //this.dtSued.userCreaRepo = UturuncoUtils.getSession('user');
+    //this.dtSued.userCreaRepo = 1;
+    this.dtSued.userCreaRepo = UturuncoUtils.getSession('user');
    
     this.dtSued.fechaAlta = moment(this.dtSued.fechaAlta).format('YYYY-MM-DD');
     try {

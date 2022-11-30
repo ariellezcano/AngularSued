@@ -23,7 +23,7 @@ export class Utils {
     }
   
     public static clearSession() {
-      localStorage.clear();
+      sessionStorage.clear();
       /*
           for (let i = 0; i < localStorage.length; i++) {
             let key = this.loc.key(i);

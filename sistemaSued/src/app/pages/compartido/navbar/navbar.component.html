@@ -1,126 +1,265 @@
 
-    <!-- <nav
-      class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-      >
-      <div class="container">
-        <div
-        >
-          <ul class="navbar-nav flex-grow">
-            <form class="form-inline my-2 my-lg-0">
-              <label id="ROL" for="Name">USUARIO: {{ rol | uppercase }}</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <label id="label" for="Name">{{ usuario | uppercase }}</label> &nbsp; &nbsp;
-              <button
-                (click)="cerrar()"
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
+<nav class="navbar navbar-expand-lg navbar-primary bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/principal']">
+      <img src="./assets/img/escudo.png" alt="" width="30" height="33" />
+      &nbsp;<b> Estadísticas </b>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+          <b>Usuarios</b>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-usuarios/']"
+                >Lista de usuarios habilitados</a
               >
-                Cerrar Sesión
-              </button>
-            </form>
-          </ul>
-        </div>
-      </div>
-    </nav> -->
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" [routerLink]="['/principal']">
-          <img src="./assets/img/escudo.png" alt="" width="30" height="33"> &nbsp;<b> Estadísticas </b>
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/lst-usuarios/']">Usuarios</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" [routerLink]="['/lst-preventivo/']">Preventivos</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Otros:
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" [routerLink]="['/lst-contravencion/']">Contravenciones</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-colisiones/']">Colisiones</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-lesiones/']">Lesiones Leves</a></li>                
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Tablas
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 300px; height: 150px; overflow: auto">
-                <li><a class="dropdown-item" [routerLink]="['/lst-delito/']">Delitos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-lugar/']">Lugares</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-medio/']">Medios Utilizados</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-objeto/']">Objetos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-barrio/']">Barrios</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-calle/']">Calles</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-dncp/']">Delitos S.N.I.C</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-departamento/']">Departamentos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-localidad/']">Localidades</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-modalidad/']">Modalidad</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-naciones/']">Nacionalidad</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-estudio/']">Nivel de estudios</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-ocupacion/']">Ocupaciones</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-provincia/']">Provincias</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-sexo/']">Sexos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-unidades/']">Unidades</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-vinculo/']">Vínculos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-identidadGenero/']">Identidad de Género</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-tipoMoneda/']">Tipo de Moneda</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-marcas/']">Marcas de armas</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-marcasVehiculos/']">Marcas de vehículos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-modelos/']">Modelo de vehículos</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-marcasMoto/']">Marcas de motocicletas</a></li>
-                <li><a class="dropdown-item" [routerLink]="['/lst-modelosMoto/']">Modelos de motocicletas</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Planillas
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" [routerLink]="['/planillaHD/abm']">Planilla de Hechos Delictuosos</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <!-- <li><hr class="dropdown-divider"></li> -->
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-roles/']">Roles de usuarios</a>
             </li>
           </ul>
-          <form class="d-flex">
-            <!-- <label id="ROL" for="Name">USUARIO: {{ rol | uppercase }}</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <label id="label" for="Name">{{ usuario | uppercase }}</label> &nbsp; &nbsp;
-            <button class="btn btn-outline-success" type="submit">Cerrar Sesión</button> -->
-          </form>
+        </li>
+        <!-- <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['/lst-usuarios/']"
+            >Usuarios</a
+          >
+        </li> -->
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['/lst-preventivo/']"
+            >Preventivos</a
+          >
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Otros:
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-contravencion/']"
+                >Contravenciones</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-colisiones/']"
+                >Colisiones</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-lesiones/']"
+                >Lesiones Leves</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Tablas
+          </a>
+          <ul
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+            style="width: 300px; height: 150px; overflow: auto"
+          >
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-delito/']"
+                >Delitos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-lugar/']"
+                >Lugares</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-medio/']"
+                >Medios Utilizados</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-objeto/']"
+                >Objetos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-barrio/']"
+                >Barrios</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-calle/']">Calles</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-dncp/']"
+                >Delitos S.N.I.C</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-departamento/']"
+                >Departamentos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-localidad/']"
+                >Localidades</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-modalidad/']"
+                >Modalidad</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-naciones/']"
+                >Nacionalidad</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-estudio/']"
+                >Nivel de estudios</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-ocupacion/']"
+                >Ocupaciones</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-provincia/']"
+                >Provincias</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-sexo/']">Sexos</a>
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-unidades/']"
+                >Unidades</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-vinculo/']"
+                >Vínculos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-identidadGenero/']"
+                >Identidad de Género</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-tipoMoneda/']"
+                >Tipo de Moneda</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-marcas/']"
+                >Marcas de armas</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-marcasVehiculos/']"
+                >Marcas de vehículos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-modelos/']"
+                >Modelo de vehículos</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-marcasMoto/']"
+                >Marcas de motocicletas</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-modelosMoto/']"
+                >Modelos de motocicletas</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Planillas
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/planillaHD/abm']"
+                >Planilla de Hechos Delictuosos</a
+              >
+            </li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <!-- <li><hr class="dropdown-divider"></li> -->
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <div class="col-md-12">
+          <label id="ROL" for="Name"> USUARIO: <b> {{ rol | uppercase }} </b></label>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label id="label" for="Name"> <b> {{ usuario | uppercase }} </b></label> &nbsp;
+          &nbsp;
+          <button
+            (click)="cerrar()"
+            class="btn btn-info"
+            type="submit"
+          >
+           <b>Cerrar Sesión</b>
+          </button>
         </div>
-      </div>
-    </nav>
+      </form>
+    </div>
+  </div>
+</nav>

@@ -2,7 +2,7 @@ import { Rol } from "./rol";
 
 export class UsuarioSued {
   id!: number;
-  userCreaRepo!: number; //usuario que crea el usuario
+  userCreaRepo!: any; //usuario que crea el usuario
   usuarioRepo: any;//el usuario creado
   fechaAlta: any;
   persona!: number;

@@ -21,17 +21,17 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-   /* this.rol = JSON.parse(''+Utils.getSession('personal')).rol;
+    this.rol = JSON.parse(''+Utils.getSession('personal')).rol;
 
     this.usuario =
       JSON.parse(''+Utils.getSession('personal')).apellido +
       " " +
-      JSON.parse(''+Utils.getSession("personal")).nombre;*/
+      JSON.parse(''+Utils.getSession("personal")).nombre;
     }
   
   cerrar() {
     Utils.clearSession();
-    this.route.navigate([""]);
+    this.route.navigate(["login"]);
   }
 
 //para abajo no sirve
