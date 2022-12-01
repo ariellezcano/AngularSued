@@ -21,8 +21,8 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   //tipoPersona: string;
   rol: boolean;
 
-  public nombre: string = "SUED";
-  public url: string = "https://policiadigital.chaco.gob.ar/sued/"
+  public nombre: string = "Estadistísticas Policiales (SUED)";
+  public url: string = "https://10.125.31.214/sued/"
   public activo: boolean = true;
 
 
@@ -38,7 +38,6 @@ export class AbmConsultaUsuarioComponent implements OnInit {
 
   public async insertSued() {
     this.dtSued.sistema = 1;
-    //this.dtSued.userCreaRepo = 1;
     this.dtSued.userCreaRepo = UturuncoUtils.getSession('user');
    
     this.dtSued.fechaAlta = moment(this.dtSued.fechaAlta).format('YYYY-MM-DD');
@@ -48,10 +47,10 @@ export class AbmConsultaUsuarioComponent implements OnInit {
       let res = JSON.parse(JSON.stringify(data));
       console.log("res", res)
       if (res.code == 200) {
-        // try {
-        //   let data = await this.wsdlRegistro.patchSistemaHabilitados(this.dtSued.usuarioRepo, this.nombre, this.url, this.activo).then();
-        // } catch (error) {
-        // }
+        try {
+          let data = await this.wsdlRegistro.patchSistemaHabilitados(this.dtSued.usuarioRepo, this.nombre, this.url, this.activo).then();
+        } catch (error) {
+        }
         Swal.fire({
           position: 'top-end',
           icon: 'success',

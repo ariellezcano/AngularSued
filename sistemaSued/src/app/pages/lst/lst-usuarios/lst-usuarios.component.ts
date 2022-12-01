@@ -27,8 +27,8 @@ export class LstUsuariosComponent implements OnInit {
   procesando!: Boolean;
   public load!: boolean;
 
-  public nombre: string = 'SUED';
-  public url: string = 'https://policiadigital.chaco.gob.ar/sued/';
+  public nombre: string = 'Estadistísticas Policiales (SUED)';
+  public url: string = 'https://10.125.31.214/sued/';
   public activoSistema: boolean = false;
 
   TipoUsuario!: string;
@@ -78,28 +78,28 @@ export class LstUsuariosComponent implements OnInit {
     try {
       this.procesando = true;
       this.item.baja = true;
-      //this.item.usuarioBaja = UturuncoUtils.getSession('user');
+      this.item.usuarioBaja = Number(UturuncoUtils.getSession('user'));
       console.log('usuario', this.item);
       const res = await this.wsdl.doUpdateBaja(this.item.id, this.item).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.code == 200) {
-        // try {
-        //   let data = await this.wsdlRegistro
-        //     .patchSistemaHabilitados(
-        //       this.item.usuarioRepo,
-        //       this.nombre,
-        //       this.url,
-        //       this.activoSistema
-        //     )
-        //     .then();
-        //   let res = JSON.parse(JSON.stringify(data));
-        //   console.log('resultadoasa', result);
-        //   if (res.code == 200) {
-        //     console.log('Personal inhabilitado');
-        //   }
-        // } catch (error) {
-        //   console.log('respuestaerror', error);
-        // }
+        try {
+          let data = await this.wsdlRegistro
+            .patchSistemaHabilitados(
+              this.item.usuarioRepo,
+              this.nombre,
+              this.url,
+              this.activoSistema
+            )
+            .then();
+          let res = JSON.parse(JSON.stringify(data));
+          console.log('resultadoasa', result);
+          if (res.code == 200) {
+            console.log('Personal inhabilitado');
+          }
+        } catch (error) {
+          console.log('respuestaerror', error);
+        }
         UturuncoUtils.showToas('Usuario inhabilitado correctamente!', 'success');
         this.cancel();
       } else {

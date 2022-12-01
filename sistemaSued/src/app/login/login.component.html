@@ -1,24 +1,48 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 
 <div class="wrapper">
-    <div class="logo">
-        <img src="./../../assets/img/escudo.png" alt="">
+  <div class="logo">
+    <img src="./../../assets/img/escudo.png" alt="" />
+  </div>
+  <div class="text-center mt-4 name">Estadísticas Policiales</div>
+  <form class="p-3 mt-3">
+    <div class="form-field d-flex align-items-center">
+      <i class="fa fa-user" aria-hidden="true"></i>
+      <input
+        id="color"
+        [(ngModel)]="userName"
+        type="text"
+        name="userName"
+        id="userName"
+        placeholder="Usuario"
+      />
     </div>
-    <div class="text-center mt-4 name">
-        Estadísticas Policiales
+    <div class="form-field d-flex align-items-center">
+      <i class="fa fa-key" aria-hidden="true"></i>
+      <input
+        id="color"
+        [(ngModel)]="password"
+        type="password"
+        name="password"
+        id="pwd"
+        placeholder="Contraseña"
+      />
     </div>
-    <form class="p-3 mt-3">
-        <div class="form-field d-flex align-items-center">
-            <i class="fa fa-user" aria-hidden="true"></i>
-            <input id="color" [(ngModel)]="userName" type="text" name="userName" id="userName" placeholder="Usuario">
-        </div>
-        <div class="form-field d-flex align-items-center">
-            <i class="fa fa-key" aria-hidden="true"></i>
-            <input id="color" [(ngModel)]="password" type="password" name="password" id="pwd" placeholder="Contraseña">
-        </div>
-        <button (click)="login()" class="btn mt-3">Iniciar sesión</button>
-    </form>
-    <div class="text-center fs-6">
-        <a href="#">Recuperar contraseña</a> o <a href="#">Registrarse</a>
-    </div>
+    <button (click)="login()" class="btn mt-3">
+      <i class="fa fa-sign-in" aria-hidden="true"></i>
+      Iniciar sesión
+    </button>
+  </form>
+  <div class="text-center fs-6">
+    <a href="https://policiadigital.chaco.gob.ar"
+      ><b>
+        <i class="fa fa-external-link" aria-hidden="true"></i>
+        &nbsp;
+        <u> Ir a Policía Digital</u></b
+      ></a
+    >
+  </div>
 </div>

@@ -25,8 +25,8 @@ export class FilUsuariosComponent implements OnInit {
   public result: any;
   public rol: any;
 
-  public nombre: string = 'SUED';
-  public url: string = 'https://policiadigital.chaco.gob.ar/sued/';
+  public nombre: string = "Estadistísticas Policiales (SUED)";
+  public url: string = "https://10.125.31.214/sued/"
   public activoSistema: boolean = true;
 
   item: UsuarioSued;
@@ -137,21 +137,22 @@ export class FilUsuariosComponent implements OnInit {
 
   async editBaja() {
     //fecha y id de quien da de baja
+    this.item.usuarioRepo = Number(UturuncoUtils.getSession('user'));
     this.item.baja = false;
     let data2 = await this.wsdlUsuarioSued
       .doUpdateBaja(this.item.id, this.item)
       .then();
     const result2 = JSON.parse(JSON.stringify(data2));
     if (result2.code == 200) {
-      // try {
-      //   let data = await this.wsdl.patchSistemaHabilitados(this.item.usuarioRepo, this.nombre, this.url, this.activoSistema).then();
-      //   let res = JSON.parse(JSON.stringify(data));
-      //   if(res.code == 200){
-      //     console.log("Personal Habilitado");
-      //   }
-      // } catch (error) {
-      //   //console.log("respuestaerror", error);
-      // }
+      try {
+        let data = await this.wsdl.patchSistemaHabilitados(this.item.usuarioRepo, this.nombre, this.url, this.activoSistema).then();
+        let res = JSON.parse(JSON.stringify(data));
+        if(res.code == 200){
+          console.log("Personal Habilitado");
+        }
+      } catch (error) {
+        //console.log("respuestaerror", error);
+      }
 
       Swal.fire(
         'Operación Exitosa!',

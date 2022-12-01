@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
+import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FilPreventivoComponent } from '../../filters/fil-preventivo/fil-preventivo.component';
 
@@ -61,7 +62,8 @@ export class LstPreventivoComponent implements OnInit {
       })
       .then(async (result) => {
         if (result.isConfirmed) {
-          let data = await this.wsdl.doDelete(id).then();
+          this.item.usuarioBaja = Number(UturuncoUtils.getSession('user'));
+          let data = await this.wsdl.doDelete(id, this.item.usuarioBaja).then();
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
             this.proccess = false;

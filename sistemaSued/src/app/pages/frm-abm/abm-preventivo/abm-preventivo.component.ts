@@ -24,6 +24,7 @@ import {
   LugarService,
   PreventivoService,
 } from 'src/app/services/index.service';
+import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -195,6 +196,8 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.hora != undefined &&
       this.item.delito != undefined
     ) {
+      this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
+      console.log("usuario crea", this.item.usuarioCrea)
       var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
       //var convert = hora;
       //var Format = hora.replace(/[:]/g, '');

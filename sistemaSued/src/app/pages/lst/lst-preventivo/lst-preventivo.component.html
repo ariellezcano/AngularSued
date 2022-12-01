@@ -53,8 +53,8 @@
               {{ item.fechaHecho | date: "dd/MM/yyyy" }}
             </td>
             <td class="text-primary">{{ item.hora }}</td>
-            <td class="text-primary">
-              {{ item?.delitoNavigation?.descripcion }}
+            <td class="text-danger">
+             <b> {{ item?.delitoNavigation?.descripcion }}</b>
             </td>
             <td class="text-primary">
               {{ item?.localidadNavigation?.nombre }}

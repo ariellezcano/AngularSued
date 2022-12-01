@@ -22,9 +22,9 @@ export class Preventivo {
     fechaBaja: any;
     especificarLugar!: string;
     nivelEducativo!: string;
-    usuarioCrea!: number;
+    usuarioCrea: any;
     fechaCreacion: any;
-    usuarioBaja!: number;
+    usuarioBaja: any;
     activo: boolean;
 
 

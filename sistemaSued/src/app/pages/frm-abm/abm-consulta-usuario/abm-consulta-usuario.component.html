@@ -47,7 +47,7 @@
     </div>
     <hr />
     <div class="row">
-      <div class="col-md-12">
+      <div *ngIf="dtSued.rolNombre != 'MANAGER'" class="col-md-12">
         <button type="submit" class="btn btn-info d-grid gap-2 col-6 mx-auto">
           <i class="fa fa-thumbs-up" aria-hidden="true"
             >&nbsp;Guardar Usuario</i

@@ -72,10 +72,10 @@ export class PreventivoService {
       });
   }
 
-  doDelete(id: number) {
+  doDelete(id: number, usuario: any) {
     this.other_header = this.other_header;
     return this.http
-      .delete(this.api + '/' + id, { headers: this.other_header })
+      .delete(this.api + '/' + id + "," + usuario, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
         return {
