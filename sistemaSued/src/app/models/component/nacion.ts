@@ -1,6 +1,6 @@
 export class Naciones{
     id!: number;
-    codigo!: string;
+    codigo!: number;
     nacion!: string;
     nacionalidad!: string;
     constructor(){}

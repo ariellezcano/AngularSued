@@ -1,7 +1,7 @@
 export class Medio{
     id!: number;
-    codMedio!: string;
-    codTipo!: string;
+    codMedio!: number;
+    codTipo!: number;
     descripcion!: string;
 
     constructor(){}

@@ -1,6 +1,6 @@
 export class Calle {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     nombre!: string;
     //localidad!: number;
 

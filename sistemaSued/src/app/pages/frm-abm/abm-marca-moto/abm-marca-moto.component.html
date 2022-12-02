@@ -6,8 +6,23 @@
     <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
     
       <div class="form-group row">
-        <label for="Nombre" class="col-sm-12 col-form-label">Nombre de la marca:</label>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
+          <label for="Nombre" class="col-sm-12 col-form-label">Código:</label>
+          <input
+            [(ngModel)]="item.codigo"
+            id="descripcion"
+            type="number"
+            class="form-control"
+            placeholder="Código"
+            formControlName="codigo"
+            [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
+          />
+          <div *ngIf="enviado && f['codigo'].errors" class="invalid-feedback">
+            <div *ngIf="f['codigo'].errors['required']">Campo obligatorio</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <label for="Nombre" class="col-sm-12 col-form-label">Marca:</label>
           <input
             [(ngModel)]="item.nombre"
             id="descripcion"

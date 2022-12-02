@@ -1,6 +1,6 @@
 export class Ocupacion {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     descripcion!: string;
 
     constructor(){}

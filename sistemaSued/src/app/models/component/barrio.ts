@@ -1,6 +1,6 @@
 export class Barrio {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     nombre!: string;
     
     constructor(){

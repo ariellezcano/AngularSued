@@ -126,11 +126,11 @@ export class AbmLugarComponent implements OnInit {
     }
   }
 
-  seleccionCalle(event: Calle) {
-    if (event != undefined) {
-      this.item.calle = event.id;
-    }
-  }
+  // seleccionCalle(event: Calle) {
+  //   if (event != undefined) {
+  //     this.item.calle = event.id;
+  //   }
+  // }
 
   
   back() {

@@ -1,6 +1,7 @@
 export class UnidadesSued {
     id!: number;
-    codigo!: string;
+    codigo!: number;
+    dirZona!: number;
     unidad!: number;
     nombre!: string;
     // direccion!: string;

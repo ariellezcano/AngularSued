@@ -1,7 +1,7 @@
 export class Objeto {
     id!: number;
-    codTipo!: string;
-    codSubTipo!: string;
+    codTipo!: number;
+    codSubTipo!: number;
     descripcion!: string;
 
     constructor(){}

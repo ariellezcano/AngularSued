@@ -1,6 +1,6 @@
 export class Departamento {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     descripcion!: string;
 
     constructor(){}

@@ -3,19 +3,19 @@
   <hr />
   <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
     <div class="form-group row">
-      <div class="col-md-4">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Lugar:</label>
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Código:</label>
         <div class="col-sm-12">
           <input
-            [(ngModel)]="item.codLugar"
+            [(ngModel)]="item.codigo"
             id="codigo"
-            type="text"
+            type="number"
             class="form-control"
             [ngModelOptions]="{ standalone: true }"
             />
         </div>
       </div>
-      <div class="col-md-4">
+      <!-- <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">Tipo:</label>
         <div class="col-sm-12">
           <input
@@ -27,8 +27,8 @@
           />
           
         </div>
-      </div>
-      <div class="col-md-4">
+      </div> -->
+      <!-- <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label"> Sub-Tipo:</label>
         <div class="col-sm-12">
           <input
@@ -39,7 +39,7 @@
             [ngModelOptions]="{ standalone: true }"
           />
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="form-group row">
       <div class="col-md-12">

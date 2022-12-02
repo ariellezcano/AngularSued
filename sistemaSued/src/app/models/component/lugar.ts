@@ -1,13 +1,6 @@
 export class Lugar{
     id!: number;
-    codLugar!: string;
-    codTipo!: string;
-    codSubTipo!: string;
+    codigo!: number;
     descripcion!: string;
-    calle!: number;
-    dirNro!: string;
-    dirAdic!: string;
-
-    calleNavigation: any
     constructor(){}
 }

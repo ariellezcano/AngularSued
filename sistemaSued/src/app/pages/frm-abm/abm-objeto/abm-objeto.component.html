@@ -10,7 +10,7 @@
         <input
           [(ngModel)]="item.codTipo"
           id="codigo"
-          type="text"
+          type="number"
           class="form-control"
           formControlName="codigoTipo"
           [ngClass]="{ 'is-invalid': enviado && f['codigoTipo'].errors }"
@@ -27,7 +27,7 @@
         >
         <input
           [(ngModel)]="item.codSubTipo"
-          type="text"
+          type="number"
           class="form-control"
           [ngModelOptions]="{ standalone: true }"
         />

@@ -1,6 +1,6 @@
 export class Localidad {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     nombre!: string;
     departamento!: number;
     provincia!: number;

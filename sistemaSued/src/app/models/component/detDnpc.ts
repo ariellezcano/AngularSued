@@ -1,6 +1,6 @@
 export class DetDnpc{
     id!: number;
-    dnpc!: string;
+    dnpc!: number;
     descripcion!: string;
 
     constructor(){}

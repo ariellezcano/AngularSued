@@ -28,11 +28,7 @@
             <tr>
               <th>Código</th>
               <th>Unidad</th>
-              <!-- <th>Dirección</th>
-              <th>Localidad</th>
-              <th>Departamento</th>
-              <th>Teléfono</th>
-              <th>Centrex</th> -->
+              <th>Dirección de Zona</th>
               <th>Acción</th>
             </tr>
           </thead>
@@ -40,11 +36,7 @@
             <tr *ngFor="let item of items">
               <td class="text-primary">{{ item?.codigo }}</td>
               <td class="text-primary">{{ item?.nombre}}</td>
-              <!--<td class="text-primary">{{ item?.direccion }}</td>
-              <td class="text-primary">{{ item?.localidadNavigation?.nombre}}</td>
-              <td class="text-primary">{{ item?.departamentoNavigation?.descripcion}}</td>
-              <td class="text-primary">{{ item?.telefono}}</td>
-              <td class="text-primary">{{ item?.centrex}}</td> -->
+              <td class="text-primary">{{ item?.dirZona}}</td>
               <td>
                 <button
                   (click)="linkear(item.id)"

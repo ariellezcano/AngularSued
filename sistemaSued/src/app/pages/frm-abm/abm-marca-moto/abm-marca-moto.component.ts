@@ -33,6 +33,7 @@ export class AbmMarcaMotoComponent implements OnInit {
   ngOnInit(): void {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
+      codigo: ['', Validators.required],
       nombre: ['', Validators.required]
       });
 

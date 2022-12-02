@@ -1,6 +1,6 @@
 export class ModeloVehiculo {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     marca!: number;
     descripcion!: string;
 

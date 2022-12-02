@@ -3,12 +3,12 @@
   <hr />
   <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
     <div class="form-group row">
-      <div class="col-md-6">
+      <div class="col-md-2">
         <label for="Nombre" class="col-sm-12 col-form-label"> Código:</label>
         <input
           [(ngModel)]="item.codigo"
           id="codigo"
-          type="text"
+          type="number"
           class="form-control"
           formControlName="codigo"
           [ngClass]="{ 'is-invalid': enviado && f['codigo'].errors }"
@@ -17,16 +17,42 @@
           <div *ngIf="f['codigo'].errors['required']">Campo obligatorio</div>
         </div>
       </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Dirección de Zona:</label
+        >
+        <select
+          [(ngModel)]="item.dirZona"
+          class="form-select"
+          aria-label="Default select example"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option selected>Seleccione una opción</option>
+          <option value="D.G.Z.M">Dirección General Zona Metropolitana</option>
+          <option value="D.G.Z.I S.P.">
+            Dirección General Zona Interior "Pcia. Roque Sáenz Peña"
+          </option>
+          <option value="D.G.Z.I V.A.">
+            Dirección General Zona Interior "Villa Angela"
+          </option>
+          <option value="D.G.Z.I. CH">
+            Dirección General Zona Interior "Charata"
+          </option>
+          <option value="D.G.Z.I Gral. S.M.">
+            Dirección General Zona Interior "Gral José de San Martín"
+          </option>
+        </select>
+      </div>
       <div id="autocompletado" class="col-md-6">
         <label for="" class="col-sm-12 col-form-label">Unidad:</label>
         <app-fil-unidad-autocompletado (unidadSeleccionada)="unidad($event)">
         </app-fil-unidad-autocompletado>
       </div>
     </div>
-    <br>
+    <br />
     <div *ngIf="item.unidad" class="row">
       <div class="col-md-12 alert alert-info">
-       Unidad Seleccionada:&nbsp;&nbsp;<b>{{item.nombre}}</b>
+        Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombre }}</b>
       </div>
     </div>
     <!-- <div class="row">

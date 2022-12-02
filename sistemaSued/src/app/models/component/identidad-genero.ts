@@ -1,5 +1,5 @@
 export class IdentidadGenero {
     id!: number;
-    codigo!: string;
+    codigo!: number;
     autoPercepcion!: string
 }

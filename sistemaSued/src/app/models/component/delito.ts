@@ -1,9 +1,9 @@
 export class Delito {
     id!: number;
-    codTitulo!: string;
-    codCapitulo!: string;
-    codTipo!: string;
-    codSubTipo!: string;
+    codTitulo!: number;
+    codCapitulo!: number;
+    codTipo!: number;
+    codSubTipo!: number;
     descripcion!: string;
     articulo!: string;
     dnpc!: number;
