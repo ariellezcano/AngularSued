@@ -115,4 +115,19 @@ export class PreventivoService {
         };
       });
   }
+
+  doFilterPlanillaInnerJoin(fecha1?: any, fecha2?: any, localidad?: any, departamento?: any, unidad?: any, delito?: any) {
+    this.other_header = this.other_header;
+    const ruta = this.api + '/' + 'filterPlanillaInnerJoin/';
+    return this.http
+      .get(ruta + fecha1 +","+ fecha2 +","+ localidad +","+ departamento +","+ unidad +","+ delito)
+      .toPromise()
+      .catch((err) => {
+        return {
+          code: 500,
+          data: err.message,
+          msg: 'Error en el servicio',
+        };
+      });
+  }
 }
