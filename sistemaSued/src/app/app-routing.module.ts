@@ -5,23 +5,27 @@ import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     component: LoginComponent,
   },
-  {
-    path: '',
-    component: PagesComponent,
-  },
+  // {
+  //   path: '',
+  //   component: PagesComponent,
+  // },
   
+  // {
+  //   path: 'validacion/:id',
+  //   component: VerificacionComponent,
+  // },
 
   {
-    path: 'dashboard',
+    path: 'principal',
     loadChildren: () =>
       import('./pages/pages-routing.module').then((m) => m.PagesRoutingModule),
   },
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'principal',
     pathMatch: 'full',
   },
 
@@ -29,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-md-4">
             <label for=""> <b>Fecha Hecho.:</b></label>
-            {{ prev.fechaHecho | date: "dd/MM/yyyy" }}
+            {{ prev.fechaHecho | date : "dd/MM/yyyy" }}
           </div>
           <div class="col-md-4">
             <label for=""> <b>Hora hecho:</b></label>
@@ -58,10 +58,10 @@
           class="nav-link"
           id="home-tab"
           data-bs-toggle="tab"
-          data-bs-target="#home"
+          data-bs-target="#caratula"
           type="button"
           role="tab"
-          aria-controls="home"
+          aria-controls="caratula"
           aria-selected="false"
         >
           Cáratulas Secundarias
@@ -183,7 +183,7 @@
       </div>
       <div
         class="tab-pane"
-        id="home"
+        id="caratula"
         role="tabpanel"
         aria-labelledby="home-tab"
       >
@@ -201,31 +201,33 @@
       >
         <br />
         <section class="tab-panel">
+          <!-- LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMAS Y LESIONES CULPOSAS POR ACC. TRANSITO LEVES -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.descripcion ==
-                'LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMA' ||
-              prev.delitoNavigation?.descripcion ==
-                'LESIONES CULPOSAS POR ACC. TRANSITO LEVES'
+              prev.delitoNavigation?.id ==
+                13 ||
+              prev.delitoNavigation?.id ==
+                12
             "
           >
             <app-abm-snic [id]="this.id"></app-abm-snic>
           </ng-container>
+          <!-- homicidio doloso consumado y tentativo -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.descripcion ==
-                'HOMICIDIO DOLOSO TENTATIVO' ||
-              prev.delitoNavigation?.descripcion == 'HOMICIDIO DOLOSO CONSUMADO'
+              prev.delitoNavigation?.id == 1 ||
+              prev.delitoNavigation?.id == 2
             "
           >
             <app-abm-prev-homicidio [id]="this.id"></app-abm-prev-homicidio>
           </ng-container>
+          <!-- instigacion al suicidio consumado y tentativa -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.descripcion ==
-                'INSTIGACION AL SUICIDIO CONSUMADO' ||
-              prev.delitoNavigation?.descripcion ==
-                'INSTIGACION AL SUICIDIO TENTATIVA'
+              prev.delitoNavigation?.id ==
+                5 ||
+              prev.delitoNavigation?.id ==
+                6
             "
           >
             <app-abm-prev-suicidio [id]="this.id"></app-abm-prev-suicidio>

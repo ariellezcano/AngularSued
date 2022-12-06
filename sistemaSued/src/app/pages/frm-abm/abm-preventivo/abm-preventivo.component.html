@@ -21,7 +21,8 @@
         <label for="" class="col-sm-12 col-form-label">Unidad:</label>
         <app-fil-autocompletado-unidad-sued
           (unidadSeleccionada)="unidad($event)"
-        >
+          [ngModelOptions]="{ standalone: true }"
+          >
         </app-fil-autocompletado-unidad-sued>
       </div>
     </div>
@@ -170,12 +171,12 @@
       </div>
     </div>
     <ng-container
-      *ngIf="busquedaLugar == 'ESTABLECIMIENTOS EDUCATIVOS' && item.lugar > 0"
+      *ngIf="busquedaLugar == 'ESTABLECIMIENTO EDUCATIVO' && item.lugar > 0"
     >
       <div class="row">
         <div class="col-md-6">
           <label for="" class="col-sm-12 col-form-label"
-            >Nivel de estudio:</label
+            >Nivel Educativo:</label
           >
           <select
             [ngModelOptions]="{ standalone: true }"
@@ -220,11 +221,27 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="busquedaLugar == 'EDIFICIOS PUBLICOS' && item.lugar > 0">
+    <ng-container *ngIf="busquedaLugar == 'EDIFICIO PUBLICO' && item.lugar > 0">
       <div class="row">
         <div class="col-md-12">
           <label class="col-sm-12 col-form-label" for=""
             >Especificar nombre del edificio:</label
+          >
+          <input
+            [(ngModel)]="item.especificarLugar"
+            name="especificarLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="busquedaLugar == 'OTRO LUGAR (ESPECIFICAR)' && item.lugar > 0">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="col-sm-12 col-form-label" for=""
+            >Especificar Lugar:</label
           >
           <input
             [(ngModel)]="item.especificarLugar"

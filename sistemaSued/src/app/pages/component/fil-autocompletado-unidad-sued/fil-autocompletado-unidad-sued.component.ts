@@ -12,7 +12,7 @@ export class FilAutocompletadoUnidadSuedComponent implements OnInit {
   @Output()
   unidadSeleccionada: EventEmitter<UnidadesSued> = new EventEmitter<UnidadesSued>();
 
-  keyword = 'codigo';
+  keyword = 'nombre';
   cargando: Boolean = false;
   item: UnidadesSued;
   items: UnidadesSued[];
