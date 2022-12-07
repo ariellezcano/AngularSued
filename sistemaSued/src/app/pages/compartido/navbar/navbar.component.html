@@ -116,7 +116,7 @@
             </li>
             <li>
               <a class="dropdown-item" [routerLink]="['/lst-dncp/']"
-                >Delitos S.N.I.C</a
+                >Delitos D.N.P.C</a
               >
             </li>
             <li>
@@ -205,29 +205,49 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="rol != 'VISTA'" class="nav-item dropdown">
+        <div class="dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
-            id="navbarDropdown"
+            id="dropdownMenuButton"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
             Planillas
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-              <a class="dropdown-item" [routerLink]="['/planillaHD/abm']"
-                >Planilla de Hechos Delictuosos</a
-              >
+              <a class="dropdown-item">
+                Planillas para D.N.G.I.C. &raquo;
+              </a>
+              <ul class="dropdown-menu dropdown-submenu">
+                <li>
+                  <a class="dropdown-item"  [routerLink]="['/planillaHechosDelictivos/abm']">Planillas de Hechos Delictuosos</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" >Delitos contra la propiedad</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" >Homicidios Dolosos</a>               
+                </li>
+                <li>
+                  <a class="dropdown-item" >Homicidios Culposos Acc. Tránsito</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" >Suicidios</a>
+                </li>
+              </ul>
             </li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <!-- <li><hr class="dropdown-divider"></li> -->
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li>
+              <a class="dropdown-item" href="#">Another action</a>
+            </li>
+            
           </ul>
-        </li>
+        </div>
       </ul>
       <form class="d-flex">
         <div class="col-md-12">

@@ -44,6 +44,7 @@ import { AbmUnidadesComponent } from './frm-abm/abm-unidades/abm-unidades.compon
 import { AbmVehiculoMarcaComponent } from './frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component';
 import { AbmVinculoComponent } from './frm-abm/abm-vinculo/abm-vinculo.component';
 import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-planilla-hd.component';
+import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hechos-delictivos/abm-planilla-hechos-delictivos.component';
 import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.component';
 import { LstArticuloComponent } from './lst/lst-articulo/lst-articulo.component';
 import { LstBarrioComponent } from './lst/lst-barrio/lst-barrio.component';
@@ -574,12 +575,24 @@ const routes: Routes = [
           },
         ],
       },
+
+      // PLANILLAS
       {
         path: 'planillaHD',
         children: [
           {
             path: 'abm',
             component: AbmPlanillaHDComponent,
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'planillaHechosDelictivos',
+        children: [
+          {
+            path: 'abm',
+            component: AbmPlanillaHechosDelictivosComponent,
             canActivate: [AuthGuard],
           },
         ],

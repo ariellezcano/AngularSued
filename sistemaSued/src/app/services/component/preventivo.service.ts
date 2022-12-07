@@ -115,4 +115,19 @@ export class PreventivoService {
         };
       });
   }
+
+  doFilterPlanillaHD(fecha1?: any, fecha2?: any, departamento?: any, localidad?: any, zonaMetro?: any, dnpc?: boolean) {
+    this.other_header = this.other_header;
+    const ruta = this.api + '/' + 'filterPlanillaHechosDel/';
+    return this.http
+      .get(ruta + fecha1 +","+ fecha2 +","+ localidad +","+ departamento +","+ zonaMetro +","+ dnpc)
+      .toPromise()
+      .catch((err) => {
+        return {
+          code: 500,
+          data: err.message,
+          msg: 'Error en el servicio',
+        };
+      });
+  }
 }

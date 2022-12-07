@@ -1,0 +1,96 @@
+<br />
+<div class="container border border-danger">
+  <br />
+  <div class="row">
+    <legend class="text-primary"><b> DATOS PARA GENERAR EL REPORTE:</b></legend>
+    <label for="">Planilla de Hechos Delictuosos</label>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha</label>
+      <input
+        [(ngModel)]="item.fecha1"
+        id="codigo"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha</label>
+      <input
+        [(ngModel)]="item.fecha2"
+        id="codigo"
+        type="date"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-6">
+      <center>
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Listar todos los dnpc</label
+        >
+        <input
+          [(ngModel)]="item.dnpc"
+          id="codigo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </center>
+    </div>
+  </div>
+  <br />
+  <div id="posicion" class="row">
+    <h5>Tipo &nbsp;</h5>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Localidad</label>
+      <input
+        (click)="ActivarCasilla(1)"
+        [(ngModel)]="item.localidad"
+        id="codigo"
+        type="checkbox"
+        class="form-sm-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-4">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Departamento</label>
+      <input
+        (click)="ActivarCasilla(2)"
+        [(ngModel)]="item.departamento"
+        type="checkbox"
+        class="form-sm-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Resistencia</label>
+      <input
+        (click)="ActivarCasilla(3)"
+        [(ngModel)]="item.zonaMetro"
+        type="checkbox"
+        class="form-sm-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary" (click)="buscar()">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        Filtrar dato
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" (click)="back()">
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        Cancelar
+      </button>
+    </div>
+  </div>
+  <br />
+</div>
