@@ -1,9 +1,11 @@
 <br />
-<div class="container border border-danger">
+<div class="container border border-danger rounded">
   <br />
   <div class="row">
-    <legend class="text-primary"><b> DATOS PARA GENERAR EL REPORTE:</b></legend>
-    <label for="">Planilla de Hechos Delictuosos</label>
+    <legend class="text-primary">
+      <b> DATOS PARA GENERAR EL REPORTE:</b>
+    </legend>
+    <label for=""><b> Planilla de Hechos Delictuosos </b></label>
   </div>
   <hr />
   <div class="row">
@@ -44,23 +46,23 @@
   </div>
   <br />
   <div id="posicion" class="row">
-    <h5>Tipo &nbsp;</h5>
+    <h5 id="tipo">Tipo &nbsp;</h5>
     <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Localidad</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Departamento</label>
       <input
-        (click)="ActivarCasilla(1)"
-        [(ngModel)]="item.localidad"
-        id="codigo"
+        (click)="ActivarCasilla(2)"
+        [(ngModel)]="item.departamento"
         type="checkbox"
         class="form-sm-control"
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
     <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Departamento</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Localidad</label>
       <input
-        (click)="ActivarCasilla(2)"
-        [(ngModel)]="item.departamento"
+        (click)="ActivarCasilla(1)"
+        [(ngModel)]="item.localidad"
+        id="codigo"
         type="checkbox"
         class="form-sm-control"
         [ngModelOptions]="{ standalone: true }"
@@ -81,7 +83,13 @@
   <hr />
   <div class="row">
     <div class="col-md-12">
-      <button type="button" class="btn btn-primary" (click)="buscar()">
+      <button
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        class="btn btn-primary"
+        (click)="buscar()"
+      >
         <i class="fa fa-search-plus" aria-hidden="true"></i>
         Filtrar dato
       </button>
@@ -93,4 +101,159 @@
     </div>
   </div>
   <br />
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-fullscreen-xxl-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Planilla de hechos delictuosos
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <ng-container *ngIf="item.departamento">
+          <ng-container
+            *ngIf="item.departamento && item.dnpc; else elseTemplate"
+          >
+            <div class="row">
+              <center>
+                <h3>PLANILLA DE HECHOS DELICTIVOS</h3>
+              </center>
+            </div>
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <label for="">
+                  <b>
+                    Ministerio de Justicia de la Nación - Dirección Nacional de
+                    Política Criminal
+                  </b>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label for=""
+                  >Período: {{ item.fecha1 | date : "dd/MM/yyyy" }} -
+                  {{ item.fecha2 | date : "dd/MM/yyyy" }}</label
+                >
+              </div>
+            </div>
+            <div class="row border border-dark rounded">
+              <div class="col-md-4">
+                <label for=""><b> Tipo de Delito </b></label>
+              </div>
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-4 text-center">
+                    <b> Cantidad de Hechos</b>
+                  </div>
+                  <div class="col-md-8 text-center">
+                    <b> Cantidad de Víctimas </b>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="row">
+                      <div class="col-md-4">Denuncia Particular</div>
+                      <div class="col-md-4">Interv. Policial</div>
+                      <div class="col-md-4">Total</div>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="row">
+                      <div class="col-md-2">Masculino</div>
+                      <div class="col-md-2">Femenino</div>
+                      <div class="col-md-2">No consta</div>
+                      <div class="col-md-2">Total Víct.</div>
+                      <div class="col-md-2">Inculpados</div>
+                      <div class="col-md-2">Detenidos</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row" *ngFor="let itemPrev of items">
+              <div class="row">
+                <div class="col-md-4 border border-dark rounded">
+                  <label for=""
+                    ><u>Departamento:</u>&nbsp;&nbsp;
+                    <b
+                      >{{
+                        itemPrev.localidadNavigation?.dptoNavigation?.codigo
+                      }}&nbsp;
+                      {{
+                        itemPrev.localidadNavigation?.dptoNavigation
+                          ?.descripcion
+                      }}</b
+                    ></label
+                  >
+                </div>
+              </div>
+              <div class="col-md-8"></div>
+              <div class="row">
+                <div class="col-md-4">
+                  <b>{{ itemPrev.delitoNavigation?.dnpcNavigation?.dnpc }}</b
+                  >&nbsp;
+                  {{ itemPrev.delitoNavigation?.dnpcNavigation?.descripcion }}
+                </div>
+                <div class="col-md-8 text-center">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">{{denunciaPart}}</div>
+                        <div class="col-md-4">{{intervencionPol}}</div>
+                        <div class="col-md-4">{{total}}</div>
+                      </div>
+                    </div>
+                    <div class="col-md-8 text-center">
+                      <div class="row">
+                        <div class="col-md-2">1</div>
+                        <div class="col-md-2">2</div>
+                        <div class="col-md-2">3</div>
+                        <div class="col-md-2">4</div>
+                        <div class="col-md-2">5</div>
+                        <div class="col-md-2">6</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #elseTemplate> </ng-template>
+        </ng-container>
+        <ng-container *ngIf="item.localidad">
+          <ng-container *ngIf="item.localidad && item.dnpc; else elseTemplate">
+          </ng-container>
+          <ng-template #elseTemplate> </ng-template>
+        </ng-container>
+        <ng-container *ngIf="item.zonaMetro">
+          <ng-container *ngIf="item.zonaMetro && item.dnpc; else elseTemplate">
+          </ng-container>
+          <ng-template #elseTemplate> </ng-template>
+        </ng-container>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success">Excel</button>
+        <button type="button" class="btn btn-info">PDF</button>
+        <button type="button" (click)="vaciarVariables()" class="btn btn-danger" data-bs-dismiss="modal">
+          Salir
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

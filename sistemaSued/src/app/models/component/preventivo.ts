@@ -18,7 +18,7 @@ export class Preventivo {
     anio!: number;
     nro!: number;
     letra!: string;
-    intervencionPol!: boolean;
+    intervencionPol: boolean;
     fechaBaja: any;
     especificarLugar!: string;
     nivelEducativo!: string;
@@ -46,5 +46,6 @@ export class Preventivo {
         this.activo = true;
         this.nombreUnidad = '';
         this.nombreUniEspecial = '';
+        this.intervencionPol = false;
     }
 }

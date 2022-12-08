@@ -8,13 +8,25 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-abm-planilla-hechos-delictivos',
   templateUrl: './abm-planilla-hechos-delictivos.component.html',
-  styleUrls: ['./abm-planilla-hechos-delictivos.component.scss']
+  styleUrls: ['./abm-planilla-hechos-delictivos.component.scss'],
 })
 export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   @Output() emmit: EventEmitter<Preventivo[]> = new EventEmitter();
   
+  //array para guardar denuncias
+  denuncia: Preventivo[];
+  intervenPol: Preventivo[];
+
   item: PlanillaHechosDel;
-  items: Preventivo[];
+
+  itemPrev: Preventivo;
+  items:Preventivo[];
+
+  intervencionPol: number = 0;
+  denunciaPart: number = 0;
+  
+  total: number = 0;
+  // itemss: Preventivo[];
 
   constructor(
     private wsdl: PreventivoService,
@@ -23,10 +35,12 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   ) {
     this.item = new PlanillaHechosDel();
     this.items = [];
+    this.denuncia = [];
+    this.intervenPol = [];
+    this.itemPrev = new Preventivo();
   }
 
   ngOnInit(): void {}
-
 
   async buscar() {
     if (this.item.fecha2 == undefined) {
@@ -47,6 +61,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
+        this.verificar();
         console.log('items', this.items);
       }
     } catch (error) {
@@ -54,16 +69,46 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     }
   }
 
-  ActivarCasilla(num: number){
-    if(num == 1){
+  // verificar() {
+  //   this.items.forEach((element) => {
+  //       if (element.intervencionPol) {
+  //         this.denuncia.push(element)
+  //         this.intervencionPol = this.denuncia.length;
+  //         console.log("intervenPol",this.intervencionPol);
+  //       } else {
+  //         this.intervenPol.push(element);
+  //         this.denunciaPart = this.intervenPol.length;
+  //         console.log("denunciaPart",this.denunciaPart)
+  //       }
+  //   });
+  //   this.total = this.intervencionPol + this.denunciaPart;
+  // }
+
+   verificar() {
+    this.items.forEach((element) => {
+        if (element.intervencionPol) {
+          this.denuncia.push(element)
+          this.intervencionPol = this.denuncia.length;
+          console.log("intervenPol",this.intervencionPol);
+        } else {
+          this.intervenPol.push(element);
+          this.denunciaPart = this.intervenPol.length;
+          console.log("denunciaPart",this.denunciaPart)
+        }
+    });
+    this.total = this.intervencionPol + this.denunciaPart;
+  }
+
+  ActivarCasilla(num: number) {
+    if (num == 1) {
       this.item.localidad = true;
       this.item.departamento = false;
       this.item.zonaMetro = false;
-    }else if(num == 2){
+    } else if (num == 2) {
       this.item.localidad = false;
       this.item.departamento = true;
       this.item.zonaMetro = false;
-    }else if(num == 3){
+    } else if (num == 3) {
       this.item.localidad = false;
       this.item.departamento = false;
       this.item.zonaMetro = true;
@@ -77,5 +122,10 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
 
   back() {
     this.router.navigate(['/principal/']);
+  }
+
+  vaciarVariables(){
+    this.intervencionPol = 0;
+    this.denunciaPart = 0;
   }
 }

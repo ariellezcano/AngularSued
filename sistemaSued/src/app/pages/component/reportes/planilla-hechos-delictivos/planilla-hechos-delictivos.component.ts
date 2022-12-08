@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Preventivo } from 'src/app/models/index.models';
 
 @Component({
   selector: 'app-planilla-hechos-delictivos',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanillaHechosDelictivosComponent implements OnInit {
 
-  constructor() { }
+
+  items: Preventivo[];
+
+  constructor() {
+    this.items = [];
+   }
 
   ngOnInit(): void {
   }
 
+  doFound(event: Preventivo[]) {
+    this.items = event;
+  }
+  
 }
