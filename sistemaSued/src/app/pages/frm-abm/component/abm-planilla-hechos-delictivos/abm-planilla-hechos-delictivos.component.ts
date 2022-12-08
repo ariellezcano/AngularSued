@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanillaHechosDel } from 'src/app/models/component/models-planillas/planilla-hechos-del';
-import { Preventivo } from 'src/app/models/index.models';
+import { Delito, Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   @Output() emmit: EventEmitter<Preventivo[]> = new EventEmitter();
-  
+
   //array para guardar denuncias
   denuncia: Preventivo[];
   intervenPol: Preventivo[];
@@ -20,13 +20,12 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   item: PlanillaHechosDel;
 
   itemPrev: Preventivo;
-  items:Preventivo[];
+  items: Preventivo[];
 
   intervencionPol: number = 0;
   denunciaPart: number = 0;
-  
+
   total: number = 0;
-  // itemss: Preventivo[];
 
   constructor(
     private wsdl: PreventivoService,
@@ -62,7 +61,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       if (result.code == 200) {
         this.items = result.data;
         this.verificar();
-        console.log('items', this.items);
+        //console.log('items', this.items);
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
@@ -84,19 +83,8 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   //   this.total = this.intervencionPol + this.denunciaPart;
   // }
 
-   verificar() {
-    this.items.forEach((element) => {
-        if (element.intervencionPol) {
-          this.denuncia.push(element)
-          this.intervencionPol = this.denuncia.length;
-          console.log("intervenPol",this.intervencionPol);
-        } else {
-          this.intervenPol.push(element);
-          this.denunciaPart = this.intervenPol.length;
-          console.log("denunciaPart",this.denunciaPart)
-        }
-    });
-    this.total = this.intervencionPol + this.denunciaPart;
+  verificar() {
+    
   }
 
   ActivarCasilla(num: number) {
@@ -124,7 +112,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     this.router.navigate(['/principal/']);
   }
 
-  vaciarVariables(){
+  vaciarVariables() {
     this.intervencionPol = 0;
     this.denunciaPart = 0;
   }

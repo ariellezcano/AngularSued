@@ -147,6 +147,7 @@ export class AbmPreventivoComponent implements OnInit {
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;
           }
           if(this.item.localidad != undefined){
+            //this.item.localidad = result.dato.Localidad;
             this.item.localidadCoordenada = this.item.localidadNavigation?.nombre;
             this.item.pais = this.item.localidadNavigation?.nacionNavigation?.nacion;
             this.item.cp = this.item.localidadNavigation?.codPostal;
@@ -169,7 +170,7 @@ export class AbmPreventivoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: Preventivo) {
-    alert(this.item.calle);
+    //alert(this.item.calle);
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -197,7 +198,7 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.delito != undefined
     ) {
       this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
-      console.log("usuario crea", this.item.usuarioCrea)
+      //console.log("usuario crea", this.item.usuarioCrea)
       var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
       //var convert = hora;
       //var Format = hora.replace(/[:]/g, '');
