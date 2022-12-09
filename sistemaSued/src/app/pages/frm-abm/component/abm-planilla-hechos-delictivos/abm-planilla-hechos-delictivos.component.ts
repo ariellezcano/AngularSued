@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModelPrevPlanilla } from 'src/app/models/component/models-planillas/modelPrevPlanilla';
 import { PlanillaHechosDel } from 'src/app/models/component/models-planillas/planilla-hechos-del';
 import { Delito, Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
@@ -13,14 +14,10 @@ import Swal from 'sweetalert2';
 export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   @Output() emmit: EventEmitter<Preventivo[]> = new EventEmitter();
 
-  //array para guardar denuncias
-  denuncia: Preventivo[];
-  intervenPol: Preventivo[];
-
   item: PlanillaHechosDel;
 
-  itemPrev: Preventivo;
-  items: Preventivo[];
+  itemsPrev: ModelPrevPlanilla[];
+  itemPr: ModelPrevPlanilla;
 
   intervencionPol: number = 0;
   denunciaPart: number = 0;
@@ -33,10 +30,8 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     private router: Router
   ) {
     this.item = new PlanillaHechosDel();
-    this.items = [];
-    this.denuncia = [];
-    this.intervenPol = [];
-    this.itemPrev = new Preventivo();
+    this.itemsPrev = [];
+    this.itemPr = new ModelPrevPlanilla();
   }
 
   ngOnInit(): void {}
@@ -59,32 +54,12 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
         .then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.items = result.data;
-        this.verificar();
-        //console.log('items', this.items);
+        this.itemsPrev = result.data;
+        console.log('items', this.itemsPrev);
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
     }
-  }
-
-  // verificar() {
-  //   this.items.forEach((element) => {
-  //       if (element.intervencionPol) {
-  //         this.denuncia.push(element)
-  //         this.intervencionPol = this.denuncia.length;
-  //         console.log("intervenPol",this.intervencionPol);
-  //       } else {
-  //         this.intervenPol.push(element);
-  //         this.denunciaPart = this.intervenPol.length;
-  //         console.log("denunciaPart",this.denunciaPart)
-  //       }
-  //   });
-  //   this.total = this.intervencionPol + this.denunciaPart;
-  // }
-
-  verificar() {
-    
   }
 
   ActivarCasilla(num: number) {

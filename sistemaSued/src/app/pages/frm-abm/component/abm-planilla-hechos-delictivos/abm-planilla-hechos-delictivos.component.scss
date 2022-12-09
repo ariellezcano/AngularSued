@@ -12,3 +12,12 @@
     margin-left:7px;
     background:#F4F9F9;
 }
+
+@media print {
+    .noPrint{
+      display:none;
+    }
+  }
+  h1{
+    color:#f6f6;
+  }

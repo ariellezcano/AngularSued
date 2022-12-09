@@ -186,29 +186,28 @@
               </div>
             </div>
             <br />
-            <div class="row" *ngFor="let itemPrev of items">
+            <div class="row" *ngFor="let itemPr of itemsPrev">
               <div class="row">
                 <div class="col-md-4 border border-dark rounded">
                   <label for=""
                     ><u>Departamento:</u>&nbsp;&nbsp;
                     <b
                       >{{
-                        itemPrev.localidadNavigation?.dptoNavigation?.codigo
+                        itemPr.codigo
                       }}&nbsp;
                       {{
-                        itemPrev.localidadNavigation?.dptoNavigation
-                          ?.descripcion
+                        itemPr.departamento
                       }}</b
                     ></label
                   >
                 </div>
               </div>
               <div class="col-md-8"></div>
-              <div class="row">
+              <div class="row" *ngFor="let i of itemPr.dnpc">
                 <div class="col-md-4">
-                  <b>{{ itemPrev.delitoNavigation?.dnpcNavigation?.dnpc }}</b
+                  <b>{{ i.codDel }}</b
                   >&nbsp;
-                  {{ itemPrev.delitoNavigation?.dnpcNavigation?.descripcion }}
+                  {{ i.nombre }}
                 </div>
                 <div class="col-md-8 text-center">
                   <div class="row">
@@ -221,17 +220,50 @@
                     </div>
                     <div class="col-md-8 text-center">
                       <div class="row">
-                        <div class="col-md-2">1</div>
-                        <div class="col-md-2">2</div>
-                        <div class="col-md-2">3</div>
-                        <div class="col-md-2">4</div>
-                        <div class="col-md-2">5</div>
-                        <div class="col-md-2">6</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <br>
+              <br>
+              <div class="row text-center">
+               <hr>
+                <div class="col-md-4">
+                  <span for=""> <b>Total General</b> </span>
+                </div>
+                <div class="col-md-8">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-md-4">0</div>
+                        <div class="col-md-4">0</div>
+                        <div class="col-md-4">0</div>
+                      </div>
+                    </div>
+                    <div class="col-md-8 text-center">
+                      <div class="row">
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                        <div class="col-md-2">0</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <br>
+              <br>
+              <br>
             </div>
           </ng-container>
           <ng-template #elseTemplate> </ng-template>
@@ -247,9 +279,9 @@
           <ng-template #elseTemplate> </ng-template>
         </ng-container>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer noPrint">
         <button type="button" class="btn btn-success">Excel</button>
-        <button type="button" class="btn btn-info">PDF</button>
+        <button type="button" class="btn btn-info" onclick="window.print();">PDF</button>
         <button type="button" (click)="vaciarVariables()" class="btn btn-danger" data-bs-dismiss="modal">
           Salir
         </button>
