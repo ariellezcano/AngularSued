@@ -13,10 +13,9 @@ export class Dnpc {
 export class ModelPrevPlanilla {
   codigo: any;
   departamento!: string;
-  dnpc: Dnpc[];
+  dnpc!: Dnpc[];
   totalRegistros!: number;
 
   constructor() {
-    this.dnpc = [];
   }
 }

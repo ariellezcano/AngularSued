@@ -56,6 +56,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       if (result.code == 200) {
         this.itemsPrev = result.data;
         console.log('items', this.itemsPrev);
+        //this.verificar();
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
@@ -78,6 +79,14 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     }
   }
 
+  // verificar(){
+  //   for (let index = 0; index < this.itemsPrev.length; index++) {
+  //     const element = this.itemsPrev[index];
+  //     console.log(element)
+      
+  //   }
+  // }
+
   cancelar() {
     this.item = new PlanillaHechosDel();
     this.back();
@@ -90,5 +99,17 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   vaciarVariables() {
     this.intervencionPol = 0;
     this.denunciaPart = 0;
+  }
+
+  //hasta aca llegue
+  sumarValores(item: any){
+    let acumular = 0;
+    let part = 0;
+    if(item){
+
+      this.intervencionPol = acumular+=1; 
+    }else{
+      this.denunciaPart = part+= 1; 
+    }
   }
 }

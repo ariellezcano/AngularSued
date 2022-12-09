@@ -129,6 +129,29 @@
           <ng-container
             *ngIf="item.departamento && item.dnpc; else elseTemplate"
           >
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row text-center">
+                <label for=""><b>PROVINCIA DEL CHACO</b></label>
+              </div>
+              <div class="row text-center">
+                <label for=""><b>POLICIA</b></label>
+              </div>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+              <div class="row text-center">
+                <label for=""><b>DIRECCION DE GABINETE</b></label>
+              </div>
+              <div class="row text-center">
+                <label for=""><b>DEPARTAMENTO PLANEAMIENTO POLICIAL</b></label>
+              </div>
+              <div class="row text-center">
+                <label for="">DIVISION ESTADISTICAS POLICIALES</label>
+              </div>
+            </div>
+          </div>
+          <hr>
             <div class="row">
               <center>
                 <h3>PLANILLA DE HECHOS DELICTIVOS</h3>
@@ -209,13 +232,13 @@
                   >&nbsp;
                   {{ i.nombre }}
                 </div>
-                <div class="col-md-8 text-center">
+                <div class="col-md-8 text-center" *ngFor="let it of i.lstDel">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="row">
-                        <div class="col-md-4">{{denunciaPart}}</div>
                         <div class="col-md-4">{{intervencionPol}}</div>
-                        <div class="col-md-4">{{total}}</div>
+                        <div class="col-md-4">{{denunciaPart}}</div>
+                        <div class="col-md-4">0</div>
                       </div>
                     </div>
                     <div class="col-md-8 text-center">
