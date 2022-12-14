@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModelPrevPlanilla } from 'src/app/models/component/models-planillas/modelPrevPlanilla';
@@ -20,8 +21,8 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   itemPr: ModelPrevPlanilla;
 
   intervencionPol: number = 0;
-  intervenPol: any [];
   denunciaPart: number = 0;
+  intervenPol: any [];
   denParticular: [];
   total: number = 0;
 
@@ -66,7 +67,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.itemsPrev = result.data;
-        //console.log('items', this.itemsPrev);
+        console.log('items', this.itemsPrev);
         this.verificar();
       }
     } catch (error) {
@@ -90,90 +91,107 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     }
   }
 
-  verificar() {
-    let nombre = '';
-    // alert("aca estoy")
+  verificar(){
     for (let index = 0; index < this.itemsPrev.length; index++) {
       const element = this.itemsPrev[index].departamento;
       const arr = this.itemsPrev[index].dnpc;
-      //console.log("arr", arr)
-      arr.forEach((element1) => {
-        nombre = element1.nombre;
-        element1.lstDel.forEach((element2) => {
-         // console.log("arr", element1.lstDel)
-          if (element2.intervencionPol) {
-            const verificar = this.intervenPol.find(
-              (e) => e == this.insert.departamento
-            );
-            console.log("verificar", verificar);
-            if (verificar == undefined) {
-              let delito = nombre;
-              let numero: any = Number(element2.intervencionPol);
-
-              this.insert.departamento = element;
-              this.insert.delito = delito;
-              this.insert.intervenPol = numero;
-
-              this.intervenPol.push(this.insert)
+      console.log(arr)
+      if(element == "SAN FERNANDO"){
+        for (let index = 0; index < arr.length; index++) {
+          const tamanio = arr.length;
+          let delito = arr[index].nombre;
+          if(arr[index].nombre == delito && arr.length <= tamanio){
+            arr[index].lstDel.forEach(element => {
+              console.log(element)
               
-              console.log("arr interven Pol",this.intervenPol)
-            } else {
-              if (verificar) {
-                const delito = this.intervenPol.find(
-                  (e) => element1.nombre == this.insert.delito
-                );
-                let numero: any = Number(element2.intervencionPol);
-                if (delito) {
-                  this.insert.intervenPol =
-                    Number(element2.intervencionPol) + numero;
-                  //this.intervenPol.push(insert)
-                } else {
-                  this.insert.departamento = element;
-                  this.insert.delito = nombre;
-                  this.insert.intervenPol = numero;
-                }
-              }
-              // alert("no existe")
-            }
-
-            //this.intervenPol.push()
-          } else {
-            const verificar = this.intervenPol.find(
-              (e) => e == this.insert.departamento
-            );
-            if (!verificar) {
-              let delito = nombre;
-              let numero: any = Number(element2.intervencionPol);
-
-              this.insert.departamento = nombre;
-              this.insert.delito = delito;
-              this.insert.denParticular = numero;
-            } else {
-              if (verificar) {
-                const delito = this.intervenPol.find(
-                  (e) => element1.nombre == this.insert.delito
-                );
-                let numero: any = Number(element2.intervencionPol);
-                if (delito) {
-                  this.insert.denParticular =
-                    Number(element2.intervencionPol) + numero;
-                }
-              } else {
-                let numero: any = Number(element2.intervencionPol);
-
-                this.insert.departamento = element;
-                this.insert.delito = nombre;
-                this.insert.denParticular = numero;
-              }
-              // alert("no existe")
-            }
+            });
           }
-        });
-      });
-      //console.log('elemento del bucle', element);
+          
+          
+        }
+      }   
     }
-   // console.log("aca estoy", this.insert)
   }
+
+  // verificar() {
+  //   // alert("aca estoy")
+  //   for (let index = 0; index < this.itemsPrev.length; index++) {
+  //     const element = this.itemsPrev[index].departamento;
+  //     const arr = this.itemsPrev[index].dnpc;
+  //     arr.forEach((element1) => {
+  //       let delito = element1.nombre;
+  //       element1.lstDel.forEach((element2) => {
+  //         console.log(element1.lstDel);
+  //         if (element2.intervencionPol) {
+  //           const verificar = this.intervenPol.indexOf(element);
+  //           if (verificar == -1) {
+  //             let numero: any = Number(element2.intervencionPol);
+  //             this.insert.departamento = element;
+  //             this.insert.delito = delito;
+  //             this.insert.intervenPol = numero;
+
+  //             this.intervenPol.push(this.insert)
+  //           } else {
+  //             if (verificar !== -1) {
+  //               const del = this.intervenPol.indexOf(delito);
+  //               let numero: any = Number(element2.intervencionPol);
+  //               if (del !== -1) {
+  //                 this.intervenPol.forEach(i => {
+  //                   if(i.insert.departamento == element){
+  //                     if(i.insert.delito == delito){
+  //                       let objIndex = this.intervenPol.findIndex((obj => obj.insert.intervencionPol));
+  //                       let suma = i.insert.intervencionPol + numero;
+  //                       this.intervenPol[objIndex].intervencionPol = suma;
+  //                     }
+  //                   } 
+  //                 });
+  //               } else {
+  //                 this.insert.departamento = element;
+  //                 this.insert.delito = delito;
+  //                 this.insert.intervenPol = numero;
+  //                 this.intervenPol.push(this.insert)
+  //               }
+  //             }
+  //           }
+  //         } else {
+  //           const verificar = this.intervenPol.indexOf(element);
+  //           //console.log("verificar1", verificar);
+  //           if (verificar == -1) {
+  //             let numero: any = Number(element2.intervencionPol);
+  //             this.insert.departamento = element;
+  //             this.insert.delito = delito;
+  //             this.insert.denParticular = numero;
+
+  //             this.intervenPol.push(this.insert)
+  //           } else {
+  //             if (verificar !== -1) {
+  //               const del = this.intervenPol.indexOf(delito);
+  //               let numero: any = Number(element2.intervencionPol);
+  //               if (del !== -1) {
+  //                 this.intervenPol.forEach(i => {
+  //                   if(i.insert.departamento == element){
+  //                     if(i.insert.delito == delito){
+  //                       let objIndex = this.intervenPol.findIndex((obj => obj.insert.denParticular));
+  //                       console.log("objIndex",objIndex)
+  //                       let suma = i.insert.denunciaPart + numero;
+  //                       this.intervenPol[objIndex].denParticular = suma;
+  //                     }
+  //                   } 
+  //                 });
+  //               } else {
+  //                 this.insert.departamento = element;
+  //                 this.insert.delito = delito;
+  //                 this.insert.denParticular = numero;
+  //                 this.intervenPol.push(this.insert)
+  //               }
+  //             }
+  //           }
+  //         }
+  //       });
+  //     });
+  //   }
+  //  // console.log("aca estoy", this.insert)
+  // }
 
   cancelar() {
     this.item = new PlanillaHechosDel();
