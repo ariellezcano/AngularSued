@@ -20,19 +20,8 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   itemsPrev: ModelPrevPlanilla[];
   itemPr: ModelPrevPlanilla;
 
-  intervencionPol: number = 0;
-  denunciaPart: number = 0;
-  intervenPol: any [];
-  denParticular: [];
-  total: number = 0;
-
-  insert = {
-    departamento: '',
-    delito: '',
-    intervenPol: Number,
-    denParticular: Number,
-    total: Number,
-  };
+  intervenPol = 0;
+  denunciaPart = 0;
 
   constructor(
     private wsdl: PreventivoService,
@@ -41,8 +30,6 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   ) {
     this.item = new PlanillaHechosDel();
     this.itemsPrev = [];
-    this.intervenPol = [];
-    this.denParticular = [];
     this.itemPr = new ModelPrevPlanilla();
   }
 
@@ -67,7 +54,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.itemsPrev = result.data;
-        console.log('items', this.itemsPrev);
+        //console.log('items', this.itemsPrev);
         this.verificar();
       }
     } catch (error) {
@@ -91,107 +78,53 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     }
   }
 
-  verificar(){
-    for (let index = 0; index < this.itemsPrev.length; index++) {
-      const element = this.itemsPrev[index].departamento;
-      const arr = this.itemsPrev[index].dnpc;
-      console.log(arr)
-      if(element == "SAN FERNANDO"){
-        for (let index = 0; index < arr.length; index++) {
-          const tamanio = arr.length;
-          let delito = arr[index].nombre;
-          if(arr[index].nombre == delito && arr.length <= tamanio){
-            arr[index].lstDel.forEach(element => {
-              console.log(element)
-              
-            });
-          }
-          
-          
-        }
-      }   
-    }
-  }
-
-  // verificar() {
-  //   // alert("aca estoy")
+  // verificar(){
   //   for (let index = 0; index < this.itemsPrev.length; index++) {
   //     const element = this.itemsPrev[index].departamento;
+  //     console.log("departamento",element)
   //     const arr = this.itemsPrev[index].dnpc;
-  //     arr.forEach((element1) => {
-  //       let delito = element1.nombre;
-  //       element1.lstDel.forEach((element2) => {
-  //         console.log(element1.lstDel);
-  //         if (element2.intervencionPol) {
-  //           const verificar = this.intervenPol.indexOf(element);
-  //           if (verificar == -1) {
-  //             let numero: any = Number(element2.intervencionPol);
-  //             this.insert.departamento = element;
-  //             this.insert.delito = delito;
-  //             this.insert.intervenPol = numero;
-
-  //             this.intervenPol.push(this.insert)
-  //           } else {
-  //             if (verificar !== -1) {
-  //               const del = this.intervenPol.indexOf(delito);
-  //               let numero: any = Number(element2.intervencionPol);
-  //               if (del !== -1) {
-  //                 this.intervenPol.forEach(i => {
-  //                   if(i.insert.departamento == element){
-  //                     if(i.insert.delito == delito){
-  //                       let objIndex = this.intervenPol.findIndex((obj => obj.insert.intervencionPol));
-  //                       let suma = i.insert.intervencionPol + numero;
-  //                       this.intervenPol[objIndex].intervencionPol = suma;
-  //                     }
-  //                   } 
-  //                 });
-  //               } else {
-  //                 this.insert.departamento = element;
-  //                 this.insert.delito = delito;
-  //                 this.insert.intervenPol = numero;
-  //                 this.intervenPol.push(this.insert)
-  //               }
-  //             }
-  //           }
-  //         } else {
-  //           const verificar = this.intervenPol.indexOf(element);
-  //           //console.log("verificar1", verificar);
-  //           if (verificar == -1) {
-  //             let numero: any = Number(element2.intervencionPol);
-  //             this.insert.departamento = element;
-  //             this.insert.delito = delito;
-  //             this.insert.denParticular = numero;
-
-  //             this.intervenPol.push(this.insert)
-  //           } else {
-  //             if (verificar !== -1) {
-  //               const del = this.intervenPol.indexOf(delito);
-  //               let numero: any = Number(element2.intervencionPol);
-  //               if (del !== -1) {
-  //                 this.intervenPol.forEach(i => {
-  //                   if(i.insert.departamento == element){
-  //                     if(i.insert.delito == delito){
-  //                       let objIndex = this.intervenPol.findIndex((obj => obj.insert.denParticular));
-  //                       console.log("objIndex",objIndex)
-  //                       let suma = i.insert.denunciaPart + numero;
-  //                       this.intervenPol[objIndex].denParticular = suma;
-  //                     }
-  //                   } 
-  //                 });
-  //               } else {
-  //                 this.insert.departamento = element;
-  //                 this.insert.delito = delito;
-  //                 this.insert.denParticular = numero;
-  //                 this.intervenPol.push(this.insert)
-  //               }
-  //             }
-  //           }
+  //     console.log(arr)
+  //     if(element == "SAN FERNANDO"){
+  //       for (let index = 0; index < arr.length; index++) {
+  //         const tamanio = arr.length;
+          
+  //         let delito = arr[index].nombre;
+  //         //alert(delito)
+  //         if(arr[index].nombre == delito && arr.length <= tamanio){
+  //           arr[index].lstDel.forEach(element => {
+  //             alert("ACA ESTOY")
+  //             //console.log("lstDelito",element)
+              
+  //           });
   //         }
-  //       });
-  //     });
+          
+          
+  //       }
+  //     }   
   //   }
-  //  // console.log("aca estoy", this.insert)
   // }
+
+  verificar() {
+    // alert("aca estoy")
+    for (let index = 0; index < this.itemsPrev.length; index++) {
+      
+      //let nombre = this.itemsPrev[index].departamento;
+      const arr = this.itemsPrev[index].dnpc;
+      arr.forEach((element1) => {
+        element1.intervenPol = 0;
+        element1.denunciaPart = 0;
+        element1.lstDel.forEach((element2) => {
+          console.log(element1.lstDel);
+          if (element2.intervencionPol) {
+            element1.intervenPol ++ 
+          } else {
+            element1.denunciaPart ++
+          }
+        });
+      });
+    }
+   // console.log("aca estoy", this.insert)
+  }
 
   cancelar() {
     this.item = new PlanillaHechosDel();
@@ -202,10 +135,10 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     this.router.navigate(['/principal/']);
   }
 
-  vaciarVariables() {
-    this.intervencionPol = 0;
-    this.denunciaPart = 0;
-  }
+  // vaciarVariables() {
+  //   this.intervencionPol = 0;
+  //   this.denunciaPart = 0;
+  // }
 
   //hasta aca llegue
 }

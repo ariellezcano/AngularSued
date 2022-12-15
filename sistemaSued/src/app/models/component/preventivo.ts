@@ -41,7 +41,7 @@ export class Preventivo {
     localidadCoordenada: any;
     cp: any;
     pais: any;
-    
+
     constructor(){
         this.activo = true;
         this.nombreUnidad = '';

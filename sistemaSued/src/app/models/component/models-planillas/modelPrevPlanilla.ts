@@ -4,9 +4,12 @@ export class Dnpc {
   codDel!: any;
   lstDel: Preventivo[];
   nombre!: string;
-
+  intervenPol: number = 0;
+  denunciaPart: number = 0;
+  
   constructor() {
     this.lstDel = [];
+
   }
 }
 

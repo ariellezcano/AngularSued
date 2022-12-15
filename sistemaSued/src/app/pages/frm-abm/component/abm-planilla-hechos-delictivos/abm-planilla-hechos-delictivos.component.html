@@ -232,12 +232,12 @@
                   >&nbsp;
                   {{ i.nombre }}
                 </div>
-                <div class="col-md-8 text-center" *ngFor="let it of i.lstDel">
+                <div class="col-md-8 text-center">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="row">
-                        <div class="col-md-4">{{intervencionPol}}</div>
-                        <div class="col-md-4">{{denunciaPart}}</div>
+                        <div class="col-md-4">{{i.intervenPol}}</div>
+                        <div class="col-md-4">{{i.denunciaPart}}</div>
                         <div class="col-md-4">0</div>
                       </div>
                     </div>
@@ -305,7 +305,7 @@
       <div class="modal-footer noPrint">
         <button type="button" class="btn btn-success">Excel</button>
         <button type="button" class="btn btn-info" onclick="window.print();">PDF</button>
-        <button type="button" (click)="vaciarVariables()" class="btn btn-danger" data-bs-dismiss="modal">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
           Salir
         </button>
       </div>
