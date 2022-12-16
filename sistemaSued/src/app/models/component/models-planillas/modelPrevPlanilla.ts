@@ -6,6 +6,7 @@ export class Dnpc {
   nombre!: string;
   intervenPol: number = 0;
   denunciaPart: number = 0;
+  //totalGeneral: number = 0;
   
   constructor() {
     this.lstDel = [];

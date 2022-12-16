@@ -20,8 +20,9 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   itemsPrev: ModelPrevPlanilla[];
   itemPr: ModelPrevPlanilla;
 
-  intervenPol = 0;
-  denunciaPart = 0;
+  // intervenPol = 0;
+  // denunciaPart = 0;
+  totalGeneral = 0;
 
   constructor(
     private wsdl: PreventivoService,
@@ -107,16 +108,16 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   verificar() {
     // alert("aca estoy")
     for (let index = 0; index < this.itemsPrev.length; index++) {
-      
-      //let nombre = this.itemsPrev[index].departamento;
       const arr = this.itemsPrev[index].dnpc;
       arr.forEach((element1) => {
         element1.intervenPol = 0;
         element1.denunciaPart = 0;
+        //element1.totalGeneral = 0;
         element1.lstDel.forEach((element2) => {
           console.log(element1.lstDel);
           if (element2.intervencionPol) {
-            element1.intervenPol ++ 
+            element1.intervenPol ++
+           // this.totalGeneral = element1.intervenPol + element1.intervenPol
           } else {
             element1.denunciaPart ++
           }
