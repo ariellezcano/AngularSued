@@ -22,7 +22,8 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
 
   // intervenPol = 0;
   // denunciaPart = 0;
-  totalGeneral = 0;
+  totalGeneralInt!: number;
+  totalGralDen!: number;
 
   constructor(
     private wsdl: PreventivoService,
@@ -31,6 +32,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   ) {
     this.item = new PlanillaHechosDel();
     this.itemsPrev = [];
+   
     this.itemPr = new ModelPrevPlanilla();
   }
 
@@ -55,7 +57,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.itemsPrev = result.data;
-        //console.log('items', this.itemsPrev);
+        console.log('items', this.itemsPrev);
         this.verificar();
       }
     } catch (error) {
@@ -106,25 +108,28 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   // }
 
   verificar() {
-    // alert("aca estoy")
     for (let index = 0; index < this.itemsPrev.length; index++) {
+      this.totalGeneralInt = this.itemsPrev[index].totalIntervencion = 0;
+      this.totalGralDen = this.itemsPrev[index].totalDenParticular = 0;
+      //console.log("element1", index)
       const arr = this.itemsPrev[index].dnpc;
       arr.forEach((element1) => {
+        
         element1.intervenPol = 0;
         element1.denunciaPart = 0;
-        //element1.totalGeneral = 0;
+       
         element1.lstDel.forEach((element2) => {
           console.log(element1.lstDel);
           if (element2.intervencionPol) {
-            element1.intervenPol ++
-           // this.totalGeneral = element1.intervenPol + element1.intervenPol
+            element1.intervenPol ++;
+            this.totalGeneralInt ++;
           } else {
-            element1.denunciaPart ++
+            element1.denunciaPart ++;
+            this.totalGralDen ++;
           }
         });
       });
     }
-   // console.log("aca estoy", this.insert)
   }
 
   cancelar() {
