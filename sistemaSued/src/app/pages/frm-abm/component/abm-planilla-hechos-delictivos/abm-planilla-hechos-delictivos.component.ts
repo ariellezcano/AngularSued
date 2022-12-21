@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModelPrevPlanilla } from 'src/app/models/component/models-planillas/modelPrevPlanilla';
 import { PlanillaHechosDel } from 'src/app/models/component/models-planillas/planilla-hechos-del';
 import { Delito, Preventivo } from 'src/app/models/index.models';
-import { PreventivoService } from 'src/app/services/index.service';
+import {
+  PreventivoService,
+  PrevVictimaService,
+} from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,19 +23,18 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   itemsPrev: ModelPrevPlanilla[];
   itemPr: ModelPrevPlanilla;
 
-  // intervenPol = 0;
-  // denunciaPart = 0;
   totalGeneralInt!: number;
   totalGralDen!: number;
 
   constructor(
     private wsdl: PreventivoService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private wsdlVictima: PrevVictimaService
   ) {
     this.item = new PlanillaHechosDel();
     this.itemsPrev = [];
-   
+
     this.itemPr = new ModelPrevPlanilla();
   }
 
@@ -57,8 +59,28 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.itemsPrev = result.data;
-        console.log('items', this.itemsPrev);
+        //console.log('items', this.itemsPrev);
         this.verificar();
+        try {
+          let data = await this.wsdlVictima
+            .doFilterPlanillaHDVictima(
+              this.item.fecha1,
+              this.item.fecha2,
+              this.item.localidad,
+              this.item.departamento,
+              this.item.zonaMetro,
+              this.item.dnpc
+            )
+            .then();
+            console.log("datos", this.item);
+          const result = JSON.parse(JSON.stringify(data));
+          if (result.code == 200) {
+            console.log(result.data)
+            this.verificarVictima();
+          }
+        } catch (error) {
+          Swal.fire('Error al obtener los datos,' + error);
+        }
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
@@ -81,55 +103,31 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     }
   }
 
-  // verificar(){
-  //   for (let index = 0; index < this.itemsPrev.length; index++) {
-  //     const element = this.itemsPrev[index].departamento;
-  //     console.log("departamento",element)
-  //     const arr = this.itemsPrev[index].dnpc;
-  //     console.log(arr)
-  //     if(element == "SAN FERNANDO"){
-  //       for (let index = 0; index < arr.length; index++) {
-  //         const tamanio = arr.length;
-          
-  //         let delito = arr[index].nombre;
-  //         //alert(delito)
-  //         if(arr[index].nombre == delito && arr.length <= tamanio){
-  //           arr[index].lstDel.forEach(element => {
-  //             alert("ACA ESTOY")
-  //             //console.log("lstDelito",element)
-              
-  //           });
-  //         }
-          
-          
-  //       }
-  //     }   
-  //   }
-  // }
-
   verificar() {
     for (let index = 0; index < this.itemsPrev.length; index++) {
-      this.totalGeneralInt = this.itemsPrev[index].totalIntervencion = 0;
-      this.totalGralDen = this.itemsPrev[index].totalDenParticular = 0;
-      //console.log("element1", index)
+      this.itemsPrev[index].totalIntervencion = 0;
+      this.itemsPrev[index].totalDenParticular = 0;
       const arr = this.itemsPrev[index].dnpc;
       arr.forEach((element1) => {
-        
         element1.intervenPol = 0;
         element1.denunciaPart = 0;
-       
         element1.lstDel.forEach((element2) => {
-          console.log(element1.lstDel);
           if (element2.intervencionPol) {
-            element1.intervenPol ++;
-            this.totalGeneralInt ++;
+            element1.intervenPol++;
+            this.itemsPrev[index].totalIntervencion++;
+            //console.log("totalint",this.totalGeneralInt)
           } else {
-            element1.denunciaPart ++;
-            this.totalGralDen ++;
+            element1.denunciaPart++;
+            this.itemsPrev[index].totalDenParticular++;
+            //console.log("totalDen",this.totalGralDen)
           }
         });
       });
     }
+  }
+
+  verificarVictima() {
+
   }
 
   cancelar() {
