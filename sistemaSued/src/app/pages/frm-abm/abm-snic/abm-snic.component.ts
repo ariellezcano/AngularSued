@@ -20,6 +20,7 @@ export class AbmSnicComponent implements OnInit {
   enviado = false;
 
   item: PrevSnic;
+  guardando: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class AbmSnicComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevSnic();
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class AbmSnicComponent implements OnInit {
   }
 
   doAction() {
-    this.enviado = true;
+    //this.enviado = true;
     //if (this.form.valid) {
       if (this.id > 0 && this.item.preventivo > 0) {
         this.actualizarDatos(this.item);
@@ -70,12 +72,15 @@ export class AbmSnicComponent implements OnInit {
   }
 
   async actualizarDatos(obj: PrevSnic) {
+    this.guardando = true;
     //console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.back();
+        this.guardando = false;
+        //this.back();
+        this.findId();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -84,12 +89,16 @@ export class AbmSnicComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+    }
   }
 
 
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then(
@@ -99,6 +108,7 @@ export class AbmSnicComponent implements OnInit {
       );
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.findId();
         Swal.fire({
           position: 'top-end',
@@ -108,6 +118,7 @@ export class AbmSnicComponent implements OnInit {
           timer: 1500,
         });
       } else if(result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -115,6 +126,7 @@ export class AbmSnicComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',

@@ -76,7 +76,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
             console.log(result.data)
-            this.verificarVictima();
+            //this.verificarVictima();
           }
         } catch (error) {
           Swal.fire('Error al obtener los datos,' + error);
@@ -115,11 +115,9 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
           if (element2.intervencionPol) {
             element1.intervenPol++;
             this.itemsPrev[index].totalIntervencion++;
-            //console.log("totalint",this.totalGeneralInt)
           } else {
             element1.denunciaPart++;
             this.itemsPrev[index].totalDenParticular++;
-            //console.log("totalDen",this.totalGralDen)
           }
         });
       });

@@ -34,6 +34,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
   Ditem: Delito;
 
   mostrarBtnModif: boolean;
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -46,6 +47,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
     this.prev = new Preventivo();
     this.prevCad = new PrevCaratula();
     this.busqueda = '';
+    this.guardando = false;
     this.Ditem = new Delito();
     this.Ditems = [];
     this.mostrarBtnModif = false;
@@ -121,10 +123,14 @@ export class AbmPrevCaratulaComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevCaratula) {
+    //inhabilita el boton
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        //abilita el boton
+        this.guardando = false;
         this.idSeleccion=0;
         this.mostrarBtnModif =false;
         this.busqueda = '';
@@ -138,6 +144,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
     } catch (error) {}
   }
@@ -155,15 +162,18 @@ export class AbmPrevCaratulaComponent implements OnInit {
   }
 
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.busqueda='';
         this.item = new PrevCaratula();
         this.obtenerDetalle();
       } else if(result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -171,6 +181,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',

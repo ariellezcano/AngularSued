@@ -39,7 +39,17 @@
       </select>
     </div>
     <div class="col-md-6">
-      <ng-container
+      <ng-container *ngIf="guardando; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <center>
+        <button id="boton" class="btn btn-disabled" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Guardando datos...
+        </button>
+      </center>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <ng-container
         *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
       ></ng-container>
       <ng-template #thenTemplate>
@@ -61,6 +71,7 @@
         </div>
       </ng-template>
       <ng-template #elseTemplate>
+      </ng-template>
         <div class="row">
           <center>
             <button
@@ -193,6 +204,8 @@
     </button>
     &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
+      <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        &nbsp;
       Cancelar
     </button>
   </div>

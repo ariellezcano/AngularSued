@@ -20,7 +20,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
   enviado = false;
 
   item: PrevSnicHomicidio;
-
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -28,6 +28,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevSnicHomicidio();
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -70,12 +71,14 @@ export class AbmPrevHomicidioComponent implements OnInit {
   }
 
   async actualizarDatos(obj: PrevSnicHomicidio) {
-    console.log("enviado modificar", this.item)
+    this.guardando = true;
+    //console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-       this.findId();
+        this.guardando = false;
+        this.findId();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -84,21 +87,22 @@ export class AbmPrevHomicidioComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+    }
   }
 
 
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
-      let data = await this.wsdl.doInsert(this.item).then(
-        /*data => {
-          console.log("data de data", data)
-        }*/
-      );
+      let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.findId();
         Swal.fire({
           position: 'top-end',
@@ -108,6 +112,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
           timer: 1500,
         });
       } else if(result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -115,6 +120,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',

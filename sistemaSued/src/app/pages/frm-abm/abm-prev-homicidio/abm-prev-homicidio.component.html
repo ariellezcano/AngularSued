@@ -231,17 +231,34 @@
     </div>
     <hr />
     <div class="row">
-      <ng-container
+      <ng-container *ngIf="guardando; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <button id="boton" class="btn btn-disabled" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Guardando datos...
+        </button>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <ng-container
         *ngIf="item.preventivo > 0; then thenTemplate; else elseTemplate"
       ></ng-container>
       <ng-template #thenTemplate>
-        <button class="btn btn-primary" type="submit">Editar registro</button>
+        <button class="btn btn-primary" type="submit">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;
+          Editar registro</button>
       </ng-template>
       <ng-template #elseTemplate>
-        <button class="btn btn-dark" type="submit">Guardar</button>
+        <button class="btn btn-dark" type="submit">
+          <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;
+          Guardar</button>
       </ng-template>
+      </ng-template>
+      
+     
       &nbsp;
       <button class="btn btn-info" type="button" (click)="back()">
+        <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+        &nbsp;
         Cancelar
       </button>
     </div>

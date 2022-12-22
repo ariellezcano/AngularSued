@@ -40,6 +40,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
   items: PrevUnidadEspecial[];
 
   mostrarBtnModif: boolean;
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -51,7 +52,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
     this.prev = new Preventivo();
     this.prevCad = new PrevUnidadEspecial();
     this.busqueda = '';
-
+    this.guardando = false;
     this.mostrarBtnModif = false;
     this.id = 0;
   }
@@ -101,10 +102,12 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
   }
 
   async actualizarDatos(obj: PrevUnidadEspecial) {
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
         this.item = new PrevUnidadEspecial();
@@ -117,20 +120,26 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+    }
   }
 
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     if (this.item.unidadEspecial > 0) {
       try {
         let data = await this.wsdl.doInsert(this.item).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          this.guardando = false;
           this.item = new PrevUnidadEspecial();
           this.obtenerDetalle();
         } else if (result.code == 204) {
+          this.guardando = false;
           Swal.fire({
             icon: 'info',
             title: 'Alerta...',
@@ -138,6 +147,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
           });
         }
       } catch (error) {
+        this.guardando = false;
         Swal.fire({
           icon: 'error',
           title: 'Alerta...',
@@ -145,6 +155,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
         });
       }
     } else {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
