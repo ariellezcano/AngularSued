@@ -163,7 +163,8 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <ng-container
+      <ng-container *ngIf="!guardando">
+        <ng-container
         *ngIf="mostrarBtnModif; then mostrar; else noMostrar"
       ></ng-container>
       <ng-template #mostrar>
@@ -202,6 +203,16 @@
           </center>
         </div>
       </ng-template>
+      </ng-container>
+      <ng-container *ngIf="guardando">
+        <center>
+          <button id="boton" class="btn btn-disabled" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Guardando datos...
+          </button>
+        </center>
+      </ng-container>
+      
     </div>
   </div>
   <br />

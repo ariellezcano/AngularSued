@@ -2,24 +2,26 @@
   background-color: bisque !important;
 }
 .btn-circle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 12px;
-    line-height: 1.42857;
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
 }
 
 .t-success {
-    //background-color: lightgreen !important;
-    color: green !important;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 15px;
-  }
+  //background-color: lightgreen !important;
+  color: green !important;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 15px;
+}
 
-  .color{
-    background-color: #E0144C;
-  }
-  
+.color {
+  background-color: #e0144c;
+}
+.btn-disabled {
+  background-color: #40e0d0;
+}

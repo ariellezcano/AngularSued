@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Modalidad, Preventivo, PrevModalidad, PrevObjeto } from 'src/app/models/index.models';
-import { ModalidadService, PreventivoService, PrevModalidadService, PrevObjetoService } from 'src/app/services/index.service';
+import {
+  Modalidad,
+  Preventivo,
+  PrevModalidad,
+  PrevObjeto,
+} from 'src/app/models/index.models';
+import {
+  ModalidadService,
+  PreventivoService,
+  PrevModalidadService,
+  PrevObjetoService,
+} from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-abm-prev-modalidad',
   templateUrl: './abm-prev-modalidad.component.html',
-  styleUrls: ['./abm-prev-modalidad.component.scss']
+  styleUrls: ['./abm-prev-modalidad.component.scss'],
 })
 export class AbmPrevModalidadComponent implements OnInit {
-
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -33,6 +42,7 @@ export class AbmPrevModalidadComponent implements OnInit {
   Mitem: Modalidad;
 
   mostrarBtnModif: boolean;
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,6 +58,7 @@ export class AbmPrevModalidadComponent implements OnInit {
     this.Mitem = new Modalidad();
     this.Mitems = [];
     this.mostrarBtnModif = false;
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -103,12 +114,14 @@ export class AbmPrevModalidadComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevModalidad) {
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.idSeleccion=0;
-        this.mostrarBtnModif =false;
+        this.guardando = false;
+        this.idSeleccion = 0;
+        this.mostrarBtnModif = false;
         this.busqueda = '';
         this.item = new PrevModalidad();
         this.obtenerDetalle();
@@ -120,8 +133,11 @@ export class AbmPrevModalidadComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+    }
   }
 
   async agregarDato() {
@@ -137,27 +153,40 @@ export class AbmPrevModalidadComponent implements OnInit {
   }
 
   async guardar() {
-    this.item.preventivo = this.id;
-    try {
-      let data = await this.wsdl.doInsert(this.item).then();
-      const result = JSON.parse(JSON.stringify(data));
-      if (result.code == 200) {
-       this.busqueda = '';
-       this.Mitems = [];
-       this.item = new PrevModalidad();
-       this.obtenerDetalle();
-      } else if(result.code == 204) {
+    if (this.item.modalidad !== undefined) {
+      this.guardando = true;
+      this.item.preventivo = this.id;
+      try {
+        let data = await this.wsdl.doInsert(this.item).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.guardando = false;
+          this.busqueda = '';
+          this.Mitems = [];
+          this.item = new PrevModalidad();
+          this.obtenerDetalle();
+        } else if (result.code == 204) {
+          this.guardando = false;
+          Swal.fire({
+            icon: 'info',
+            title: 'Alerta...',
+            text: 'El dato ya existe en la base de datos',
+          });
+        }
+      } catch (error) {
+        this.guardando = false;
         Swal.fire({
-          icon: 'info',
+          icon: 'error',
           title: 'Alerta...',
-          text: 'El dato ya existe en la base de datos',
+          text: 'No se pudo insertar los datos',
         });
       }
-    } catch (error) {
+    } else {
       Swal.fire({
         icon: 'error',
-        title: 'Alerta...',
-        text: 'No se pudo insertar los datos',
+        title: 'Oops...',
+        text: 'Debe ingresar datos a guardar!',
+        footer: '<b>DATO REQUERIDO: "MODALIDAD"</b>',
       });
     }
   }
@@ -232,7 +261,6 @@ export class AbmPrevModalidadComponent implements OnInit {
     return color;
   }
 
-
   preDelete(item: PrevModalidad) {
     this.item = new PrevModalidad();
     this.item = item;
@@ -280,7 +308,7 @@ export class AbmPrevModalidadComponent implements OnInit {
     let valor = '';
     if (item) {
       valor = 'Si';
-    }else{
+    } else {
       valor = 'No';
     }
     return valor;
@@ -289,5 +317,4 @@ export class AbmPrevModalidadComponent implements OnInit {
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
-
 }

@@ -61,6 +61,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   seleccionID: any;
 
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -84,6 +85,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.itemsArma = [];
     this.itemsPM = [];
     this.botonModifArma = false;
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -175,12 +177,14 @@ export class AbmPreventivoMedioComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PreventivoMedio) {
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
+        this.guardando = false;
         this.busqueda = '';
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
@@ -192,8 +196,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+    }
   }
 
   async actualizarArmas(obj: PrevMedioArma) {
@@ -230,16 +237,19 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   //guarda el preventivo medio en la base de datos
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.busqueda='';
         this.item = new PreventivoMedio();
         this.obtenerDetalle();
         
       } else if (result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -247,6 +257,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',
