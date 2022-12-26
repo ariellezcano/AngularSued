@@ -71,6 +71,8 @@ export class AbmPreVictimaComponent implements OnInit {
   Oitem: Ocupacion;
 
   mostrarBtnModif: boolean;
+  guardando: boolean;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -99,6 +101,7 @@ export class AbmPreVictimaComponent implements OnInit {
     this.Citem = new Calle();
     this.CItems = [];
     this.mostrarBtnModif = false;
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -166,14 +169,17 @@ export class AbmPreVictimaComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevVictima) {
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         //this.back();
+        this.guardando = false;
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
         this.busqueda = '';
+        this.busquedaOc = '';
         this.busquedaBarrio = '';
         this.busquedaCalle = '';
         this.item = new PrevVictima();
@@ -186,28 +192,34 @@ export class AbmPreVictimaComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
-  }
-
-  async agregarDato() {
-    for (let index = 0; index < this.items.length; index++) {
-      this.prevVic = new PrevVictima();
-      this.prevVic = this.items[index];
-      if (this.prevVic.id == undefined) {
-        this.item = new PrevVictima();
-        this.item = this.prevVic;
-        this.guardar();
-      }
+    } catch (error) {
+      this.guardando = false;
     }
   }
 
+  // async agregarDato() {
+  //   for (let index = 0; index < this.items.length; index++) {
+  //     this.prevVic = new PrevVictima();
+  //     this.prevVic = this.items[index];
+  //     if (this.prevVic.id == undefined) {
+  //       this.item = new PrevVictima();
+  //       this.item = this.prevVic;
+  //       this.guardar();
+  //     }
+  //   }
+  // }
+
+
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.busquedaBarrio = '';
         this.busquedaCalle = '';
         this.busqueda = '';
@@ -222,6 +234,7 @@ export class AbmPreVictimaComponent implements OnInit {
         //   timer: 1500,
         // });
       } else if (result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -229,6 +242,7 @@ export class AbmPreVictimaComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',

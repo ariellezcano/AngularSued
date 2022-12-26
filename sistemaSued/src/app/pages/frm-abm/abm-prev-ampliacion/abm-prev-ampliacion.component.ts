@@ -37,7 +37,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
   items: PrevAmpliacion[];
 
   mostrarBtnModif: boolean;
-
+  guardando: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -50,6 +50,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     this.prevAmp = new PrevAmpliacion();
     this.busqueda = '';
     this.mostrarBtnModif = false;
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -128,10 +129,12 @@ export class AbmPrevAmpliacionComponent implements OnInit {
   }
 
   async actualizarDatos(obj: PrevAmpliacion) {
+    this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         //this.back();
         this.idSeleccion=0;
         this.mostrarBtnModif =false;
@@ -146,33 +149,37 @@ export class AbmPrevAmpliacionComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
       }
-    } catch (error) {}
-  }
-
-  async agregarDato() {
-    for (let index = 0; index < this.items.length; index++) {
-      this.prevAmp = new PrevAmpliacion();
-      this.prevAmp = this.items[index];
-      if (this.prevAmp.id == undefined) {
-        this.item = new PrevAmpliacion();
-        this.item = this.prevAmp;
-        this.guardar();
-      }
+    } catch (error) {
+      this.guardando = false;
     }
   }
 
+  // async agregarDato() {
+  //   for (let index = 0; index < this.items.length; index++) {
+  //     this.prevAmp = new PrevAmpliacion();
+  //     this.prevAmp = this.items[index];
+  //     if (this.prevAmp.id == undefined) {
+  //       this.item = new PrevAmpliacion();
+  //       this.item = this.prevAmp;
+  //       this.guardar();
+  //     }
+  //   }
+  // }
+
   async guardar() {
+    this.guardando = true;
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        //this.fil.keyword = '';
+        this.guardando = false;
         this.item = new PrevAmpliacion();
         this.obtenerDetalle();
-       
       } else if (result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -180,6 +187,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',
@@ -189,11 +197,11 @@ export class AbmPrevAmpliacionComponent implements OnInit {
   }
 
   //agrega fila en memoria
-  addRow() {
-    this.busqueda = '';
-    this.items.unshift(this.item);
-    this.item = new PrevAmpliacion();
-  }
+  // addRow() {
+  //   this.busqueda = '';
+  //   this.items.unshift(this.item);
+  //   this.item = new PrevAmpliacion();
+  // }
 
   //elimina la fila en memoria
   deleteRow(indice: any) {

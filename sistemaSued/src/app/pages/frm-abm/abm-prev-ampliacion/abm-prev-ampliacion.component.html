@@ -57,43 +57,60 @@
   </div>
   <br />
   <ng-container
-    *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+    *ngIf="guardando; then thenTemplate; else elseTemplate"
   ></ng-container>
   <ng-template #thenTemplate>
-    <div class="row">
-      <center>
-        <button
-          id="boton"
-          type="button"
-          title="Modificar datos"
-          placement="top"
-          (click)="actualizarDatos(this.item)"
-          show-delay="10"
-          class="btn btn-primary"
-        >
-          <i class="fa fa-edit" aria-hidden="true"></i>
-          Guardar modificación
-        </button>
-      </center>
-    </div>
+    <center>
+      <button id="boton" class="btn btn-disabled" type="button" disabled>
+        <span
+          class="spinner-grow spinner-grow-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        Guardando datos...
+      </button>
+    </center>
   </ng-template>
   <ng-template #elseTemplate>
-    <div class="row">
-      <center>
-        <button
-          id="boton"
-          type="button"
-          title="Guardar"
-          placement="top"
-          (click)="guardar()"
-          show-delay="10"
-          class="btn btn-outline-info"
-        >
-          <i class="fa fa-plus" aria-hidden="true"></i>
-          Agregar a tabla
-        </button>
-      </center>
-    </div>
+    <ng-container
+      *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+    ></ng-container>
+    <ng-template #thenTemplate>
+      <div class="row">
+        <center>
+          <button
+            id="boton"
+            type="button"
+            title="Modificar datos"
+            placement="top"
+            (click)="actualizarDatos(this.item)"
+            show-delay="10"
+            class="btn btn-primary"
+          >
+            <i class="fa fa-edit" aria-hidden="true"></i>
+            Guardar modificación
+          </button>
+        </center>
+      </div>
+    </ng-template>
+    <ng-template #elseTemplate>
+      <div class="row">
+        <center>
+          <button
+            id="boton"
+            type="button"
+            title="Guardar"
+            placement="top"
+            (click)="guardar()"
+            show-delay="10"
+            class="btn btn-outline-info"
+          >
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Agregar a tabla
+          </button>
+        </center>
+      </div>
+    </ng-template>
   </ng-template>
   <hr />
   <div class="row">
@@ -113,13 +130,13 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.fechaAmpliacion | date: "dd/MM/yyyy" }}</td>
+            <td>{{ i.fechaAmpliacion | date : "dd/MM/yyyy" }}</td>
             <td>{{ i.nroNota }}</td>
             <td>{{ i?.unidadNavigation.nombre }}</td>
             <td>{{ i.observacion }}</td>
           </ng-template>
           <ng-template #elseTemplate>
-            <td>{{ i.fechaAmpliacion | date: "dd/MM/yyyy" }}</td>
+            <td>{{ i.fechaAmpliacion | date : "dd/MM/yyyy" }}</td>
             <td>{{ i.nroNota }}</td>
             <td>{{ i.nombreUnidad }}</td>
             <td>{{ i.observacion }}</td>
@@ -207,15 +224,6 @@
   </div>
   <hr />
   <div class="row">
-    <!-- <button
-      *ngIf="!mostrarBtnModif"
-      class="btn btn-dark"
-      type="button"
-      (click)="agregarDato()"
-    >
-      Guardar
-    </button>
-    &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
       Cancelar
     </button>

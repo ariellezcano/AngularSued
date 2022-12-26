@@ -54,6 +54,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
   //ocupado en el filtro ocupacion
   Oitems: Ocupacion[];
   Oitem: Ocupacion;
+  guardando: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -78,6 +79,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     this.Citem = new Calle();
     this.CItems = [];
     this.mostrarBtnModif = false;
+    this.guardando = false;
   }
 
   ngOnInit(): void {
@@ -133,11 +135,14 @@ export class AbmPrevInculpadoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevInculpado) {
+    this.guardando = true;
+
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
       console.log(data)
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.idSeleccion=0;
         this.mostrarBtnModif=false;
         this.busqueda = '';
@@ -159,8 +164,13 @@ export class AbmPrevInculpadoComponent implements OnInit {
           timer: 1500,
         });
       } else if (result.code == 204) {
+        this.guardando = false;
+
       }
-    } catch (error) {}
+    } catch (error) {
+      this.guardando = false;
+
+    }
   }
 
   // async agregarDato() {
@@ -176,11 +186,14 @@ export class AbmPrevInculpadoComponent implements OnInit {
   // }
 
   async guardar() {
+    this.guardando = true;
+
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
+        this.guardando = false;
         this.busqueda = '';
         this.busquedaOc = '';
         this.busquedaCalle = '';
@@ -192,8 +205,8 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.filCalle.items = [];
         this.item = new PrevInculpado();
         this.obtenerDetalle()
-       
       } else if(result.code == 204) {
+        this.guardando = false;
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -201,6 +214,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
         });
       }
     } catch (error) {
+      this.guardando = false;
       Swal.fire({
         icon: 'error',
         title: 'Alerta...',

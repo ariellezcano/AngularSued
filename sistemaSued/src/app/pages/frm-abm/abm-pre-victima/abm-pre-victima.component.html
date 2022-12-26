@@ -209,6 +209,16 @@
   <br />
   <div class="row">
     <div class="col-md-12">
+      <ng-container *ngIf="guardando; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-template #thenTemplate>
+        <center>
+        <button id="boton" class="btn btn-disabled" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Guardando datos...
+        </button>
+      </center>
+      </ng-template>
+      <ng-template #elseTemplate>
       <ng-container
         *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
       ></ng-container>
@@ -248,6 +258,7 @@
           </center>
         </div>
       </ng-template>
+    </ng-template>
     </div>
   </div>
   <hr />
