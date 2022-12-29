@@ -137,6 +137,7 @@ import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-
 import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-buscador-delito.component';
 import { ComboRolComponent } from './component/combo-rol/combo-rol.component';
 import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hechos-delictivos/abm-planilla-hechos-delictivos.component';
+import { VerificacionComponent } from './compartido/verificacion/verificacion.component';
 
 @NgModule({
     declarations: [
@@ -272,7 +273,7 @@ import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-pl
       FilBuscadorDelitoComponent,
       ComboRolComponent,
       AbmPlanillaHechosDelictivosComponent,
-
+      VerificacionComponent,
     ],
     exports: [],
     imports: [

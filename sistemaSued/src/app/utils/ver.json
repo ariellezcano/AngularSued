@@ -1,0 +1,12 @@
+{
+    "id": 3,
+    "nombre": "SUED",
+    "url": "http://10.125.31.214/sued/#/",
+    "api": "https://policiadigitalchaco.com.ar/apiSued",
+    "ruta": "/api/UsuariosSued",
+    "rutaId": "/api/UsuariosSued/{id}",
+    "repo": "find/vinculacionSistema/",
+    "validacion": "validacion/",
+    "unidadSistema": "/api/UnidadSistema/obtenerDatos",
+    "activo": true
+}

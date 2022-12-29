@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -18,6 +19,20 @@ export class UsuariosSuedService {
     this.other_header = this.other_header;
     return this.http
       .get(this.api +"/"+ id, { headers: this.other_header })
+      .toPromise()
+      .catch((err) => {
+        return {
+          code: 500,
+          data: err.message,
+          msg: 'Error en el servicio',
+        };
+      });
+  }
+
+  doLoginId(cifrado: any) {
+    this.other_header = UturuncoUtils.getHeader();
+    return this.http
+      .get(this.api + '/find/idUserOci/' + cifrado, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
         return {

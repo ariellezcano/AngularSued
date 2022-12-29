@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
+import { VerificacionComponent } from './pages/compartido/verificacion/verificacion.component';
 import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [
@@ -13,10 +14,10 @@ const routes: Routes = [
   //   component: PagesComponent,
   // },
   
-  // {
-  //   path: 'validacion/:id',
-  //   component: VerificacionComponent,
-  // },
+  {
+    path: 'validacion/:id',
+    component: VerificacionComponent,
+  },
 
   {
     path: 'principal',
