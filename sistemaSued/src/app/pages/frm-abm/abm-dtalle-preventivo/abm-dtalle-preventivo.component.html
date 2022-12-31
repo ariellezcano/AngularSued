@@ -38,7 +38,7 @@
       </div>
     </div>
     <hr />
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs justify-content-center nav-pills mb-3" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
           class="nav-link active"
@@ -67,7 +67,21 @@
           Cáratulas Secundarias
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        *ngIf="
+          prev.delitoNavigation?.id !== 7 &&
+          prev.delitoNavigation?.id !== 8 &&
+          prev.delitoNavigation?.id !== 9 &&
+          prev.delitoNavigation?.id !== 10 &&
+          prev.delitoNavigation?.id !== 11 &&
+          prev.delitoNavigation?.id !== 14 &&
+          prev.delitoNavigation?.id !== 17 &&
+          prev.delitoNavigation?.id !== 18 &&
+          prev.delitoNavigation?.id !== 20
+        "
+        class="nav-item"
+        role="presentation"
+      >
         <button
           class="nav-link"
           id="home-tab"
@@ -81,7 +95,16 @@
           S.N.I.C.
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        *ngIf="
+          prev.delitoNavigation?.id !== 7 && 
+          prev.delitoNavigation?.id !== 8 &&
+          prev.delitoNavigation?.id !== 18 &&
+          prev.delitoNavigation?.id !== 20
+        "
+        class="nav-item"
+        role="presentation"
+      >
         <button
           class="nav-link"
           id="profile-tab"
@@ -102,7 +125,18 @@
           prev.delitoNavigation?.id !== 3 &&
           prev.delitoNavigation?.id !== 4 &&
           prev.delitoNavigation?.id !== 5 &&
-          prev.delitoNavigation?.id !== 6
+          prev.delitoNavigation?.id !== 6 &&
+          prev.delitoNavigation?.id !== 7 &&
+          prev.delitoNavigation?.id !== 8 &&
+          prev.delitoNavigation?.id !== 9 &&
+          prev.delitoNavigation?.id !== 10 &&
+          prev.delitoNavigation?.id !== 12 &&
+          prev.delitoNavigation?.id !== 11 &&
+          prev.delitoNavigation?.id !== 13 &&
+          prev.delitoNavigation?.id !== 14 &&
+          prev.delitoNavigation?.id !== 17 &&
+          prev.delitoNavigation?.id !== 18 &&
+          prev.delitoNavigation?.id !== 20
         "
         class="nav-item"
         role="presentation"
@@ -125,7 +159,15 @@
           prev.delitoNavigation?.id !== 3 &&
           prev.delitoNavigation?.id !== 4 &&
           prev.delitoNavigation?.id !== 5 &&
-          prev.delitoNavigation?.id !== 6
+          prev.delitoNavigation?.id !== 6 &&
+          prev.delitoNavigation?.id !== 7 &&
+          prev.delitoNavigation?.id !== 8 &&
+          prev.delitoNavigation?.id !== 11 &&
+          prev.delitoNavigation?.id !== 12 &&
+          prev.delitoNavigation?.id !== 13 &&
+          prev.delitoNavigation?.id !== 14 &&
+          prev.delitoNavigation?.id !== 17 &&
+          prev.delitoNavigation?.id !== 18
         "
         class="nav-item"
         role="presentation"
@@ -158,8 +200,9 @@
         </button>
       </li>
       <li
-        *ngIf="prev.delitoNavigation?.id !== 5 &&
-        prev.delitoNavigation?.id !== 6"
+        *ngIf="
+          prev.delitoNavigation?.id !== 5 && prev.delitoNavigation?.id !== 6
+        "
         class="nav-item"
         role="presentation"
       >

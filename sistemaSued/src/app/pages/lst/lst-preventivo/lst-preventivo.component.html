@@ -190,7 +190,9 @@
           <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar detalle al preventivo
           </button>
           &nbsp;
+          <!-- modificado para que vea solamente el desarrollador -->
           <button
+          *ngIf="this.rol == 'DEVELOPER'"
             type="button"
             title="Ver detalle del preventivo"
             placement="top"
@@ -201,6 +203,7 @@
           >
             <i class="fa fa-info-circle" aria-hidden="true"></i> Ver detalles del Preventivo
           </button>
+          <!-- /aca finaliza -->
         </CENTER>
       </div>
     </div>

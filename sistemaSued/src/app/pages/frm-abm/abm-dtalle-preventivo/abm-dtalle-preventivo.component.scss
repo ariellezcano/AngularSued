@@ -1,3 +1,10 @@
 .card-body {
-    background-color: bisque !important;
-  }
+  background-color: bisque !important;
+}
+.nav-pills .nav-link.active,
+.show>.nav-pills .nav-link{
+  background: #AAC4FF !important;  
+  //background: #6C00FF !important;
+  color: black !important;
+  font-weight: bold;
+}

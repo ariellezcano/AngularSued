@@ -2,6 +2,7 @@ import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FilPreventivoComponent } from '../../filters/fil-preventivo/fil-preventivo.component';
@@ -25,17 +26,20 @@ export class LstPreventivoComponent implements OnInit {
 
   item!: Preventivo;
   items: Preventivo[];
-
+  rol: string; 
   user: any;
 
   constructor(private wsdl: PreventivoService, private router: Router) {
+    this.rol = '';
     this.item = new Preventivo();
     this.items = [];
     this.proccess = false;
     this.id = 0;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
+  }
 
   doFound(event: Preventivo[]) {
     this.items = event;
