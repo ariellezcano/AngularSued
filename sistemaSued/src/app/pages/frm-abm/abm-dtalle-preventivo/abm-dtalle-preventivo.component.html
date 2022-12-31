@@ -95,7 +95,18 @@
           Medio Utilizado
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        *ngIf="
+          prev.delitoNavigation?.id !== 1 &&
+          prev.delitoNavigation?.id !== 2 &&
+          prev.delitoNavigation?.id !== 3 &&
+          prev.delitoNavigation?.id !== 4 &&
+          prev.delitoNavigation?.id !== 5 &&
+          prev.delitoNavigation?.id !== 6
+        "
+        class="nav-item"
+        role="presentation"
+      >
         <button
           class="nav-link"
           id="contact-tab"
@@ -109,7 +120,16 @@
           Objeto
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        *ngIf="
+          prev.delitoNavigation?.id !== 3 &&
+          prev.delitoNavigation?.id !== 4 &&
+          prev.delitoNavigation?.id !== 5 &&
+          prev.delitoNavigation?.id !== 6
+        "
+        class="nav-item"
+        role="presentation"
+      >
         <button
           class="nav-link"
           id="contact-tab"
@@ -137,7 +157,12 @@
           Víctimas
         </button>
       </li>
-      <li class="nav-item" role="presentation">
+      <li
+        *ngIf="prev.delitoNavigation?.id !== 5 &&
+        prev.delitoNavigation?.id !== 6"
+        class="nav-item"
+        role="presentation"
+      >
         <button
           class="nav-link"
           id="contact-tab"
@@ -204,10 +229,7 @@
           <!-- LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMAS Y LESIONES CULPOSAS POR ACC. TRANSITO LEVES -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.id ==
-                13 ||
-              prev.delitoNavigation?.id ==
-                12
+              prev.delitoNavigation?.id == 13 || prev.delitoNavigation?.id == 12
             "
           >
             <app-abm-snic [id]="this.id"></app-abm-snic>
@@ -215,8 +237,7 @@
           <!-- homicidio doloso consumado y tentativo -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.id == 1 ||
-              prev.delitoNavigation?.id == 2
+              prev.delitoNavigation?.id == 1 || prev.delitoNavigation?.id == 2
             "
           >
             <app-abm-prev-homicidio [id]="this.id"></app-abm-prev-homicidio>
@@ -224,10 +245,7 @@
           <!-- instigacion al suicidio consumado y tentativa -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.id ==
-                5 ||
-              prev.delitoNavigation?.id ==
-                6
+              prev.delitoNavigation?.id == 5 || prev.delitoNavigation?.id == 6
             "
           >
             <app-abm-prev-suicidio [id]="this.id"></app-abm-prev-suicidio>
