@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { UsuarioSued } from 'src/app/models/index.models';
 import { RegistroUsuarioService, UsuariosSuedService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FiUsuariosSuedComponent } from '../../filters/fi-usuarios-sued/fi-usuarios-sued.component';
@@ -35,6 +35,7 @@ export class LstUsuariosComponent implements OnInit {
 
   entidad = 'lst-usuarios';
   nombreUsu = '';
+  //rol = '';
 
   constructor(
     private wsdl: UsuariosSuedService,
@@ -44,9 +45,11 @@ export class LstUsuariosComponent implements OnInit {
     this.load = false;
     this.item = new UsuarioSued();
     this.items = [];
+    //this.rol = "";
   }
 
   ngOnInit(): void {
+    //this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
     this.nombreUsu = JSON.parse(
       '' + UturuncoUtils.getSession('personal')
     ).nombre;

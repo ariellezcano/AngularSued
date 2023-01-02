@@ -101,6 +101,22 @@ export class PreventivoService {
       });
   }
 
+  doFilterBusquedaAvanzada(fecha: any, unidad: any, anio: number, nro: number){
+    this.other_header = this.other_header;
+    const ruta = this.api + '/' + 'filterBusqAvanzada/';
+    return this.http
+      .get(ruta + fecha +","+ unidad +","+ anio +","+ nro)
+      .toPromise()
+      .catch((err) => {
+        return {
+          code: 500,
+          data: err.message,
+          msg: 'Error en el servicio',
+        };
+      });
+  }
+
+  //PLANILLAS "REPORTES";
   doFilterPlanilla(fecha1?: any, fecha2?: any, localidad?: any, departamento?: any, unidad?: any, delito?: any) {
     this.other_header = this.other_header;
     const ruta = this.api + '/' + 'filterPlanillaHD/';
@@ -115,6 +131,7 @@ export class PreventivoService {
         };
       });
   }
+
 
   doFilterPlanillaHD(fecha1?: any, fecha2?: any, departamento?: any, localidad?: any, zonaMetro?: any, dnpc?: boolean) {
     this.other_header = this.other_header;

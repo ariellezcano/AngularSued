@@ -27,6 +27,7 @@
         <thead class="table-dark border border-dark">
           <tr>
             <th>Fecha</th>
+            <th>Unidad</th>
             <th>Preventivo N°</th>
             <th>Intervencion Pol.</th>
             <th>Fecha Hecho</th>
@@ -45,6 +46,7 @@
             <td class="text-primary">
               {{ item.fechaPreventivo | date: "dd/MM/yyyy" }}
             </td>
+            <td class="text-dark"><b>{{item.unidadNavigation?.nombre}}</b></td>
             <td class="text-primary">
               {{ item.anio }} - {{ item.nro }} - {{ item.letra }}
             </td>
