@@ -143,16 +143,17 @@ export class AbmPreventivoComponent implements OnInit {
             this.busquedaCalle = this.item.calleNavigation.nombre;
             this.Citem.nombre = this.item.calleNavigation.nombre;
           }
-          if(this.item.unidad != undefined){
+          if (this.item.unidad != undefined) {
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;
           }
-          if(this.item.localidad != undefined){
+          if (this.item.localidad != undefined) {
             //this.item.localidad = result.dato.Localidad;
-            this.item.localidadCoordenada = this.item.localidadNavigation?.nombre;
-            this.item.pais = this.item.localidadNavigation?.nacionNavigation?.nacion;
+            this.item.localidadCoordenada =
+              this.item.localidadNavigation?.nombre;
+            this.item.pais =
+              this.item.localidadNavigation?.nacionNavigation?.nacion;
             this.item.cp = this.item.localidadNavigation?.codPostal;
           }
-          
         }
       } catch (error) {}
     }
@@ -197,39 +198,51 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.hora != undefined &&
       this.item.delito != undefined
     ) {
-      this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
-      //console.log("usuario crea", this.item.usuarioCrea)
-      var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
-      //var convert = hora;
-      //var Format = hora.replace(/[:]/g, '');
-      this.item.hora = hora;
+      if (
+        Date.parse(this.item.fechaPreventivo) > Date.parse(this.item.fechaHecho)
+      ) {
+        this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
+        //console.log("usuario crea", this.item.usuarioCrea)
+        var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
+        //var convert = hora;
+        //var Format = hora.replace(/[:]/g, '');
+        this.item.hora = hora;
 
-      console.log(this.item);
+        console.log(this.item);
 
-      try {
-        let data = await this.wsdl.doInsert(this.item).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.back();
+        try {
+          let data = await this.wsdl.doInsert(this.item).then();
+          const result = JSON.parse(JSON.stringify(data));
+          if (result.code == 200) {
+            this.back();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Dato guardado correctamente!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else if (result.code == 204) {
+            Swal.fire({
+              icon: 'info',
+              title: 'Alerta...',
+              text: 'El dato ya existe en la base de datos',
+            });
+          }
+        } catch (error) {
           Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Dato guardado correctamente!',
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'info',
+            icon: 'error',
             title: 'Alerta...',
-            text: 'El dato ya existe en la base de datos',
+            text: 'No se pudo insertar los datos',
           });
         }
-      } catch (error) {
+      } else {
         Swal.fire({
           icon: 'error',
-          title: 'Alerta...',
-          text: 'No se pudo insertar los datos',
+          title: 'Oops...',
+          text: '¡Error al guardar los datos!',
+          footer:
+            '<CENTER><label><b>La fecha del hecho no puede ser mayor a la fecha de preventivo. </b></label></CENTER>',
         });
       }
     } else {
@@ -237,8 +250,9 @@ export class AbmPreventivoComponent implements OnInit {
         icon: 'error',
         title: 'Oops...',
         text: '¡No se pudo validar los datos ingresados!',
-        footer: '<CENTER><label><b>Recuerde que los datos obligatorios son: UNIDAD, AÑO, NRO., FECHA PREVENTIVO, HORA Y DELITO. </b></label></CENTER>'
-      })
+        footer:
+          '<CENTER><label><b>Recuerde que los datos obligatorios son: UNIDAD, AÑO, NRO., FECHA PREVENTIVO, HORA Y DELITO. </b></label></CENTER>',
+      });
     }
   }
 
@@ -405,12 +419,12 @@ export class AbmPreventivoComponent implements OnInit {
   //   this.item.nombreUniEspecial = event.nombre;
   // }
 
-  ActivarCasilla(num: number){
-    if(num == 1){
+  ActivarCasilla(num: number) {
+    if (num == 1) {
       this.manual = true;
       this.automatico = false;
       this.map = false;
-    }else if(num == 2){
+    } else if (num == 2) {
       this.manual = false;
       this.automatico = true;
     }

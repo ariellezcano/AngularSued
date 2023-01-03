@@ -36,7 +36,7 @@ export class AbmDtallePreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.prev = result.dato;
-          console.log("preventivo", this.prev)
+          //console.log("preventivo", this.prev)
         }
       } catch (error) {}
     }
