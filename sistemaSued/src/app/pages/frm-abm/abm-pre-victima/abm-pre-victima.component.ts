@@ -31,7 +31,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-pre-victima.component.scss'],
 })
 export class AbmPreVictimaComponent implements OnInit {
-  
   public id!: number;
 
   //valida el formulario
@@ -91,12 +90,12 @@ export class AbmPreVictimaComponent implements OnInit {
     this.busqueda = '';
     this.busquedaOc = '';
     this.busquedaBarrio = '';
-    this.busquedaCalle = ''; 
+    this.busquedaCalle = '';
     this.Nitem = new Naciones();
     this.Nitems = [];
     this.Oitem = new Ocupacion();
     this.Oitems = [];
-    this.Bitem = new Barrio()
+    this.Bitem = new Barrio();
     this.BItems = [];
     this.Citem = new Calle();
     this.CItems = [];
@@ -128,15 +127,10 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.prev = result.dato;
           if (
-            result.dato.delitoNavigation?.descripcion ==
-              'INSTIGACION AL SUICIDIO CONSUMADO' ||
-            result.dato.delitoNavigation?.descripcion ==
-              'INSTIGACION AL SUICIDIO TENTATIVA' ||
-            result.dato.delitoNavigation?.descripcion == 'HOMICIDIO CULPOSO' ||
-            result.dato.delitoNavigation?.descripcion ==
-              'HOMICIDIO DOLOSO CONSUMADO' ||
-            result.dato.delitoNavigation?.descripcion ==
-              'HOMICIDIO DOLOSO TENTATIVO'
+            result.dato.delitoNavigation?.id == 1 ||
+            result.dato.delitoNavigation?.id == 2 ||
+            result.dato.delitoNavigation?.id == 5 ||
+            result.dato.delitoNavigation?.id == 6
           ) {
             this.item.fallecio = true;
           }
@@ -211,7 +205,6 @@ export class AbmPreVictimaComponent implements OnInit {
   //   }
   // }
 
-
   async guardar() {
     this.guardando = true;
     this.item.preventivo = this.id;
@@ -262,10 +255,10 @@ export class AbmPreVictimaComponent implements OnInit {
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.nacionNavigation.nacionalidad;
           this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
-          if(this.item.barrio != undefined){
+          if (this.item.barrio != undefined) {
             this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
           }
-          if(this.item.calle != undefined){
+          if (this.item.calle != undefined) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
           this.mostrarBtnModif = true;
@@ -346,7 +339,7 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
-//filtro barrio
+  //filtro barrio
   async filtrarBarrio() {
     try {
       if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
@@ -488,8 +481,6 @@ export class AbmPreVictimaComponent implements OnInit {
     }
     return valor;
   }
-
-  
 
   back() {
     this.router.navigate(['/lst-preventivo']);

@@ -123,6 +123,12 @@ export class FilPreventivoComponent implements OnInit {
             text: 'No existe criterio buscado!',
           });
         }
+      }else{
+        Swal.fire(
+          '¡No agregó fecha a buscar!',
+          'El dato es requerido para la respectiva búsqueda del Preventivo.',
+          'warning'
+        )
       }
     } catch (error) {}
   }
