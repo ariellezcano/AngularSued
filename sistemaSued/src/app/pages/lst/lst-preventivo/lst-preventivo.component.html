@@ -163,6 +163,7 @@
           </button>
           &nbsp;
           <button
+          *ngIf="this.rol == 'DEVELOPER'"
             (click)="eliminar(this.id)"
             type="button"
             title="Eliminar"
