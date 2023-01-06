@@ -251,6 +251,7 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          console.log(result.dato)
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.nacionNavigation.nacionalidad;
@@ -261,6 +262,9 @@ export class AbmPreVictimaComponent implements OnInit {
           if (this.item.calle != undefined) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
+          // if (this.item.estudios != undefined) {
+          //   this.item.estudios = result.dato.estudios;
+          // }
           this.mostrarBtnModif = true;
         }
       } catch (error) {}
@@ -453,7 +457,7 @@ export class AbmPreVictimaComponent implements OnInit {
   seleccionEstudio(event: Estudio) {
     if (event != undefined) {
       this.item.estudios = event.id;
-      this.item.capturaEstudio = event.descripcion;
+      //this.item.capturaEstudio = event.descripcion;
     }
   }
   //captura el dato del combo

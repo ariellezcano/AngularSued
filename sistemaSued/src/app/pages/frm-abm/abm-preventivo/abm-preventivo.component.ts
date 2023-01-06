@@ -241,11 +241,11 @@ export class AbmPreventivoComponent implements OnInit {
         }
       } else {
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Oops...',
-          text: '¡Error al guardar los datos!',
+          text: 'Verifique fechas cargadas!',
           footer:
-            '<CENTER><label><b>La fecha del hecho no puede ser mayor a la fecha de preventivo. </b></label></CENTER>',
+            '<CENTER><label><b>La fecha del hecho debe ser anterior o igual a la fecha del Preventivo. </b></label></CENTER>',
         });
       }
     } else {
