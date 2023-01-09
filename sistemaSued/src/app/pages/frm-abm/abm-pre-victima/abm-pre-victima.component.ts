@@ -38,7 +38,10 @@ export class AbmPreVictimaComponent implements OnInit {
 
   //variable para verificar si fue enviado los datos
   enviado = false;
-
+  verSexo: boolean;
+  verGenero: boolean;
+  verEstudio: boolean;
+  verProvincia: boolean;
   //input de busqueda de los filtros
   busqueda;
   busquedaOc;
@@ -101,6 +104,10 @@ export class AbmPreVictimaComponent implements OnInit {
     this.CItems = [];
     this.mostrarBtnModif = false;
     this.guardando = false;
+    this.verSexo = false;
+    this.verGenero = false;
+    this.verEstudio = false;
+    this.verProvincia = false;
   }
 
   ngOnInit(): void {
@@ -172,6 +179,10 @@ export class AbmPreVictimaComponent implements OnInit {
         this.guardando = false;
         this.idSeleccion = 0;
         this.mostrarBtnModif = false;
+        this.verEstudio = false;
+        this.verGenero = false;
+        this.verProvincia = false;
+        this.verSexo = false;
         this.busqueda = '';
         this.busquedaOc = '';
         this.busquedaBarrio = '';
@@ -244,7 +255,7 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
-  //trae los datos para modificar
+  //trae los datos para modificar en la tabla de victimas
   async traerDatos(id: number) {
     if (this.id > 0) {
       try {
@@ -262,9 +273,22 @@ export class AbmPreVictimaComponent implements OnInit {
           if (this.item.calle != undefined) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
-          // if (this.item.estudios != undefined) {
-          //   this.item.estudios = result.dato.estudios;
-          // }
+          if (this.item.sexo != undefined) {
+            this.verSexo = true;
+            this.item.capturaSexo = result.dato.sexoNavigation?.descripcion;
+          }
+          if (this.item.genero != undefined) {
+            this.verGenero = true;
+            this.item.capturaGenero = result.dato.identidadNavigation?.autoPercepcion;
+          }
+          if (this.item.estudios != undefined) {
+            this.verEstudio = true;
+            this.item.capturaEstudio = result.dato.estudioNavigation?.descripcion;
+          }
+          if (this.item.provincia != undefined) {
+            this.verProvincia = true;
+            this.item.capturaProvincia = result.dato.provinciaNavigation?.nombre;
+          }
           this.mostrarBtnModif = true;
         }
       } catch (error) {}
@@ -369,12 +393,12 @@ export class AbmPreVictimaComponent implements OnInit {
   }
 
   //agrega fila en memoria
-  addRow() {
-    this.busqueda = '';
-    this.busquedaOc = '';
-    this.items.unshift(this.item);
-    this.item = new PrevVictima();
-  }
+  // addRow() {
+  //   this.busqueda = '';
+  //   this.busquedaOc = '';
+  //   this.items.unshift(this.item);
+  //   this.item = new PrevVictima();
+  // }
 
   //elimina la fila en memoria
   deleteRow(indice: any) {
@@ -400,6 +424,10 @@ export class AbmPreVictimaComponent implements OnInit {
     this.busquedaOc = '';
     this.busquedaBarrio = '';
     this.busquedaCalle = '';
+    this.verEstudio = false;
+    this.verGenero = false;
+    this.verProvincia = false;
+    this.verSexo = false;
     this.item = new PrevVictima();
     this.mostrarBtnModif = false;
   }
@@ -450,7 +478,7 @@ export class AbmPreVictimaComponent implements OnInit {
   seleccionSexo(event: Sexo) {
     if (event != undefined) {
       this.item.sexo = event.id;
-      this.item.capturaSexo = event.descripcion;
+      //this.item.capturaSexo = event.descripcion;
     }
   }
   //captura el dato del combo
@@ -464,6 +492,7 @@ export class AbmPreVictimaComponent implements OnInit {
   seleccionIdentidad(event: IdentidadGenero) {
     if (event != undefined) {
       this.item.genero = event.id;
+      //this.item.capturaGenero = event.autoPercepcion;
     }
   }
 

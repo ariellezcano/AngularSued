@@ -28,6 +28,8 @@ export class PrevVictima {
     capturaNacionalidad: any;
     capturaEstudio: any;
     capturaOcupacion: any;
+    capturaGenero: any;
+    capturaProvincia: any;
     
     constructor(){
 

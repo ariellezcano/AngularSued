@@ -53,53 +53,86 @@
   </div>
   <div class="row">
     <div class="col-md-6">
+      <div class="col-md-6">
         <app-combo-sexo
           [dibujar]="item"
           (emitir)="seleccionSexo($event)"
         ></app-combo-sexo>
+      </div>
+      <div *ngIf="verSexo" class="col-md-6">
+        <label class="col-sm-12 col-form-label"
+          >Dato Guardado: <b>{{ item.capturaSexo }}</b></label
+        >
+      </div>
     </div>
     <div class="col-md-6">
+      <div class="col-md-6">
         <app-combo-identidad-genero
           [dibujar]="item"
           (emitir)="seleccionIdentidad($event)"
         ></app-combo-identidad-genero>
+      </div>
+      <div *ngIf="verGenero" class="col-md-6">
+        <label class="col-sm-12 col-form-label"
+          >Dato Guardado: <b>{{ item.capturaGenero }}</b></label
+        >
+      </div>
     </div>
   </div>
   <div class="row">
+    <div class="col-md-3"></div>
     <div class="col-md-6">
-        <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
-        <input
-          (ngModelChange)="filtrarNacionalidad()"
-          [(ngModel)]="busqueda"
-          name="busqueda"
-          type="text"
-          class="form-control"
-          placeholder="Ingrese criterio de búsqueda"
-          [ngModelOptions]="{ standalone: true }"
-        />
-        <select
-          *ngIf="Nitems.length > 0 && this.busqueda"
-          name="Nitem"
-          [(ngModel)]="Nitem"
-          class="form-control"
-          (ngModelChange)="capturar($event)"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
-            {{ Nitem.nacionalidad }}
-          </option>
-        </select>
-      </div>
-    <div class="col-md-6"></div>
+      <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
+      <input
+        (ngModelChange)="filtrarNacionalidad()"
+        [(ngModel)]="busqueda"
+        name="busqueda"
+        type="text"
+        class="form-control"
+        placeholder="Ingrese criterio de búsqueda"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="Nitems.length > 0 && this.busqueda"
+        name="Nitem"
+        [(ngModel)]="Nitem"
+        class="form-control"
+        (ngModelChange)="capturar($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
+          {{ Nitem.nacionalidad }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-3"></div>
   </div>
   <div class="row">
     <legend><u>General:</u></legend>
-    <div class="col-md-6">
-      <app-combo-estudio
-        [dibujar]="item"
-        (emitir)="seleccionEstudio($event)"
-      ></app-combo-estudio>
-    </div>
+    <ng-container *ngIf="verEstudio; then mostEst; else nMostEST"></ng-container>
+    <ng-template #mostEst>
+      <div class="col-md-3">
+        <app-combo-estudio
+          [dibujar]="item"
+          (emitir)="seleccionEstudio($event)"
+        ></app-combo-estudio>
+      </div>
+      <div class="col-md-3">
+        <label class="col-sm-12 col-form-label"
+          >Dato Guardado: <b>{{ item.capturaEstudio }}</b></label
+        >
+      </div>
+    </ng-template>
+    <ng-template #nMostEST>
+      <div class="col-md-6">
+        <app-combo-estudio
+          [dibujar]="item"
+          (emitir)="seleccionEstudio($event)"
+        ></app-combo-estudio>
+      </div>
+    </ng-template>
+    
+    
     <div class="col-md-6">
       <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
       <input
@@ -125,15 +158,33 @@
       </select>
     </div>
   </div>
-  <br>
+  <br />
   <div class="row">
     <legend><u>Domicilio:</u></legend>
-    <div class="col-md-6">
-      <app-combo-provincia
-        [dibujar]="item"
-        (emitir)="seleccionProvincia($event)"
-      ></app-combo-provincia>
-    </div>
+    <ng-container *ngIf="verProvincia; then mostrar; else noMostrar"></ng-container>
+    <ng-template #mostrar>
+      <div class="col-md-3">
+        <app-combo-provincia
+          [dibujar]="item"
+          (emitir)="seleccionProvincia($event)"
+        ></app-combo-provincia>
+      </div>
+      <div class="col-md-3">
+        <label class="col-sm-12 col-form-label"
+          >Dato Guardado: <b>{{ item.capturaProvincia }}</b></label
+        >
+      </div>
+    </ng-template>
+    <ng-template #noMostrar>
+      <div class="col-md-6">
+        <app-combo-provincia
+          [dibujar]="item"
+          (emitir)="seleccionProvincia($event)"
+        ></app-combo-provincia>
+      </div>  
+    </ng-template>
+    
+    
     <div class="col-md-6">
       <label class="col-sm-12 col-form-label" for="">Barrio:</label>
       <input
@@ -160,27 +211,27 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-        <label class="col-sm-12 col-form-label" for="">Calle:</label>
-        <input
-          (change)="filtrarCalle()"
-          [(ngModel)]="busquedaCalle"
-          name="busquedaCalle"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
-        <select
-          *ngIf="CItems.length > 0 && this.busquedaCalle"
-          name="Citem"
-          [(ngModel)]="Citem"
-          class="form-control"
-          (ngModelChange)="capturarCalle($event)"
-          [ngModelOptions]="{ standalone: true }"
-        >
-          <option *ngFor="let Citem of CItems" [ngValue]="Citem">
-            {{ Citem.nombre }}
-          </option>
-        </select>
+      <label class="col-sm-12 col-form-label" for="">Calle:</label>
+      <input
+        (change)="filtrarCalle()"
+        [(ngModel)]="busquedaCalle"
+        name="busquedaCalle"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <select
+        *ngIf="CItems.length > 0 && this.busquedaCalle"
+        name="Citem"
+        [(ngModel)]="Citem"
+        class="form-control"
+        (ngModelChange)="capturarCalle($event)"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option *ngFor="let Citem of CItems" [ngValue]="Citem">
+          {{ Citem.nombre }}
+        </option>
+      </select>
     </div>
     <div class="col-md-6">
       <label for="" class="col-sm-12 col-form-label"> Nro.:</label>
@@ -209,56 +260,62 @@
   <br />
   <div class="row">
     <div class="col-md-12">
-      <ng-container *ngIf="guardando; then thenTemplate; else elseTemplate"></ng-container>
-      <ng-template #thenTemplate>
-        <center>
-        <button id="boton" class="btn btn-disabled" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-          Guardando datos...
-        </button>
-      </center>
-      </ng-template>
-      <ng-template #elseTemplate>
       <ng-container
-        *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+        *ngIf="guardando; then thenTemplate; else elseTemplate"
       ></ng-container>
       <ng-template #thenTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Modificar datos"
-              placement="top"
-              (click)="actualizarDatos(this.item)"
-              show-delay="10"
-              class="btn btn-primary"
-            >
-              <i class="fa fa-edit" aria-hidden="true"></i>
-              Guardar modificación
-            </button>
-          </center>
-        </div>
+        <center>
+          <button id="boton" class="btn btn-disabled" type="button" disabled>
+            <span
+              class="spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Guardando datos...
+          </button>
+        </center>
       </ng-template>
       <ng-template #elseTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Guardar"
-              placement="top"
-              (click)="guardar()"
-              show-delay="10"
-              class="btn btn-outline-info"
-            >
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              Agregar a tabla
-            </button>
-          </center>
-        </div>
+        <ng-container
+          *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+        ></ng-container>
+        <ng-template #thenTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Modificar datos"
+                placement="top"
+                (click)="actualizarDatos(this.item)"
+                show-delay="10"
+                class="btn btn-primary"
+              >
+                <i class="fa fa-edit" aria-hidden="true"></i>
+                Guardar modificación
+              </button>
+            </center>
+          </div>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Guardar"
+                placement="top"
+                (click)="guardar()"
+                show-delay="10"
+                class="btn btn-outline-info"
+              >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Agregar a tabla
+              </button>
+            </center>
+          </div>
+        </ng-template>
       </ng-template>
-    </ng-template>
     </div>
   </div>
   <hr />
