@@ -38,6 +38,7 @@ export class AbmPreVictimaComponent implements OnInit {
 
   //variable para verificar si fue enviado los datos
   enviado = false;
+  //habilita campos al modificar "muestra los datos guardados en bd"
   verSexo: boolean;
   verGenero: boolean;
   verEstudio: boolean;
@@ -262,7 +263,7 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          console.log(result.dato)
+          //console.log(result.dato)
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.nacionNavigation.nacionalidad;

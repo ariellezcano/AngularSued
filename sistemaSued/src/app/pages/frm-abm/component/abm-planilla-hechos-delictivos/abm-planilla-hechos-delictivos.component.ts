@@ -22,6 +22,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
 
   itemsPrev: ModelPrevPlanilla[];
   itemPr: ModelPrevPlanilla;
+  itemsVict: ModelPrevPlanilla[];
 
   totalGeneralInt!: number;
   totalGralDen!: number;
@@ -34,7 +35,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   ) {
     this.item = new PlanillaHechosDel();
     this.itemsPrev = [];
-
+    this.itemsVict = [];
     this.itemPr = new ModelPrevPlanilla();
   }
 
@@ -72,11 +73,12 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
               this.item.dnpc
             )
             .then();
-            console.log("datos", this.item);
           const result = JSON.parse(JSON.stringify(data));
+          //console.log("datos", this.item);
           if (result.code == 200) {
-            console.log(result.data)
-            //this.verificarVictima();
+            //console.log("resultado de busqueda",result.data)
+            this.itemsVict = result.data;
+            this.verificarVictima();
           }
         } catch (error) {
           Swal.fire('Error al obtener los datos,' + error);
@@ -125,7 +127,26 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   }
 
   verificarVictima() {
-
+    for (let index = 0; index < this.itemsVict.length; index++) {
+      this.itemsPrev[index].totalVcitFem = 0;
+      this.itemsPrev[index].totalVictMasc = 0;
+      this.itemsPrev[index].totalVictMasc = 0;
+      const arr = this.itemsVict[index].dnpc;
+      arr.forEach((element1) => {
+        element1.masculino = 0;
+        element1.femenino = 0;
+        element1.noConsta = 0;
+        element1.lstDelVict.forEach((element2) => {
+          if (element2.sexoNavigation.descripcion == 'VARON') {
+            element1.masculino++;
+            this.itemsVict[index].totalVictMasc++;
+          } else {
+            element1.femenino++;
+            this.itemsVict[index].totalVcitFem++;
+          }
+        });
+      });
+    }
   }
 
   cancelar() {
