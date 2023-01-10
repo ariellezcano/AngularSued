@@ -127,22 +127,27 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   }
 
   verificarVictima() {
+    console.log("data", this.itemsVict)
     for (let index = 0; index < this.itemsVict.length; index++) {
-      this.itemsPrev[index].totalVcitFem = 0;
-      this.itemsPrev[index].totalVictMasc = 0;
-      this.itemsPrev[index].totalVictMasc = 0;
+      this.itemsVict[index].totalVcitFem = 0;
+      this.itemsVict[index].totalVictMasc = 0;
+      this.itemsVict[index].totalVictNoConsta = 0;
       const arr = this.itemsVict[index].dnpc;
       arr.forEach((element1) => {
         element1.masculino = 0;
         element1.femenino = 0;
         element1.noConsta = 0;
         element1.lstDelVict.forEach((element2) => {
-          if (element2.sexoNavigation.descripcion == 'VARON') {
+          if (element2.sexoNavigation.id == 1) {
             element1.masculino++;
             this.itemsVict[index].totalVictMasc++;
-          } else {
+          } else if(element2.sexoNavigation.id == 2) {
             element1.femenino++;
             this.itemsVict[index].totalVcitFem++;
+          } else if(element2.sexoNavigation.id == 3){
+            element1.noConsta++;
+            //console.log("noconsta", element1.noConsta)
+            this.itemsVict[index].totalVictNoConsta++;
           }
         });
       });
