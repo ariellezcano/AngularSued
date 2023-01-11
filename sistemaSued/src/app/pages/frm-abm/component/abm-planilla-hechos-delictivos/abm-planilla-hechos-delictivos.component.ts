@@ -6,6 +6,7 @@ import { PlanillaHechosDel } from 'src/app/models/component/models-planillas/pla
 import { Delito, Preventivo } from 'src/app/models/index.models';
 import {
   PreventivoService,
+  PrevInculpadoService,
   PrevVictimaService,
 } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
@@ -20,22 +21,27 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
 
   item: PlanillaHechosDel;
 
-  itemsPrev: ModelPrevPlanilla[];
   itemPr: ModelPrevPlanilla;
-  itemsVict: ModelPrevPlanilla[];
 
-  totalGeneralInt!: number;
-  totalGralDen!: number;
+  itemsPrev: ModelPrevPlanilla[];
+  itemsVict: ModelPrevPlanilla[];
+  itemsInc: ModelPrevPlanilla[];
+
+  masculino: number = 0;
+  femenino: number = 0;
+  noConsta: number = 0;
 
   constructor(
     private wsdl: PreventivoService,
     private route: ActivatedRoute,
     private router: Router,
-    private wsdlVictima: PrevVictimaService
+    private wsdlVictima: PrevVictimaService,
+    private wsdlInculpado: PrevInculpadoService 
   ) {
     this.item = new PlanillaHechosDel();
     this.itemsPrev = [];
     this.itemsVict = [];
+    this.itemsInc = [];
     this.itemPr = new ModelPrevPlanilla();
   }
 
@@ -45,7 +51,6 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
     if (this.item.fecha2 == undefined) {
       this.item.fecha2 = this.item.fecha1;
     }
-
     try {
       let data = await this.wsdl
         .doFilterPlanillaHD(
@@ -62,32 +67,63 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
         this.itemsPrev = result.data;
         //console.log('items', this.itemsPrev);
         this.verificar();
-        try {
-          let data = await this.wsdlVictima
-            .doFilterPlanillaHDVictima(
-              this.item.fecha1,
-              this.item.fecha2,
-              this.item.localidad,
-              this.item.departamento,
-              this.item.zonaMetro,
-              this.item.dnpc
-            )
-            .then();
-          const result = JSON.parse(JSON.stringify(data));
-          //console.log("datos", this.item);
-          if (result.code == 200) {
-            //console.log("resultado de busqueda",result.data)
-            this.itemsVict = result.data;
-            this.verificarVictima();
-          }
-        } catch (error) {
-          Swal.fire('Error al obtener los datos,' + error);
-        }
+        this.buscarVictima();
+        this.buscarInculpado();
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);
     }
   }
+
+ async buscarVictima(){
+  try {
+    let data = await this.wsdlVictima
+      .doFilterPlanillaHDVictima(
+        this.item.fecha1,
+        this.item.fecha2,
+        this.item.localidad,
+        this.item.departamento,
+        this.item.zonaMetro,
+        this.item.dnpc
+      )
+      .then();
+    const result = JSON.parse(JSON.stringify(data));
+    //console.log("datos", this.item);
+    if (result.code == 200) {
+      //console.log("resultado de busqueda",result.data)
+      this.itemsVict = result.data;
+      this.verificarVictima();
+      //this.verificarNuevo();
+    }
+  } catch (error) {
+    Swal.fire('Error al obtener los datos,' + error);
+  }
+ }
+
+ async buscarInculpado(){
+  try {
+    let data = await this.wsdlInculpado
+      .doFilterPlanillaHDInc(
+        this.item.fecha1,
+        this.item.fecha2,
+        this.item.localidad,
+        this.item.departamento,
+        this.item.zonaMetro,
+        this.item.dnpc
+      )
+      .then();
+    const result = JSON.parse(JSON.stringify(data));
+    //console.log("datos", this.item);
+    if (result.code == 200) {
+      console.log("resultado de busqueda",result.data)
+      this.itemsInc = result.data;
+      //this.verificarVictima();
+      //this.verificarNuevo();
+    }
+  } catch (error) {
+    Swal.fire('Error al obtener los datos,' + error);
+  }
+ }
 
   ActivarCasilla(num: number) {
     if (num == 1) {
@@ -106,6 +142,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   }
 
   verificar() {
+    console.log('prev', this.itemsPrev);
     for (let index = 0; index < this.itemsPrev.length; index++) {
       this.itemsPrev[index].totalIntervencion = 0;
       this.itemsPrev[index].totalDenParticular = 0;
@@ -127,11 +164,11 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   }
 
   verificarVictima() {
-    console.log("data", this.itemsVict)
+    console.log('data', this.itemsVict);
     for (let index = 0; index < this.itemsVict.length; index++) {
-      this.itemsVict[index].totalVcitFem = 0;
-      this.itemsVict[index].totalVictMasc = 0;
-      this.itemsVict[index].totalVictNoConsta = 0;
+      //this.itemsVict[index].totalVcitFem = 0;
+      //this.itemsVict[index].totalVictMasc = 0;
+      //this.itemsVict[index].totalVictNoConsta = 0;
       const arr = this.itemsVict[index].dnpc;
       arr.forEach((element1) => {
         element1.masculino = 0;
@@ -140,14 +177,13 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
         element1.lstDelVict.forEach((element2) => {
           if (element2.sexoNavigation.id == 1) {
             element1.masculino++;
-            this.itemsVict[index].totalVictMasc++;
-          } else if(element2.sexoNavigation.id == 2) {
+            //this.itemsVict[index].totalVictMasc++;
+          } else if (element2.sexoNavigation.id == 2) {
             element1.femenino++;
-            this.itemsVict[index].totalVcitFem++;
-          } else if(element2.sexoNavigation.id == 3){
+            //this.itemsVict[index].totalVcitFem++;
+          } else if (element2.sexoNavigation.id == 3) {
             element1.noConsta++;
-            //console.log("noconsta", element1.noConsta)
-            this.itemsVict[index].totalVictNoConsta++;
+            //this.itemsVict[index].totalVictNoConsta++;
           }
         });
       });
