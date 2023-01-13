@@ -340,6 +340,10 @@ cancelarModificacion() {
     return color;
   }
 
+  mayus(e: any) {
+    e.value = e.value.toUpperCase();
+  }
+
   preDelete(item: PrevInculpado) {
     this.item = new PrevInculpado();
     this.item = item;
