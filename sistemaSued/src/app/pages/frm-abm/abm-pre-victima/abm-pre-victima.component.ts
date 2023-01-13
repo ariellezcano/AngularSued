@@ -256,41 +256,56 @@ export class AbmPreVictimaComponent implements OnInit {
     }
   }
 
-  //trae los datos para modificar en la tabla de victimas
+  //trae los datos para modificar de la tabla de victimas
   async traerDatos(id: number) {
     if (this.id > 0) {
       try {
         let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          //console.log(result.dato)
+          console.log("victimas",result.dato);
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
-          this.busqueda = result.dato.nacionNavigation.nacionalidad;
-          this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+          this.mostrarBtnModif = true;
+
+          console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
+          
+          if (this.item.nacionNavigation.id > 0) {
+            this.busqueda = result.dato.nacionNavigation.nacionalidad;
+          }
+          if (this.item.ocupacionNavigation.id > 0) {
+            this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+          }
           if (this.item.barrio != undefined) {
+            console.log("barrio tiene")
             this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
           }
           if (this.item.calle != undefined) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
-          if (this.item.sexo != undefined) {
+          if (this.item.sexo !== null) {
             this.verSexo = true;
+            alert("ACTIVADO")
             this.item.capturaSexo = result.dato.sexoNavigation?.descripcion;
           }
-          if (this.item.genero != undefined) {
+          if (this.item.genero > 0) {
             this.verGenero = true;
-            this.item.capturaGenero = result.dato.identidadNavigation?.autoPercepcion;
+            console.log(this.verGenero)
+            this.item.capturaGenero =
+              result.dato.identidadNavigation?.autoPercepcion;
           }
           if (this.item.estudios != undefined) {
             this.verEstudio = true;
-            this.item.capturaEstudio = result.dato.estudioNavigation?.descripcion;
+            this.item.capturaEstudio =
+              result.dato.estudioNavigation?.descripcion;
           }
           if (this.item.provincia != undefined) {
             this.verProvincia = true;
-            this.item.capturaProvincia = result.dato.provinciaNavigation?.nombre;
+            this.item.capturaProvincia =
+              result.dato.provinciaNavigation?.nombre;
           }
-          this.mostrarBtnModif = true;
+          
+          
         }
       } catch (error) {}
     }

@@ -231,6 +231,7 @@ async traerDatos(id: number) {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.item = result.dato;
+        console.log("verificar datos", result.dato)
         this.idSeleccion = result.dato.id;
         if(this.item.fechaDetencion != null){
           this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');

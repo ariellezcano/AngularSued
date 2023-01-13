@@ -350,6 +350,8 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
+          <th>Persona</th>
+          <th>D.N.I.</th>
           <th>Sexo</th>
           <th>Edad</th>
           <th>Nacionalidad</th>
@@ -365,7 +367,9 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.sexoNavigation.descripcion }}</td>
+            <td class="text-primary">{{ i.nombre }}, {{ i.apellido }}</td>
+            <td>{{ i.dni }}</td>
+            <td>{{ i.sexoNavigation?.descripcion }}</td>
             <td>{{ i.edad }}</td>
             <td>{{ i.nacionalidadNavigation?.nacionalidad }}</td>
             <td>{{ i.estudiosNavigation?.descripcion }}</td>

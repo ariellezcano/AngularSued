@@ -323,6 +323,8 @@
     <table id="tabla" class="table">
       <thead class="text-center table-primary">
         <tr>
+          <th>Persona</th>
+          <th>D.N.I.</th>
           <th>Sexo</th>
           <th>Nacionalidad</th>
           <th>Edad</th>
@@ -337,10 +339,12 @@
             *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.sexoNavigation.descripcion }}</td>
-            <td>{{ i.nacionNavigation.nacionalidad }}</td>
+            <td>{{ i.nombre }}, {{ i.apellido }}</td>
+            <td>{{ i.dni }}</td>
+            <td>{{ i.sexoNavigation?.descripcion }}</td>
+            <td>{{ i.nacionNavigation?.nacionalidad }}</td>
             <td>{{ i.edad }}</td>
-            <td>{{ i.estudioNavigation.descripcion }}</td>
+            <td>{{ i.estudioNavigation?.descripcion }}</td>
             <td>{{ valor(i.fallecio) }}</td>
           </ng-template>
           <ng-template #elseTemplate>
@@ -359,11 +363,11 @@
             <ng-container
               *ngIf="
                 mostrarBtnModif && idSeleccion == i.id;
-                then thenTemplate;
-                else elseTemplate
+                then cancelarMod;
+                else mostrarMod
               "
             ></ng-container>
-            <ng-template #thenTemplate>
+            <ng-template #cancelarMod>
               <td>
                 <button
                   type="button"
@@ -377,7 +381,7 @@
                 </button>
               </td>
             </ng-template>
-            <ng-template #elseTemplate>
+            <ng-template #mostrarMod>
               <td>
                 <button
                   type="button"
