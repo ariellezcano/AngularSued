@@ -44,25 +44,11 @@
           class="nav-link active"
           id="home-tab"
           data-bs-toggle="tab"
-          data-bs-target="#unidad"
-          type="button"
-          role="tab"
-          aria-controls="unidad"
-          aria-selected="true"
-        >
-          Unidades Int.
-        </button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="home-tab"
-          data-bs-toggle="tab"
           data-bs-target="#caratula"
           type="button"
           role="tab"
           aria-controls="caratula"
-          aria-selected="false"
+          aria-selected="true"
         >
           Cáratulas Secundarias
         </button>
@@ -567,24 +553,25 @@
           Ampliaciones
         </button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#unidad"
+          type="button"
+          role="tab"
+          aria-controls="unidad"
+          aria-selected="false"
+        >
+          Unidades Int.
+        </button>
+      </li>
     </ul>
     <div class="tab-content" id="myTabContent">
+      
       <div
         class="tab-pane fade show active"
-        id="unidad"
-        role="tabpanel"
-        aria-labelledby="home-tab"
-      >
-        <br />
-        <section class="tab-panel">
-          <app-abm-prev-unidad-especial
-            [id]="this.id"
-          ></app-abm-prev-unidad-especial>
-        </section>
-        <br />
-      </div>
-      <div
-        class="tab-pane"
         id="caratula"
         role="tabpanel"
         aria-labelledby="home-tab"
@@ -694,6 +681,20 @@
         <section class="tab-panel">
           <app-abm-prev-ampliacion [id]="this.id"></app-abm-prev-ampliacion>
         </section>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="unidad"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <br />
+        <section class="tab-panel">
+          <app-abm-prev-unidad-especial
+            [id]="this.id"
+          ></app-abm-prev-unidad-especial>
+        </section>
+        <br />
       </div>
     </div>
   </center>

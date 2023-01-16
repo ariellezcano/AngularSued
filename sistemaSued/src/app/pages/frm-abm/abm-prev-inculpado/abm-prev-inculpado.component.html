@@ -84,7 +84,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <label *ngIf="verSexo" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.sexoNavigation?.descripcion}}</b> </label>
+    </div>
+    <div class="col-md-3">
+      <label *ngIf="verGenero" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.identidadNavigation?.autoPercepcion}}</b> </label>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-1"></div>
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Nacionalidad:</label>
       <input
@@ -116,6 +126,13 @@
       ></app-combo-provincia>
     </div>
     <div class="col-md-2"></div>
+  </div>
+  <div *ngIf="verificar" class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-4">
+      <label class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.provinciaNavigation?.nombre}}</b></label>
+    </div>
+    <div class="col-md-3"></div>
   </div>
   <br />
   <div class="row">
@@ -180,6 +197,15 @@
       ></app-combo-vinculo>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <label *ngIf="verEstudio" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.estudiosNavigation?.descripcion}}</b> </label>
+    </div>
+    <div class="col-md-4">
+      <label *ngIf="verVinculo" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.vinculoNavigation?.descripcion}}</b> </label>
+    </div>
+  </div>
   <br />
   <legend><u>Datos Detención:</u></legend>
   <div class="row">
@@ -220,6 +246,16 @@
           />
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+        <label *ngIf="verProv" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.provinciaDetNavigation?.nombre}}</b> </label>
+      </div>
+      <div class="col-md-4">
+        <label *ngIf="verLocalidad" for="" class="col-sm-12 col-form-label"> Dato guardado: <b>{{item.localidadNavigation?.nombre}}</b> </label>
+      </div>
+    <div class="col-md-4">
     </div>
   </div>
   <div class="row">
@@ -354,7 +390,8 @@
           <th>D.N.I.</th>
           <th>Sexo</th>
           <th>Edad</th>
-          <th>Nacionalidad</th>
+          <th>Prov.</th>
+          <th>Nac.</th>
           <th>Estudios</th>
           <th>Ocupación</th>
           <th>Detenido</th>
@@ -364,26 +401,27 @@
       <tbody>
         <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
           <ng-container
-            *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
+            *ngIf="i.id > 0; then thenTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
             <td class="text-primary">{{ i.nombre }}, {{ i.apellido }}</td>
             <td>{{ i.dni }}</td>
             <td>{{ i.sexoNavigation?.descripcion }}</td>
             <td>{{ i.edad }}</td>
+            <td>{{ i.provinciaNavigation?.nombre }}</td>
             <td>{{ i.nacionalidadNavigation?.nacionalidad }}</td>
             <td>{{ i.estudiosNavigation?.descripcion }}</td>
             <td>{{ i.ocupacionNavigation?.descripcion }}</td>
             <td>{{ valor(i.detenido) }}</td>
           </ng-template>
-          <ng-template #elseTemplate>
+          <!-- <ng-template #elseTemplate>
             <td>{{ i.capturaSexo }}</td>
             <td>{{ i.edad }}</td>
             <td>{{ i.capturaNacionalidad }}</td>
             <td>{{ i.capturaEstudio }}</td>
             <td>{{ i.capturaOcupacion }}</td>
             <td>{{ valor(i.detenido) }}</td>
-          </ng-template>
+          </ng-template> -->
           <!-- editar y guardar -->
           <ng-container
             *ngIf="i.id > 0; then mostrar; else noMostrar"

@@ -35,6 +35,15 @@ export class AbmPrevInculpadoComponent implements OnInit {
   busqueda;
   busquedaOc;
   busquedaCalle;
+  busquedaBarrio;
+  verificar: Boolean;
+  verSexo: boolean;
+  verGenero: boolean;
+  verVinculo: boolean;
+  verEstudio: boolean;
+  verProv: boolean;
+  verLocalidad: boolean;
+  //verificar
  //vista previa del preventivo
   prev: Preventivo;
   prevInc: PrevInculpado;
@@ -72,6 +81,14 @@ export class AbmPrevInculpadoComponent implements OnInit {
     this.busqueda = '';
     this.busquedaOc = '';
     this.busquedaCalle = '';
+    this.busquedaBarrio = '';
+    this.verificar = false;
+    this.verSexo = false;
+    this.verGenero = false;
+    this.verVinculo = false;
+    this.verEstudio = false;
+    this.verProv = false;
+    this.verLocalidad = false;
     this.Nitem = new Naciones();
     this.Nitems = [];
     this.Oitem = new Ocupacion();
@@ -139,12 +156,19 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
-      console.log(data)
+      //console.log(data)
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.guardando = false;
         this.idSeleccion=0;
         this.mostrarBtnModif=false;
+        this.verificar = false;
+        this.verSexo = false;
+        this.verGenero = false;
+        this.verVinculo = false;
+        this.verEstudio = false;
+        this.verProv = false;
+        this.verLocalidad = false;
         this.busqueda = '';
         this.busquedaCalle = '';
         this.busquedaOc = '';
@@ -231,21 +255,49 @@ async traerDatos(id: number) {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.item = result.dato;
-        console.log("verificar datos", result.dato)
+        this.mostrarBtnModif = true;
+        //console.log("verificar datos", result.dato)
         this.idSeleccion = result.dato.id;
         if(this.item.fechaDetencion != null){
           this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');
         }
         if(result.dato.ocupacion > 0){
-          this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
+          this.busquedaOc = result.dato.ocupacionNavigation?.descripcion;
         }
         if(result.dato.nacionalidad > 0){
-          this.busqueda = result.dato.nacionalidadNavigation.nacionalidad;
+          this.busqueda = result.dato.nacionalidadNavigation?.nacionalidad;
+        }
+        if(result.dato.dirCalle > 0){
+          this.filCalle.busqueda = result.dato.dirCalleNavigation?.nombre;
+        }
+        if(result.dato.dirBarrio > 0){
+          this.filBarrio.busqueda = result.dato.barrioNavigation?.nombre;
+        }
+        if(result.dato.provincia > 0){
+          this.verificar = true;
+        }
+        if(result.dato.sexo > 0){
+          this.verSexo = true;
+        }
+        if(result.dato.genero > 0){
+          this.verGenero = true;
+        }
+        if(result.dato.vinculo > 0){
+          this.verVinculo = true;
+        }
+        if(result.dato.estudios > 0){
+          this.verEstudio = true;
+        }
+        if(result.dato.provDetencion > 0){
+        this.verProv = true;
+        }
+        if(result.dato.localidad > 0){
+          this.verLocalidad = true;
         }
         if(result.dato.calle > 0){
-          this.busquedaCalle = result.dato.calleNavigation.nombre;
+          this.busquedaCalle = result.dato.calleNavigation?.nombre;
         }
-        this.mostrarBtnModif = true;
+        
       }
     } catch (error) {}
   }
@@ -263,6 +315,13 @@ cancelarModificacion() {
   this.filCalle.item = new Calle();
   this.filCalle.items = [];
   this.item = new PrevInculpado();
+  this.verificar = false;
+  this.verSexo = false;
+  this.verGenero = false;
+  this.verVinculo = false;
+  this.verEstudio = false;
+  this.verProv = false;
+  this.verLocalidad = false;
   this.mostrarBtnModif = false;
 }
 

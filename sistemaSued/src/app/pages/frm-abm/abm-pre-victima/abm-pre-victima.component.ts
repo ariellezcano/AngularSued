@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -31,6 +31,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-pre-victima.component.scss'],
 })
 export class AbmPreVictimaComponent implements OnInit {
+
+  @Output() emmitProvincia: EventEmitter<Provincia> = new EventEmitter();
+
   public id!: number;
 
   //valida el formulario
@@ -263,12 +266,12 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          console.log("victimas",result.dato);
+          //console.log("victimas",result.dato);
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           this.mostrarBtnModif = true;
 
-          console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
+          //console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
           
           if (this.item.nacionNavigation.id > 0) {
             this.busqueda = result.dato.nacionNavigation.nacionalidad;
@@ -276,21 +279,21 @@ export class AbmPreVictimaComponent implements OnInit {
           if (this.item.ocupacionNavigation.id > 0) {
             this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
           }
-          if (this.item.barrio != undefined) {
-            console.log("barrio tiene")
+          if (this.item.barrio > 0) {
+            //console.log("barrio tiene")
             this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
           }
-          if (this.item.calle != undefined) {
+          if (this.item.calle > 0) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
-          if (this.item.sexo !== null) {
+          if (this.item.sexo > 0) {
             this.verSexo = true;
-            alert("ACTIVADO")
+            //alert("ACTIVADO")
             this.item.capturaSexo = result.dato.sexoNavigation?.descripcion;
           }
           if (this.item.genero > 0) {
             this.verGenero = true;
-            console.log(this.verGenero)
+            //console.log(this.verGenero)
             this.item.capturaGenero =
               result.dato.identidadNavigation?.autoPercepcion;
           }
@@ -299,8 +302,10 @@ export class AbmPreVictimaComponent implements OnInit {
             this.item.capturaEstudio =
               result.dato.estudioNavigation?.descripcion;
           }
-          if (this.item.provincia != undefined) {
+          if (this.item.provincia > 0) {
+            //this.emmitProvincia.emit(this.item.provinciaNavigation);
             this.verProvincia = true;
+
             this.item.capturaProvincia =
               result.dato.provinciaNavigation?.nombre;
           }

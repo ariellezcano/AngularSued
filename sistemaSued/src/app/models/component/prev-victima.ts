@@ -23,6 +23,7 @@ export class PrevVictima {
     identidadNavigation: any;
     calleNavigation: any;
     barrioNavigation: any;
+    provinciaNavigation: any;
 
     capturaSexo: any;
     capturaNacionalidad: any;

@@ -326,7 +326,8 @@
           <th>Persona</th>
           <th>D.N.I.</th>
           <th>Sexo</th>
-          <th>Nacionalidad</th>
+          <!-- <th>Prov.</th> -->
+          <th>Nac.</th>
           <th>Edad</th>
           <th>Estudios</th>
           <th>Fallecio</th>
@@ -336,24 +337,25 @@
       <tbody>
         <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
           <ng-container
-            *ngIf="i.id > 0; then thenTemplate; else elseTemplate"
+            *ngIf="i.id > 0; then thenTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td>{{ i.nombre }}, {{ i.apellido }}</td>
+            <td class="text-primary">{{ i.nombre }}, {{ i.apellido }}</td>
             <td>{{ i.dni }}</td>
             <td>{{ i.sexoNavigation?.descripcion }}</td>
+            <!-- <td>{{ i.provinciaNavigation?.nombre }}</td> -->
             <td>{{ i.nacionNavigation?.nacionalidad }}</td>
             <td>{{ i.edad }}</td>
             <td>{{ i.estudioNavigation?.descripcion }}</td>
             <td>{{ valor(i.fallecio) }}</td>
           </ng-template>
-          <ng-template #elseTemplate>
+          <!-- <ng-template #elseTemplate>
             <td>{{ i.capturaSexo }}</td>
             <td>{{ i.capturaNacionalidad }}</td>
             <td>{{ i.edad }}</td>
             <td>{{ i.capturaEstudio }}</td>
             <td>{{ valor(i.fallecio) }}</td>
-          </ng-template>
+          </ng-template> -->
           <!-- editar y guardar -->
           <ng-container
             *ngIf="i.id > 0; then mostrar; else noMostrar"
