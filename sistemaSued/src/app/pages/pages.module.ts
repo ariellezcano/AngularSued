@@ -138,6 +138,11 @@ import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-
 import { ComboRolComponent } from './component/combo-rol/combo-rol.component';
 import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hechos-delictivos/abm-planilla-hechos-delictivos.component';
 import { VerificacionComponent } from './compartido/verificacion/verificacion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 
 @NgModule({
     declarations: [
@@ -284,6 +289,8 @@ import { VerificacionComponent } from './compartido/verificacion/verificacion.co
       HttpClientModule,
       PagesRoutingModule,
       AutocompleteLibModule,
+      BrowserAnimationsModule,
+      BsDatepickerModule.forRoot(),
     ],
     providers: [],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],

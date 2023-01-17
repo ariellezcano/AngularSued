@@ -266,17 +266,17 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          //console.log("victimas",result.dato);
           this.item = result.dato;
+          console.log("victimas",this.item);
           this.idSeleccion = result.dato.id;
           this.mostrarBtnModif = true;
 
           //console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
           
-          if (this.item.nacionNavigation.id > 0) {
+          if (this.item.nacionalidad > 0) {
             this.busqueda = result.dato.nacionNavigation.nacionalidad;
           }
-          if (this.item.ocupacionNavigation.id > 0) {
+          if (this.item.ocupacion > 0) {
             this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
           }
           if (this.item.barrio > 0) {
@@ -287,29 +287,29 @@ export class AbmPreVictimaComponent implements OnInit {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
           if (this.item.sexo > 0) {
-            this.verSexo = true;
-            //alert("ACTIVADO")
+            //console.log("RECUPERO SEXO PERSONA")
+            //alert("ACTIVADO SEXO")
             this.item.capturaSexo = result.dato.sexoNavigation?.descripcion;
+            this.verSexo = true;
           }
           if (this.item.genero > 0) {
-            this.verGenero = true;
-            //console.log(this.verGenero)
-            this.item.capturaGenero =
-              result.dato.identidadNavigation?.autoPercepcion;
-          }
-          if (this.item.estudios != undefined) {
-            this.verEstudio = true;
+            //console.log("RECUPERO GENERO")
+            //alert("ACTIVADO GENERO")
+            
+            this.item.capturaGenero = result.dato.identidadNavigation?.autoPercepcion;
+              this.verGenero = true;
+            }
+          if (this.item.estudios > 0) {
             this.item.capturaEstudio =
               result.dato.estudioNavigation?.descripcion;
-          }
+              this.verEstudio = true;
+            }
           if (this.item.provincia > 0) {
             //this.emmitProvincia.emit(this.item.provinciaNavigation);
-            this.verProvincia = true;
-
             this.item.capturaProvincia =
               result.dato.provinciaNavigation?.nombre;
+              this.verProvincia = true;
           }
-          
           
         }
       } catch (error) {}

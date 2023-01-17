@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { PrevAmpliacion, Preventivo, UnidadesSued } from 'src/app/models/index.models';
 import {
   PrevAmpliacionService,
@@ -42,8 +43,10 @@ export class AbmPrevAmpliacionComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevAmpliacionService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');//fecha en español, datepicker
     this.item = new PrevAmpliacion();
     this.items = [];
     this.prev = new Preventivo();
@@ -117,7 +120,7 @@ export class AbmPrevAmpliacionComponent implements OnInit {
           if (this.item.fechaAmpliacion != undefined) {
             this.item.fechaAmpliacion = moment(
               this.item.fechaAmpliacion
-            ).format('YYYY-MM-DD');
+            ).format('DD-MM-YYYY');
           }
           if(this.item.unidad != undefined){
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;

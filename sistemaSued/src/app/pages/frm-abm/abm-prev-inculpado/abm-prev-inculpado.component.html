@@ -54,13 +54,13 @@
   <div class="row">
     <div class="col-md-3">
       <app-combo-sexo
-        [dibujar]="item"
+        [dibujar]="item.sexoNavigation"
         (emitir)="seleccionSexo($event)"
       ></app-combo-sexo>
     </div>
     <div class="col-md-3">
       <app-combo-identidad-genero
-        [dibujar]="item"
+        [dibujar]="item.identidadNavigation"
         (emitir)="seleccionIdentidad($event)"
       ></app-combo-identidad-genero>
     </div>
@@ -121,7 +121,7 @@
     </div>
     <div class="col-md-4">
       <app-combo-provincia
-        [dibujar]="item"
+        [dibujar]="item.provinciaNavigation"
         (emitir)="seleccionProvincia($event)"
       ></app-combo-provincia>
     </div>
@@ -186,13 +186,13 @@
     </div>
     <div class="col-md-4">
       <app-combo-estudio
-        [dibujar]="item"
+        [dibujar]="item.estudiosNavigation"
         (emitir)="seleccionEstudio($event)"
       ></app-combo-estudio>
     </div>
     <div class="col-md-4">
       <app-combo-vinculo
-        [dibujar]="item"
+        [dibujar]="item.vinculoNavigation"
         (emitir)="seleccionVinculo($event)"
       ></app-combo-vinculo>
     </div>
@@ -211,13 +211,13 @@
   <div class="row">
     <div class="col-md-4">
       <app-combo-provincia
-        [dibujar]="item"
+        [dibujar]="item.provinciaDetNavigation"
         (emitir)="seleccionProvDetencion($event)"
       ></app-combo-provincia>
     </div>
     <div class="col-md-4">
       <app-combo-localidad
-        [dibujar]="item"
+        [dibujar]="item.localidadNavigation"
         (emitir)="seleccionLocalidad($event)"
       ></app-combo-localidad>
     </div>
@@ -306,13 +306,24 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha:</label>
-      <input
-        [(ngModel)]="item.fechaDetencion"
-        type="date"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <label for="Nombre" class="col-sm-12 col-form-label"> Fecha de detención:</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><i class="fa fa-calendar" aria-hidden="true"></i
+        ></span>
+        <input
+          [(ngModel)]="item.fechaDetencion"
+          type="text"
+          placeholder="00-00-0000"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          bsDatepicker
+          [bsConfig]="{
+            dateInputFormat: 'DD-MM-YYYY',
+            containerClass: 'theme-blue'
+          }"
+        />
+      </div>
     </div>
     <div class="col-md-8">
       <center>

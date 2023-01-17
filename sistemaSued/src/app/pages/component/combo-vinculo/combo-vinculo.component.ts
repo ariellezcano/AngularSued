@@ -10,7 +10,7 @@ import { VinculoService } from 'src/app/services/index.service';
 export class ComboVinculoComponent implements OnInit {
 
   @Input()
-  set dibujar(item: any) {
+  set dibujar(item: Vinculo) {
     this.item = item;
   }
 

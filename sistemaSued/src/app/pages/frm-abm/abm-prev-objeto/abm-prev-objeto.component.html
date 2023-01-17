@@ -137,16 +137,27 @@
       </center>
     </div>
     <div class="col-md-4">
+
       <label for="Nombre" class="col-sm-12 col-form-label">
-        Fecha Secuestro:</label
+        Fecha de secuestro:</label
       >
-      <input
-        [(ngModel)]="item.fecha"
-        name="fecha"
-        type="date"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><i class="fa fa-calendar" aria-hidden="true"></i
+        ></span>
+        <input
+          [(ngModel)]="item.fecha"
+          type="text"
+          placeholder="00-00-0000"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          bsDatepicker
+          [bsConfig]="{
+            dateInputFormat: 'DD-MM-YYYY',
+            containerClass: 'theme-blue'
+          }"
+        />
+      </div>
     </div>
     <div class="col-md-4">
       <label for="Nombre" class="col-sm-12 col-form-label">

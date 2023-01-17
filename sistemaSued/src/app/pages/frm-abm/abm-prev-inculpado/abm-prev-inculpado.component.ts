@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
@@ -72,8 +73,10 @@ export class AbmPrevInculpadoComponent implements OnInit {
     private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
     private wsdlCalle: CalleService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');//fecha en español, datepicker
     this.item = new PrevInculpado();
     this.items = [];
     this.prev = new Preventivo();
@@ -259,7 +262,7 @@ async traerDatos(id: number) {
         //console.log("verificar datos", result.dato)
         this.idSeleccion = result.dato.id;
         if(this.item.fechaDetencion != null){
-          this.item.fechaDetencion = moment( this.item.fechaDetencion).format('YYYY-MM-DD');
+          this.item.fechaDetencion = moment( this.item.fechaDetencion).format('DD-MM-YYYY');
         }
         if(result.dato.ocupacion > 0){
           this.busquedaOc = result.dato.ocupacionNavigation?.descripcion;

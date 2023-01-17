@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {
   ArmaMarca,
   MarcaMoto,
@@ -95,8 +96,10 @@ export class AbmPrevObjetoComponent implements OnInit {
     private wsdlObjAuto: PrevObjAutoService,
     private wsdlObjMoto: PrevObjMotoService,
     private wsdlMedio: ObjetoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');//fecha en español, datepicker
     this.item = new PrevObjeto();
     this.items = [];
     this.prev = new Preventivo();
@@ -539,7 +542,7 @@ export class AbmPrevObjetoComponent implements OnInit {
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           if (this.item.fecha != undefined) {
-            this.item.fecha = moment(this.item.fecha).format('YYYY-MM-DD');
+            this.item.fecha = moment(this.item.fecha).format('DD-MM-YYYY');
           }
           this.busqueda = result.dato.objetoNavigation.descripcion;
           this.mostrarBtnModif = true;

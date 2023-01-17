@@ -10,7 +10,7 @@ import { ProvinciaService } from 'src/app/services/index.service';
 export class ComboProvinciaComponent implements OnInit {
 
   @Input()
-  set dibujar(item: any) {
+  set dibujar(item: Provincia) {
     this.item = item;
   }
 
@@ -41,8 +41,8 @@ export class ComboProvinciaComponent implements OnInit {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
-  listar() {
-    this.wsdl.getList(1, 100).then((data: any) => {
+  async listar() {
+      await this.wsdl.getList(1, 100).then((data: any) => {
       this.items = data.data;
       this.items.sort((x: any, y: any) => {
         if (x.nombre > y.nombre) {

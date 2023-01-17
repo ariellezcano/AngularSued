@@ -10,7 +10,7 @@ import { EstudiosService } from 'src/app/services/index.service';
 export class ComboEstudioComponent implements OnInit {
 
   @Input()
-  set dibujar(item: any) {
+  set dibujar(item: Estudio) {
     this.item = item;
   }
 

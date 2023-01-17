@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { LoginComponent } from './login/login.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent],

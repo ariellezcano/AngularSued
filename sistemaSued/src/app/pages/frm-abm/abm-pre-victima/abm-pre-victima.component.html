@@ -55,7 +55,7 @@
     <div class="col-md-6">
       <div class="col-md-6">
         <app-combo-sexo
-          [dibujar]="item"
+          [dibujar]="item.sexoNavigation"
           (emitir)="seleccionSexo($event)"
         ></app-combo-sexo>
       </div>
@@ -68,7 +68,7 @@
     <div class="col-md-6">
       <div class="col-md-6">
         <app-combo-identidad-genero
-          [dibujar]="item"
+          [dibujar]="item.identidadNavigation"
           (emitir)="seleccionIdentidad($event)"
         ></app-combo-identidad-genero>
       </div>
@@ -113,7 +113,7 @@
     <ng-template #mostEst>
       <div class="col-md-3">
         <app-combo-estudio
-          [dibujar]="item"
+          [dibujar]="item.estudioNavigation"
           (emitir)="seleccionEstudio($event)"
         ></app-combo-estudio>
       </div>
@@ -126,7 +126,7 @@
     <ng-template #nMostEST>
       <div class="col-md-6">
         <app-combo-estudio
-          [dibujar]="item"
+          [dibujar]="item.estudioNavigation"
           (emitir)="seleccionEstudio($event)"
         ></app-combo-estudio>
       </div>
@@ -165,7 +165,7 @@
     <ng-template #mostrar>
       <div class="col-md-3">
         <app-combo-provincia
-          [dibujar]="item"
+          [dibujar]="item.provinciaNavigation"
           (emitir)="seleccionProvincia($event)"
         ></app-combo-provincia>
       </div>
@@ -178,7 +178,7 @@
     <ng-template #noMostrar>
       <div class="col-md-6">
         <app-combo-provincia
-          [dibujar]="item"
+          [dibujar]="item.provinciaNavigation"
           (emitir)="seleccionProvincia($event)"
         ></app-combo-provincia>
       </div>  

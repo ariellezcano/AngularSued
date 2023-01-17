@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {
   ArmaMarca,
   Medio,
@@ -68,8 +69,10 @@ export class AbmPreventivoMedioComponent implements OnInit {
     private wsdlMedioArma: PrevMedArmaService,
     private wsdl: PreventivoMedioService,
     private wsdlMedio: MedioService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');//fecha en español, datepicker
     this.item = new PreventivoMedio();
     this.items = [];
     this.prev = new Preventivo();

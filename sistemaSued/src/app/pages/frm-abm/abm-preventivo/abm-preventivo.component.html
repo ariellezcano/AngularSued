@@ -9,20 +9,31 @@
         <label for="Nombre" class="col-sm-12 col-form-label">
           Fecha Preventivo:</label
         >
-        <input
-          [(ngModel)]="item.fechaPreventivo"
-          id="codigo"
-          type="date"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"
+            ><i class="fa fa-calendar" aria-hidden="true"></i
+          ></span>
+          <input
+            aria-describedby="basic-addon1"
+            [(ngModel)]="item.fechaPreventivo"
+            type="text"
+            placeholder="00-00-0000"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            bsDatepicker
+            [bsConfig]="{
+              dateInputFormat: 'DD-MM-YYYY',
+              containerClass: 'theme-blue'
+            }"
+          />
+        </div>
       </div>
       <div id="autocompletado" class="col-md-6">
         <label for="" class="col-sm-12 col-form-label">Unidad:</label>
         <app-fil-autocompletado-unidad-sued
           (unidadSeleccionada)="unidad($event)"
           [ngModelOptions]="{ standalone: true }"
-          >
+        >
         </app-fil-autocompletado-unidad-sued>
       </div>
     </div>
@@ -101,14 +112,27 @@
           />
         </div>
         <div class="row">
-          <div class="col-md-6">
-            <label for="">Fecha Hecho</label> &nbsp;
-            <input
-              [(ngModel)]="item.fechaHecho"
-              type="date"
-              class="form-control"
-              [ngModelOptions]="{ standalone: true }"
-            />
+            <div class="col-md-6">
+              <label for="Nombre">
+                Fecha Hecho:</label
+              >
+              <div class="input-group mb-3">
+                <span class="input-group-text"
+                  ><i class="fa fa-calendar" aria-hidden="true"></i
+                ></span>
+                <input
+                  [(ngModel)]="item.fechaHecho"
+                  type="text"
+                  placeholder="00-00-0000"
+                  class="form-control"
+                  [ngModelOptions]="{ standalone: true }"
+                  bsDatepicker
+                  [bsConfig]="{
+                    dateInputFormat: 'DD-MM-YYYY',
+                    containerClass: 'theme-blue'
+                  }"
+                />
+              </div>
           </div>
           <div class="col-md-6">
             <label for="">Hora:</label> &nbsp;
@@ -237,7 +261,9 @@
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="busquedaLugar == 'OTRO LUGAR (ESPECIFICAR)' && item.lugar > 0">
+    <ng-container
+      *ngIf="busquedaLugar == 'OTRO LUGAR (ESPECIFICAR)' && item.lugar > 0"
+    >
       <div class="row">
         <div class="col-md-12">
           <label class="col-sm-12 col-form-label" for=""
@@ -265,7 +291,7 @@
       <div class="row">
         <div class="col-md-6">
           <app-combo-localidad
-            [dibujar]="item"
+            [dibujar]="item.localidadNavigation"
             (emitir)="seleccionLocalidad($event)"
           ></app-combo-localidad>
         </div>
@@ -521,20 +547,18 @@
           type="button"
           (click)="actualizarDatos(this.item)"
         >
-        <i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp;
-          Editar registro
+          <i class="fa fa-pencil-square" aria-hidden="true"></i>&nbsp; Editar
+          registro
         </button>
       </ng-template>
       <ng-template #elseTemplate>
         <button class="btn btn-dark" type="button" (click)="guardar()">
-          <i class="fa fa-archive" aria-hidden="true"></i>&nbsp;
-          Guardar
+          <i class="fa fa-archive" aria-hidden="true"></i>&nbsp; Guardar
         </button>
       </ng-template>
       &nbsp;
       <button class="btn btn-danger" type="button" (click)="back()">
-        <i class="fa fa-reply-all" aria-hidden="true"></i>&nbsp;
-        Cancelar
+        <i class="fa fa-reply-all" aria-hidden="true"></i>&nbsp; Cancelar
       </button>
     </div>
   </form>

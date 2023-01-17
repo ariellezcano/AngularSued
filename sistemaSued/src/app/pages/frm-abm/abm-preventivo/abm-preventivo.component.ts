@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {
   Barrio,
   Calle,
@@ -52,7 +53,7 @@ export class AbmPreventivoComponent implements OnInit {
   automatico: boolean;
   manual: boolean;
 
-  item!: Preventivo;
+  item: Preventivo;
 
   ditems: Delito[];
   ditem: Delito;
@@ -75,8 +76,10 @@ export class AbmPreventivoComponent implements OnInit {
     private wsdlDelito: DelitoService,
     private wsdlCalle: CalleService,
     private wsdlBarrio: BarrioService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');//fecha en español, datepicker
     this.item = new Preventivo();
     this.busqueda = '';
     this.busquedaLugar = '';
@@ -120,15 +123,16 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
+          console.log("this.item", this.item)
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
-              'YYYY-MM-DD'
+              'DD-MM-YYYY'
             );
           }
           if (this.item.fechaPreventivo != undefined) {
             this.item.fechaPreventivo = moment(
               this.item.fechaPreventivo
-            ).format('YYYY-MM-DD');
+            ).format('DD-MM-YYYY');
           }
           if (this.item.barrio != undefined) {
             this.busquedaBarrio = this.item.barrioNavigation.nombre;
@@ -258,6 +262,7 @@ export class AbmPreventivoComponent implements OnInit {
       });
     }
   }
+
 
   async filtrarDelito() {
     try {
@@ -433,6 +438,8 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
+
+  
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
