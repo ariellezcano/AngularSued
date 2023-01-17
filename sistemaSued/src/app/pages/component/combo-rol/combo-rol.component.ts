@@ -41,8 +41,8 @@ export class ComboRolComponent implements OnInit {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
-  listar() {
-    this.wsdl.getList(1, 15).then((data: any) => {
+  async listar() {
+    await this.wsdl.getList(1, 15).then((data: any) => {
       this.items = data.data;
       // for (var i = 0; i < this.itemss.length; i++) {
       //   const element = this.itemss[i];
