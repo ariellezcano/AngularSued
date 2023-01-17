@@ -267,7 +267,7 @@ export class AbmPreVictimaComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          console.log("victimas",this.item);
+          //console.log("victimas",this.item);
           this.idSeleccion = result.dato.id;
           this.mostrarBtnModif = true;
 

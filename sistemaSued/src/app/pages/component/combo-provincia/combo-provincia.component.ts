@@ -43,7 +43,8 @@ export class ComboProvinciaComponent implements OnInit {
 
   async listar() {
       await this.wsdl.getList(1, 100).then((data: any) => {
-      this.items = data.data;
+        this.items = data.data;
+        console.log(this.items)
       this.items.sort((x: any, y: any) => {
         if (x.nombre > y.nombre) {
           return 1;
