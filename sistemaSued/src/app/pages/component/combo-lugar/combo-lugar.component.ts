@@ -23,7 +23,7 @@ export class ComboLugarComponent implements OnInit {
   constructor(private wsdl: CalleService) {
     this.item = new Calle();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

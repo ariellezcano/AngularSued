@@ -24,7 +24,7 @@ export class ComboDepartamentoComponent implements OnInit {
   constructor(private wsdl: DepartamentoService) {
     this.item = new Departamento();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

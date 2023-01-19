@@ -7,7 +7,7 @@
           name="item"
           [(ngModel)]="item"
           [compareWith]="compareWitch"
-          class="form-control form-sm"
+          class="form-select form-select-lm mb-3" aria-label=".form-select-lg example"
         >
           <option *ngFor="let item of items" [ngValue]="item">
             {{ item.dnpc }} - {{ item.descripcion }}

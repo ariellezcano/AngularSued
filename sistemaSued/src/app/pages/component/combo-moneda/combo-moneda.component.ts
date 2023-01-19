@@ -24,7 +24,7 @@ export class ComboMonedaComponent implements OnInit {
   constructor(private wsdl: TipoMonedaService) {
     this.item = new TipoMoneda();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

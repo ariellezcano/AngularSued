@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -136,11 +137,13 @@ export class AbmLocalidadComponent implements OnInit {
   seleccionDpto(event: Departamento) {
     if (event != undefined) {
       this.item.departamento = event.id;
+      this.item.codDto = event.codigo;
     }
   }
   seleccionNac(event: Naciones) {
     if (event != undefined) {
       this.item.nacion = event.id;
+      this.item.codNac = event.codigo;
     }
   }
   seleccionProv(event: Provincia) {

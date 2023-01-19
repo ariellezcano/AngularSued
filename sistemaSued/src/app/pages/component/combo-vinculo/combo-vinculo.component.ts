@@ -24,7 +24,7 @@ export class ComboVinculoComponent implements OnInit {
   constructor(private wsdl: VinculoService) {
     this.item = new Vinculo();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

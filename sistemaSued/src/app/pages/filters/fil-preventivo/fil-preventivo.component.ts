@@ -82,14 +82,14 @@ export class FilPreventivoComponent implements OnInit {
           //console.log("result", result)
           this.emmit.emit(this.items);
         }
-      } else if (this.fecha != undefined) {
-        if (this.uniCodigo == undefined) {
+      } else if (this.fecha != undefined && this.fecha != '') {
+        if (this.uniCodigo == undefined || this.uniCodigo == '') {
           this.uniCodigo = 0;
         }
-        if (this.anio == undefined) {
+        if (this.anio == undefined || this.anio == '') {
           this.anio = 0;
         }
-        if (this.nroPrev == undefined) {
+        if (this.nroPrev == undefined || this.nroPrev == '') {
           this.nroPrev = 0;
         }
 

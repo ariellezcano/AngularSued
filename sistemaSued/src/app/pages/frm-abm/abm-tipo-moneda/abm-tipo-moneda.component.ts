@@ -33,7 +33,8 @@ export class AbmTipoMonedaComponent implements OnInit {
   ngOnInit(): void {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
-      nombre: ['', Validators.required]
+      nombre: ['', Validators.required],
+      codigo: ['', Validators.required],
       });
 
     //captura el id que viene en el url
@@ -53,6 +54,7 @@ export class AbmTipoMonedaComponent implements OnInit {
        // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
+          console.log(this.item)
         }
       } catch (error) {}
     }

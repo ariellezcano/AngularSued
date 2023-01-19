@@ -24,7 +24,7 @@ export class ComboBarrioComponent implements OnInit {
   constructor(private wsdl: BarrioService) {
     this.item = new Barrio();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

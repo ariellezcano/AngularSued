@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Provincia } from 'src/app/models/index.models';
 import { ProvinciaService } from 'src/app/services/index.service';
@@ -5,10 +6,9 @@ import { ProvinciaService } from 'src/app/services/index.service';
 @Component({
   selector: 'app-combo-provincia',
   templateUrl: './combo-provincia.component.html',
-  styleUrls: ['./combo-provincia.component.scss']
+  styleUrls: ['./combo-provincia.component.scss'],
 })
 export class ComboProvinciaComponent implements OnInit {
-
   @Input()
   set dibujar(item: Provincia) {
     this.item = item;
@@ -16,15 +16,14 @@ export class ComboProvinciaComponent implements OnInit {
 
   @Output() emitir: EventEmitter<Provincia> = new EventEmitter<Provincia>();
 
-
   item: Provincia;
   items: Provincia[];
-
 
   constructor(private wsdl: ProvinciaService) {
     this.item = new Provincia();
     this.items = [];
-    this.listar();
+    //this.defecto = '';
+    //this.listar();
   }
 
   ngOnInit(): void {
@@ -42,9 +41,10 @@ export class ComboProvinciaComponent implements OnInit {
   }
 
   async listar() {
-      await this.wsdl.getList(1, 100).then((data: any) => {
-        this.items = data.data;
-        console.log(this.items)
+    await this.wsdl.getList(1, 100).then((data: any) => {
+      //this.items = [];
+      this.items = data.data;
+      //console.log(this.items);
       this.items.sort((x: any, y: any) => {
         if (x.nombre > y.nombre) {
           return 1;
@@ -56,5 +56,4 @@ export class ComboProvinciaComponent implements OnInit {
       });
     });
   }
-
 }

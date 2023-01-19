@@ -24,7 +24,7 @@ export class ComboNacionComponent implements OnInit {
   constructor(private wsdl: NacionesService) {
     this.item = new Naciones();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

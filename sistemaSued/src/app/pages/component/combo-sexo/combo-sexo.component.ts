@@ -24,7 +24,7 @@ export class ComboSexoComponent implements OnInit {
   constructor(private wsdl: SexoService) {
     this.item = new Sexo();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

@@ -24,7 +24,7 @@ export class ComboEstudioComponent implements OnInit {
   constructor(private wsdl: EstudiosService) {
     this.item = new Estudio();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

@@ -24,7 +24,7 @@ export class ComboDncpComponent implements OnInit {
   constructor(private wsdl: DncpService) {
     this.item = new DetDnpc();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

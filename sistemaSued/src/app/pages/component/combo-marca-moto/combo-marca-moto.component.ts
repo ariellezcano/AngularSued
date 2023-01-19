@@ -24,7 +24,7 @@ export class ComboMarcaMotoComponent implements OnInit {
   constructor(private wsdl: MarcaMotoService) {
     this.item = new MarcaMoto();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

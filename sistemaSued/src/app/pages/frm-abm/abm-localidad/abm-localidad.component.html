@@ -45,19 +45,19 @@
     <div class="form-group row">
       <div class="col-md-4">
         <app-combo-nacion
-          [dibujar]="item"
+          [dibujar]="item.nacionNavigation"
           (emitir)="seleccionNac($event)"
         ></app-combo-nacion>
       </div>
       <div class="col-md-4">
         <app-combo-provincia
-          [dibujar]="item"
+          [dibujar]="item.provinciaNavigation"
           (emitir)="seleccionProv($event)"
         ></app-combo-provincia>
       </div>
       <div class="col-md-4">
         <app-combo-departamento
-          [dibujar]="item"
+          [dibujar]="item.dptoNavigation"
           (emitir)="seleccionDpto($event)"
         ></app-combo-departamento>
       </div>

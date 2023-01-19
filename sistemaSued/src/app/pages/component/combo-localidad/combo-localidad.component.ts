@@ -24,7 +24,7 @@ export class ComboLocalidadComponent implements OnInit {
   constructor(private wsdl: LocalidadService) {
     this.item = new Localidad();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {

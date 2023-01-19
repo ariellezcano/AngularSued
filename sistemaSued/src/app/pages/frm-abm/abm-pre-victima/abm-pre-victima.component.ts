@@ -312,7 +312,9 @@ export class AbmPreVictimaComponent implements OnInit {
           }
           
         }
-      } catch (error) {}
+      } catch (error: any) {
+        Swal.fire('Error al obtener los datos', error);
+      }
     }
   }
 

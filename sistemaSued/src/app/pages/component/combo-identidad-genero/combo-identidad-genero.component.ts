@@ -24,7 +24,7 @@ export class ComboIdentidadGeneroComponent implements OnInit {
   constructor(private wsdl: IdentidadGeneroService) {
     this.item = new IdentidadGenero();
     this.items = [];
-    this.listar();
+    //this.listar();
   }
 
   ngOnInit(): void {
