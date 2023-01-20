@@ -17,19 +17,26 @@
     <div class="row">
       <div class="col-md-6">
         <label for="" class="col-sm-12 col-form-label">Filtrar Modalidad:</label>
-        <input
-          (ngModelChange)="filtrarModalidad()"
-          [(ngModel)]="busqueda"
-          name="busqueda"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+          <input
+            (keyup.enter)="filtrarModalidad()"
+            [(ngModel)]="busqueda"
+            name="busqueda"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ingrese nombre de la modalidad"
+          />
+        </div>
         <select
           *ngIf="Mitems.length > 0 && this.busqueda"
           name="Mitem"
           [(ngModel)]="Mitem"
-          class="form-control"
+          class="form-select form-select-lm mb-3" 
+          aria-label=".form-select-lg example"
           (ngModelChange)="capturar($event)"
           [ngModelOptions]="{ standalone: true }"
         >

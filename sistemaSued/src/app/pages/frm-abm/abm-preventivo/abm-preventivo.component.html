@@ -112,27 +112,25 @@
           />
         </div>
         <div class="row">
-            <div class="col-md-6">
-              <label for="Nombre">
-                Fecha Hecho:</label
-              >
-              <div class="input-group mb-3">
-                <span class="input-group-text"
-                  ><i class="fa fa-calendar" aria-hidden="true"></i
-                ></span>
-                <input
-                  [(ngModel)]="item.fechaHecho"
-                  type="text"
-                  placeholder="00-00-0000"
-                  class="form-control"
-                  [ngModelOptions]="{ standalone: true }"
-                  bsDatepicker
-                  [bsConfig]="{
-                    dateInputFormat: 'DD-MM-YYYY',
-                    containerClass: 'theme-blue'
-                  }"
-                />
-              </div>
+          <div class="col-md-6">
+            <label for="Nombre"> Fecha Hecho:</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text"
+                ><i class="fa fa-calendar" aria-hidden="true"></i
+              ></span>
+              <input
+                [(ngModel)]="item.fechaHecho"
+                type="text"
+                placeholder="00-00-0000"
+                class="form-control"
+                [ngModelOptions]="{ standalone: true }"
+                bsDatepicker
+                [bsConfig]="{
+                  dateInputFormat: 'DD-MM-YYYY',
+                  containerClass: 'theme-blue'
+                }"
+              />
+            </div>
           </div>
           <div class="col-md-6">
             <label for="">Hora:</label> &nbsp;
@@ -148,20 +146,27 @@
     </div>
     <div class="form-group row">
       <div class="col-md-6">
-        <label for="">Delito:</label>
-        <input
-          (change)="filtrarDelito()"
-          [(ngModel)]="busqueda"
-          name="busqueda"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+        <label for="">Filtro Delito:</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+          <input
+            (keyup.enter)="filtrarDelito()"
+            [(ngModel)]="busqueda"
+            name="busqueda"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ingrese nombre del delito"
+          />
+        </div>
         <select
           *ngIf="ditems.length > 0 && this.busqueda"
           name="ditem"
           [(ngModel)]="ditem"
-          class="form-control"
+          class="form-select form-select-lm mb-3" 
+          aria-label=".form-select-lg example"
           (ngModelChange)="capturar($event)"
           [ngModelOptions]="{ standalone: true }"
         >
@@ -171,20 +176,27 @@
         </select>
       </div>
       <div class="col-md-6">
-        <label for="">Lugar:</label>
-        <input
-          (change)="filtrarLugar()"
-          [(ngModel)]="busquedaLugar"
-          name="busquedaLugar"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+        <label for="">Filtro Lugar:</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+          <input
+            (keyup.enter)="filtrarLugar()"
+            [(ngModel)]="busquedaLugar"
+            name="busquedaLugar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Ingrese lugar a buscar"
+          />
+        </div>
         <select
           *ngIf="lugarItems.length > 0 && this.busquedaLugar"
           name="litem"
           [(ngModel)]="litem"
-          class="form-control"
+          class="form-select form-select-lm mb-3" 
+          aria-label=".form-select-lg example"
           (ngModelChange)="capturarLugar($event)"
           [ngModelOptions]="{ standalone: true }"
         >
@@ -296,20 +308,27 @@
           ></app-combo-localidad>
         </div>
         <div class="col-md-6">
-          <label class="col-sm-12 col-form-label" for="">Barrio:</label>
-          <input
-            (change)="filtrarBarrio()"
-            [(ngModel)]="busquedaBarrio"
-            name="busquedaBarrio"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
+          <label class="col-sm-12 col-form-label" for="">Filtro Barrio:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input
+              (keyup.enter)="filtrarBarrio()"
+              [(ngModel)]="busqueda"
+              name="busquedaBarrio"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Ingrese nombre del barrio"
+            />
+          </div>
           <select
             *ngIf="BItems.length > 0 && this.busquedaBarrio"
             name="Bitem"
             [(ngModel)]="Bitem"
-            class="form-control"
+            class="form-select form-select-lm mb-3" 
+            aria-label=".form-select-lg example"
             (ngModelChange)="capturarBarrio($event)"
             [ngModelOptions]="{ standalone: true }"
           >
@@ -335,19 +354,26 @@
       <div class="row">
         <div class="col-md-6">
           <label class="col-sm-12 col-form-label" for="">Calle:</label>
-          <input
-            (change)="filtrarCalle()"
-            [(ngModel)]="busquedaCalle"
-            name="busquedaCalle"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input
+              (keyup.enter)="filtrarCalle()"
+              [(ngModel)]="busquedaCalle"
+              name="busquedaCalle"
+              type="text"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Ingrese calle a buscar"
+            />
+          </div>
           <select
             *ngIf="CItems.length > 0 && this.busquedaCalle"
             name="Citem"
             [(ngModel)]="Citem"
-            class="form-control"
+            class="form-select form-select-lm mb-3" 
+            aria-label=".form-select-lg example"
             (ngModelChange)="capturarCalle($event)"
             [ngModelOptions]="{ standalone: true }"
           >

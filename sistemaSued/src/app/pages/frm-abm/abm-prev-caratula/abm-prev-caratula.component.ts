@@ -104,9 +104,11 @@ export class AbmPrevCaratulaComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          this.idSeleccion = result.dato.id;
-          this.busqueda = result.dato.delitoNavigation.descripcion;
+          
+          this.idSeleccion = this.item.id;
+          this.busqueda = result.dato.delitoNavigation?.descripcion;
           this.mostrarBtnModif = true;
+          console.log("id", this.idSeleccion, this.mostrarBtnModif)
         }
       } catch (error) {}
     }

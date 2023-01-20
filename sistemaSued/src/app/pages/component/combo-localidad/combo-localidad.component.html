@@ -10,7 +10,7 @@
           class="form-select form-select-lm mb-3" aria-label=".form-select-lg example"
         >
           <option *ngFor="let item of items" [ngValue]="item">
-            {{ item.codPostal }} - {{ item.nombre }} - {{item.nacionNavigation.nacion}}
+            {{ item.codPostal }} - {{ item.nombre }} - {{item.dptoNavigation?.descripcion}}
           </option>
         </select>
       </div>

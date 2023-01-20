@@ -40,19 +40,26 @@
     </div>
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Medio:</label>
-      <input
-        (ngModelChange)="filtrarMedio()"
-        [(ngModel)]="busqueda"
-        name="busqueda"
-        type="text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+        <input
+          (keyup.enter)="filtrarMedio()"
+          [(ngModel)]="busqueda"
+          name="busqueda"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Ingrese nombre del medio utilizado"
+        />
+      </div>
       <select
         *ngIf="Mitems.length > 0 && this.busqueda"
         name="Mitem"
         [(ngModel)]="Mitem"
-        class="form-control"
+        class="form-select form-select-lm mb-3" 
+        aria-label=".form-select-lg example"
         (ngModelChange)="capturar($event)"
         [ngModelOptions]="{ standalone: true }"
       >

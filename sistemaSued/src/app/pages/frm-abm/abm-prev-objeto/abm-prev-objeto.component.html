@@ -15,19 +15,26 @@
   <div class="row">
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label">Filtro Objeto:</label>
-      <input
-        (ngModelChange)="filtrarObjeto()"
-        [(ngModel)]="busqueda"
-        name="busqueda"
-        type="text"
-        class="form-control"
-        [ngModelOptions]="{ standalone: true }"
-      />
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+        <input
+          (keyup.enter)="filtrarObjeto()"
+          [(ngModel)]="busqueda"
+          name="busqueda"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          placeholder="Ingrese nombre del objeto"
+        />
+      </div>
       <select
         *ngIf="Oitems.length > 0 && this.busqueda"
         name="Oitem"
         [(ngModel)]="Oitem"
-        class="form-control"
+        class="form-select form-select-lm mb-3" 
+        aria-label=".form-select-lg example"
         (ngModelChange)="capturar($event)"
         [ngModelOptions]="{ standalone: true }"
       >
