@@ -265,14 +265,24 @@
       <input
         [(ngModel)]="item.dirNro"
         name="dirNro"
-        type="text"
+        type="number"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
+      <label for="" class="col-sm-12 col-form-label"> Dirección Adicional:</label>
+      <input
+        [(ngModel)]="item.dirAdicional"
+        name="dirAdicional"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-6">
       <center>
         <label for="Nombre" class="col-sm-12 col-form-label"> Falleció:</label>
         <input

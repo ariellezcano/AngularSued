@@ -14,6 +14,7 @@ export class PrevVictima {
     genero!: number;
     calle!: number;
     dirNro!: number;
+    dirAdicional!: string;
     barrio!: number;
 
     nacionNavigation: any;
