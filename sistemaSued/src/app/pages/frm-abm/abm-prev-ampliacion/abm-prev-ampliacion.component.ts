@@ -132,6 +132,9 @@ export class AbmPrevAmpliacionComponent implements OnInit {
   }
 
   async actualizarDatos(obj: PrevAmpliacion) {
+    if(this.item.fechaAmpliacion !== undefined){
+      this.item.fechaAmpliacion = moment(this.item.fechaAmpliacion,"DD/MM/YYYY");
+    }
     this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();

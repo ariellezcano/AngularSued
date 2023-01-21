@@ -79,7 +79,7 @@ export class AbmPreventivoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bsLocaleService: BsLocaleService
   ) {
-    this.bsLocaleService.use('es');//fecha en español, datepicker
+    this.bsLocaleService.use('es'); //fecha en español, datepicker
     this.item = new Preventivo();
     this.busqueda = '';
     this.busquedaLugar = '';
@@ -123,7 +123,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          console.log("this.item", this.item)
+          console.log('this.item', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'DD-MM-YYYY'
@@ -175,7 +175,14 @@ export class AbmPreventivoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: Preventivo) {
-    //alert(this.item.calle);
+    if (this.item.fechaPreventivo != undefined) {
+      this.item.fechaPreventivo = moment(this.item.fechaPreventivo,"DD/MM/YYYY");
+      console.log(this.item.fechaPreventivo)
+    }
+
+    if (this.item.fechaHecho != undefined) {
+      this.item.fechaHecho = moment(this.item.fechaHecho,"DD/MM/YYYY");
+    }
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -262,7 +269,6 @@ export class AbmPreventivoComponent implements OnInit {
       });
     }
   }
-
 
   async filtrarDelito() {
     try {
@@ -438,8 +444,6 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-
-  
   back() {
     this.router.navigate(['/lst-preventivo']);
   }

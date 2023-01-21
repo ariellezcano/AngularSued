@@ -155,8 +155,11 @@ export class AbmPrevInculpadoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevInculpado) {
+    if(this.item.fechaDetencion !== undefined){
+      this.item.fechaDetencion = moment(this.item.fechaDetencion,"DD/MM/YYYY");
+    }
+    
     this.guardando = true;
-
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
       //console.log(data)

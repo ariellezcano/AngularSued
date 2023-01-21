@@ -294,6 +294,10 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   //modifica los datos del prevObjeto
   async actualizarDatos(obj: PrevObjeto) {
+    if(this.item.fecha !== undefined){
+      this.item.fecha = moment(this.item.fecha,"DD/MM/YYYY");
+    }
+    
     this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();

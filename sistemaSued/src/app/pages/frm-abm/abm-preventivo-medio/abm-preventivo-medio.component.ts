@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
@@ -180,7 +181,13 @@ export class AbmPreventivoMedioComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PreventivoMedio) {
+    
     this.guardando = true;
+    
+    if(this.item.fecha !== undefined){
+      this.item.fecha = moment(this.item.fecha,"DD/MM/YYYY");
+    }
+  
     try {
       let data = await this.wsdl.doUpdate(this.item.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
