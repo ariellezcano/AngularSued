@@ -338,7 +338,6 @@ cancelarModificacion() {
         let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Nitems = [];
           this.Nitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -352,6 +351,7 @@ cancelarModificacion() {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
+      this.Nitems = [];
     }
   }
   //filtra y captura ocupacion
@@ -361,7 +361,6 @@ cancelarModificacion() {
         let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Oitems = [];
           this.Oitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -375,6 +374,7 @@ cancelarModificacion() {
       this.busquedaOc = event.descripcion;
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
+      this.Oitems = [];
     }
   }
 
@@ -462,7 +462,6 @@ cancelarModificacion() {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.CItems = [];
           this.CItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -477,6 +476,7 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
+      this.CItems = [];
     }
   }
 

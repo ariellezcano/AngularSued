@@ -165,7 +165,7 @@
           *ngIf="ditems.length > 0 && this.busqueda"
           name="ditem"
           [(ngModel)]="ditem"
-          class="form-select form-select-lm mb-3" 
+          class="form-select form-select-lm mb-3"
           aria-label=".form-select-lg example"
           (ngModelChange)="capturar($event)"
           [ngModelOptions]="{ standalone: true }"
@@ -195,7 +195,7 @@
           *ngIf="lugarItems.length > 0 && this.busquedaLugar"
           name="litem"
           [(ngModel)]="litem"
-          class="form-select form-select-lm mb-3" 
+          class="form-select form-select-lm mb-3"
           aria-label=".form-select-lg example"
           (ngModelChange)="capturarLugar($event)"
           [ngModelOptions]="{ standalone: true }"
@@ -327,7 +327,7 @@
             *ngIf="BItems.length > 0 && this.busquedaBarrio"
             name="Bitem"
             [(ngModel)]="Bitem"
-            class="form-select form-select-lm mb-3" 
+            class="form-select form-select-lm mb-3"
             aria-label=".form-select-lg example"
             (ngModelChange)="capturarBarrio($event)"
             [ngModelOptions]="{ standalone: true }"
@@ -363,6 +363,7 @@
               [(ngModel)]="busquedaCalle"
               name="busquedaCalle"
               type="text"
+              id="calle"
               class="form-control"
               [ngModelOptions]="{ standalone: true }"
               placeholder="Ingrese calle a buscar"
@@ -372,7 +373,7 @@
             *ngIf="CItems.length > 0 && this.busquedaCalle"
             name="Citem"
             [(ngModel)]="Citem"
-            class="form-select form-select-lm mb-3" 
+            class="form-select form-select-lm mb-3"
             aria-label=".form-select-lg example"
             (ngModelChange)="capturarCalle($event)"
             [ngModelOptions]="{ standalone: true }"
@@ -507,6 +508,33 @@
       </div>
     </ng-container>
     <ng-container *ngIf="manual">
+      <div class="row">
+        <center>
+          <div class="col-md-6">
+            <label class="col-sm-12 col-form-label" for=""
+              >Agregar Coordenadas:</label
+            >
+            <div class="input-group mb-3">
+              <input
+                [(ngModel)]="coordenadas"
+                [ngModelOptions]="{ standalone: true }"
+                type="text"
+                class="form-control"
+                placeholder="Agregue coordenadas a dividir"
+                aria-describedby="button-addon2"
+              />
+              <button
+                (click)="cortarCadena()"
+                class="btn btn-outline-danger"
+                type="button"
+                id="button-addon2"
+              >
+                <i class="fa fa-scissors" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </center>
+      </div>
       <div class="row">
         <span>
           <b><u> Coordenadas:</u></b></span

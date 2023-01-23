@@ -325,7 +325,6 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Nitems = [];
           this.Nitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -339,6 +338,7 @@ export class AbmPreVictimaComponent implements OnInit {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
+      this.Nitems = [];
     }
   }
   //filtra y captura ocupacion
@@ -348,7 +348,6 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Oitems = [];
           this.Oitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -362,6 +361,7 @@ export class AbmPreVictimaComponent implements OnInit {
       this.busquedaOc = event.descripcion;
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
+      this.Oitems = [];
     }
   }
 
@@ -372,7 +372,6 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.CItems = [];
           this.CItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -387,6 +386,7 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
+      this.CItems = [];
     }
   }
 
@@ -397,7 +397,6 @@ export class AbmPreVictimaComponent implements OnInit {
         let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.BItems = [];
           this.BItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -412,6 +411,7 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
+      this.BItems = [];
     }
   }
 

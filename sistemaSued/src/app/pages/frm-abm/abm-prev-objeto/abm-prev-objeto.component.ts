@@ -607,7 +607,7 @@ export class AbmPrevObjetoComponent implements OnInit {
         let data = await this.wsdlMedio.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Oitems = [];
+          //this.Oitems = [];
           this.Oitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -622,6 +622,7 @@ export class AbmPrevObjetoComponent implements OnInit {
       this.item.objeto = event.id;
       this.item.capturaObj = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codSubTipo;
+      this.Oitems = [];
     }
   }
 

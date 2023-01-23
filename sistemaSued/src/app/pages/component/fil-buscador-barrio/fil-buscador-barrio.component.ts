@@ -31,7 +31,6 @@ export class FilBuscadorBarrioComponent implements OnInit {
         let data = await this.wsdl.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.items = [];
           this.items = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -44,6 +43,7 @@ export class FilBuscadorBarrioComponent implements OnInit {
     if (event != undefined) {
       this.busqueda = event.nombre;
       this.emmit.emit(event)
+      this.items = [];
     }
   }
 }

@@ -10,7 +10,7 @@ import { TipoMonedaService } from 'src/app/services/index.service';
 export class ComboMonedaComponent implements OnInit {
 
   @Input()
-  set dibujar(item: any) {
+  set dibujar(item: TipoMoneda) {
     this.item = item;
   }
 

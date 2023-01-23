@@ -53,6 +53,9 @@ export class AbmPreventivoComponent implements OnInit {
   automatico: boolean;
   manual: boolean;
 
+  //variable para cortar la coordenada
+  coordenadas: string;
+
   item: Preventivo;
 
   ditems: Delito[];
@@ -87,6 +90,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.busquedaBarrio = '';
     this.latitud = '';
     this.longitud = '';
+    this.coordenadas = '';
     this.ditems = [];
     this.ditem = new Delito();
     this.lugarItems = [];
@@ -176,12 +180,15 @@ export class AbmPreventivoComponent implements OnInit {
 
   async actualizarDatos(obj: Preventivo) {
     if (this.item.fechaPreventivo != undefined) {
-      this.item.fechaPreventivo = moment(this.item.fechaPreventivo,"DD/MM/YYYY");
-      console.log(this.item.fechaPreventivo)
+      this.item.fechaPreventivo = moment(
+        this.item.fechaPreventivo,
+        'DD/MM/YYYY'
+      );
+      console.log(this.item.fechaPreventivo);
     }
 
     if (this.item.fechaHecho != undefined) {
-      this.item.fechaHecho = moment(this.item.fechaHecho,"DD/MM/YYYY");
+      this.item.fechaHecho = moment(this.item.fechaHecho, 'DD/MM/YYYY');
     }
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
@@ -276,7 +283,6 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlDelito.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.ditems = [];
           this.ditems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -289,6 +295,7 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.delito = event.id;
       this.busqueda = event.descripcion;
+      this.ditems = [];
     }
   }
 
@@ -298,7 +305,6 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.lugarItems = [];
           this.lugarItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -313,6 +319,7 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
+      this.lugarItems = [];
     }
   }
 
@@ -322,7 +329,6 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.CItems = [];
           this.CItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -331,12 +337,13 @@ export class AbmPreventivoComponent implements OnInit {
     } catch (error) {
       Swal.fire('Error al obtener el dato');
     }
-  }
+}
 
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
+      this.CItems = [];
     }
   }
 
@@ -346,7 +353,6 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.BItems = [];
           this.BItems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la búsqueda realizada');
@@ -361,6 +367,7 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
+      this.BItems = [];
     }
   }
 
@@ -426,6 +433,21 @@ export class AbmPreventivoComponent implements OnInit {
   unidad(event: UnidadesSued) {
     this.item.unidad = event.id;
     this.item.nombreUnidad = event.nombre;
+  }
+
+  cortarCadena() {
+    if (this.coordenadas.length > 0) {
+      let nombreJunto = this.coordenadas;
+      let cadena = nombreJunto.split(/,/);
+      this.item.latitud = cadena[0];
+      this.item.longitud = cadena[1];
+      this.coordenadas = '';
+    } else {
+      Swal.fire({
+        icon: 'info',
+        text: 'Agregue coordenadas',
+      });
+    }
   }
 
   // unidadEspecial(event: UnidadesSued) {

@@ -67,7 +67,7 @@
       </div>
       <div class="col-md-4">
         <app-combo-moneda
-        [dibujar]="item"
+        [dibujar]="item.monedaNavigation"
         (emitir)="seleccionMoneda($event)"
       ></app-combo-moneda>
       </div>
@@ -103,7 +103,7 @@
       </div>
       <div class="col-md-4">
         <app-combo-moneda
-        [dibujar]="item"
+        [dibujar]="item.monedaNavigation"
         (emitir)="seleccionMoneda($event)"
       ></app-combo-moneda>
       </div>
@@ -263,7 +263,7 @@
             <td>{{ i.capturaObj }}</td>
           </ng-template>
           <td>{{ valor(i.secuestro) }}</td>
-          <td>{{ i.valor }}</td>
+          <td>{{ i.valor }} {{i.monedaNavigation?.nombre}}</td>
           <td>{{ i.fecha | date: "dd/MM/yyyy" }}</td>
 
           <!-- editar y guardar -->

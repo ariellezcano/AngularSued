@@ -198,7 +198,6 @@ export class AbmPrevCaratulaComponent implements OnInit {
         let data = await this.wsdlModalidad.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Ditems = [];
           this.Ditems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -213,6 +212,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
       this.item.delito = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTitulo +" - "+ event.codCapitulo +" - "+ event.codTipo +" - "+ event.codSubTipo;
+      this.Ditems = [];
     }
   }
 

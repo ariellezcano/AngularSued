@@ -315,7 +315,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
         let data = await this.wsdlMedio.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Mitems = [];
+          //this.Mitems = [];
           this.Mitems = result.data;
         } else if (result.code == 204) {
           Swal.fire('No existe la busqueda realizada');
@@ -330,7 +330,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.medioUtilizado = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
-
+      this.Mitems = [];
     }
   }
 
