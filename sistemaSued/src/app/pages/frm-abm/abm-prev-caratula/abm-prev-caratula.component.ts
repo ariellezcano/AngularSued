@@ -193,6 +193,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
   }
 
   async filtrarDelito() {
+    this.Ditems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlModalidad.doFilter(this.busqueda).then();
@@ -200,7 +201,11 @@ export class AbmPrevCaratulaComponent implements OnInit {
         if (result.code == 200) {
           this.Ditems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -212,7 +217,6 @@ export class AbmPrevCaratulaComponent implements OnInit {
       this.item.delito = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTitulo +" - "+ event.codCapitulo +" - "+ event.codTipo +" - "+ event.codSubTipo;
-      this.Ditems = [];
     }
   }
 

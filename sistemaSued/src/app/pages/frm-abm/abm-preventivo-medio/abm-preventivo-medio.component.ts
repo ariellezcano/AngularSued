@@ -310,6 +310,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
 
   //filtro de medios y captura
   async filtrarMedio() {
+    //alert("ACA ESTO")
+    this.Mitems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlMedio.doFilter(this.busqueda).then();
@@ -318,7 +320,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
           //this.Mitems = [];
           this.Mitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -330,7 +336,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.medioUtilizado = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
-      this.Mitems = [];
     }
   }
 

@@ -208,6 +208,7 @@ export class AbmPrevModalidadComponent implements OnInit {
   }
 
   async filtrarModalidad() {
+    this.Mitems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlModalidad.doFilter(this.busqueda).then();
@@ -215,7 +216,11 @@ export class AbmPrevModalidadComponent implements OnInit {
         if (result.code == 200) {
           this.Mitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -227,7 +232,7 @@ export class AbmPrevModalidadComponent implements OnInit {
       this.item.modalidad = event.id;
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codigo;
-      this.Mitems = [];
+      
     }
   }
 

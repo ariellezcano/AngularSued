@@ -26,6 +26,7 @@ export class FilBuscadorDelitoComponent implements OnInit {
   }
 
   async filtrar() {
+    this.items = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdl.doFilter(this.busqueda).then();
@@ -34,7 +35,11 @@ export class FilBuscadorDelitoComponent implements OnInit {
           
           this.items = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -44,7 +49,7 @@ export class FilBuscadorDelitoComponent implements OnInit {
     if (event != undefined) {
       this.busqueda = event.descripcion;
       this.emmit.emit(event)
-      this.items = [];
+      
     }
   }
 }

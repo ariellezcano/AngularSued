@@ -320,6 +320,7 @@ export class AbmPreVictimaComponent implements OnInit {
 
   //filtra y captura nacionalidad
   async filtrarNacionalidad() {
+    this.Nitems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
@@ -327,7 +328,11 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.Nitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -338,11 +343,11 @@ export class AbmPreVictimaComponent implements OnInit {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
-      this.Nitems = [];
     }
   }
   //filtra y captura ocupacion
   async filtrarOcupacion() {
+    this.Oitems = [];
     try {
       if (this.busquedaOc != '' && this.busquedaOc != undefined) {
         let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
@@ -350,7 +355,11 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.Oitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -361,12 +370,12 @@ export class AbmPreVictimaComponent implements OnInit {
       this.busquedaOc = event.descripcion;
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
-      this.Oitems = [];
     }
   }
 
   //filtro calle
   async filtrarCalle() {
+    this.CItems = [];
     try {
       if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
@@ -374,7 +383,11 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.CItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {
@@ -386,12 +399,13 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
-      this.CItems = [];
+      
     }
   }
 
   //filtro barrio
   async filtrarBarrio() {
+    this.BItems = [];
     try {
       if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
         let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
@@ -399,7 +413,11 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.BItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {
@@ -411,7 +429,6 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
-      this.BItems = [];
     }
   }
 

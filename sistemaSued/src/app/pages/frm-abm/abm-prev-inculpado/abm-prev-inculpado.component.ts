@@ -333,6 +333,7 @@ cancelarModificacion() {
 
 //filtra y captura nacionalidad
   async filtrarNacionalidad() {
+    this.Nitems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
@@ -340,7 +341,11 @@ cancelarModificacion() {
         if (result.code == 200) {
           this.Nitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -351,11 +356,12 @@ cancelarModificacion() {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
-      this.Nitems = [];
+      
     }
   }
   //filtra y captura ocupacion
   async filtrarOcupacion() {
+    this.Oitems = [];
     try {
       if (this.busquedaOc != '' && this.busquedaOc != undefined) {
         let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
@@ -363,7 +369,11 @@ cancelarModificacion() {
         if (result.code == 200) {
           this.Oitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -374,7 +384,7 @@ cancelarModificacion() {
       this.busquedaOc = event.descripcion;
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
-      this.Oitems = [];
+     
     }
   }
 
@@ -457,6 +467,7 @@ cancelarModificacion() {
 
   //filtro calle
   async filtrarCalle() {
+    this.CItems = [];
     try {
       if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
@@ -464,7 +475,11 @@ cancelarModificacion() {
         if (result.code == 200) {
           this.CItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {
@@ -476,7 +491,7 @@ cancelarModificacion() {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
-      this.CItems = [];
+     
     }
   }
 

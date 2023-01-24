@@ -26,6 +26,7 @@ export class FilBuscadorBarrioComponent implements OnInit {
   }
 
   async filtrar() {
+    this.items = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdl.doFilter(this.busqueda).then();
@@ -33,7 +34,11 @@ export class FilBuscadorBarrioComponent implements OnInit {
         if (result.code == 200) {
           this.items = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -43,7 +48,7 @@ export class FilBuscadorBarrioComponent implements OnInit {
     if (event != undefined) {
       this.busqueda = event.nombre;
       this.emmit.emit(event)
-      this.items = [];
+      
     }
   }
 }

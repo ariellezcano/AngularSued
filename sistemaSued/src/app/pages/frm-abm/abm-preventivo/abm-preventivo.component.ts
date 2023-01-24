@@ -278,6 +278,7 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   async filtrarDelito() {
+    this.ditems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlDelito.doFilter(this.busqueda).then();
@@ -285,7 +286,11 @@ export class AbmPreventivoComponent implements OnInit {
         if (result.code == 200) {
           this.ditems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {}
@@ -295,11 +300,11 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.delito = event.id;
       this.busqueda = event.descripcion;
-      this.ditems = [];
     }
   }
 
   async filtrarLugar() {
+    this.lugarItems = [];
     try {
       if (this.busquedaLugar != '' && this.busquedaLugar != undefined) {
         let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
@@ -307,7 +312,11 @@ export class AbmPreventivoComponent implements OnInit {
         if (result.code == 200) {
           this.lugarItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {
@@ -319,11 +328,11 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
-      this.lugarItems = [];
     }
   }
 
   async filtrarCalle() {
+    this.CItems = [];
     try {
       if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
         let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
@@ -331,23 +340,28 @@ export class AbmPreventivoComponent implements OnInit {
         if (result.code == 200) {
           this.CItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {
       Swal.fire('Error al obtener el dato');
     }
-}
+  }
 
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
-      this.CItems = [];
     }
   }
 
   async filtrarBarrio() {
+    //console.log(this.item.barrio)
+    this.BItems = [];
     try {
       if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
         let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
@@ -355,7 +369,12 @@ export class AbmPreventivoComponent implements OnInit {
         if (result.code == 200) {
           this.BItems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la búsqueda realizada');
+          // this.item.barrio = 0;
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {
@@ -367,7 +386,6 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
-      this.BItems = [];
     }
   }
 
@@ -415,9 +433,13 @@ export class AbmPreventivoComponent implements OnInit {
 
   async enviarCoordenadas() {
     try {
-      let data = await this.wsdlGeo
-        .obtenerGeo(this.item.latitud, this.item.longitud)
-        .then();
+      if (this.item.latitud != undefined && this.item.longitud != undefined) {
+        let data = await this.wsdlGeo
+          .obtenerGeo(this.item.latitud, this.item.longitud)
+          .then();
+      } else {
+        Swal.fire('Agregue coordenadas a buscar!');
+      }
       //const result = JSON.parse(JSON.stringify(data));
     } catch (error) {
       if (

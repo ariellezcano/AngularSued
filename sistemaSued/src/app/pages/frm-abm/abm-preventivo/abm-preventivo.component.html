@@ -539,7 +539,7 @@
         <span>
           <b><u> Coordenadas:</u></b></span
         >
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="">Latitud:</label> &nbsp;
           <input
             [(ngModel)]="item.latitud"
@@ -548,7 +548,7 @@
             [ngModelOptions]="{ standalone: true }"
           />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="">Longitud:</label> &nbsp;
           <input
             [(ngModel)]="item.longitud"
@@ -556,6 +556,12 @@
             class="form-control"
             [ngModelOptions]="{ standalone: true }"
           />
+        </div>
+        <div class="col-md-4">
+          <a class="btn btn-primary" (click)="enviarCoordenadas()">
+            <i class="fa fa-street-view" aria-hidden="true"></i>
+            Verificar coordenadas
+          </a>
         </div>
       </div>
       <br />

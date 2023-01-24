@@ -602,6 +602,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   }
 
   async filtrarObjeto() {
+    this.Oitems = [];
     try {
       if (this.busqueda != '' && this.busqueda != undefined) {
         let data = await this.wsdlMedio.doFilter(this.busqueda).then();
@@ -610,7 +611,11 @@ export class AbmPrevObjetoComponent implements OnInit {
           //this.Oitems = [];
           this.Oitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire('No existe la busqueda realizada');
+          Swal.fire({
+            icon: 'warning',
+            text: 'Verifique el dato ingresado!',
+            footer: '<b>No existe la búsqueda realizada...</b>'
+          })
         }
       }
     } catch (error) {}
@@ -622,7 +627,6 @@ export class AbmPrevObjetoComponent implements OnInit {
       this.item.objeto = event.id;
       this.item.capturaObj = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codSubTipo;
-      this.Oitems = [];
     }
   }
 
