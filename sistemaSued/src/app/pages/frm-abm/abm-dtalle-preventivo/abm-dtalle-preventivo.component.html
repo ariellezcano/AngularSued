@@ -569,7 +569,6 @@
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      
       <div
         class="tab-pane fade show active"
         id="caratula"
@@ -593,7 +592,7 @@
           <!-- LESIONES CULPOSAS POR ACC. TRANS GRAVES Y GRAVISIMAS Y LESIONES CULPOSAS POR ACC. TRANSITO LEVES -->
           <ng-container
             *ngIf="
-              prev.delitoNavigation?.id == 13 || prev.delitoNavigation?.id == 12
+            prev.delitoNavigation?.id == 3 || prev.delitoNavigation?.id == 13 || prev.delitoNavigation?.id == 12
             "
           >
             <app-abm-snic [id]="this.id"></app-abm-snic>

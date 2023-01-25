@@ -101,7 +101,7 @@ export class PreventivoService {
       });
   }
 
-  doFilterBusquedaAvanzada(fecha: any, unidad: any, anio: number, nro: number){
+  doFilterBusquedaAvanzada(fecha?: any, unidad?: any, anio?: any, nro?: any){
     this.other_header = this.other_header;
     const ruta = this.api + '/' + 'filterBusqAvanzada/';
     return this.http

@@ -25,7 +25,7 @@ export class PrevSnic {
     vehiculoVehiculo: boolean;
     bicicleta: boolean;
     motoMoto: boolean;
-    tren: boolean;
+    trenVehiculo: boolean;
     vehiculoObjeto: boolean;
     vehiculo: boolean;
     motoTsangre: boolean;
@@ -42,7 +42,7 @@ export class PrevSnic {
     incendio: boolean;
     caidaOcupante: boolean;
     otroTh: boolean;//ocupado TIPO DE HECHO
-    ignoraTh: boolean;
+    //ignoraTh: boolean;
     //Ubicacion de la calzada
     dentroCalzada: boolean;
     fueraCalzada: boolean;
@@ -73,7 +73,7 @@ export class PrevSnic {
         this.vehiculoVehiculo = false;
         this.bicicleta = false;
         this.motoMoto = false;
-        this.tren = false;
+        this.trenVehiculo = false;
         this.vehiculoObjeto = false;
         this.vehiculo = false;
         this.motoTsangre = false;
@@ -88,7 +88,7 @@ export class PrevSnic {
         this.incendio = false;
         this.caidaOcupante = false;
         this.otroTh = false;
-        this.ignoraTh = false;
+        //this.ignoraTh = false;
         this.dentroCalzada = false;
         this.fueraCalzada = false;
         this.ignoraCalzada = false;

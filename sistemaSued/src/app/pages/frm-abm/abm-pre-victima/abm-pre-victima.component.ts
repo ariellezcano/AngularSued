@@ -223,16 +223,18 @@ export class AbmPreVictimaComponent implements OnInit {
   async guardar() {
     this.guardando = true;
     this.item.preventivo = this.id;
+    console.log("items", this.item)
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
+      console.log("resultado ",result)
       if (result.code == 200) {
+        this.item = new PrevVictima();
         this.guardando = false;
         this.busquedaBarrio = '';
         this.busquedaCalle = '';
         this.busqueda = '';
         this.busquedaOc = '';
-        this.item = new PrevVictima();
         this.obtenerDetalle();
         // Swal.fire({
         //   position: 'top-end',
@@ -293,9 +295,6 @@ export class AbmPreVictimaComponent implements OnInit {
             this.verSexo = true;
           }
           if (this.item.genero > 0) {
-            //console.log("RECUPERO GENERO")
-            //alert("ACTIVADO GENERO")
-            
             this.item.capturaGenero = result.dato.identidadNavigation?.autoPercepcion;
               this.verGenero = true;
             }
@@ -448,7 +447,6 @@ export class AbmPreVictimaComponent implements OnInit {
   // se utiliza para pintar la fila en memoria
   colores(item: PrevVictima) {
     let color = '';
-
     if (item.id == undefined) {
       color = 't-success';
     } else {

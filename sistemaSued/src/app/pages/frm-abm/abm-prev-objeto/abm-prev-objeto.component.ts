@@ -158,7 +158,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   seleccionado(item: PrevObjeto) {
     this.arma = true;
     this.idSeleccionado = item.id;
-    this.cantidadSecuestrada = item.cantSecuestro;
+    this.cantidadSecuestrada = item.cantidad;
     if (this.cantidadSecuestrada > 1) {
       this.filterArma();
     } else if (this.cantidadSecuestrada == 1) {
@@ -199,7 +199,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   seleccionadoMoto(item: PrevObjeto) {
     this.moto = true;
     this.idSeleccionado = item.id;
-    this.cantidadSecuestrada = item.cantSecuestro;
+    this.cantidadSecuestrada = item.cantidad;
     if (this.cantidadSecuestrada > 1) {
       this.filterMoto();
     } else if (this.cantidadSecuestrada == 1) {
@@ -240,7 +240,7 @@ export class AbmPrevObjetoComponent implements OnInit {
   seleccionadoAuto(item: PrevObjeto) {
     this.auto = true;
     this.idSeleccionado = item.id;
-    this.cantidadSecuestrada = item.cantSecuestro;
+    this.cantidadSecuestrada = item.cantidad;
     if (this.cantidadSecuestrada > 1) {
       this.filterAuto();
     } else if (this.cantidadSecuestrada == 1) {

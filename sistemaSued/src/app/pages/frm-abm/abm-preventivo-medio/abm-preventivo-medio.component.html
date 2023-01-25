@@ -80,17 +80,34 @@
       </center>
     </div>
   </div>
-  <div *ngIf="item.capturaDescripcion == 'GANADO MAYOR Y MENOR' || item.capturaDescripcion == 'OTROS MEDIOS NO CONTEMPLADOS'" class="row">
-    <div class="col-md-12">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Especificar ganado:</label>
-        <input
-          [(ngModel)]="item.especificar"
-          type="text"
-          class="form-control"
-          [ngModelOptions]="{ standalone: true }"
-        />
+  <ng-container *ngIf="item.capturaDescripcion == 'GANADO MAYOR Y MENOR'">
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Especificar ganado:</label>
+          <input
+            [(ngModel)]="item.especificar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+      </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-container *ngIf="item.capturaDescripcion == 'OTROS MEDIOS NO CONTEMPLADOS'">
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Especificar medio:</label>
+          <input
+            [(ngModel)]="item.especificar"
+            type="text"
+            class="form-control"
+            [ngModelOptions]="{ standalone: true }"
+          />
+      </div>
+    </div>
+  </ng-container>
+  
+  
   <br />
   <div class="row">
     <div class="col-md-12">

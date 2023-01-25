@@ -26,6 +26,7 @@ export class LstPreventivoComponent implements OnInit {
 
   item!: Preventivo;
   items: Preventivo[];
+  
   rol: string; 
   user: any;
 
