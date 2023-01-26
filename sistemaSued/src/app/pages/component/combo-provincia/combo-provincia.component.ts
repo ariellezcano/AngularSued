@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Provincia } from 'src/app/models/index.models';
 import { ProvinciaService } from 'src/app/services/index.service';
@@ -41,6 +40,7 @@ export class ComboProvinciaComponent implements OnInit {
   }
 
   async listar() {
+    //this.items = [];
     await this.wsdl.getList(1, 100).then((data: any) => {
       //this.items = [];
       this.items = data.data;
