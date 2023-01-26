@@ -228,10 +228,12 @@
       ></app-combo-provincia>
     </div>
     <div class="col-md-4">
-      <app-combo-localidad
+      <app-fil-buscador-localidad (emmit)="seleccionLocalidad($event)">
+      </app-fil-buscador-localidad>
+      <!-- <app-combo-localidad
         [dibujar]="item.localidadNavigation"
         (emitir)="seleccionLocalidad($event)"
-      ></app-combo-localidad>
+      ></app-combo-localidad> -->
     </div>
     <div class="col-md-4">
       <center>

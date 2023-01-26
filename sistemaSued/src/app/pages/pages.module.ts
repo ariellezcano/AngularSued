@@ -142,6 +142,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
+import { FilBuscadorLocalidadComponent } from './component/fil-buscador-localidad/fil-buscador-localidad.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -279,6 +280,7 @@ defineLocale('es', esLocale);
       ComboRolComponent,
       AbmPlanillaHechosDelictivosComponent,
       VerificacionComponent,
+      FilBuscadorLocalidadComponent,
     ],
     exports: [],
     imports: [

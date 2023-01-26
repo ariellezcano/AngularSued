@@ -1,4 +1,4 @@
-import { Call } from '@angular/compiler';
+import { Call, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,8 +8,10 @@ import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { ComboProvinciaComponent } from '../../component/combo-provincia/combo-provincia.component';
 import { FilBuscadorBarrioComponent } from '../../component/fil-buscador-barrio/fil-buscador-barrio.component';
 import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
+import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
 
 @Component({
   selector: 'app-abm-prev-inculpado',
@@ -20,6 +22,9 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   @ViewChild(FilBuscadorCalleComponent, { static: false }) filCalle!: FilBuscadorCalleComponent;
   @ViewChild(FilBuscadorBarrioComponent, { static: false }) filBarrio!: FilBuscadorBarrioComponent;
+  @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
+  //@ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
+
  
   public id!: number;
   //valida el formulario
@@ -184,6 +189,9 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.filCalle.busqueda = '';
         this.filCalle.item = new Calle();
         this.filCalle.items = [];
+        this.filLocalidad.busqueda = '';
+        this.filLocalidad.item = new Localidad();
+        this.filLocalidad.items = [];
         this.item = new PrevInculpado();
         this.obtenerDetalle();
         Swal.fire({
@@ -233,6 +241,10 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.filCalle.busqueda = '';
         this.filCalle.item = new Calle();
         this.filCalle.items = [];
+        this.filLocalidad.busqueda = '';
+        this.filLocalidad.item = new Localidad();
+        this.filLocalidad.items = [];
+        //this.comboProvincia.items = [];
         this.item = new PrevInculpado();
         this.obtenerDetalle()
       } else if(result.code == 204) {
@@ -298,6 +310,7 @@ async traerDatos(id: number) {
         this.verProv = true;
         }
         if(result.dato.localidad > 0){
+          this.filLocalidad.busqueda = result.dato.localidadNavigation?.nombre; 
           this.verLocalidad = true;
         }
         if(result.dato.calle > 0){
@@ -321,6 +334,9 @@ cancelarModificacion() {
   this.filCalle.item = new Calle();
   this.filCalle.items = [];
   this.item = new PrevInculpado();
+  this.filLocalidad.busqueda = '';
+  this.filLocalidad.item = new Localidad();
+  this.filLocalidad.items = [];
   this.verificar = false;
   this.verSexo = false;
   this.verGenero = false;
@@ -330,6 +346,14 @@ cancelarModificacion() {
   this.verLocalidad = false;
   this.mostrarBtnModif = false;
 }
+
+//captura localidad
+// doFoundLocalidad(event: Localidad){
+//   if (event != undefined) {
+//     this.item.localidad = event.id;
+//     //alert(this.item.localidad);
+//   }
+// }
 
 //filtra y captura nacionalidad
   async filtrarNacionalidad() {
@@ -389,13 +413,13 @@ cancelarModificacion() {
   }
 
   //agrega fila en memoria
-  addRow() {
-    this.busqueda = '';
-    this.busquedaOc = '';
-    this.busquedaCalle = '';
-    this.items.unshift(this.item);
-    this.item = new PrevInculpado();
-  }
+  // addRow() {
+  //   this.busqueda = '';
+  //   this.busquedaOc = '';
+  //   this.busquedaCalle = '';
+  //   this.items.unshift(this.item);
+  //   this.item = new PrevInculpado();
+  // }
 
   //elimina la fila en memoria
   deleteRow(indice: any) {
@@ -415,9 +439,9 @@ cancelarModificacion() {
     return color;
   }
 
-  mayus(e: any) {
-    e.value = e.value.toUpperCase();
-  }
+  // mayus(e: any) {
+  //   e.value = e.value.toUpperCase();
+  // }
 
   preDelete(item: PrevInculpado) {
     this.item = new PrevInculpado();
@@ -524,11 +548,11 @@ cancelarModificacion() {
       this.item.capturaVinculo = event.descripcion;
     }
   }
-  //captura el dato del combo
+  //captura el dato del filtro/combo
   seleccionLocalidad(event: Localidad) {
     if (event != undefined) {
       this.item.localidad = event.id;
-      this.item.capturaLocalidad = event.nombre;
+      //this.item.capturaLocalidad = event.nombre;
     }
   }
   //captura el dato del combo

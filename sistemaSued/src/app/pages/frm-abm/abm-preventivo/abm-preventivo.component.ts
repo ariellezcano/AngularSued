@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -27,6 +27,7 @@ import {
 } from 'src/app/services/index.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
+import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
 
 @Component({
   selector: 'app-abm-preventivo',
@@ -34,6 +35,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
+  @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
+  
   @Output()
   latitud?: string;
   @Output()
@@ -161,6 +164,7 @@ export class AbmPreventivoComponent implements OnInit {
             this.item.pais =
               this.item.localidadNavigation?.nacionNavigation?.nacion;
             this.item.cp = this.item.localidadNavigation?.codPostal;
+            this.filLocalidad.busqueda = this.item.localidadNavigation?.nombre;
           }
         }
       } catch (error) {}
@@ -414,7 +418,7 @@ export class AbmPreventivoComponent implements OnInit {
         )
         .then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log(result);
+      //console.log(result);
       if (result.results != undefined) {
         this.item.latitud = '';
         this.item.longitud = '';
@@ -469,6 +473,20 @@ export class AbmPreventivoComponent implements OnInit {
         icon: 'info',
         text: 'Agregue coordenadas',
       });
+    }
+  }
+
+  //captura localidad
+  doFoundLocalidad(event: Localidad){
+    this.item.localidadCoordenada = '';
+    this.item.cp = '';
+    this.item.pais = '';
+    if (event != undefined) {
+      this.item.localidad = event.id;
+      //alert(this.item.localidad);
+      this.item.localidadCoordenada = event.nombre;
+      this.item.cp = event.codPostal;
+      this.item.pais = event.nacionNavigation?.nacion;
     }
   }
 

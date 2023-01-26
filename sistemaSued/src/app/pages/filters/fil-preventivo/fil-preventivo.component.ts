@@ -82,7 +82,11 @@ export class FilPreventivoComponent implements OnInit {
           //console.log("result", result)
           this.emmit.emit(this.items);
         }
-      } else if (this.fecha != undefined && this.fecha != '') {
+      } else {
+
+        if(this.fecha == undefined || this.fecha == ''){
+          this.fecha = "fechaVacia";
+        }
         if (this.uniCodigo == undefined || this.uniCodigo == '') {
           this.uniCodigo = 0;
         }
@@ -102,6 +106,7 @@ export class FilPreventivoComponent implements OnInit {
           )
           .then();
         const result = JSON.parse(JSON.stringify(data));
+        console.log("result", result)
         if (result.code == 200) {
           this.items = result.data;
           //console.log(this.items)
@@ -123,13 +128,13 @@ export class FilPreventivoComponent implements OnInit {
             text: 'No existe criterio buscado!',
           });
         }
-      }else{
-        Swal.fire(
-          '¡No agregó fecha a buscar!',
-          'El dato es requerido para la respectiva búsqueda del Preventivo.',
-          'warning'
-        )
-      }
+       }//else{
+      //   Swal.fire(
+      //     '¡No agregó fecha a buscar!',
+      //     'El dato es requerido para la respectiva búsqueda del Preventivo.',
+      //     'warning'
+      //   )
+      // }
     } catch (error) {}
   }
 }
