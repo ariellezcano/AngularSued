@@ -163,6 +163,19 @@
       />
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label"> Dirección Adicional:</label>
+        <input
+          [(ngModel)]="item.domDirAdicional"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+    </div>
+    <div class="col-md-4"></div>
+  </div>
   <br />
   <div class="row">
     <legend><u>General:</u></legend>

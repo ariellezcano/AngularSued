@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Sexo } from 'src/app/models/index.models';
 import { SexoService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilSexoComponent } from '../../filters/fil-sexo/fil-sexo.component';
 
@@ -17,13 +18,15 @@ export class LstSexoComponent implements OnInit {
 
   items: Sexo[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: SexoService, private router: Router) {
     this.item = new Sexo();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Sexo[]) {

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IdentidadGenero } from 'src/app/models/index.models';
 import { IdentidadGeneroService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilIdentidadGeneroComponent } from '../../filters/fil-identidad-genero/fil-identidad-genero.component';
 
@@ -18,13 +19,15 @@ export class LstIdentidadGeneroComponent implements OnInit {
 
   items: IdentidadGenero[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: IdentidadGeneroService, private router: Router) {
     this.item = new IdentidadGenero();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: IdentidadGenero[]) {

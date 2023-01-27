@@ -3,7 +3,7 @@
       <div class="col-md-6">
         <legend class="text-dark">
           <em>
-            <b> <u>Listado de modelos de vehículos</u> </b>
+            <b> <u>Listado de Modelos de Vehículos</u> </b>
           </em>
         </legend>
       </div>
@@ -50,6 +50,7 @@
                 </button>
                 &nbsp;
                 <button
+                  *ngIf="rol == 'DEVELOPER'"
                   (click)="eliminar(item.id)"
                   type="button"
                   title="Eliminar"

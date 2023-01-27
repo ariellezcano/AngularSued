@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModeloMoto } from 'src/app/models/index.models';
 import { ModeloMotoService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilModeloMotoComponent } from '../../filters/fil-modelo-moto/fil-modelo-moto.component';
 
@@ -18,13 +19,16 @@ export class LstModeloMotoComponent implements OnInit {
 
   items: ModeloMoto[];
   user: any;
+  rol: any;
 
   constructor(private wsdl: ModeloMotoService, private router: Router) {
     this.item = new ModeloMoto();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: ModeloMoto[]) {

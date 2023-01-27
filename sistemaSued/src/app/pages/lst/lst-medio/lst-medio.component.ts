@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Medio } from 'src/app/models/index.models';
 import { MedioService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilMedioComponent } from '../../filters/fil-medio/fil-medio.component';
 
@@ -18,13 +19,15 @@ export class LstMedioComponent implements OnInit {
 
   items: Medio[];
   user: any;
-
+  rol: string; 
   constructor(private wsdl: MedioService, private router: Router) {
     this.item = new Medio();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Medio[]) {

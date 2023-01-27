@@ -9,7 +9,8 @@
           [compareWith]="compareWitch"
           class="form-select form-select-lm mb-3" aria-label=".form-select-lg example"
         >
-          <option *ngFor="let item of items" [ngValue]="item">
+        <!-- <option [ngValue]="undefined" disabled>Selecione Item</option>   -->
+        <option *ngFor="let item of items" [ngValue]="item">
             {{ item.codigo }} - {{ item.nombre }}
           </option>
         </select>

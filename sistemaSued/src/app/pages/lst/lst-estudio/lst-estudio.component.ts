@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Estudio } from 'src/app/models/index.models';
 import { EstudiosService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilEstudioComponent } from '../../filters/fil-estudio/fil-estudio.component';
 
@@ -18,13 +19,15 @@ export class LstEstudioComponent implements OnInit {
 
   items: Estudio[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: EstudiosService, private router: Router) {
     this.item = new Estudio();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Estudio[]) {

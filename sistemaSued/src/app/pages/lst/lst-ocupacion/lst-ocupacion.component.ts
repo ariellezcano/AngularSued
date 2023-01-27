@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Ocupacion } from 'src/app/models/index.models';
 import { OcupacionService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilOcupacionComponent } from '../../filters/fil-ocupacion/fil-ocupacion.component';
 
@@ -18,13 +19,16 @@ export class LstOcupacionComponent implements OnInit {
 
   items: Ocupacion[];
   user: any;
+  rol: any;
 
   constructor(private wsdl: OcupacionService, private router: Router) {
     this.item = new Ocupacion();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Ocupacion[]) {

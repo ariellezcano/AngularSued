@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Delito } from 'src/app/models/component/delito';
 import { DelitoService } from 'src/app/services/component/delito.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilDelitoComponent } from '../../filters/fil-delito/fil-delito.component';
 
@@ -20,12 +21,15 @@ export class LstDelitoComponent implements OnInit {
   items: Delito[];
   user: any;
 
+  rol: string; 
   constructor(private wsdl: DelitoService, private router: Router) {
     this.item = new Delito();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Delito[]) {

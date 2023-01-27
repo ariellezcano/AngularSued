@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MarcaMoto } from 'src/app/models/index.models';
 import { MarcaMotoService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilMarcaMotoComponent } from '../../filters/fil-marca-moto/fil-marca-moto.component';
 
@@ -18,13 +19,16 @@ export class LstMarcaMotoComponent implements OnInit {
 
   items: MarcaMoto[];
   user: any;
+  rol: any;
 
   constructor(private wsdl: MarcaMotoService, private router: Router) {
     this.item = new MarcaMoto();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: MarcaMoto[]) {

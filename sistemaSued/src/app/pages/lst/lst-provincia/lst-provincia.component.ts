@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Provincia } from 'src/app/models/index.models';
 import { ProvinciaService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilProvinciaComponent } from '../../filters/fil-provincia/fil-provincia.component';
 
@@ -18,13 +19,15 @@ export class LstProvinciaComponent implements OnInit {
 
   items: Provincia[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: ProvinciaService, private router: Router) {
     this.item = new Provincia();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Provincia[]) {

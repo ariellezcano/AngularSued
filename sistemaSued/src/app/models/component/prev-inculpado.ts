@@ -26,6 +26,7 @@ export class PrevInculpado {
     dirCalle!: number;
     direccionNro!: number;
     dirBarrio!: number;
+    domDirAdicional!: string;
 
     nacionalidadNavigation: any;
     sexoNavigation: any;

@@ -1,4 +1,3 @@
-import { Call, ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +7,6 @@ import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
-import { ComboProvinciaComponent } from '../../component/combo-provincia/combo-provincia.component';
 import { FilBuscadorBarrioComponent } from '../../component/fil-buscador-barrio/fil-buscador-barrio.component';
 import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
 import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
@@ -34,7 +32,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
   enviado = false;
 //boton
   mostrarBtnModif: boolean;
-
   //id seleccion tabla
   idSeleccion!: number;
   //input de busqueda de los filtros
@@ -244,7 +241,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.filLocalidad.busqueda = '';
         this.filLocalidad.item = new Localidad();
         this.filLocalidad.items = [];
-        //this.comboProvincia.items = [];
+        //this.comboProvincia.emitir.closed();
         this.item = new PrevInculpado();
         this.obtenerDetalle()
       } else if(result.code == 204) {
@@ -321,6 +318,8 @@ async traerDatos(id: number) {
     } catch (error) {}
   }
 }
+
+
 
 //cancelar modificacion
 cancelarModificacion() {
@@ -568,7 +567,6 @@ cancelarModificacion() {
       this.item.provDetencion = event.id;
     }
   }
-
   //captura la calle
   doFoundCalle(event: Calle){
     this.item.dirCalle = event.id;

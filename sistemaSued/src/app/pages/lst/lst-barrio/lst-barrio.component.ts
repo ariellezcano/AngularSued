@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Barrio } from 'src/app/models/index.models';
 import { BarrioService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilBarrioComponent } from '../../filters/fil-barrio/fil-barrio.component';
 
@@ -18,13 +19,15 @@ export class LstBarrioComponent implements OnInit {
 
   items: Barrio[];
   user: any;
-
+  rol: string; 
   constructor(private wsdl: BarrioService, private router: Router) {
     this.item = new Barrio();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Barrio[]) {

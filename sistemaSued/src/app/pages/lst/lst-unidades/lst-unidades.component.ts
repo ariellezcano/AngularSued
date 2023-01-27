@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Unidad, UnidadesSued } from 'src/app/models/index.models';
 import { UnidadesSuedService, UnidadService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilUnidadesComponent } from '../../filters/fil-unidades/fil-unidades.component';
 
@@ -20,13 +21,15 @@ export class LstUnidadesComponent implements OnInit {
   items: UnidadesSued[];
 
   user: any;
-
+  rol: any;
   constructor(private wsdl: UnidadesSuedService, private router: Router) {
     this.item = new UnidadesSued();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: UnidadesSued[]) {

@@ -15,6 +15,9 @@ export class ComboProvinciaComponent implements OnInit {
 
   @Output() emitir: EventEmitter<Provincia> = new EventEmitter<Provincia>();
 
+  @Input()
+  canActivateTab = () => true;
+
   item: Provincia;
   items: Provincia[];
 
@@ -26,14 +29,26 @@ export class ComboProvinciaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listar();
+    if(this.canActivateTab()) {
+      this.listar();
+    }else{
+      this.item = new Provincia();
+    }
+    
   }
   //captura el dato del combo
 
   capturar(event: Provincia) {
-    this.item = event;
-    this.emitir.emit(this.item);
+    if (event !== undefined) {
+      this.item = event;
+      this.emitir.emit(this.item);
+    }
+    else{
+      this.item = new Provincia();
+    }
   }
+
+  
 
   compareWitch(c1: Provincia, c2: Provincia): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;

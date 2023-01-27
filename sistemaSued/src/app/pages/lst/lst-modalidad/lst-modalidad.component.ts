@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Modalidad } from 'src/app/models/index.models';
 import { ModalidadService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilModalidadComponent } from '../../filters/fil-modalidad/fil-modalidad.component';
 
@@ -18,13 +19,15 @@ export class LstModalidadComponent implements OnInit {
 
   items: Modalidad[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: ModalidadService, private router: Router) {
     this.item = new Modalidad();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Modalidad[]) {

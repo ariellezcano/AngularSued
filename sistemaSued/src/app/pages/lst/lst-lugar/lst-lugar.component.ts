@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Lugar } from 'src/app/models/index.models';
 import { LugarService } from 'src/app/services/component/lugar.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilLugarComponent } from '../../filters/fil-lugar/fil-lugar.component';
 
@@ -18,13 +19,15 @@ export class LstLugarComponent implements OnInit {
 
   items: Lugar[];
   user: any;
-
+  rol: string; 
   constructor(private wsdl: LugarService, private router: Router) {
     this.item = new Lugar();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Lugar[]) {

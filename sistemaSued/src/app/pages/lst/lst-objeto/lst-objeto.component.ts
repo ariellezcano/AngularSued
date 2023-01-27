@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Objeto } from 'src/app/models/index.models';
 import { ObjetoService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilObjetoComponent } from '../../filters/fil-objeto/fil-objeto.component';
 
@@ -18,13 +19,15 @@ export class LstObjetoComponent implements OnInit {
 
   items: Objeto[];
   user: any;
-
+  rol: string; 
   constructor(private wsdl: ObjetoService, private router: Router) {
     this.item = new Objeto();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Objeto[]) {

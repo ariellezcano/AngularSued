@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Calle } from 'src/app/models/index.models';
 import { CalleService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilCalleComponent } from '../../filters/fil-calle/fil-calle.component';
 
@@ -18,13 +19,16 @@ export class LstCalleComponent implements OnInit {
 
   items: Calle[];
   user: any;
-
+  rol: string; 
+  
   constructor(private wsdl: CalleService, private router: Router) {
     this.item = new Calle();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Calle[]) {

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { TipoMoneda } from 'src/app/models/index.models';
 import { TipoMonedaService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilTipoMonedaComponent } from '../../filters/fil-tipo-moneda/fil-tipo-moneda.component';
 
@@ -18,13 +19,15 @@ export class LstTipoMonedaComponent implements OnInit {
 
   items: TipoMoneda[];
   user: any;
-
+  rol: any;
   constructor(private wsdl: TipoMonedaService, private router: Router) {
     this.item = new TipoMoneda();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: TipoMoneda[]) {

@@ -393,17 +393,18 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  seleccionLocalidad(event: Localidad) {
-    this.item.localidadCoordenada = '';
-    this.item.cp = '';
-    this.item.pais = '';
-    if (event != undefined) {
-      this.item.localidad = event.id;
-      this.item.localidadCoordenada = event.nombre;
-      this.item.cp = event.codPostal;
-      this.item.pais = event.nacionNavigation?.nacion;
-    }
-  }
+  //seleccion localidad es del combo
+  // seleccionLocalidad(event: Localidad) {
+  //   this.item.localidadCoordenada = '';
+  //   this.item.cp = '';
+  //   this.item.pais = '';
+  //   if (event != undefined) {
+  //     this.item.localidad = event.id;
+  //     this.item.localidadCoordenada = event.nombre;
+  //     this.item.cp = event.codPostal;
+  //     this.item.pais = event.nacionNavigation?.nacion;
+  //   }
+  // }
 
   async buscarCoordenadas() {
     this.map = false;

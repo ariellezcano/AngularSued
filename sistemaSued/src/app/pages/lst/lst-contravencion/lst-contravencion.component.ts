@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contravencion } from 'src/app/models/index.models';
 import { ContravencionService } from 'src/app/services/index.service';
+import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilContravencionComponent } from '../../filters/fil-contravencion/fil-contravencion.component';
 
@@ -20,13 +21,16 @@ export class LstContravencionComponent implements OnInit {
   user: any;
 
   seleccionAccion: any;
+  rol: any;
 
   constructor(private wsdl: ContravencionService, private router: Router) {
     this.item = new Contravencion();
     this.items = [];
+    this.rol = '';
   }
 
   ngOnInit(): void {
+    this.rol = JSON.parse(''+ Utils.getSession('personal')).rol;
   }
 
   doFound(event: Contravencion[]) {
