@@ -138,6 +138,7 @@ export class LstPreventivoComponent implements OnInit {
   clickRow(item: any) {
     this.id = 0;
     this.selectedRowIndex = item.id;
+    //console.log("this.selectedRowIndex");
     this.id = this.selectedRowIndex;
     this.proccess = true;
   }

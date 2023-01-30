@@ -11,7 +11,7 @@ export const environment = {
   //trabajo
   //URL: 'https://localhost:7033/api/',
   //desarrollo
-  URL: 'http://192.168.5.252:7033/api/',
+  URL: 'http://10.125.31.15:7033/api/',
   //real
   //URL: 'http://10.125.31.149/api/',
 
@@ -24,7 +24,7 @@ export const environment = {
   //real
   //URLRegBus: 'https://policiadigital.chaco.gob.ar:9090/api_registroUsuario/',
   //desarrollo
-  URLRegBus: 'http://192.168.5.242/api_registroUsuario/',
+  URLRegBus: 'http://10.125.31.74/api_registroUsuario/',
 
 };
 

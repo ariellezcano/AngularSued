@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import moment from 'moment';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {
   Preventivo,
   PrevUnidadEspecial,
@@ -45,8 +47,10 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private wsdl: PrevUnidadEspecialService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private bsLocaleService: BsLocaleService
   ) {
+    this.bsLocaleService.use('es');
     this.item = new PrevUnidadEspecial();
     this.items = [];
     this.prev = new Preventivo();
@@ -95,9 +99,14 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           this.item.nombreUnidad = result.dato.unidadEspNavigation.nombre;
+          if(this.item.fecha != null){
+            this.item.fecha = moment( this.item.fecha).format('DD-MM-YYYY');
+          }
           this.mostrarBtnModif = true;
         }
-      } catch (error) {}
+      } catch (error) {
+        //Utils.showToas('Excepción: ' + error.message, 'error');
+      }
     }
   }
 

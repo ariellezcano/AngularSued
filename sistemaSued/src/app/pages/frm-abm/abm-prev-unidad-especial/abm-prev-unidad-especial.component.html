@@ -20,7 +20,38 @@
       <app-fil-autocompletado-unidad-sued (unidadSeleccionada)="unidad($event)">
       </app-fil-autocompletado-unidad-sued>
     </div>
-    <div *ngIf="item.unidadEspecial > 0" class="col-md-6">
+    <div class="col-md-3">
+      <label class="col-sm-12 col-form-label" for="Nombre"> Fecha:</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text"
+          ><i class="fa fa-calendar" aria-hidden="true"></i
+        ></span>
+        <input
+          [(ngModel)]="item.fecha"
+          type="text"
+          placeholder="00-00-0000"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+          bsDatepicker
+          [bsConfig]="{
+            dateInputFormat: 'DD-MM-YYYY',
+            containerClass: 'theme-blue'
+          }"
+        />
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Número Nota:</label>
+      <input
+        [(ngModel)]="item.nroNota"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="item.unidadEspecial > 0" class="col-md-12">
       <br>
         <center>
         <label class="alert alert-info" for=""
@@ -28,6 +59,16 @@
         >
       </center>
     </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <label for="" class="col-sm-12 col-form-label">Observaciones:</label>
+        <textarea
+          class="form-control"
+          name="observacion"
+          [(ngModel)]="item.observaciones"
+        ></textarea>
+      </div>
   </div>
   <br />
   <div class="row">
@@ -92,6 +133,9 @@
     <thead class="text-center table-primary">
       <tr>
         <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Nro. Nota</th>
+        <th>Observaciones</th>
         <th>Acción</th>
       </tr>
     </thead>
@@ -100,6 +144,9 @@
         <ng-container *ngIf="i.id > 0; then thenTemplate"></ng-container>
         <ng-template #thenTemplate>
           <td>{{ i.unidadEspNavigation.nombre }}</td>
+          <td>{{i.fecha | date : "dd/MM/yyyy"}}</td>
+          <td>{{i.nroNota}}</td>
+          <td>{{i.observaciones}}</td>
         </ng-template>
         <!-- editar y guardar -->
         <ng-container *ngIf="i.id > 0; then mostrar"></ng-container>

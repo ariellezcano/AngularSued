@@ -222,7 +222,6 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   async guardar() {
     this.guardando = true;
-
     this.item.preventivo = this.id;
     try {
       let data = await this.wsdl.doInsert(this.item).then();
@@ -558,6 +557,7 @@ cancelarModificacion() {
   seleccionProvincia(event: Provincia) {
     if (event != undefined) {
       this.item.provincia = event.id;
+      alert(this.item.provincia)
       this.item.capturaProvincia = event.nombre;
     }
   }
