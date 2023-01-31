@@ -3,10 +3,15 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo } from 'src/app/models/index.models';
+import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo, Vinculo } from 'src/app/models/index.models';
 import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { ComboEstudioComponent } from '../../component/combo-estudio/combo-estudio.component';
+import { ComboIdentidadGeneroComponent } from '../../component/combo-identidad-genero/combo-identidad-genero.component';
+import { ComboProvinciaComponent } from '../../component/combo-provincia/combo-provincia.component';
+import { ComboSexoComponent } from '../../component/combo-sexo/combo-sexo.component';
+import { ComboVinculoComponent } from '../../component/combo-vinculo/combo-vinculo.component';
 import { FilBuscadorBarrioComponent } from '../../component/fil-buscador-barrio/fil-buscador-barrio.component';
 import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
 import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
@@ -21,7 +26,12 @@ export class AbmPrevInculpadoComponent implements OnInit {
   @ViewChild(FilBuscadorCalleComponent, { static: false }) filCalle!: FilBuscadorCalleComponent;
   @ViewChild(FilBuscadorBarrioComponent, { static: false }) filBarrio!: FilBuscadorBarrioComponent;
   @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
-  //@ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
+
+  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
+  @ViewChild(ComboSexoComponent, { static: false }) comboSexo!: ComboSexoComponent;
+  @ViewChild(ComboIdentidadGeneroComponent, { static: false }) comboGenero!: ComboIdentidadGeneroComponent;
+  @ViewChild(ComboVinculoComponent,{ static: false }) comboVinculo!: ComboVinculoComponent;
+  @ViewChild(ComboEstudioComponent,{ static: false }) comboEstudio!: ComboEstudioComponent;
 
  
   public id!: number;
@@ -241,8 +251,15 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.filLocalidad.item = new Localidad();
         this.filLocalidad.items = [];
         //this.comboProvincia.emitir.closed();
+        this.comboProvincia.item = new Provincia();
+        this.comboSexo.item = new Sexo();
+        this.comboGenero.item = new IdentidadGenero();
+        this.comboVinculo.item = new Vinculo();
+        this.comboEstudio.item = new Estudio();
+
         this.item = new PrevInculpado();
-        this.obtenerDetalle()
+        this.obtenerDetalle();
+
       } else if(result.code == 204) {
         this.guardando = false;
         Swal.fire({
@@ -557,7 +574,7 @@ cancelarModificacion() {
   seleccionProvincia(event: Provincia) {
     if (event != undefined) {
       this.item.provincia = event.id;
-      alert(this.item.provincia)
+      //alert(this.item.provincia)
       this.item.capturaProvincia = event.nombre;
     }
   }

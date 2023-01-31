@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -24,6 +24,10 @@ import {
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
+import { ComboEstudioComponent } from '../../component/combo-estudio/combo-estudio.component';
+import { ComboIdentidadGeneroComponent } from '../../component/combo-identidad-genero/combo-identidad-genero.component';
+import { ComboProvinciaComponent } from '../../component/combo-provincia/combo-provincia.component';
+import { ComboSexoComponent } from '../../component/combo-sexo/combo-sexo.component';
 
 @Component({
   selector: 'app-abm-pre-victima',
@@ -32,7 +36,22 @@ import Swal from 'sweetalert2';
 })
 export class AbmPreVictimaComponent implements OnInit {
 
-  @Output() emmitProvincia: EventEmitter<Provincia> = new EventEmitter();
+
+  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
+  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia1!: ComboProvinciaComponent;
+  @ViewChild(ComboSexoComponent, { static: false }) comboSexo!: ComboSexoComponent;
+  @ViewChild(ComboIdentidadGeneroComponent, { static: false }) comboGenero!: ComboIdentidadGeneroComponent;
+  @ViewChild(ComboEstudioComponent, { static: false }) comboEstudio!: ComboEstudioComponent;
+
+  //@Output() emmitProvincia: EventEmitter<Provincia> = new EventEmitter();
+
+
+  // ngAfterViewInit() {
+  //   this.comboProvincia.item = new Provincia();
+  //   this.comboSexo.item = new Sexo();
+  //   this.comboGenero.item = new IdentidadGenero();
+  //   this.comboEstudio.item = new Estudio(); 
+  // }
 
   public id!: number;
 
@@ -235,6 +254,10 @@ export class AbmPreVictimaComponent implements OnInit {
         this.busquedaCalle = '';
         this.busqueda = '';
         this.busquedaOc = '';
+        this.comboProvincia.item = new Provincia();
+        this.comboSexo.item = new Sexo();
+        this.comboGenero.item = new IdentidadGenero();
+        this.comboEstudio.item = new Estudio();
         this.obtenerDetalle();
         // Swal.fire({
         //   position: 'top-end',

@@ -58,7 +58,7 @@
         *ngIf="Mitems.length > 0 && this.busqueda"
         name="Mitem"
         [(ngModel)]="Mitem"
-        class="form-select form-select-lm mb-3" 
+        class="form-select form-select-lm mb-3"
         aria-label=".form-select-lg example"
         (ngModelChange)="capturar($event)"
         [ngModelOptions]="{ standalone: true }"
@@ -83,31 +83,36 @@
   <ng-container *ngIf="item.capturaDescripcion == 'GANADO MAYOR Y MENOR'">
     <div class="row">
       <div class="col-md-12">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Especificar ganado:</label>
-          <input
-            [(ngModel)]="item.especificar"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Especificar ganado:</label
+        >
+        <input
+          [(ngModel)]="item.especificar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="item.capturaDescripcion == 'OTROS MEDIOS NO CONTEMPLADOS'">
+  <ng-container
+    *ngIf="item.capturaDescripcion == 'OTROS MEDIOS NO CONTEMPLADOS'"
+  >
     <div class="row">
       <div class="col-md-12">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Especificar medio:</label>
-          <input
-            [(ngModel)]="item.especificar"
-            type="text"
-            class="form-control"
-            [ngModelOptions]="{ standalone: true }"
-          />
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Especificar medio:</label
+        >
+        <input
+          [(ngModel)]="item.especificar"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
       </div>
     </div>
   </ng-container>
-  
-  
+
   <br />
   <div class="row">
     <div class="col-md-12">
@@ -125,46 +130,46 @@
         </button>
       </ng-template>
       <ng-template #elseTemplate>
-      <ng-container
-        *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
-      ></ng-container>
-      <ng-template #thenTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Modificar datos"
-              placement="top"
-              (click)="actualizarDatos(this.item)"
-              show-delay="10"
-              class="btn btn-primary"
-            >
-              <i class="fa fa-edit" aria-hidden="true"></i>
-              Guardar modificación
-            </button>
-          </center>
-        </div>
+        <ng-container
+          *ngIf="mostrarBtnModif; then thenTemplate; else elseTemplate"
+        ></ng-container>
+        <ng-template #thenTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Modificar datos"
+                placement="top"
+                (click)="actualizarDatos(this.item)"
+                show-delay="10"
+                class="btn btn-primary"
+              >
+                <i class="fa fa-edit" aria-hidden="true"></i>
+                Guardar modificación
+              </button>
+            </center>
+          </div>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <div class="row">
+            <center>
+              <button
+                id="boton"
+                type="button"
+                title="Guardar"
+                placement="top"
+                (click)="guardar()"
+                show-delay="10"
+                class="btn btn-outline-info"
+              >
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Agregar a tabla
+              </button>
+            </center>
+          </div>
+        </ng-template>
       </ng-template>
-      <ng-template #elseTemplate>
-        <div class="row">
-          <center>
-            <button
-              id="boton"
-              type="button"
-              title="Guardar"
-              placement="top"
-              (click)="guardar()"
-              show-delay="10"
-              class="btn btn-outline-info"
-            >
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              Agregar a tabla
-            </button>
-          </center>
-        </div>
-      </ng-template>
-    </ng-template>
     </div>
   </div>
   <hr />
@@ -196,7 +201,7 @@
             <td>{{ i.capturaDescripcion }}</td>
           </ng-template>
           <td>{{ valor(i.secuestro) }}</td>
-          <td>{{ i.fecha | date: "dd/MM/yyyy" }}</td>
+          <td>{{ i.fecha | date : "dd/MM/yyyy" }}</td>
 
           <!-- editar y guardar -->
           <ng-container
@@ -237,18 +242,18 @@
                     i.medioNavigation?.descripcion == 'RIFLE'
                   "
                 >
-                   <button
-                      type="button"
-                      title="Agregar detalle del arma"
-                      placement="top"
-                      show-delay="10"
-                      (click)="seleccionado(i.id)"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      class="color btn-circle"
-                    >
-                      <i class="fa fa-info" aria-hidden="true"></i>
-                    </button>
+                  <button
+                    type="button"
+                    title="Agregar detalle del arma"
+                    placement="top"
+                    show-delay="10"
+                    (click)="seleccionado(i.id)"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    class="color btn-circle"
+                  >
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                  </button>
                 </ng-container>
                 &nbsp;
                 <button
@@ -316,6 +321,8 @@
     </button>
     &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
+      <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+      &nbsp;
       Cancelar
     </button>
   </div>
@@ -427,7 +434,8 @@
           (click)="cancelar()"
           data-bs-dismiss="modal"
         >
-          Cancelar
+          <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+          &nbsp; Cancelar
         </button>
       </div>
     </div>

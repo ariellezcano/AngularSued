@@ -377,7 +377,7 @@
             *ngIf="i.id > 0; then thenTemplate"
           ></ng-container>
           <ng-template #thenTemplate>
-            <td class="text-primary">{{ i.nombre }}, {{ i.apellido }}</td>
+            <td class="text-primary">{{ i.nombre | uppercase }}, {{ i.apellido | uppercase }}</td>
             <td>{{ i.dni }}</td>
             <td>{{ i.sexoNavigation?.descripcion }}</td>
             <!-- <td>{{ i.provinciaNavigation?.nombre }}</td> -->
@@ -481,6 +481,8 @@
     </button>
     &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
+      <i class="fa fa-hand-o-left" aria-hidden="true"></i>
+      &nbsp;
       Cancelar
     </button>
   </div>
