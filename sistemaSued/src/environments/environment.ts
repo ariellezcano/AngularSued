@@ -11,20 +11,20 @@ export const environment = {
   //trabajo
   //URL: 'https://localhost:7033/api/',
   //desarrollo
-  URL: 'http://10.125.31.15:7033/api/',
+  URL: 'http://10.125.30.248:7033/api/',
   //real
   //URL: 'http://10.125.31.149/api/',
 
   URLOci: 'https://policiadigital.chaco.gob.ar:9090/api_oci/',
   URLGeolocalizacion: 'https://api.geoapify.com/v1/geocode/search?text=',
 
-  URLCivil: 'http://10.125.31.74/api_civil/',
+  URLCivil: 'http://10.125.30.74/api_civil/',
   //URL: 'http://10.125.31.10:8888/api_oci/',
 
   //real
   //URLRegBus: 'https://policiadigital.chaco.gob.ar:9090/api_registroUsuario/',
   //desarrollo
-  URLRegBus: 'http://10.125.31.74/api_registroUsuario/',
+  URLRegBus: 'http://10.125.30.74/api_registroUsuario/',
 
 };
 
