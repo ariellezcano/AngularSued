@@ -25,7 +25,7 @@ export class PrevSnic {
     vehiculoVehiculo: boolean;
     bicicleta: boolean;
     motoMoto: boolean;
-    trenVehiculo: boolean;
+    tren: boolean;
     vehiculoObjeto: boolean;
     vehiculo: boolean;
     motoTsangre: boolean;
@@ -73,7 +73,7 @@ export class PrevSnic {
         this.vehiculoVehiculo = false;
         this.bicicleta = false;
         this.motoMoto = false;
-        this.trenVehiculo = false;
+        this.tren = false;
         this.vehiculoObjeto = false;
         this.vehiculo = false;
         this.motoTsangre = false;
