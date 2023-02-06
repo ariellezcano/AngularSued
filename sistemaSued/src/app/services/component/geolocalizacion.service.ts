@@ -38,7 +38,7 @@ export class GeolocalizacionService {
       pais +
       '&format=json&apiKey=' +
       this.apiKey;
-    console.log('datass', data);
+    //console.log('datass', data);
     return (
       fetch(data, requestOptions)
         .then((response) => {

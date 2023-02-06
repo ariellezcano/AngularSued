@@ -426,8 +426,9 @@ export class AbmPreventivoComponent implements OnInit {
         )
         .then();
       const result = JSON.parse(JSON.stringify(data));
-      //console.log(result);
+      console.log(result)
       if (result.results != undefined) {
+        console.log(result.result);
         this.item.latitud = '';
         this.item.longitud = '';
         this.latitud = '';
