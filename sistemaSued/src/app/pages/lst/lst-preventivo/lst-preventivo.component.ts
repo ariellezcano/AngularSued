@@ -94,34 +94,34 @@ export class LstPreventivoComponent implements OnInit {
       });
   }
 
-  seleccion(id: any) {
-    switch (this.seleccionAccion.length > 0) {
-      case this.seleccionAccion == 'caratula':
-        this.router.navigateByUrl('lst-preventivo/caratula/' + id);
-        break;
-      case this.seleccionAccion == 'snic':
-        this.router.navigateByUrl('lst-preventivo/snic/' + id);
-        break;
-      case this.seleccionAccion == 'medio':
-        this.router.navigateByUrl('lst-preventivo/medioUtilizado/' + id);
-        break;
-      case this.seleccionAccion == 'objeto':
-        this.router.navigateByUrl('lst-preventivo/objeto/' + id);
-        break;
-      case this.seleccionAccion == 'modalidad':
-        this.router.navigateByUrl('lst-preventivo/modalidad/' + id);
-        break;
-      case this.seleccionAccion == 'victimas':
-        this.router.navigateByUrl('lst-preventivo/victimas/' + id);
-        break;
-      case this.seleccionAccion == 'inculpados':
-        this.router.navigateByUrl('lst-preventivo/inculpados/' + id);
-        break;
-      case this.seleccionAccion == 'ampliaciones':
-        this.router.navigateByUrl('lst-preventivo/ampliacion/' + id);
-        break;
-    }
-  }
+  // seleccion(id: any) {
+  //   switch (this.seleccionAccion.length > 0) {
+  //     case this.seleccionAccion == 'caratula':
+  //       this.router.navigateByUrl('lst-preventivo/caratula/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'snic':
+  //       this.router.navigateByUrl('lst-preventivo/snic/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'medio':
+  //       this.router.navigateByUrl('lst-preventivo/medioUtilizado/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'objeto':
+  //       this.router.navigateByUrl('lst-preventivo/objeto/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'modalidad':
+  //       this.router.navigateByUrl('lst-preventivo/modalidad/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'victimas':
+  //       this.router.navigateByUrl('lst-preventivo/victimas/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'inculpados':
+  //       this.router.navigateByUrl('lst-preventivo/inculpados/' + id);
+  //       break;
+  //     case this.seleccionAccion == 'ampliaciones':
+  //       this.router.navigateByUrl('lst-preventivo/ampliacion/' + id);
+  //       break;
+  //   }
+  // }
 
   valor(item: any) {
     item = item;
@@ -135,10 +135,10 @@ export class LstPreventivoComponent implements OnInit {
   }
 
 
-  clickRow(item: any) {
+  clickRow(item: number) {
     this.id = 0;
-    this.selectedRowIndex = item.id;
-    //console.log("this.selectedRowIndex");
+    this.selectedRowIndex = item;
+    //console.log(this.selectedRowIndex);
     this.id = this.selectedRowIndex;
     this.proccess = true;
   }

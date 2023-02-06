@@ -389,60 +389,61 @@ const routes: Routes = [
         path: 'lst-preventivo',
         children: [
           {
-            path: 'abm/:id',
-            component: AbmPreventivoComponent,
-            canActivate: [AuthGuard],
-          },
-          {
             path: '',
             component: LstPreventivoComponent,
             canActivate: [AuthGuard],
           },
           {
-            path: 'medioUtilizado/:id',
-            component: AbmPreventivoMedioComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'objeto/:id',
-            component: AbmPrevObjetoComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'modalidad/:id',
-            component: AbmPrevModalidadComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'caratula/:id',
-            component: AbmPrevCaratulaComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'snic/:id',
-            component: AbmSnicComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'victimas/:id',
-            component: AbmPreVictimaComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'inculpados/:id',
-            component: AbmPrevInculpadoComponent,
-            canActivate: [AuthGuard],
-          },
-          {
-            path: 'ampliacion/:id',
-            component: AbmPrevAmpliacionComponent,
+            path: 'abm/:id',
+            component: AbmPreventivoComponent,
             canActivate: [AuthGuard],
           },
           {
             path: 'detalle/:id',
             component: AbmDtallePreventivoComponent,
             canActivate: [AuthGuard],
-          },
+          }
+          // {
+          //   path: 'medioUtilizado/:id',
+          //   component: AbmPreventivoMedioComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'objeto/:id',
+          //   component: AbmPrevObjetoComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'modalidad/:id',
+          //   component: AbmPrevModalidadComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'caratula/:id',
+          //   component: AbmPrevCaratulaComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'snic/:id',
+          //   component: AbmSnicComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'victimas/:id',
+          //   component: AbmPreVictimaComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'inculpados/:id',
+          //   component: AbmPrevInculpadoComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          // {
+          //   path: 'ampliacion/:id',
+          //   component: AbmPrevAmpliacionComponent,
+          //   canActivate: [AuthGuard],
+          // },
+          
         ],
       },
       {

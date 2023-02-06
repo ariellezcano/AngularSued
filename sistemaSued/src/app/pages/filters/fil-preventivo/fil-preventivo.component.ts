@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { relativeTimeThreshold } from 'moment';
 import { Preventivo } from 'src/app/models/index.models';
 import { PreventivoService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
@@ -30,13 +29,13 @@ export class FilPreventivoComponent implements OnInit {
   totalRegistros!: number;
   totalPaginas!: number;
   public limit: any;
-  public limits: Number[] = [10, 25, 50];
+  public limits: Number[] = [10, 25, 50, 100];
 
   constructor(private wsdl: PreventivoService) {
     this.busqueda = '';
     this.items = [];
 
-    this.limit = 10;
+    this.limit = 25;
     this.paginaActual = 1;
     this.siguiente = false;
     this.anterior = false;

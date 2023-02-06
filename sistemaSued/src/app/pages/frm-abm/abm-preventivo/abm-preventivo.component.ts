@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -37,13 +37,16 @@ import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-loca
 export class AbmPreventivoComponent implements OnInit {
   @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
   
+  @Input()
+  public id!: number;
+
   @Output()
   latitud?: string;
   @Output()
   longitud?: string;
 
   map: boolean;
-  public id!: number;
+  //public id!: number;
   //valida el formulario
   form!: FormGroup;
   //imput filtros
@@ -130,7 +133,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          console.log('this.item', this.item);
+          //console.log('this.item', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'DD-MM-YYYY'
@@ -198,7 +201,7 @@ export class AbmPreventivoComponent implements OnInit {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.back();
+        //this.back();
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -239,14 +242,18 @@ export class AbmPreventivoComponent implements OnInit {
           let data = await this.wsdl.doInsert(this.item).then();
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
-            this.back();
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Dato guardado correctamente!',
-              showConfirmButton: false,
-              timer: 1500,
-            });
+
+            let idPreventivo: number = result.dato.id;
+            //console.log("creado correctamente", idPreventivo);
+            this.linkearDetalle(idPreventivo);
+            // this.back();
+            // Swal.fire({
+            //   position: 'top-end',
+            //   icon: 'success',
+            //   title: 'Dato guardado correctamente!',
+            //   showConfirmButton: false,
+            //   timer: 1500,
+            // });
           } else if (result.code == 204) {
             Swal.fire({
               icon: 'info',
@@ -505,6 +512,10 @@ export class AbmPreventivoComponent implements OnInit {
       this.manual = false;
       this.automatico = true;
     }
+  }
+
+  linkearDetalle(id: Number) {
+    this.router.navigateByUrl('lst-preventivo/detalle/' + id);
   }
 
   back() {

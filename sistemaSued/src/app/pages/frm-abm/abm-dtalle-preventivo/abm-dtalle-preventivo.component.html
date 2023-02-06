@@ -5,7 +5,7 @@
     </legend>
     <hr />
 
-    <div class="card">
+    <div *ngIf="prev.id > 0" class="card">
       <div class="card-body">
         <div class="row">
           <div class="col-md-4">
@@ -42,6 +42,20 @@
       <li class="nav-item" role="presentation">
         <button
           class="nav-link active"
+          id="home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#general"
+          type="button"
+          role="tab"
+          aria-controls="general"
+          aria-selected="true"
+        >
+          General
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
           id="home-tab"
           data-bs-toggle="tab"
           data-bs-target="#caratula"
@@ -571,6 +585,18 @@
     <div class="tab-content" id="myTabContent">
       <div
         class="tab-pane fade show active"
+        id="general"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <br />
+        <section class="tab-panel">
+          <app-abm-preventivo [id]="this.id"></app-abm-preventivo>
+        </section>
+        <br />
+      </div>
+      <div
+        class="tab-pane fade"
         id="caratula"
         role="tabpanel"
         aria-labelledby="home-tab"
