@@ -52,7 +52,7 @@ export class FilUsuariosComponent implements OnInit {
       }
       let data = await this.wsdl.doFindDni(this.crit).then();
       this.result = JSON.parse(JSON.stringify(data));
-      console.log('result', this.result);
+      //console.log("que es", this.result);
       if (this.result.code == 200) {
         this.id = this.result.data.id;
         this.verificarUsuario();
