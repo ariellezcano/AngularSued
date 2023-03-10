@@ -224,9 +224,7 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.delito != undefined
     ) {
       if (
-        Date.parse(this.item.fechaPreventivo) >
-          Date.parse(this.item.fechaHecho) ||
-        Date.parse(this.item.fechaPreventivo) ==
+        Date.parse(this.item.fechaPreventivo) >=
           Date.parse(this.item.fechaHecho)
       ) {
         this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
