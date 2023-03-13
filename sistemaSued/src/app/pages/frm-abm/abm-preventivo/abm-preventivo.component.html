@@ -508,6 +508,7 @@
           </a>
         </div>
       </div>
+      <br />
     </ng-container>
     <ng-container *ngIf="manual">
       <div class="row">
@@ -567,7 +568,18 @@
         </div>
       </div>
       <br />
-      <div class="row border border-primary">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <a class="btn btn-info" (click)="verMapa()">
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            Ver mapa
+          </a>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <br />
+      <div *ngIf="googleMaps" class="row border border-primary">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14163.773525075312!2d-59.00090795!3d-27.4398752!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1666610681032!5m2!1ses!2sar"
           width="500"
@@ -578,10 +590,11 @@
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      <br />
     </ng-container>
 
-    <hr />
     <div *ngIf="map" class="row">
+      <hr />
       <legend><b>Mapa:</b></legend>
       <app-geo-map [latitud]="latitud" [longitud]="longitud"></app-geo-map>
     </div>

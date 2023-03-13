@@ -59,6 +59,7 @@ export class AbmPreventivoComponent implements OnInit {
   automatico: boolean;
   manual: boolean;
 
+  googleMaps: boolean;
   //variable para cortar la coordenada
   coordenadas: string;
 
@@ -106,6 +107,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.BItems = [];
     this.Bitem = new Barrio();
     this.map = false;
+    this.googleMaps = true;
     this.automatico = false;
     this.manual = true;
   }
@@ -463,6 +465,7 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
+
   unidad(event: UnidadesSued) {
     this.item.unidad = event.id;
     this.item.nombreUnidad = event.nombre;
@@ -510,6 +513,15 @@ export class AbmPreventivoComponent implements OnInit {
     } else if (num == 2) {
       this.manual = false;
       this.automatico = true;
+    }
+  }
+
+  verMapa(){
+    if(this.item.latitud != undefined && this.item.longitud != undefined){
+      this.googleMaps = false;
+      this.latitud = this.item.latitud;
+      this.longitud = this.item.longitud;
+      this.map = true;
     }
   }
 
