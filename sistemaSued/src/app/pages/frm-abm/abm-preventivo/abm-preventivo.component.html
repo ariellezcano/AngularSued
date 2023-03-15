@@ -568,16 +568,33 @@
         </div>
       </div>
       <br />
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-          <a class="btn btn-info" (click)="verMapa()">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            Ver mapa
-          </a>
+      <ng-container
+        *ngIf="!this.map; then thenTemplate; else elseTemplate"
+      ></ng-container>
+      <ng-template #thenTemplate>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a class="btn btn-info" (click)="verMapa()">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              Ver mapa
+            </a>
+          </div>
+          <div class="col-md-4"></div>
         </div>
-        <div class="col-md-4"></div>
-      </div>
+      </ng-template>
+      <ng-template #elseTemplate>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <a class="btn btn-danger" (click)="ocultarMap()">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              Ocultar mapa
+            </a>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </ng-template>
       <br />
       <div *ngIf="googleMaps" class="row border border-primary">
         <iframe

@@ -41,6 +41,8 @@ export class AbmPreventivoMedioComponent implements OnInit {
   arma: boolean;
   botonModifArma: boolean;
 
+  mostrarModal: boolean;
+
   busqueda;
 
   prev: Preventivo;
@@ -90,6 +92,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.itemsPM = [];
     this.botonModifArma = false;
     this.guardando = false;
+    this.mostrarModal = false;
   }
 
   ngOnInit(): void {
@@ -233,17 +236,17 @@ export class AbmPreventivoMedioComponent implements OnInit {
   }
 
   //recorre el bucle para insertar los datos de preventivo medio
-  agregarDato() {
-    for (let index = 0; index < this.items.length; index++) {
-      this.prevMed = new PreventivoMedio();
-      this.prevMed = this.items[index];
-      if (this.prevMed.id == undefined) {
-        this.item = new PreventivoMedio();
-        this.item = this.prevMed;
-        this.guardar();
-      }
-    }
-  }
+  // agregarDato() {
+  //   for (let index = 0; index < this.items.length; index++) {
+  //     this.prevMed = new PreventivoMedio();
+  //     this.prevMed = this.items[index];
+  //     if (this.prevMed.id == undefined) {
+  //       this.item = new PreventivoMedio();
+  //       this.item = this.prevMed;
+  //       this.guardar();
+  //     }
+  //   }
+  // }
 
   //guarda el preventivo medio en la base de datos
   async guardar() {
@@ -321,10 +324,25 @@ export class AbmPreventivoMedioComponent implements OnInit {
           this.Mitems = result.data;
         } else if (result.code == 204) {
           Swal.fire({
+            title: '¡No existe el dato buscado!',
+            text: "Desea crearlo!",
             icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Crear!',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              
+              this.mostrarModal = true;
+            }
           })
+          // Swal.fire({
+          //   icon: 'warning',
+          //   text: 'Verifique el dato ingresado!',
+          //   footer: '<b>No existe la búsqueda realizada...</b>'
+          // })
         }
       }
     } catch (error) {}

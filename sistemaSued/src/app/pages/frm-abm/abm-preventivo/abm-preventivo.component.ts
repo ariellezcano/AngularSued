@@ -35,8 +35,9 @@ import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-loca
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
-  @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
-  
+  @ViewChild(FilBuscadorLocalidadComponent, { static: false })
+  filLocalidad!: FilBuscadorLocalidadComponent;
+
   @Input()
   public id!: number;
 
@@ -227,7 +228,7 @@ export class AbmPreventivoComponent implements OnInit {
     ) {
       if (
         Date.parse(this.item.fechaPreventivo) >=
-          Date.parse(this.item.fechaHecho)
+        Date.parse(this.item.fechaHecho)
       ) {
         this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
         //console.log("usuario crea", this.item.usuarioCrea)
@@ -242,7 +243,6 @@ export class AbmPreventivoComponent implements OnInit {
           let data = await this.wsdl.doInsert(this.item).then();
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
-
             let idPreventivo: number = result.dato.id;
             //console.log("creado correctamente", idPreventivo);
             this.linkearDetalle(idPreventivo);
@@ -426,7 +426,7 @@ export class AbmPreventivoComponent implements OnInit {
         )
         .then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log(result)
+      console.log(result);
       if (result.results != undefined) {
         console.log(result.result);
         this.item.latitud = '';
@@ -465,7 +465,6 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-
   unidad(event: UnidadesSued) {
     this.item.unidad = event.id;
     this.item.nombreUnidad = event.nombre;
@@ -487,7 +486,7 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   //captura localidad
-  doFoundLocalidad(event: Localidad){
+  doFoundLocalidad(event: Localidad) {
     this.item.localidadCoordenada = '';
     this.item.cp = '';
     this.item.pais = '';
@@ -516,13 +515,18 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  verMapa(){
-    if(this.item.latitud != undefined && this.item.longitud != undefined){
+  verMapa() {
+    if (this.item.latitud != undefined && this.item.longitud != undefined) {
       this.googleMaps = false;
       this.latitud = this.item.latitud;
       this.longitud = this.item.longitud;
       this.map = true;
     }
+  }
+
+  ocultarMap(){
+    this.map = false;
+    this.googleMaps = true;
   }
 
   linkearDetalle(id: Number) {
