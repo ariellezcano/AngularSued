@@ -20,6 +20,7 @@ import {
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
+import { VentanaLstAbmMediosComponent } from '../../component/ventana-lst-abm-medios/ventana-lst-abm-medios.component';
 
 @Component({
   selector: 'app-abm-preventivo-medio',
@@ -28,6 +29,8 @@ import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
 })
 export class AbmPreventivoMedioComponent implements OnInit {
   @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
+  @ViewChild(VentanaLstAbmMediosComponent, { static: false }) ventanaMedio!: VentanaLstAbmMediosComponent;
+
 
   public id!: number;
   //valida el formulario
@@ -323,26 +326,27 @@ export class AbmPreventivoMedioComponent implements OnInit {
           //this.Mitems = [];
           this.Mitems = result.data;
         } else if (result.code == 204) {
-          Swal.fire({
-            title: '¡No existe el dato buscado!',
-            text: "Desea crearlo!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Crear!',
-            cancelButtonText: 'Cancelar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              
-              this.mostrarModal = true;
-            }
-          })
           // Swal.fire({
+          //   title: '¡No existe el dato buscado!',
+          //   text: "Desea crearlo!",
           //   icon: 'warning',
-          //   text: 'Verifique el dato ingresado!',
-          //   footer: '<b>No existe la búsqueda realizada...</b>'
+          //   showCancelButton: true,
+          //   confirmButtonColor: '#3085d6',
+          //   cancelButtonColor: '#d33',
+          //   confirmButtonText: 'Crear!',
+          //   cancelButtonText: 'Cancelar'
+          // }).then((result) => {
+          //   if (result.isConfirmed) {
+              
+          //     this.mostrarModal = true;
+          //   }
           // })
+          Swal.fire({
+            icon: 'warning',
+            text: 'El criterio ingresado no existe!',
+            footer: '<CENTER><b>Si desea crearlo o verificar su existencia, abra la ventana de medios...</b></CENTER>'
+          })
+          this.mostrarModal = true;
         }
       }
     } catch (error) {}
@@ -451,6 +455,11 @@ export class AbmPreventivoMedioComponent implements OnInit {
       valor = 'No';
     }
     return valor;
+  }
+
+  cancelVentMedio(){
+    this.ventanaMedio.item = new Medio();
+    this.mostrarModal = false;
   }
 
   back() {

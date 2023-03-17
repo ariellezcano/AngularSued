@@ -143,6 +143,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { esLocale } from 'ngx-bootstrap/locale';
 import { FilBuscadorLocalidadComponent } from './component/fil-buscador-localidad/fil-buscador-localidad.component';
+import { VentanaLstAbmMediosComponent } from './component/ventana-lst-abm-medios/ventana-lst-abm-medios.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -281,6 +282,7 @@ defineLocale('es', esLocale);
       AbmPlanillaHechosDelictivosComponent,
       VerificacionComponent,
       FilBuscadorLocalidadComponent,
+      VentanaLstAbmMediosComponent,
     ],
     exports: [],
     imports: [
