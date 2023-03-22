@@ -27,6 +27,7 @@ export class PrevInculpado {
     direccionNro!: number;
     dirBarrio!: number;
     domDirAdicional!: string;
+    dnpcVehiculo!: string;
 
     nacionalidadNavigation: any;
     sexoNavigation: any;

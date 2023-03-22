@@ -458,6 +458,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
   }
 
   cancelVentMedio(){
+    this.busqueda = '';
     this.ventanaMedio.item = new Medio();
     this.mostrarModal = false;
   }

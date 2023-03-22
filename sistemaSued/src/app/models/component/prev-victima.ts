@@ -16,6 +16,8 @@ export class PrevVictima {
     dirNro!: number;
     dirAdicional!: string;
     barrio!: number;
+    dnpcClase!: string;
+    dnpcVehiculo!: string;
 
     nacionNavigation: any;
     estudioNavigation: any;

@@ -82,7 +82,9 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-      <label for="" class="col-sm-12 col-form-label">Filtro Nacionalidad:</label>
+      <label for="" class="col-sm-12 col-form-label"
+        >Filtro Nacionalidad:</label
+      >
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
@@ -101,7 +103,7 @@
         *ngIf="Nitems.length > 0 && this.busqueda"
         name="Nitem"
         [(ngModel)]="Nitem"
-        class="form-select form-select-lm mb-3" 
+        class="form-select form-select-lm mb-3"
         aria-label=".form-select-lg example"
         (ngModelChange)="capturar($event)"
         [ngModelOptions]="{ standalone: true }"
@@ -115,7 +117,9 @@
   </div>
   <div class="row">
     <legend><u>General:</u></legend>
-    <ng-container *ngIf="verEstudio; then mostEst; else nMostEST"></ng-container>
+    <ng-container
+      *ngIf="verEstudio; then mostEst; else nMostEST"
+    ></ng-container>
     <ng-template #mostEst>
       <div class="col-md-3">
         <app-combo-estudio
@@ -137,8 +141,7 @@
         ></app-combo-estudio>
       </div>
     </ng-template>
-    
-    
+
     <div class="col-md-6">
       <label for="" class="col-sm-12 col-form-label">Filtro Ocupación:</label>
       <div class="input-group mb-3">
@@ -159,7 +162,7 @@
         *ngIf="Oitems.length > 0 && this.busquedaOc"
         name="Oitem"
         [(ngModel)]="Oitem"
-        class="form-select form-select-lm mb-3" 
+        class="form-select form-select-lm mb-3"
         aria-label=".form-select-lg example"
         (ngModelChange)="capturarOc($event)"
         [ngModelOptions]="{ standalone: true }"
@@ -172,8 +175,57 @@
   </div>
   <br />
   <div class="row">
+    <legend>
+      <em><u>DNPC</u></em>
+    </legend>
+    <div class="col-md-6">
+      <label for="">DNPC CLASE:</label>
+      <select
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="item.dnpcClase"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="conductor">1 - Conductor</option>
+        <option value="acompañante">2 - Acompañante</option>
+        <option value="pasajero">3 - Pasajero</option>
+        <option value="peaton">4 - Peatón</option>
+        <option value="civil detenido">5 - Civil Detenido</option>
+        <option value="policia de franco">6 - Policía de Franco</option>
+        <option value="policia detenido">7 - Policía Detenido</option>
+        <option value="otro">8 - Otro</option>
+        <option value="sin determinar">99 - Sin determinar</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="">DNPC VEHICULO:</label>
+      <select
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="item.dnpcVehiculo"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="micro de larga distancia">
+          1 - Micro de larga distancia
+        </option>
+        <option value="colectivo">2 - Colectivo</option>
+        <option value="camion">3 - Camión</option>
+        <option value="camioneta">4 - Camioneta</option>
+        <option value="automovil">5 - Automóvil</option>
+        <option value="motocicleta">6 - Motocicleta</option>
+        <option value="ciclomotor">7 - Ciclomotor</option>
+        <option value="bicicleta">8 - Bicicleta</option>
+        <option value="tren">9 - Tren</option>
+        <option value="otros">10 - Otros</option>
+      </select>
+    </div>
+  </div>
+  <br />
+  <div class="row">
     <legend><u>Domicilio:</u></legend>
-    <ng-container *ngIf="verProvincia; then mostrar; else noMostrar"></ng-container>
+    <ng-container
+      *ngIf="verProvincia; then mostrar; else noMostrar"
+    ></ng-container>
     <ng-template #mostrar>
       <div class="col-md-3">
         <app-combo-provincia
@@ -193,10 +245,9 @@
           [dibujar]="item.provinciaNavigation"
           (emitir)="seleccionProvincia($event)"
         ></app-combo-provincia>
-      </div>  
+      </div>
     </ng-template>
-    
-    
+
     <div class="col-md-6">
       <label class="col-sm-12 col-form-label" for="">Filtro Barrio:</label>
       <div class="input-group mb-3">
@@ -217,7 +268,7 @@
         *ngIf="BItems.length > 0 && this.busquedaBarrio"
         name="Bitem"
         [(ngModel)]="Bitem"
-        class="form-select form-select-lm mb-3" 
+        class="form-select form-select-lm mb-3"
         aria-label=".form-select-lg example"
         (ngModelChange)="capturarBarrio($event)"
         [ngModelOptions]="{ standalone: true }"
@@ -231,7 +282,7 @@
   <div class="row">
     <div class="col-md-6">
       <label class="col-sm-12 col-form-label" for="">Filtro Calle:</label>
-      
+
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
@@ -250,7 +301,7 @@
         *ngIf="CItems.length > 0 && this.busquedaCalle"
         name="Citem"
         [(ngModel)]="Citem"
-        class="form-select form-select-lm mb-3" 
+        class="form-select form-select-lm mb-3"
         aria-label=".form-select-lg example"
         (ngModelChange)="capturarCalle($event)"
         [ngModelOptions]="{ standalone: true }"
@@ -273,7 +324,9 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <label for="" class="col-sm-12 col-form-label"> Dirección Adicional:</label>
+      <label for="" class="col-sm-12 col-form-label">
+        Dirección Adicional:</label
+      >
       <input
         [(ngModel)]="item.dirAdicional"
         name="dirAdicional"
@@ -373,11 +426,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let i of items" class="text-center {{ colores(i) }}">
-          <ng-container
-            *ngIf="i.id > 0; then thenTemplate"
-          ></ng-container>
+          <ng-container *ngIf="i.id > 0; then thenTemplate"></ng-container>
           <ng-template #thenTemplate>
-            <td class="text-primary">{{ i.nombre | uppercase }}, {{ i.apellido | uppercase }}</td>
+            <td class="text-primary">
+              {{ i.nombre | uppercase }}, {{ i.apellido | uppercase }}
+            </td>
             <td>{{ i.dni }}</td>
             <td>{{ i.sexoNavigation?.descripcion }}</td>
             <!-- <td>{{ i.provinciaNavigation?.nombre }}</td> -->
@@ -482,8 +535,7 @@
     &nbsp; -->
     <button class="btn btn-info" type="button" (click)="back()">
       <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-      &nbsp;
-      Cancelar
+      &nbsp; Cancelar
     </button>
   </div>
 </div>
