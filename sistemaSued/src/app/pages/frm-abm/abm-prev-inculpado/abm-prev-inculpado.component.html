@@ -176,8 +176,8 @@
     </div>
     <div class="col-md-2"></div>
   </div>
-  <br />
-  <div class="row">
+  <br *ngIf="this.prev.delitoNavigation?.id == 3"/>
+  <div *ngIf="this.prev.delitoNavigation?.id == 3" class="row">
     <legend>
       <em><u>DNPC</u></em>
     </legend>
