@@ -131,6 +131,27 @@
     </ng-template>
     </ng-template>
   </div>
+
+  <!-- agregue nuevo verificar -->
+  <ng-container *ngIf="mostrarModal">
+    <div class="row">
+      <div class="col-md-4">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#modalObjeto"
+        >
+          <i class="fa fa-window-restore" aria-hidden="true"></i>
+          Abrir ventana de objetos
+        </button>
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+    </div>
+  </ng-container>
+<!-- /agregue nuevo verificar -->
+
   <div class="row">
     <div class="col-md-4">
       <center>
@@ -1254,6 +1275,32 @@
           data-bs-dismiss="modal"
         >
           Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="modalObjeto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header alert alert-primary">
+        <h5 class="modal-title" id="exampleModalLabel">Ventana de Objetos</h5>
+      </div>
+      <div class="modal-body">
+        <app-ventana-lst-abm-objeto></app-ventana-lst-abm-objeto>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cancelVentObj()" data-bs-dismiss="modal">
+          Salir
         </button>
       </div>
     </div>

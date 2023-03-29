@@ -21,22 +21,16 @@ export class VentanaLstAbmMediosComponent implements OnInit {
 
   items: Medio[];
   user: any;
-  rol: string;
 
   constructor(
     private wsdl: MedioService,
-    private router: Router,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
     this.item = new Medio();
     this.items = [];
-    this.rol = '';
   }
 
   ngOnInit(): void {
-    //this.rol = JSON.parse('' + Utils.getSession('personal')).rol;
-
     //controla los campos del formulario
     this.form = this.formBuilder.group({
       //codigo: ['', Validators.required],

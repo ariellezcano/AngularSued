@@ -173,8 +173,8 @@
       </select>
     </div>
   </div>
-  <br *ngIf="this.prev.delitoNavigation?.id == 3" />
-  <div *ngIf="this.prev.delitoNavigation?.id == 3" class="row">
+  <br *ngIf="dnpc" />
+  <div *ngIf="dnpc" class="row">
     <legend>
       <em><u>DNPC</u></em>
     </legend>
@@ -183,7 +183,7 @@
       <select
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="item.dnpcClase"
-        class="form-select"
+        class="form-select text-center"
         aria-label="Default select example"
       >
         <option value="conductor">1 - Conductor</option>
@@ -202,7 +202,7 @@
       <select
         [ngModelOptions]="{ standalone: true }"
         [(ngModel)]="item.dnpcVehiculo"
-        class="form-select"
+        class="form-select text-center"
         aria-label="Default select example"
       >
         <option value="micro de larga distancia">

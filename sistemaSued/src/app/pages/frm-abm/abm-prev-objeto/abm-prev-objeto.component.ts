@@ -6,7 +6,6 @@ import moment from 'moment';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import {
   ArmaMarca,
-  MarcaMoto,
   ModeloMoto,
   ModeloVehiculo,
   Objeto,
@@ -31,6 +30,7 @@ import Swal from 'sweetalert2';
 import { FilArmaComponent } from '../../component/fil-arma/fil-arma.component';
 import { FilBuscadorModeloMotoComponent } from '../../component/fil-buscador-modelo-moto/fil-buscador-modelo-moto.component';
 import { FilModeloAutoComponent } from '../../component/fil-modelo-auto/fil-modelo-auto.component';
+import { VentanaLstAbmObjetoComponent } from '../../component/ventana-lst-abm-objeto/ventana-lst-abm-objeto.component';
 import { FilArmaMarcaComponent } from '../../filters/fil-arma-marca/fil-arma-marca.component';
 
 @Component({
@@ -45,6 +45,9 @@ export class AbmPrevObjetoComponent implements OnInit {
   @ViewChild(FilBuscadorModeloMotoComponent, { static: false })
   filMoto!: FilBuscadorModeloMotoComponent;
 
+  @ViewChild(VentanaLstAbmObjetoComponent, { static: false }) ventanaObj!: VentanaLstAbmObjetoComponent;
+
+
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -54,6 +57,8 @@ export class AbmPrevObjetoComponent implements OnInit {
   arma: boolean;
   auto: boolean;
   moto: boolean;
+
+  mostrarModal: boolean;
 
   busqueda;
   idSeleccion!: number;
@@ -123,6 +128,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     this.itemsMoto = [];
     this.cantidadSecuestrada = 0;
     this.guardando = false;
+    this.mostrarModal = false;
   }
 
   ngOnInit(): void {
@@ -613,9 +619,10 @@ export class AbmPrevObjetoComponent implements OnInit {
         } else if (result.code == 204) {
           Swal.fire({
             icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
+            text: 'El criterio ingresado no existe!',
+            footer: '<CENTER><b>Si desea crearlo o verificar su existencia, abra la ventana de objetos...</b></CENTER>'
           })
+          this.mostrarModal = true;
         }
       }
     } catch (error) {}
@@ -630,6 +637,11 @@ export class AbmPrevObjetoComponent implements OnInit {
     }
   }
 
+  cancelVentObj(){
+    this.busqueda = '';
+    this.ventanaObj.item = new Objeto();
+    this.mostrarModal = false;
+  }
   //agrega fila en memoria
   // addRow() {
   //   this.busqueda = '';

@@ -31,7 +31,6 @@ export class AbmPreventivoMedioComponent implements OnInit {
   @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
   @ViewChild(VentanaLstAbmMediosComponent, { static: false }) ventanaMedio!: VentanaLstAbmMediosComponent;
 
-
   public id!: number;
   //valida el formulario
   form!: FormGroup;

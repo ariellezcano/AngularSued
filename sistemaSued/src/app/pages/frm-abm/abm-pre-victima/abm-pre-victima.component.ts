@@ -1,5 +1,12 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -35,29 +42,24 @@ import { ComboSexoComponent } from '../../component/combo-sexo/combo-sexo.compon
   styleUrls: ['./abm-pre-victima.component.scss'],
 })
 export class AbmPreVictimaComponent implements OnInit {
-
-
-  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
-  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia1!: ComboProvinciaComponent;
-  @ViewChild(ComboSexoComponent, { static: false }) comboSexo!: ComboSexoComponent;
-  @ViewChild(ComboIdentidadGeneroComponent, { static: false }) comboGenero!: ComboIdentidadGeneroComponent;
-  @ViewChild(ComboEstudioComponent, { static: false }) comboEstudio!: ComboEstudioComponent;
+  @ViewChild(ComboProvinciaComponent, { static: false })
+  comboProvincia!: ComboProvinciaComponent;
+  @ViewChild(ComboProvinciaComponent, { static: false })
+  comboProvincia1!: ComboProvinciaComponent;
+  @ViewChild(ComboSexoComponent, { static: false })
+  comboSexo!: ComboSexoComponent;
+  @ViewChild(ComboIdentidadGeneroComponent, { static: false })
+  comboGenero!: ComboIdentidadGeneroComponent;
+  @ViewChild(ComboEstudioComponent, { static: false })
+  comboEstudio!: ComboEstudioComponent;
 
   //@Output() emmitProvincia: EventEmitter<Provincia> = new EventEmitter();
-
-
-  // ngAfterViewInit() {
-  //   this.comboProvincia.item = new Provincia();
-  //   this.comboSexo.item = new Sexo();
-  //   this.comboGenero.item = new IdentidadGenero();
-  //   this.comboEstudio.item = new Estudio(); 
-  // }
-
   public id!: number;
 
   //valida el formulario
   form!: FormGroup;
 
+  dnpc: boolean;
   //variable para verificar si fue enviado los datos
   enviado = false;
   //habilita campos al modificar "muestra los datos guardados en bd"
@@ -131,6 +133,7 @@ export class AbmPreVictimaComponent implements OnInit {
     this.verGenero = false;
     this.verEstudio = false;
     this.verProvincia = false;
+    this.dnpc = false;
   }
 
   ngOnInit(): void {
@@ -157,11 +160,15 @@ export class AbmPreVictimaComponent implements OnInit {
         if (result.code == 200) {
           this.prev = result.dato;
           if (
-            result.dato.delitoNavigation?.id == 1 ||
-            result.dato.delitoNavigation?.id == 2 ||
-            result.dato.delitoNavigation?.id == 5 ||
-            result.dato.delitoNavigation?.id == 6
+            this.prev.delitoNavigation?.id == 1 ||
+            this.prev.delitoNavigation?.id == 2 ||
+            this.prev.delitoNavigation?.id == 5 ||
+            this.prev.delitoNavigation?.id == 6
           ) {
+            this.item.fallecio = true;
+          }
+          if (this.prev.delitoNavigation?.id == 3) {
+            this.dnpc = true;
             this.item.fallecio = true;
           }
         }
@@ -242,11 +249,11 @@ export class AbmPreVictimaComponent implements OnInit {
   async guardar() {
     this.guardando = true;
     this.item.preventivo = this.id;
-    console.log("items", this.item)
+    console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log("resultado ",result)
+      console.log('resultado ', result);
       if (result.code == 200) {
         this.item = new PrevVictima();
         this.guardando = false;
@@ -297,7 +304,7 @@ export class AbmPreVictimaComponent implements OnInit {
           this.mostrarBtnModif = true;
 
           //console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
-          
+
           if (this.item.nacionalidad > 0) {
             this.busqueda = result.dato.nacionNavigation.nacionalidad;
           }
@@ -318,21 +325,21 @@ export class AbmPreVictimaComponent implements OnInit {
             this.verSexo = true;
           }
           if (this.item.genero > 0) {
-            this.item.capturaGenero = result.dato.identidadNavigation?.autoPercepcion;
-              this.verGenero = true;
-            }
+            this.item.capturaGenero =
+              result.dato.identidadNavigation?.autoPercepcion;
+            this.verGenero = true;
+          }
           if (this.item.estudios > 0) {
             this.item.capturaEstudio =
               result.dato.estudioNavigation?.descripcion;
-              this.verEstudio = true;
-            }
+            this.verEstudio = true;
+          }
           if (this.item.provincia > 0) {
             //this.emmitProvincia.emit(this.item.provinciaNavigation);
             this.item.capturaProvincia =
               result.dato.provinciaNavigation?.nombre;
-              this.verProvincia = true;
+            this.verProvincia = true;
           }
-          
         }
       } catch (error: any) {
         Swal.fire('Error al obtener los datos', error);
@@ -353,8 +360,8 @@ export class AbmPreVictimaComponent implements OnInit {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {}
@@ -380,8 +387,8 @@ export class AbmPreVictimaComponent implements OnInit {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {}
@@ -408,8 +415,8 @@ export class AbmPreVictimaComponent implements OnInit {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {
@@ -421,7 +428,6 @@ export class AbmPreVictimaComponent implements OnInit {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
-      
     }
   }
 
@@ -438,8 +444,8 @@ export class AbmPreVictimaComponent implements OnInit {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {

@@ -1,1 +1,123 @@
-<p>ventana-lst-abm-objeto works!</p>
+<div class="container">
+    <div class="row">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingThree">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree"
+              aria-expanded="false"
+              aria-controls="flush-collapseThree"
+            >
+            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
+              Alta de Objetos
+            </button>
+          </h2>
+          <div
+            id="flush-collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="flush-headingThree"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+                <form class="text-center" [formGroup]="form" (ngSubmit)="doAction()">
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label for="Nombre" class="col-sm-12 col-form-label">
+                          Código Tipo:</label
+                        >
+                        <input
+                          [(ngModel)]="item.codTipo"
+                          id="codigo"
+                          type="number"
+                          class="form-control"
+                          formControlName="codigoTipo"
+                          [ngClass]="{ 'is-invalid': enviado && f['codigoTipo'].errors }"
+                        />
+                        <div *ngIf="enviado && f['codigoTipo'].errors" class="invalid-feedback">
+                          <div *ngIf="f['codigoTipo'].errors['required']">
+                            Campo obligatorio
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="Nombre" class="col-sm-12 col-form-label">
+                          Código Sub-Tipo:</label
+                        >
+                        <input
+                          [(ngModel)]="item.codSubTipo"
+                          type="number"
+                          class="form-control"
+                          [ngModelOptions]="{ standalone: true }"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="Nombre" class="col-sm-12 col-form-label"> Descripción:</label>
+                      <input
+                        [(ngModel)]="item.descripcion"
+                        type="text"
+                        class="form-control"
+                        formControlName="descripcion"
+                        [ngClass]="{ 'is-invalid': enviado && f['descripcion'].errors }"
+                      />
+                      <div *ngIf="enviado && f['descripcion'].errors" class="invalid-feedback">
+                        <div *ngIf="f['descripcion'].errors['required']">Campo obligatorio</div>
+                      </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <div class="row">
+                      <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                  </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-md-12">
+        <legend class="text-primary alert alert-info">
+          <em>
+            <b> <u>Listado de objetos</u> </b>
+          </em>
+        </legend>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <app-fil-objeto (emmit)="doFound($event)"></app-fil-objeto>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table text-center">
+          <thead class="border border-dark">
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of items">
+                <td class="text-primary">{{ item.codTipo }} - {{ item.codSubTipo }}</td>
+                <td class="text-primary">{{ item.descripcion}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        *ngIf="items.length === 0"
+        class="alert alert-info alert-dismissible fade show text-center"
+        role="alert"
+      >
+        <strong>No hay datos</strong>
+      </div>
+    </div>
+    <hr />
+  </div>
+  

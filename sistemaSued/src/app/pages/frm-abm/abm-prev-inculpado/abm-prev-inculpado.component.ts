@@ -40,6 +40,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
   //variable para verificar si fue enviado los datos
   enviado = false;
+  dnpc: boolean;
 //boton
   mostrarBtnModif: boolean;
   //id seleccion tabla
@@ -85,6 +86,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     private wsdlOcupacion: OcupacionService,
     private wsdlNacionalidad: NacionesService,
     private wsdlCalle: CalleService,
+    private wsdlPreventivo: PreventivoService,
     private formBuilder: FormBuilder,
     private bsLocaleService: BsLocaleService
   ) {
@@ -112,6 +114,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     this.CItems = [];
     this.mostrarBtnModif = false;
     this.guardando = false;
+    this.dnpc = false;
   }
 
   ngOnInit(): void {
@@ -124,24 +127,27 @@ export class AbmPrevInculpadoComponent implements OnInit {
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
     this.obtenerDetalle();
+    this.findId();
   }
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 
-  // async findId() {
-  //   if (this.id > 0) {
-  //     try {
-  //       let data = await this.wsdlPreventivo.getFindId(this.id).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         this.prev = result.dato;
-  //         this.obtenerDetalle()
-  //       }
-  //     } catch (error) {}
-  //   }
-  // }
+  async findId() {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdlPreventivo.getFindId(this.id).then();
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == 200) {
+          this.prev = result.dato;
+          if(this.prev.delitoNavigation?.id == 3){
+            this.dnpc = true;
+          }
+        }
+      } catch (error) {}
+    }
+  }
 
   async obtenerDetalle() {
     try {
