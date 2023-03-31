@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Objeto } from 'src/app/models/index.models';
 import { ObjetoService } from 'src/app/services/index.service';
@@ -9,10 +14,9 @@ import { FilObjetoComponent } from '../../filters/fil-objeto/fil-objeto.componen
 @Component({
   selector: 'app-ventana-lst-abm-objeto',
   templateUrl: './ventana-lst-abm-objeto.component.html',
-  styleUrls: ['./ventana-lst-abm-objeto.component.scss']
+  styleUrls: ['./ventana-lst-abm-objeto.component.scss'],
 })
 export class VentanaLstAbmObjetoComponent implements OnInit {
-
   @ViewChild(FilObjetoComponent, { static: false }) fil!: FilObjetoComponent;
 
   form!: FormGroup;
@@ -24,10 +28,7 @@ export class VentanaLstAbmObjetoComponent implements OnInit {
   //variable para verificar si fue enviado los datos
   enviado = false;
 
-  constructor(
-    private wsdl: ObjetoService,
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private wsdl: ObjetoService, private formBuilder: FormBuilder) {
     this.item = new Objeto();
     this.items = [];
   }
@@ -38,17 +39,22 @@ export class VentanaLstAbmObjetoComponent implements OnInit {
     //controla los campos del formulario
     this.form = this.formBuilder.group({
       codigoTipo: ['', Validators.required],
-      descripcion: ['', Validators.required]
+      descripcion: ['', Validators.required],
     });
   }
-
 
   doAction() {
     this.enviado = true;
     if (this.form.valid) {
-        //console.log("datos enviados", this.item)
-        this.guardar();
-      }
+      //console.log("datos enviados", this.item)
+      this.guardar();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Alerta...',
+        text: 'No se pudo insertar los datos, faltan cargar los datos obligatorios.',
+      });
+    }
   }
 
   doFound(event: Objeto[]) {
@@ -95,5 +101,4 @@ export class VentanaLstAbmObjetoComponent implements OnInit {
       });
     }
   }
-
 }
