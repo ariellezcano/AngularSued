@@ -60,6 +60,7 @@ export class AbmPreVictimaComponent implements OnInit {
   form!: FormGroup;
 
   dnpc: boolean;
+  dnpcHD: boolean;
   //variable para verificar si fue enviado los datos
   enviado = false;
   //habilita campos al modificar "muestra los datos guardados en bd"
@@ -134,6 +135,7 @@ export class AbmPreVictimaComponent implements OnInit {
     this.verEstudio = false;
     this.verProvincia = false;
     this.dnpc = false;
+    this.dnpcHD = false;
   }
 
   ngOnInit(): void {
@@ -170,6 +172,9 @@ export class AbmPreVictimaComponent implements OnInit {
           if (this.prev.delitoNavigation?.id == 3) {
             this.dnpc = true;
             this.item.fallecio = true;
+          }
+          if(this.prev.delitoNavigation?.id == 1 || this.prev.delitoNavigation?.id == 2){
+            this.dnpcHD = true;
           }
         }
       } catch (error) {}

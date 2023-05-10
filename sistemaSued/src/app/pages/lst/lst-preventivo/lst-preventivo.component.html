@@ -26,6 +26,7 @@
       <table class="table text-center">
         <thead class="table-dark border border-dark">
           <tr>
+            <th class="text-primary"><b>#</b></th>
             <th>Fecha</th>
             <th>Unidad</th>
             <th>Preventivo N°</th>
@@ -43,6 +44,7 @@
             [ngClass]="{ proccess: selectedRowIndex == item.id }"
             *ngFor="let item of items"
           >
+          <td>{{item.id}}</td>
             <td class="text-primary">
               {{ item.fechaPreventivo | date: "dd/MM/yyyy" }}
             </td>

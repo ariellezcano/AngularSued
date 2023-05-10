@@ -173,7 +173,34 @@
       </select>
     </div>
   </div>
-  <br *ngIf="dnpc" />
+  <br />
+  <div *ngIf="dnpcHD" class="row">
+    <legend>
+      <em><u>DNPC</u></em>
+    </legend>
+    <div class="col-md-3"></div>
+    <div *ngIf="!dnpc" class="col-md-6">
+      <label for="">DNPC CLASE:</label>
+      <select
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="item.dnpcClase"
+        class="form-select text-center"
+        aria-label="Default select example"
+      >
+        <option value="1">1 - CIVIL</option>
+        <option value="2">2 - POLICIA EN SERVICIO</option>
+        <option value="3">3 - POLICIA FUERA DE SERVICIO</option>
+        <option value="4">4 - SEGURIDAD PRIVADA</option>
+        <option value="5">5 - OTRA FUERZA DE SEGURIDAD</option>
+        <option value="6">6 - CIVIL DETENIDO</option>
+        <option value="7">7 - POLICIA EN FRANCO DE SERVICIO</option>
+        <option value="8">8 - POLICIA RETIRADO</option>
+        <option value="9">9 - POLICIA DETENIDO</option>
+        <option value="99">99 - SIN DETERMINAR</option>
+      </select>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
   <div *ngIf="dnpc" class="row">
     <legend>
       <em><u>DNPC</u></em>
@@ -186,15 +213,15 @@
         class="form-select text-center"
         aria-label="Default select example"
       >
-        <option value="conductor">1 - Conductor</option>
-        <option value="acompañante">2 - Acompañante</option>
-        <option value="pasajero">3 - Pasajero</option>
-        <option value="peaton">4 - Peatón</option>
-        <option value="civil detenido">5 - Civil Detenido</option>
-        <option value="policia de franco">6 - Policía de Franco</option>
-        <option value="policia detenido">7 - Policía Detenido</option>
-        <option value="otro">8 - Otro</option>
-        <option value="sin determinar">99 - Sin determinar</option>
+        <option value="1">1 - Conductor</option>
+        <option value="2">2 - Acompañante</option>
+        <option value="3">3 - Pasajero</option>
+        <option value="4">4 - Peatón</option>
+        <option value="5">5 - Civil Detenido</option>
+        <option value="6">6 - Policía de Franco</option>
+        <option value="7">7 - Policía Detenido</option>
+        <option value="8">8 - Otro</option>
+        <option value="99">99 - Sin determinar</option>
       </select>
     </div>
     <div class="col-md-6">
@@ -220,6 +247,7 @@
       </select>
     </div>
   </div>
+
   <br />
   <div class="row">
     <legend><u>Domicilio:</u></legend>
