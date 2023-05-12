@@ -74,6 +74,7 @@ import { LstUsuariosComponent } from './lst/lst-usuarios/lst-usuarios.component'
 import { LstVehiculoMarcaComponent } from './lst/lst-vehiculo-marca/lst-vehiculo-marca.component';
 import { LstVinculoComponent } from './lst/lst-vinculo/lst-vinculo.component';
 import { PagesComponent } from './pages.component';
+import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidios-dolosos/abm-homicidios-dolosos.component';
 
 const routes: Routes = [
   {
@@ -594,6 +595,16 @@ const routes: Routes = [
           {
             path: 'abm',
             component: AbmPlanillaHechosDelictivosComponent,
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'planillaHomicidiosDolosos',
+        children: [
+          {
+            path: 'abm',
+            component: AbmHomicidiosDolososComponent,
             canActivate: [AuthGuard],
           },
         ],

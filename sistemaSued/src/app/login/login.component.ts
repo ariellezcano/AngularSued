@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UsuarioSued } from '../models/index.models';
-import { RegistroUsuarioService, UsuariosSuedService } from '../services/index.service';
+import {
+  RegistroUsuarioService,
+  UsuariosSuedService,
+} from '../services/index.service';
 import { UturuncoUtils } from '../utils/uturuncoUtils';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   id: number;
 
   userName: string;
@@ -24,10 +26,11 @@ export class LoginComponent implements OnInit {
   item: UsuarioSued;
 
   constructor(
-    private wsdlRegistro: RegistroUsuarioService, 
+    private wsdlRegistro: RegistroUsuarioService,
     private wsdlUsuarioSued: UsuariosSuedService,
     private route: Router,
-    private route_: ActivatedRoute) {
+    private route_: ActivatedRoute
+  ) {
     this.userName = '';
     this.password = '';
     this.proccess = false;
@@ -36,8 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.userName = '';
-  this.password = '';
+    this.userName = '';
+    this.password = '';
   }
 
   async login() {
@@ -49,6 +52,7 @@ export class LoginComponent implements OnInit {
           .then();
         this.proccess = false;
         const res = JSON.parse(JSON.stringify(data));
+        console.log('respuesta policia digital', res);
         if (res.code == 200) {
           //console.log("data login2", res)
           // this.route.navigate(['/principal']);
@@ -78,20 +82,20 @@ export class LoginComponent implements OnInit {
     try {
       this.proccess = true;
       let data = await this.wsdlUsuarioSued.getFindId(this.id).then();
-      const res = JSON.parse(JSON.stringify(data));      
+      const res = JSON.parse(JSON.stringify(data));
+      console.log('bdlocal', res);
       if (res.code == 200) {
         this.item = res.dato;
         if (!this.item.baja && this.item.activo) {
-          this.item.apellido = res.dato.apellido;
-          this.item.nombre = res.dato.nombre;
+          //this.item.apellido = res.dato.apellido;
+          //this.item.nombre = res.dato.nombre;
           //this.item.rol = res.dato.datosPersonal.rol;
-          this.item.rolNombre = res.dato.rolNavigation.nombre;
+          //this.item.rolNombre = res.dato.rolNavigation.nombre;
           this.datosPersonal = {
             apellido: this.item.apellido,
             nombre: this.item.nombre,
-            rol: this.item.rolNombre,
+            rol: this.item.rolNavigation?.nombre,
           };
-          console.log()
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -116,7 +120,7 @@ export class LoginComponent implements OnInit {
           });
         }
       } else if (res.code == 401) {
-        alert(res.code)
+        alert(res.code);
         Swal.fire(
           'Usuario no habilitado',
           'Por favor contáctese con el administrador del sistema para generar su usuario',
@@ -127,10 +131,9 @@ export class LoginComponent implements OnInit {
       }
       this.proccess = false;
     } catch (error) {
-      console.log(error)
+      console.log(error);
       Swal.fire('Oops...', 'Algo salio mal vuelva a intentar ', 'error');
       this.proccess = false;
     }
   }
-
 }
