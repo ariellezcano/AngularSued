@@ -14,6 +14,7 @@ export class PlanillasService {
   }
 
   getListHomicidioDoloso(fecha1: any, fecha2: any) {
-    return this.http.get( this.api +'/'+fecha1,fecha2);
+    console.log("")
+    return this.http.get( this.api +'/homicidioDoloso/'+fecha1,fecha2);
   }
 }

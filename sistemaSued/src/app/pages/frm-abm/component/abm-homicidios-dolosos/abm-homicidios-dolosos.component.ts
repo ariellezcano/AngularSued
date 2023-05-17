@@ -17,23 +17,34 @@ export class AbmHomicidiosDolososComponent implements OnInit {
 
   constructor(
     private wsdl: PlanillasService,
-    private route: ActivatedRoute,
+    //private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    //this.fecha1 = new Date();
+    //this.fecha2 = new Date();
+  }
 
   ngOnInit(): void {}
 
   async buscar() {
+
+    console.log(this.fecha1, this.fecha2)
     try {
-      console.log(window);
+      if(this.fecha1 != undefined && this.fecha2 == undefined){
+        this.fecha2 = this.fecha1
+      }
       const buscar = this.wsdl.getListHomicidioDoloso(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
+      console.log("buscar", data);
       const result = JSON.parse(JSON.stringify(data));
       //console.log("result", result)
       if (result.code == 200) {
-        this.emmit.emit();
+        //this.emmit.emit();
       }
-    } catch (error) {}
+    
+    } catch (error) {
+      Swal.fire("error")
+    }
   }
 
   // ActivarCasilla(num: number) {

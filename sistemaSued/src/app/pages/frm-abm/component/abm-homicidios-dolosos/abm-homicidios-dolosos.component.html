@@ -11,21 +11,23 @@
   <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha:</label>
       <input
         [(ngModel)]="fecha1"
         id="codigo"
         type="date"
+        name="fecha1"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
     <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha:</label>
       <input
         [(ngModel)]="fecha2"
         id="codigo"
         type="date"
+        name="fecha2"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
       />
