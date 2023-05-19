@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { PlanillaHd } from 'src/app/models/component/models-planillas/modeloPlanillaHd';
+import { ExelService } from 'src/app/services/planillas/exel.service';
 import { PlanillasService } from 'src/app/services/planillas/planillas.service';
 import Swal from 'sweetalert2';
 
@@ -15,53 +17,55 @@ export class AbmHomicidiosDolososComponent implements OnInit {
   fecha1: any;
   fecha2: any;
 
+  arrHomicidio:PlanillaHd[];
+
   constructor(
     private wsdl: PlanillasService,
     //private route: ActivatedRoute,
+    private excelService: ExelService,
     private router: Router
   ) {
     //this.fecha1 = new Date();
     //this.fecha2 = new Date();
+    this.arrHomicidio = [];
   }
 
   ngOnInit(): void {}
 
   async buscar() {
-
-    console.log(this.fecha1, this.fecha2)
     try {
       if(this.fecha1 != undefined && this.fecha2 == undefined){
         this.fecha2 = this.fecha1
       }
       const buscar = this.wsdl.getListHomicidioDoloso(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
-      console.log("buscar", data);
       const result = JSON.parse(JSON.stringify(data));
-      //console.log("result", result)
       if (result.code == 200) {
+        this.arrHomicidio = result.data;
+        console.log(this.arrHomicidio)
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Busqueda realizada correctamente, descargue la planilla',
+          showConfirmButton: false,
+          timer: 1500
+        })
         //this.emmit.emit();
       }
     
     } catch (error) {
-      Swal.fire("error")
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Hubo un error en la busqueda de datos!, ${error}`
+      })
     }
   }
 
-  // ActivarCasilla(num: number) {
-  //   if (num == 1) {
-  //     this.item.localidad = true;
-  //     this.item.departamento = false;
-  //     this.item.zonaMetro = false;
-  //   } else if (num == 2) {
-  //     this.item.localidad = false;
-  //     this.item.departamento = true;
-  //     this.item.zonaMetro = false;
-  //   } else if (num == 3) {
-  //     this.item.localidad = false;
-  //     this.item.departamento = false;
-  //     this.item.zonaMetro = true;
-  //   }
-  // }
+  // para exportar a excel en la funcion
+  exportTableToExcel(): void {
+    this.excelService.exportAsExcelFile(this.arrHomicidio, 'archivo');
+  }
 
   cancelar() {
     //this.item = new PlanillaHechosDel();

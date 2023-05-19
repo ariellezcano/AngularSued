@@ -40,8 +40,6 @@
     <div class="col-md-12">
       <button
         type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
         class="btn btn-primary"
         (click)="buscar()"
       >
@@ -52,6 +50,11 @@
       <button type="button" class="btn btn-danger" (click)="back()">
         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
         Cancelar
+      </button>
+      &nbsp;
+      <button *ngIf="this.arrHomicidio.length > 0" type="button" class="btn btn-info" (click)="exportTableToExcel()">
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        Descargar Excel
       </button>
     </div>
   </div>
