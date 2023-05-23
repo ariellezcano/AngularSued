@@ -52,7 +52,6 @@ export class AbmPlanillaHDComponent implements OnInit {
   }
 
   delito(event: Delito) {
-    alert(event.id);
     this.item.delito = event.id;
     this.item.delitoSeleccionado = event.descripcion;
   }

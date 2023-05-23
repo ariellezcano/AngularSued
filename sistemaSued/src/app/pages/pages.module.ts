@@ -146,6 +146,7 @@ import { FilBuscadorLocalidadComponent } from './component/fil-buscador-localida
 import { VentanaLstAbmMediosComponent } from './component/ventana-lst-abm-medios/ventana-lst-abm-medios.component';
 import { VentanaLstAbmObjetoComponent } from './component/ventana-lst-abm-objeto/ventana-lst-abm-objeto.component';
 import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidios-dolosos/abm-homicidios-dolosos.component';
+import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -287,6 +288,7 @@ defineLocale('es', esLocale);
       VentanaLstAbmMediosComponent,
       VentanaLstAbmObjetoComponent,
       AbmHomicidiosDolososComponent,
+      PlanillaExcelComponent,
       
     ],
     exports: [],

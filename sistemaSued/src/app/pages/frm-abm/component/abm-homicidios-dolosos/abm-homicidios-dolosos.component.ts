@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
 import { PlanillaHd } from 'src/app/models/component/models-planillas/modeloPlanillaHd';
+import { DataService } from 'src/app/services/data.service';
 import { ExelService } from 'src/app/services/planillas/exel.service';
 import { PlanillasService } from 'src/app/services/planillas/planillas.service';
 import Swal from 'sweetalert2';
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-homicidios-dolosos.component.scss'],
 })
 export class AbmHomicidiosDolososComponent implements OnInit {
-  @Output() emmit: EventEmitter<[]> = new EventEmitter();
+  @Output() emmit: EventEmitter<PlanillaHd[]> = new EventEmitter();
 
   fecha1: any;
   fecha2: any;
@@ -23,6 +24,7 @@ export class AbmHomicidiosDolososComponent implements OnInit {
     private wsdl: PlanillasService,
     //private route: ActivatedRoute,
     private excelService: ExelService,
+    private dataService: DataService,
     private router: Router
   ) {
     //this.fecha1 = new Date();
@@ -42,7 +44,8 @@ export class AbmHomicidiosDolososComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.arrHomicidio = result.data;
-        console.log(this.arrHomicidio)
+        //this.emmit.emit(this.arrHomicidio)
+        this.sendData(this.arrHomicidio)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -67,6 +70,11 @@ export class AbmHomicidiosDolososComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.arrHomicidio, 'archivo');
   }
 
+  sendData(arr: PlanillaHd[]) {
+    this.dataService.setDataArray(arr);
+  }
+
+
   cancelar() {
     //this.item = new PlanillaHechosDel();
     this.back();
@@ -74,5 +82,9 @@ export class AbmHomicidiosDolososComponent implements OnInit {
 
   back() {
     this.router.navigate(['/principal/']);
+  }
+
+  planillaExcel() {
+    this.router.navigate(['/principal/planillaHomicidiosDolosos/planillaExcel']);
   }
 }

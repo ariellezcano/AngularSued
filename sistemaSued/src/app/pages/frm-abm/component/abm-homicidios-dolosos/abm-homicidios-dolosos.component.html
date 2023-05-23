@@ -52,11 +52,12 @@
         Cancelar
       </button>
       &nbsp;
-      <button *ngIf="this.arrHomicidio.length > 0" type="button" class="btn btn-info" (click)="exportTableToExcel()">
-        <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-        Descargar Excel
+      <button *ngIf="this.arrHomicidio.length > 0" type="button" class="btn btn-info" (click)="planillaExcel()">
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;
+        Ver Planilla Generada
       </button>
     </div>
   </div>
   <br />
 </div>
+

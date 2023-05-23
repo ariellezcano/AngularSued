@@ -75,6 +75,7 @@ import { LstVehiculoMarcaComponent } from './lst/lst-vehiculo-marca/lst-vehiculo
 import { LstVinculoComponent } from './lst/lst-vinculo/lst-vinculo.component';
 import { PagesComponent } from './pages.component';
 import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidios-dolosos/abm-homicidios-dolosos.component';
+import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
 
 const routes: Routes = [
   {
@@ -605,6 +606,11 @@ const routes: Routes = [
           {
             path: 'abm',
             component: AbmHomicidiosDolososComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'planillaExcel',
+            component: PlanillaExcelComponent,
             canActivate: [AuthGuard],
           },
         ],
