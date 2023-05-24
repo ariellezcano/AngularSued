@@ -24,6 +24,7 @@ export class PlanillaExcelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataService();
+    console.log('items', this.items);
   }
 
   getDataService() {
@@ -35,9 +36,71 @@ export class PlanillaExcelComponent implements OnInit {
     this.router.navigate(['/principal/']);
   }
 
-
-  tipoLugar() {
-    
+  tipoLugar(
+    viaPublica: any,
+    domParticular: any,
+    comercio: any,
+    interiorRodados: any,
+    carcelComisaria: any,
+    otroLugar: any
+  ) {
+    let valor = '';
+    if (viaPublica) {
+      valor = '1';
+    } else if (domParticular) {
+      valor = '2';
+    } else if (comercio) {
+      valor = '3';
+    } else if (interiorRodados) {
+      valor = '4';
+    } else if (carcelComisaria) {
+      valor = '5';
+    } else if (otroLugar) {
+      valor = '6';
+    }
+    return valor;
   }
-  
+
+  arma(armaFuego: any, armaBlanca: any, otraArma: any, sinArma: any) {
+    let valor = '';
+    if (armaFuego) {
+      valor = '1';
+    } else if (armaBlanca) {
+      valor = '2';
+    } else if (otraArma) {
+      valor = '3';
+    } else if (sinArma) {
+      valor = '4';
+    }
+    return valor;
+  }
+
+  ocacionDelito(
+    siRobo: any,
+    abusoSexual: any,
+    otroDelito: any,
+    noOtroDelito: any
+  ) {
+    let valor = '';
+    if (siRobo) {
+      valor = '1';
+    } else if (abusoSexual) {
+      valor = '2';
+    } else if (otroDelito) {
+      valor = '3';
+    } else if (noOtroDelito) {
+      valor = '4';
+    }
+    return valor;
+  }
+
+  intervencion(intervencion: any){
+    let valor = "";
+    if(intervencion){
+      valor = "2";
+    }else{
+      valor = "1";
+    }
+    return valor;
+  }
 }

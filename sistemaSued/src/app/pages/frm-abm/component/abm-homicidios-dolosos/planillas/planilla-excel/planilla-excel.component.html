@@ -2,33 +2,103 @@
   <i class="fa fa-thumbs-down" aria-hidden="true"></i>&nbsp; Volver a Pantalla
   Principal
 </button>
-<table class="table">
+<br />
+<hr />
+<div class="row">
+  <div class="col-md-4">
+    <span>DATOS DEL HECHO</span>
+  </div>
+  <div class="col-md-4">
+    <span>DATOS DE LA VICTIMA</span>
+  </div>
+  <div class="col-md-4">
+    <span>DATOS DEL IMPUTADO</span>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <table id="tablaHd" class="table text-center">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Código de Departamento* (según codificación INDEC)</th>
+        <th scope="col">Nombre Departamento</th>
+        <th scope="col">
+          Número de Seccional* (según codificación reportada a DNGIC)
+        </th>
+        <th scope="col">Nombre Unidad</th>
+        <th scope="col">Código de Localidad* (según codificación INDEC)</th>
+        <th scope="col">Nombre Localidad</th>
+        <th scope="col">Nº de Sumario</th>
+        <th scope="col">Fecha del hecho*</th>
+        <th scope="col">Hora del hecho*</th>
+        <th scope="col">Nombre de la calle o ruta*</th>
+        <th scope="col">N° / altura*</th>
+        <th scope="col">Calle Intersección</th>
+        <th scope="col" colspan="2">(A) Tipo de lugar*</th>
+        <th scope="col" colspan="2">
+          (B) Arma o mecanismo utilizado* Especificar sólo código 3
+        </th>
+        <th scope="col" colspan="2">
+          (C) En ocasión de otro delito* Especificar sólo código 3
+        </th>
+        <th scope="col" colspan="2">
+          (D) Motivo que origina el registro del hecho* Especificar sólo código
+          4
+        </th>
+        <th scope="col">(E) Sistema de coordenadas utilizado</th>
+        <th scope="col" colspan="2">Coordenadas</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
-        <th>{{item.idDpto}}</th>
-        <td>{{item.codigoDpto}}</td>
-        <td>{{item.nombreDpto}}</td>
-        <td>{{item.idUnidad}}</td>
-        <td>{{item.nombreUnidad}}</td>
-        <td>{{item.idLocalidad}}</td>
-        <td>{{item.codigoLocalidad}}</td>
-        <td>{{item.nombreLocalidad}}</td>
-        <td>{{item.nroPreventivo}}</td>
-        <td>{{item.delito}}</td>
-        <td>{{item.descripcionDelito}}</td>
-        <td>{{item.fechaHecho | date: 'dd/MM/yyyy'}}</td>
-        <td>{{item.horaHecho}}</td>
-        <td>{{item.nombreCalle}}</td>
-        <td>{{item.alturaCalle}}</td>
-        <td>{{item.alturaCalle}}</td>
-    </tr>
+        <td>{{ item.codigoDpto }}</td>
+        <td>{{ item.nombreDpto }}</td>
+        <td>{{ item.codigoUnidad }}</td>
+        <td>{{ item.nombreUnidad }}</td>
+        <td>{{ item.codigoLocalidad }}</td>
+        <td>{{ item.nombreLocalidad }}</td>
+        <td>{{ item.nroPreventivo }}</td>
+        <td>{{ item.fechaHecho | date : "dd/MM/yyyy" }}</td>
+        <td>{{ item.horaHecho }}</td>
+        <td>{{ item.nombreCalle }}</td>
+        <td>{{ item.alturaCalle }}</td>
+        <td>s/d</td>
+        <td>
+          {{
+            tipoLugar(
+              item.viaPublica,
+              item.domParticular,
+              item.comercio,
+              item.interiorRodados,
+              item.carcelComisaria,
+              item.otroLugar
+            )
+          }}
+        </td>
+        <td>{{ item.otroLugarEsp }}</td>
+        <td>
+          {{
+            arma(item.armaFuego, item.armaBlanca, item.otraArma, item.sinArma)
+          }}
+        </td>
+        <td>{{ item.otraArmaEsp }}</td>
+        <td>
+          {{
+            ocacionDelito(
+              item.siRobo,
+              item.abusoSexual,
+              item.otroDelito,
+              item.noOtroDelito
+            )
+          }}
+        </td>
+        <td>{{ item.otroDelitoEsp }}</td>
+        <td>{{ intervencion(item.interPolicial) }}</td>
+        <td></td>
+        <td>1</td>
+        <td>{{ item.latitud }}</td>
+        <td>{{ item.longitud }}</td>
+      </tr>
     </tbody>
   </table>
+</div>

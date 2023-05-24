@@ -15,6 +15,7 @@ export class PlanillaHd{
     horaHecho?: string;
     nombreCalle?: string;
     alturaCalle?: number;
+    //tipoLugar
     viaPublica?: boolean;
     domParticular?: boolean;
     comercio?: boolean;
@@ -22,16 +23,19 @@ export class PlanillaHd{
     carcelComisaria?: boolean;
     otroLugar?: boolean;
     otroLugarEsp?: boolean;
+    //medio arma mecanica
     armaFuego?: boolean;
     armaBlanca?: boolean;
     otraArma?: boolean;
     otraArmaEsp?: string;
     sinArma?: boolean;
+    //en ocacion de otro delito
     siRobo?: boolean;
     abusoSexual?: boolean;
     otroDelito?: boolean;
-    especifDel?: string;
-    noOtrodelito?: boolean;
+    otroDelitoEsp?: string;
+    noOtroDelito?: boolean;
+
     interPolicial?: boolean;
     latitud?: string;
     longitud?: string;
