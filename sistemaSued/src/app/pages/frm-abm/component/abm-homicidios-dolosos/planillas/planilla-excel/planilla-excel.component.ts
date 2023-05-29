@@ -103,4 +103,12 @@ export class PlanillaExcelComponent implements OnInit {
     }
     return valor;
   }
+
+  cortarCadena(data: any){
+    let cadena = "";
+    if(data != undefined && data != ""){
+      cadena = data.slice(0,10);
+    }
+    return cadena;
+  }
 }

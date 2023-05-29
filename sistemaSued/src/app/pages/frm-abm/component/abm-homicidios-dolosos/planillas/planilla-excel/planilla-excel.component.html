@@ -5,18 +5,18 @@
 <br />
 <hr />
 <div class="row">
-  <div class="col-md-4">
-    <span>DATOS DEL HECHO</span>
-  </div>
-  <div class="col-md-4">
-    <span>DATOS DE LA VICTIMA</span>
-  </div>
-  <div class="col-md-4">
-    <span>DATOS DEL IMPUTADO</span>
-  </div>
-</div>
-<hr />
-<div class="row">
+  <table class="text-center">
+    <thead>
+      <th scope="col" colspan="27"><span>DATOS DEL HECHO</span></th>
+      <th>
+        <span>DATOS DE LA VICTIMA</span>
+      </th>
+      <th>
+        <span>DATOS DEL IMPUTADO</span>
+      </th>
+    </thead>
+  </table>
+  <hr />
   <table id="tablaHd" class="table text-center">
     <thead>
       <tr>
@@ -49,6 +49,21 @@
         <th scope="col" colspan="2">Coordenadas</th>
         <th scope="col">Observaciones</th>
         <th scope="col">Nro. Documento</th>
+        <!-- victima -->
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">(F) Sexo*</th>
+        <th scope="col">Edad*</th>
+        <th scope="col" colspan="2">(G) Clase* Especificar sólo código 5</th>
+        <th scope="col" colspan="2">
+          (H) Situación Ocupacional* Especificar sólo código 14
+        </th>
+        <th scope="col" colspan="2">(J) Género* Especificar sólo código 5</th>
+        <th scope="col">(F) Sexo*</th>
+        <th scope="col">Edad*</th>
+        <th scope="col" colspan="2">(G) Clase*</th>
+        <th scope="col">Vínculo *</th>
+        <th scope="col">(J) Género*</th>
       </tr>
     </thead>
     <tbody>
@@ -98,10 +113,27 @@
         <td>{{ intervencion(item.interPolicial) }}</td>
         <td></td>
         <td>1</td>
-        <td>{{ item.latitud }}</td>
-        <td>{{ item.longitud }}</td>
-        <td><input type="text"></td>
-        <td>{{item.dniVctima}}</td>
+        <td>{{ cortarCadena(item.latitud) }}</td>
+        <td>{{ cortarCadena(item.longitud) }}</td>
+        <td>{{ item.observacionAmpl }}</td>
+        <td>{{ item.dniVctima }}</td>
+        <td>{{ item.nombreVictima }}</td>
+        <td>{{ item.apellidoVictima }}</td>
+        <td>{{ item.codigoSexo }}</td>
+        <td>{{ item.edadVictima }}</td>
+        <td>{{ item.claseVictima }}</td>
+        <td>s/d</td>
+        <td>{{ item.codigoOcupacion }}</td>
+        <td>s/d</td>
+        <td>{{ item.codigoGenero }}</td>
+        <td>s/d</td>
+        <td>{{ item.codigoSexInculpado }}</td>
+        <td>{{ item.edadInculpado }}</td>
+        <td>{{ item.claseInculpado }}</td>
+        <td>s/d</td>
+        <td>{{item.codigoVinculo}}</td>
+        <td>{{item.codGeneroInculp}}</td>
+        <td>s/d</td>
       </tr>
     </tbody>
   </table>

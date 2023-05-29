@@ -37,24 +37,31 @@ export class PlanillaHd{
     noOtroDelito?: boolean;
 
     interPolicial?: boolean;
+    //coordenadas
     latitud?: string;
     longitud?: string;
+    //observacionAmpliacion
+    observacionAmpl?: string;
+    //victima
     dniVctima?: number;
     nombreVictima?: string;
     apellidoVictima?: string;
     sexoVictima?: number;
     codigoSexo?: number;
+    edadVictima?: number;
     descripcionSexo?: string;
     claseVictima?: string;
     codigoOcupacion?: number;
     descripOcupacion?: string;
     codigoGenero?: number;
     genero?: string;
+    //inculpado
     sexoGeneroInc?: number;
     codigoSexInculpado?: number;
     descripSexoInc?: string;
     edadInculpado?: number;
     claseInculpado?: string;
     codigoVinculo?: number;
+    codGeneroInculp?: number;
     descripcionVinculo?: string;
 }
