@@ -22,6 +22,7 @@ const EXCEL_EXTENSION = '.xlsx';
 })
 export class ExelService {
   constructor() {}
+
   public exportAsExcelFile(json: any[], excelFileName: string): void {
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
     const workbook: XLSX.WorkBook = {
@@ -61,7 +62,8 @@ export class ExelService {
   //   this.exportar = false;
   // }
 
-  static exportTableToExcel(tableID: any, filename = '') {
+  //static
+   exportTableToExcel(tableID: any, filename = '') {
     return new Promise((resolve) => {
       var downloadLink;
       var dataType = 'application/vnd.ms-excel';

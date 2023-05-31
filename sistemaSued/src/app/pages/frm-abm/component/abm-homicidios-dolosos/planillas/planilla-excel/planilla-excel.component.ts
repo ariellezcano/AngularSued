@@ -1,9 +1,12 @@
 import { DataService } from './../../../../../../services/data.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { PlanillaHD } from 'src/app/models/index.models';
 import { AbmHomicidiosDolososComponent } from '../../abm-homicidios-dolosos.component';
 import { PlanillaHd } from 'src/app/models/component/models-planillas/modeloPlanillaHd';
 import { Route, Router } from '@angular/router';
+import { ExelService } from 'src/app/services/planillas/exel.service';
+import Swal from 'sweetalert2';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-planilla-excel',
@@ -14,12 +17,17 @@ export class PlanillaExcelComponent implements OnInit {
   @ViewChild(AbmHomicidiosDolososComponent, { static: false })
   fil!: AbmHomicidiosDolososComponent;
 
+  //@ViewChild('table', { static: false }) tablaRef!: ElementRef;
+
+
   item: PlanillaHd;
   items: PlanillaHd[];
+  exportar: boolean;
 
-  constructor(private router: Router, private dataService: DataService) {
+  constructor(private router: Router, private dataService: DataService, private wsdlExcel: ExelService) {
     this.item = new PlanillaHd();
     this.items = [];
+    this.exportar=false;
   }
 
   ngOnInit(): void {
@@ -111,4 +119,30 @@ export class PlanillaExcelComponent implements OnInit {
     }
     return cadena;
   }
+
+  // async imprimirExcel(table: string, nombre: string){
+  //   this.exportar = true;
+  //   await this.wsdlExcel.exportTableToExcel(table,nombre);
+  //   this.exportar=false;
+  //   if(!this.exportar){
+  //     Swal.fire('Dato exportado correctamente')
+  //   }
+  // }
+
+
+  exportarExcel(table: string) {
+    const tabla = document.getElementById(table);
+
+    /* Crear un libro de Excel y una hoja de cálculo */
+    const libro = XLSX.utils.book_new();
+    const hoja = XLSX.utils.table_to_sheet(tabla);
+
+    /* Agregar la hoja de cálculo al libro */
+    XLSX.utils.book_append_sheet(libro, hoja, table);
+
+    /* Generar el archivo Excel */
+    const nombreArchivo = 'planillaHd.xlsx';
+    XLSX.writeFile(libro, nombreArchivo);
+  }
 }
+
