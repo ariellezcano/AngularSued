@@ -1,11 +1,14 @@
 import { DataService } from './../../../../../../services/data.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { PlanillaHD } from 'src/app/models/index.models';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { AbmHomicidiosDolososComponent } from '../../abm-homicidios-dolosos.component';
 import { PlanillaHd } from 'src/app/models/component/models-planillas/modeloPlanillaHd';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ExelService } from 'src/app/services/planillas/exel.service';
-import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -17,22 +20,33 @@ export class PlanillaExcelComponent implements OnInit {
   @ViewChild(AbmHomicidiosDolososComponent, { static: false })
   fil!: AbmHomicidiosDolososComponent;
 
-  //@ViewChild('table', { static: false }) tablaRef!: ElementRef;
-
+  @ViewChild('table', { static: false }) tablaRef!: ElementRef;
 
   item: PlanillaHd;
   items: PlanillaHd[];
   exportar: boolean;
 
-  constructor(private router: Router, private dataService: DataService, private wsdlExcel: ExelService) {
+  constructor(
+    private router: Router,
+    private dataService: DataService,
+    private wsdlExcel: ExelService
+  ) {
     this.item = new PlanillaHd();
     this.items = [];
-    this.exportar=false;
+    this.exportar = false;
   }
 
   ngOnInit(): void {
     this.getDataService();
-    console.log('items', this.items);
+  }
+
+  ngAfterViewInit() {
+    if (this.tablaRef && this.tablaRef.nativeElement) {
+      setTimeout(() => {
+        const data = this.tablaRef.nativeElement;
+        console.log('adentro', data);
+      }, 3000);
+    }
   }
 
   getDataService() {
@@ -102,23 +116,23 @@ export class PlanillaExcelComponent implements OnInit {
     return valor;
   }
 
-  intervencion(intervencion: any){
-    let valor = "";
-    if(intervencion){
-      valor = "2";
-    }else{
-      valor = "1";
+  intervencion(intervencion: any) {
+    let valor = '';
+    if (intervencion) {
+      valor = '2';
+    } else {
+      valor = '1';
     }
     return valor;
   }
 
   cortarCadena = (data: any) => {
-    let cadena = "";
-    if(data != undefined && data != ""){
-      cadena = data.slice(0,10);
+    let cadena = '';
+    if (data != undefined && data != '') {
+      cadena = data.slice(0, 10);
     }
     return cadena;
-  }
+  };
 
   // async imprimirExcel(table: string, nombre: string){
   //   this.exportar = true;
@@ -129,20 +143,64 @@ export class PlanillaExcelComponent implements OnInit {
   //   }
   // }
 
+  exportarExcel(nombre: string) {
+    console.log("element",this.tablaRef)
+    if (this.tablaRef && this.tablaRef.nativeElement) {
+      const tabla = this.tablaRef.nativeElement;
 
-  exportarExcel(table: string) {
-    const tabla = document.getElementById(table);
+      const estilosEncabezado = window.getComputedStyle(
+        tabla.querySelector('.encabezado')
+      );
+      const estilosCelda = window.getComputedStyle(
+        tabla.querySelector('.celda')
+      );
 
-    /* Crear un libro de Excel y una hoja de cálculo */
-    const libro = XLSX.utils.book_new();
-    const hoja = XLSX.utils.table_to_sheet(tabla);
+      const libro = XLSX.utils.book_new();
+      const hoja = XLSX.utils.table_to_sheet(tabla);
 
-    /* Agregar la hoja de cálculo al libro */
-    XLSX.utils.book_append_sheet(libro, hoja, table);
+      /* Aplicar estilos a la hoja de cálculo */
+      Object.keys(hoja).forEach((celda) => {
+        const estiloCelda = hoja[celda].s!;
 
-    /* Generar el archivo Excel */
-    const nombreArchivo = 'planillaHd.xlsx';
-    XLSX.writeFile(libro, nombreArchivo);
+        if (hoja[celda].r === 0) {
+          // Estilos para el encabezado
+          estiloCelda.border = {
+            top: {
+              style: 'thin',
+              color: { rgb: estilosEncabezado.borderColor },
+            },
+            bottom: {
+              style: 'thin',
+              color: { rgb: estilosEncabezado.borderColor },
+            },
+            left: {
+              style: 'thin',
+              color: { rgb: estilosEncabezado.borderColor },
+            },
+            right: {
+              style: 'thin',
+              color: { rgb: estilosEncabezado.borderColor },
+            },
+          };
+        } else {
+          // Estilos para las celdas
+          estiloCelda.border = {
+            top: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
+            bottom: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
+            left: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
+            right: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
+          };
+        }
+      });
+
+      XLSX.utils.book_append_sheet(libro, hoja, 'tablaHd');
+
+      const nombreArchivo = nombre;
+      XLSX.writeFile(libro, nombreArchivo);
+    } else {
+      console.error(
+        'El elemento tablaRef no está definido o no tiene un elemento nativo.'
+      );
+    }
   }
 }
-

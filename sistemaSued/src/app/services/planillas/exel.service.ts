@@ -63,36 +63,51 @@ export class ExelService {
   // }
 
   //static
-   exportTableToExcel(tableID: any, filename = '') {
-    return new Promise((resolve) => {
-      var downloadLink;
-      var dataType = 'application/vnd.ms-excel';
-      var navigator: any;
+  //  exportTableToExcel(tableID: any, filename = '') {
+  //   return new Promise((resolve) => {
+  //     var downloadLink;
+  //     var dataType = 'application/vnd.ms-excel';
+  //     var navigator: any;
 
-      var tableSelect: any = document.getElementById(tableID);
-      console.log(tableSelect);
-      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+  //     var tableSelect: any = document.getElementById(tableID);
+  //     console.log(tableSelect);
+  //     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
-      // Specify file name
-      filename = filename ? filename + '.xls' : 'excel_data.xls';
+  //     // Specify file name
+  //     filename = filename ? filename + '.xls' : 'excel_data.xls';
 
-      // Create download link element
-      downloadLink = document.createElement('a');
+  //     // Create download link element
+  //     downloadLink = document.createElement('a');
 
-      document.body.appendChild(downloadLink);
+  //     document.body.appendChild(downloadLink);
 
-      // Create a link to the file
-      downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+  //     // Create a link to the file
+  //     downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
 
-      // Setting the file name
-      downloadLink.download = filename;
+  //     // Setting the file name
+  //     downloadLink.download = filename;
 
-      //triggering the function
-      downloadLink.click();
-      resolve(true);
-    });
-  }
-  static delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+  //     //triggering the function
+  //     downloadLink.click();
+  //     resolve(true);
+  //   });
+  // }
+  // static delay(ms: number) {
+  //   return new Promise((resolve) => setTimeout(resolve, ms));
+  // }
+
+  exportarExcel(table: string) {
+    const tabla = document.getElementById(table);
+
+    /* Crear un libro de Excel y una hoja de cálculo */
+    const libro = XLSX.utils.book_new();
+    const hoja = XLSX.utils.table_to_sheet(tabla);
+
+    /* Agregar la hoja de cálculo al libro */
+    XLSX.utils.book_append_sheet(libro, hoja, table);
+
+    /* Generar el archivo Excel */
+    const nombreArchivo = 'planillaHd.xlsx';
+    XLSX.writeFile(libro, nombreArchivo);
   }
 }
