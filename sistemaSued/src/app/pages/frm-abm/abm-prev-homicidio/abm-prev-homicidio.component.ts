@@ -55,7 +55,60 @@ export class AbmPrevHomicidioComponent implements OnInit {
         if (result.code == 200) {
           this.item = result.dato;
         }
-      } catch (error) {}
+      } catch (error: any) {
+        Swal.fire("Error", error)
+      }
+    }
+  }
+
+  ckeckPresion=(num: number)=>{
+    if(num == 1){
+      this.item.viaPublica = true;
+      this.item.domParticular = false;
+      this.item.comercio = false;
+      this.item.intRodados = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 2){
+      this.item.domParticular = true
+      this.item.viaPublica = false;
+      this.item.comercio = false;
+      this.item.intRodados = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 3){
+      this.item.comercio = true;
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.intRodados = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 4){
+      this.item.intRodados = true;
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.comercio = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 5){
+      this.item.carcelComisaria = true;
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.comercio = false;
+      this.item.intRodados = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 6){
+      this.item.otroLugar = true;
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.comercio = false;
+      this.item.intRodados = false;
+      this.item.carcelComisaria = false;
     }
   }
 
@@ -72,7 +125,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
 
   async actualizarDatos(obj: PrevSnicHomicidio) {
     this.guardando = true;
-    //console.log("enviado modificar", this.item)
+    console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));

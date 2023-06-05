@@ -14,6 +14,7 @@
         >
         <input
           [(ngModel)]="item.viaPublica"
+          (click)="ckeckPresion(1)"
           name="viaPublica"
           type="checkbox"
           class="form-sm-control"
@@ -26,6 +27,7 @@
         >
         <input
           [(ngModel)]="item.domParticular"
+          (click)="ckeckPresion(2)"
           name="domParticular"
           type="checkbox"
           class="form-sm-control"
@@ -38,6 +40,7 @@
         >
         <input
           [(ngModel)]="item.comercio"
+          (click)="ckeckPresion(3)"
           name="subUrbano"
           type="checkbox"
           class="form-sm-control"
@@ -52,6 +55,7 @@
         >
         <input
           [(ngModel)]="item.intRodados"
+          (click)="ckeckPresion(4)"
           name="diurno"
           type="checkbox"
           class="form-sm-control"
@@ -64,6 +68,7 @@
         >
         <input
           [(ngModel)]="item.carcelComisaria"
+          (click)="ckeckPresion(5)"
           name="intRodados"
           type="checkbox"
           class="form-sm-control"
@@ -76,6 +81,7 @@
         >
         <input
           [(ngModel)]="item.otroLugar"
+          (click)="ckeckPresion(6)"
           name="otroLugar"
           type="checkbox"
           class="form-sm-control"
@@ -83,7 +89,7 @@
         />
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="item.otroLugar" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
           Especificar lugar:</label

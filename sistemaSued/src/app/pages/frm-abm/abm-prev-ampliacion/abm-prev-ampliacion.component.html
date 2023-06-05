@@ -143,7 +143,7 @@
           <ng-template #thenTemplate>
             <td>{{ i.fechaAmpliacion | date : "dd/MM/yyyy" }}</td>
             <td>{{ i.nroNota }}</td>
-            <td>{{ i?.unidadNavigation.nombre }}</td>
+            <td>{{ i?.unidadNavigation?.nombre }}</td>
             <td>{{ i.observacion }}</td>
           </ng-template>
           <ng-template #elseTemplate>

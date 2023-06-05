@@ -1,10 +1,5 @@
 import { DataService } from './../../../../../../services/data.service';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbmHomicidiosDolososComponent } from '../../abm-homicidios-dolosos.component';
 import { PlanillaHd } from 'src/app/models/component/models-planillas/modeloPlanillaHd';
 import { Router } from '@angular/router';
@@ -144,57 +139,17 @@ export class PlanillaExcelComponent implements OnInit {
   // }
 
   exportarExcel(nombre: string) {
-    console.log("element",this.tablaRef)
     if (this.tablaRef && this.tablaRef.nativeElement) {
       const tabla = this.tablaRef.nativeElement;
 
-      const estilosEncabezado = window.getComputedStyle(
-        tabla.querySelector('.encabezado')
-      );
-      const estilosCelda = window.getComputedStyle(
-        tabla.querySelector('.celda')
-      );
-
+      /* Crear un libro de Excel y una hoja de cálculo */
       const libro = XLSX.utils.book_new();
       const hoja = XLSX.utils.table_to_sheet(tabla);
 
-      /* Aplicar estilos a la hoja de cálculo */
-      Object.keys(hoja).forEach((celda) => {
-        const estiloCelda = hoja[celda].s!;
+      /* Agregar la hoja de cálculo al libro */
+      XLSX.utils.book_append_sheet(libro, hoja, 'table');
 
-        if (hoja[celda].r === 0) {
-          // Estilos para el encabezado
-          estiloCelda.border = {
-            top: {
-              style: 'thin',
-              color: { rgb: estilosEncabezado.borderColor },
-            },
-            bottom: {
-              style: 'thin',
-              color: { rgb: estilosEncabezado.borderColor },
-            },
-            left: {
-              style: 'thin',
-              color: { rgb: estilosEncabezado.borderColor },
-            },
-            right: {
-              style: 'thin',
-              color: { rgb: estilosEncabezado.borderColor },
-            },
-          };
-        } else {
-          // Estilos para las celdas
-          estiloCelda.border = {
-            top: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
-            bottom: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
-            left: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
-            right: { style: 'thin', color: { rgb: estilosCelda.borderColor } },
-          };
-        }
-      });
-
-      XLSX.utils.book_append_sheet(libro, hoja, 'tablaHd');
-
+      /* Generar el archivo Excel */
       const nombreArchivo = nombre;
       XLSX.writeFile(libro, nombreArchivo);
     } else {
