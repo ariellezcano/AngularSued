@@ -87,10 +87,6 @@ export class LoginComponent implements OnInit {
       if (res.code == 200) {
         this.item = res.dato;
         if (!this.item.baja && this.item.activo) {
-          //this.item.apellido = res.dato.apellido;
-          //this.item.nombre = res.dato.nombre;
-          //this.item.rol = res.dato.datosPersonal.rol;
-          //this.item.rolNombre = res.dato.rolNavigation.nombre;
           this.datosPersonal = {
             apellido: this.item.apellido,
             nombre: this.item.nombre,
