@@ -28,6 +28,7 @@ import {
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
+import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
 
 @Component({
   selector: 'app-abm-preventivo',
@@ -37,6 +38,8 @@ import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-loca
 export class AbmPreventivoComponent implements OnInit {
   @ViewChild(FilBuscadorLocalidadComponent, { static: false })
   filLocalidad!: FilBuscadorLocalidadComponent;
+  @ViewChild(FilBuscadorCalleComponent, { static: false })
+  filCalleInterseccion!: FilBuscadorCalleComponent;
 
   @Input()
   public id!: number;
@@ -54,6 +57,7 @@ export class AbmPreventivoComponent implements OnInit {
   busqueda;
   busquedaLugar;
   busquedaCalle;
+  busquedaCalleInterseccion;
   busquedaBarrio;
   //variable para verificar si fue enviado los datos
   enviado: boolean = false;
@@ -75,6 +79,9 @@ export class AbmPreventivoComponent implements OnInit {
   CItems: Calle[];
   Citem: Calle;
 
+  CItemsInters: Calle[];
+  cItemInt: Calle;
+
   BItems: Barrio[];
   Bitem: Barrio;
 
@@ -95,6 +102,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.busqueda = '';
     this.busquedaLugar = '';
     this.busquedaCalle = '';
+    this.busquedaCalleInterseccion = '';
     this.busquedaBarrio = '';
     this.latitud = '';
     this.longitud = '';
@@ -105,6 +113,8 @@ export class AbmPreventivoComponent implements OnInit {
     this.litem = new Lugar();
     this.CItems = [];
     this.Citem = new Calle();
+    this.CItemsInters = [];
+    this.cItemInt = new Calle();
     this.BItems = [];
     this.Bitem = new Barrio();
     this.map = false;
@@ -148,17 +158,23 @@ export class AbmPreventivoComponent implements OnInit {
             ).format('DD-MM-YYYY');
           }
           if (this.item.barrio != undefined) {
-            this.busquedaBarrio = this.item.barrioNavigation.nombre;
+            this.busquedaBarrio = this.item.barrioNavigation?.nombre;
           }
           if (this.item.delito != undefined) {
-            this.busqueda = this.item.delitoNavigation.descripcion;
+            this.busqueda = this.item.delitoNavigation?.descripcion;
           }
           if (this.item.lugar != undefined) {
-            this.busquedaLugar = this.item.lugarNavigation.descripcion;
+            this.busquedaLugar = this.item.lugarNavigation?.descripcion;
           }
           if (this.item.calle != undefined) {
-            this.busquedaCalle = this.item.calleNavigation.nombre;
-            this.Citem.nombre = this.item.calleNavigation.nombre;
+            this.busquedaCalle = this.item.calleNavigation?.nombre;
+            this.Citem.nombre = this.item.calleNavigation?.nombre;
+          }
+          if (this.item.calleInterseccion != undefined) {
+            this.busquedaCalleInterseccion =
+              this.item.calleInterseccionNavigation?.nombre;
+            this.cItemInt.nombre =
+              this.item.calleInterseccionNavigation?.nombre;
           }
           if (this.item.unidad != undefined) {
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;
@@ -237,23 +253,14 @@ export class AbmPreventivoComponent implements OnInit {
         //var Format = hora.replace(/[:]/g, '');
         this.item.hora = hora;
 
-        console.log(this.item);
+        // console.log(this.item);
 
         try {
           let data = await this.wsdl.doInsert(this.item).then();
           const result = JSON.parse(JSON.stringify(data));
           if (result.code == 200) {
             let idPreventivo: number = result.dato.id;
-            //console.log("creado correctamente", idPreventivo);
             this.linkearDetalle(idPreventivo);
-            // this.back();
-            // Swal.fire({
-            //   position: 'top-end',
-            //   icon: 'success',
-            //   title: 'Dato guardado correctamente!',
-            //   showConfirmButton: false,
-            //   timer: 1500,
-            // });
           } else if (result.code == 204) {
             Swal.fire({
               icon: 'info',
@@ -342,14 +349,25 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  async filtrarCalle() {
-    this.CItems = [];
+  async filtrarCalle(tipoCalle: string) {
+    let criterio = '';
+    if (tipoCalle == 'individual') {
+      this.CItems = [];
+      criterio = this.busquedaCalle;
+    } else if (tipoCalle == 'interseccion') {
+      this.CItemsInters = [];
+      criterio = this.busquedaCalleInterseccion;
+    }
     try {
-      if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
-        let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
+      if (criterio != '' && criterio != undefined) {
+        let data = await this.wsdlCalle.doFilter(criterio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.CItems = result.data;
+          if (tipoCalle == 'individual') {
+            this.CItems = result.data;
+          } else if (tipoCalle == 'interseccion') {
+            this.CItemsInters = result.data;
+          }
         } else if (result.code == 204) {
           Swal.fire({
             icon: 'warning',
@@ -362,11 +380,18 @@ export class AbmPreventivoComponent implements OnInit {
       Swal.fire('Error al obtener el dato');
     }
   }
-
+  //calle individual
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
+    }
+  }
+  //calle interseccion
+  capturarCalleInterseccion(event: Calle) {
+    if (event != undefined) {
+      this.item.calleInterseccion = event.id;
+      this.busquedaCalleInterseccion = event.nombre;
     }
   }
 
@@ -524,7 +549,7 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  ocultarMap(){
+  ocultarMap() {
     this.map = false;
     this.googleMaps = true;
   }

@@ -361,7 +361,7 @@
               <i class="fa fa-search" aria-hidden="true"></i>
             </span>
             <input
-              (keyup.enter)="filtrarCalle()"
+              (keyup.enter)="filtrarCalle('individual')"
               [(ngModel)]="busquedaCalle"
               name="busquedaCalle"
               type="text"
@@ -386,6 +386,40 @@
           </select>
         </div>
         <div class="col-md-6">
+          <label class="col-sm-12 col-form-label" for="">Calle Intersección:</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </span>
+            <input
+              (keyup.enter)="filtrarCalle('interseccion')"
+              [(ngModel)]="busquedaCalleInterseccion"
+              name="busquedaCalleInterseccion"
+              type="text"
+              id="busquedaCalleInterseccion"
+              class="form-control"
+              [ngModelOptions]="{ standalone: true }"
+              placeholder="Ingrese calle a buscar"
+            />
+          </div>
+          <select
+            *ngIf="CItemsInters.length > 0 && this.busquedaCalleInterseccion"
+            name="cItemInt"
+            [(ngModel)]="cItemInt"
+            class="form-select form-select-lm mb-3"
+            aria-label=".form-select-lg example"
+            (ngModelChange)="capturarCalleInterseccion($event)"
+            [ngModelOptions]="{ standalone: true }"
+          >
+            <option *ngFor="let cItemInt of CItemsInters" [ngValue]="cItemInt">
+              {{ cItemInt.nombre }}
+            </option>
+          </select>
+        </div>
+        
+      </div>
+      <div class="row">
+        <div class="col-md-6">
           <label class="col-sm-12 col-form-label" for="">Altura:</label>
           <input
             [(ngModel)]="item.dirNro"
@@ -394,8 +428,6 @@
             [ngModelOptions]="{ standalone: true }"
           />
         </div>
-      </div>
-      <div class="row">
         <div class="col-md-6">
           <label class="col-sm-12 col-form-label" for=""
             >Dirección Adicional:</label

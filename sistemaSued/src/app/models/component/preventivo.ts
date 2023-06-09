@@ -9,6 +9,7 @@ export class Preventivo {
     hora: any;
     lugar!: number;
     calle!: number;
+    calleInterseccion!:number;
     dirNro!: number;
     dirAdic!: string;
     barrio!: number;
@@ -30,6 +31,7 @@ export class Preventivo {
 
     lugarNavigation: any;
     calleNavigation: any;
+    calleInterseccionNavigation: any;
     barrioNavigation: any;
     delitoNavigation: any;
     localidadNavigation: any;
