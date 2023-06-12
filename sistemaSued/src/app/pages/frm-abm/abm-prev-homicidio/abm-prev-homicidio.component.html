@@ -112,6 +112,7 @@
         >
         <input
           [(ngModel)]="item.armaFuego"
+          (click)="ckeckPresion(7)"
           name="diurno"
           type="checkbox"
           class="form-sm-control"
@@ -124,6 +125,7 @@
         >
         <input
           [(ngModel)]="item.armaBlanca"
+          (click)="ckeckPresion(8)"
           name="nocturno"
           type="checkbox"
           class="form-sm-control"
@@ -136,6 +138,7 @@
         >
         <input
           [(ngModel)]="item.otraArma"
+          (click)="ckeckPresion(9)"
           name="nocturno"
           type="checkbox"
           class="form-sm-control"
@@ -148,6 +151,7 @@
         >
         <input
           [(ngModel)]="item.sinArma"
+          (click)="ckeckPresion(10)"
           name="sinArma"
           type="checkbox"
           class="form-sm-control"
@@ -155,7 +159,7 @@
         />
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="item.otraArma" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
           Especificar arma:</label
@@ -178,7 +182,8 @@
         >
         <input
           [(ngModel)]="item.robo"
-          name="leves"
+          (click)="ckeckPresion(11)"
+          name="robo"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -190,7 +195,8 @@
         >
         <input
           [(ngModel)]="item.violacion"
-          name="graves"
+          (click)="ckeckPresion(12)"
+          name="violacion"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -202,6 +208,7 @@
         >
         <input
           [(ngModel)]="item.otroDel"
+          (click)="ckeckPresion(13)"
           name="otroDel"
           type="checkbox"
           class="form-sm-control"
@@ -214,6 +221,7 @@
         >
         <input
           [(ngModel)]="item.noOtrodelito"
+          (click)="ckeckPresion(14)"
           name="noOtrodelito"
           type="checkbox"
           class="form-sm-control"
@@ -221,7 +229,7 @@
         />
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="item.otroDel" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
           Especificar delito:</label
@@ -229,6 +237,7 @@
         <input
           [(ngModel)]="item.especifDel"
           name="especifDel"
+          maxlength="75"
           type="text"
           class="form-control"
           [ngModelOptions]="{ standalone: true }"

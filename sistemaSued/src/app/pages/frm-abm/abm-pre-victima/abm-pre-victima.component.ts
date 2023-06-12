@@ -173,6 +173,7 @@ export class AbmPreVictimaComponent implements OnInit {
             this.dnpc = true;
             this.item.fallecio = true;
           }
+          //si es homicidio doloso consumado o tentativo
           if(this.prev.delitoNavigation?.id == 1 || this.prev.delitoNavigation?.id == 2){
             this.dnpcHD = true;
           }

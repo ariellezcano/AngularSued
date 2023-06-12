@@ -52,19 +52,19 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <app-combo-sexo
         [dibujar]="item.sexoNavigation"
         (emitir)="seleccionSexo($event)"
       ></app-combo-sexo>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <app-combo-identidad-genero
         [dibujar]="item.identidadNavigation"
         (emitir)="seleccionIdentidad($event)"
       ></app-combo-identidad-genero>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <label for="Nombre" class="col-sm-12 col-form-label"> Alias:</label>
       <input
         [(ngModel)]="item.alias"
@@ -73,14 +73,32 @@
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
-    <div class="col-md-3">
-      <!-- <label for="Nombre" class="col-sm-12 col-form-label"> Clase:</label>
+    <!-- <div class="col-md-3">
+       <label for="Nombre" class="col-sm-12 col-form-label"> Clase:</label>
       <input
         [(ngModel)]="item.persClase"
         type="text"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
-      /> -->
+      />
+    </div>-->
+  </div>
+  <div class="row">
+    <div *ngIf="item.genero == 5" class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <label for="especifGenero" class="col-sm-12 col-form-label">
+          Especificar Género:</label
+        >
+        <input
+          [(ngModel)]="item.especifGeneroInc"
+          name="especifGeneroInc"
+          type="text"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3"></div>
     </div>
   </div>
   <div class="row">
@@ -186,12 +204,11 @@
     </div>
     <div class="col-md-2"></div>
   </div>
-  <br *ngIf="!dnpc"/>
+  <br *ngIf="!dnpc" />
   <div *ngIf="!dnpc" class="row">
     <legend>
       <em><u>DNPC</u></em>
     </legend>
-    <div class="col-md-3"></div>
     <div class="col-md-6">
       <label for="">DNPC CLASE:</label>
       <select
@@ -212,7 +229,16 @@
         <option value="99">99 - SIN DETERMINAR</option>
       </select>
     </div>
-    <div class="col-md-3"></div>
+    <div *ngIf="item.persClase == '5'" class="col-md-6">
+      <label for="especifGenero"> Especificar Fuerza de Seguridad:</label>
+      <input
+        [(ngModel)]="item.especifClaseInc"
+        name="especifClaseInc"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
   </div>
   <br *ngIf="dnpc" />
   <div *ngIf="dnpc" class="row">
@@ -228,9 +254,7 @@
         class="form-select text-center"
         aria-label="Default select example"
       >
-        <option value="1">
-          1 - Micro de larga distancia
-        </option>
+        <option value="1">1 - Micro de larga distancia</option>
         <option value="2">2 - Colectivo</option>
         <option value="3">3 - Camión</option>
         <option value="4">4 - Camioneta</option>

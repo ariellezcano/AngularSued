@@ -6,19 +6,21 @@ export class PrevVictima {
     nacionalidad!: number;
     estudios!: number;
     ocupacion!: number;
+    especifOcupacion!: string;
     nombre!: string;
     apellido!: string;
     dni!: number;
     fallecio!: boolean;
     provincia!: number;
     genero!: number;
+    especifGenero!: string;
     calle!: number;
     dirNro!: number;
     dirAdicional!: string;
     barrio!: number;
     dnpcClase!: string;
+    especifClaseVict!: string;
     dnpcVehiculo!: string;
-
     nacionNavigation: any;
     estudioNavigation: any;
     ocupacionNavigation: any;

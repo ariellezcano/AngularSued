@@ -131,7 +131,7 @@
           <td class="celda">{{ item.horaHecho }}</td>
           <td class="celda">{{ item.nombreCalle }}</td>
           <td class="celda">{{ item.alturaCalle }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{ item.interseccionCalle }}</td>
           <td class="celda">
             {{
               tipoLugar(
@@ -174,18 +174,18 @@
           <td class="celda">{{ item.codigoSexo }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
           <td class="celda">{{ item.claseVictima }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{ item.especifClaseVic }}</td>
           <td class="celda">{{ item.codigoOcupacion }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{ item.especOcupacion }}</td>
           <td class="celda">{{ item.codigoGenero }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{ item.especGenero }}</td>
           <td class="celda">{{ item.codigoSexInculpado }}</td>
           <td class="celda">{{ item.edadInculpado }}</td>
           <td class="celda">{{ item.claseInculpado }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{item.especifClaseInc}}</td>
           <td class="celda">{{ item.codigoVinculo }}</td>
           <td class="celda">{{ item.codGeneroInculp }}</td>
-          <td class="celda">s/d</td>
+          <td class="celda">{{item.especifGeneroInc}}</td>
         </tr>
       </tbody>
     </table>

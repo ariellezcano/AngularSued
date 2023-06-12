@@ -21,7 +21,9 @@ export class PrevInculpado {
     localidad!: number;
     provincia!: number;
     persClase!: string;
+    especifClaseInc!: string;
     genero!: number;
+    especifGeneroInc!: string;
     provDetencion!: number;
     dirCalle!: number;
     direccionNro!: number;

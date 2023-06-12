@@ -61,7 +61,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
     }
   }
 
-  ckeckPresion=(num: number)=>{
+  ckeckPresion=(num: number)=> {
+    //Tipo de lugar
     if(num == 1){
       this.item.viaPublica = true;
       this.item.domParticular = false;
@@ -110,6 +111,56 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.intRodados = false;
       this.item.carcelComisaria = false;
     }
+    //Clase de Arma
+    if(num == 7){
+      this.item.armaFuego = true;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+    }
+    if(num == 8){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = true;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+    }
+    if(num == 9){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = true;
+      this.item.sinArma = false;
+    }
+    if(num == 10){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = true;
+    }
+    //Otro delito
+    if(num == 11){
+      this.item.robo = true;
+      this.item.violacion = false;
+      this.item.otroDel = false;
+      this.item.noOtrodelito = false;
+    }
+    if(num == 12){
+      this.item.robo = false;
+      this.item.violacion = true;
+      this.item.otroDel = false;
+      this.item.noOtrodelito = false;
+    }
+    if(num == 13){
+      this.item.robo = false;
+      this.item.violacion = false;
+      this.item.otroDel = true;
+      this.item.noOtrodelito = false;
+    }
+    if(num == 14){
+      this.item.robo = false;
+      this.item.violacion = false;
+      this.item.otroDel = false;
+      this.item.noOtrodelito = true;
+    }   
   }
 
   doAction() {

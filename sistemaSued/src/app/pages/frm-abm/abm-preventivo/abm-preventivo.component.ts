@@ -146,7 +146,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          //console.log('this.item', this.item);
+          console.log('this.itemPreventivo', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'DD-MM-YYYY'
@@ -189,7 +189,9 @@ export class AbmPreventivoComponent implements OnInit {
             this.filLocalidad.busqueda = this.item.localidadNavigation?.nombre;
           }
         }
-      } catch (error) {}
+      } catch (error) {
+        Swal.fire(`Error al obtener los datos, ${error}`)
+      }
     }
   }
 
@@ -349,12 +351,17 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
+  opcCalle = {
+    individual: "individual",
+    interseccion: "interseccion"
+  }
+
   async filtrarCalle(tipoCalle: string) {
     let criterio = '';
-    if (tipoCalle == 'individual') {
+    if (tipoCalle == this.opcCalle.individual) {
       this.CItems = [];
       criterio = this.busquedaCalle;
-    } else if (tipoCalle == 'interseccion') {
+    } else if (tipoCalle == this.opcCalle.interseccion) {
       this.CItemsInters = [];
       criterio = this.busquedaCalleInterseccion;
     }
@@ -363,9 +370,9 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlCalle.doFilter(criterio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          if (tipoCalle == 'individual') {
+          if (tipoCalle == this.opcCalle.individual) {
             this.CItems = result.data;
-          } else if (tipoCalle == 'interseccion') {
+          } else if (tipoCalle == this.opcCalle.interseccion) {
             this.CItemsInters = result.data;
           }
         } else if (result.code == 204) {
@@ -380,6 +387,7 @@ export class AbmPreventivoComponent implements OnInit {
       Swal.fire('Error al obtener el dato');
     }
   }
+
   //calle individual
   capturarCalle(event: Calle) {
     if (event != undefined) {

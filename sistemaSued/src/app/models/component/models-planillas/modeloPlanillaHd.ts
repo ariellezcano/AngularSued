@@ -15,6 +15,7 @@ export class PlanillaHd{
     horaHecho?: string;
     nombreCalle?: string;
     alturaCalle?: number;
+    interseccionCalle?: string;
     //tipoLugar
     viaPublica?: boolean;
     domParticular?: boolean;
@@ -51,17 +52,22 @@ export class PlanillaHd{
     edadVictima?: number;
     descripcionSexo?: string;
     claseVictima?: string;
+    especifClaseVic?: string;
     codigoOcupacion?: number;
     descripOcupacion?: string;
+    especOcupacion?: string;
     codigoGenero?: number;
     genero?: string;
+    especGenero?: string;
     //inculpado
     sexoGeneroInc?: number;
     codigoSexInculpado?: number;
     descripSexoInc?: string;
     edadInculpado?: number;
     claseInculpado?: string;
+    especifClaseInc?: string;
     codigoVinculo?: number;
-    codGeneroInculp?: number;
     descripcionVinculo?: string;
+    codGeneroInculp?: number;
+    especifGeneroInc?: string;
 }
