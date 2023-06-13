@@ -35,18 +35,20 @@ export class PlanillaExcelComponent implements OnInit {
     this.getDataService();
   }
 
-  ngAfterViewInit() {
-    if (this.tablaRef && this.tablaRef.nativeElement) {
-      setTimeout(() => {
-        const data = this.tablaRef.nativeElement;
-        console.log('adentro', data);
-      }, 3000);
-    }
-  }
+  // ngAfterViewInit() {
+  //   if (this.tablaRef && this.tablaRef.nativeElement) {
+  //     setTimeout(() => {
+  //       const data = this.tablaRef.nativeElement;
+  //       console.log('adentro', data);
+  //     }, 3000);
+  //   }
+  // }
 
   getDataService() {
+    this.items = [];
     const data = this.dataService.getDataArray();
     this.items = data;
+    console.log("items datos",this.items)
   }
 
   back() {
@@ -55,7 +57,7 @@ export class PlanillaExcelComponent implements OnInit {
 
   tipoLugar(
     viaPublica: any,
-    domParticular: any,
+    domParticular: any,                                                                                                                                                                                                                                                                                                                                                                                                                                                            
     comercio: any,
     interiorRodados: any,
     carcelComisaria: any,
@@ -137,6 +139,18 @@ export class PlanillaExcelComponent implements OnInit {
   //     Swal.fire('Dato exportado correctamente')
   //   }
   // }
+
+  verificarDireccion(nombre: string | null, adicional: string | null){
+    let dato = '';
+    //alert("aca llegue")
+    console.log("direccion",nombre, adicional)
+    if(nombre != null){
+      dato = nombre;
+    }else if(adicional != null){
+      dato = adicional;
+    }
+    return dato;
+  }
 
   exportarExcel(nombre: string) {
     if (this.tablaRef && this.tablaRef.nativeElement) {

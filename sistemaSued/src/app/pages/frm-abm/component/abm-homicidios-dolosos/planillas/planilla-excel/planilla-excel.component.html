@@ -129,7 +129,7 @@
           <td class="celda">{{ item.nroPreventivo }}</td>
           <td class="celda">{{ item.fechaHecho | date : "dd/MM/yyyy" }}</td>
           <td class="celda">{{ item.horaHecho }}</td>
-          <td class="celda">{{ item.nombreCalle }}</td>
+          <td class="celda">{{ verificarDireccion(item.nombreCalle, item.dirAdicional) }}</td>
           <td class="celda">{{ item.alturaCalle }}</td>
           <td class="celda">{{ item.interseccionCalle }}</td>
           <td class="celda">
@@ -182,10 +182,10 @@
           <td class="celda">{{ item.codigoSexInculpado }}</td>
           <td class="celda">{{ item.edadInculpado }}</td>
           <td class="celda">{{ item.claseInculpado }}</td>
-          <td class="celda">{{item.especifClaseInc}}</td>
+          <td class="celda">{{ item.especifClaseInc }}</td>
           <td class="celda">{{ item.codigoVinculo }}</td>
           <td class="celda">{{ item.codGeneroInculp }}</td>
-          <td class="celda">{{item.especifGeneroInc}}</td>
+          <td class="celda">{{ item.especifGeneroInc }}</td>
         </tr>
       </tbody>
     </table>

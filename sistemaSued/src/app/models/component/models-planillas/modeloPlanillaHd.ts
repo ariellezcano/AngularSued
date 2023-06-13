@@ -13,8 +13,9 @@ export class PlanillaHd{
     descripcionDelito?: string;
     fechaHecho?: any;
     horaHecho?: string;
-    nombreCalle?: string;
+    nombreCalle!: string | null;
     alturaCalle?: number;
+    dirAdicional!: string | null;
     interseccionCalle?: string;
     //tipoLugar
     viaPublica?: boolean;
