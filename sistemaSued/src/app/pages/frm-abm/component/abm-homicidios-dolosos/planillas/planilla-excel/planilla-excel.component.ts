@@ -48,10 +48,11 @@ export class PlanillaExcelComponent implements OnInit {
     this.items = [];
     const data = this.dataService.getDataArray();
     this.items = data;
-    console.log("items datos",this.items)
+    //console.log("items datos",this.items)
   }
 
   back() {
+    this.dataService.dataArray = [];
     this.router.navigate(['/principal/']);
   }
 
