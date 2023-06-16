@@ -133,6 +133,134 @@ export class AbmPrevSuicidioComponent implements OnInit {
     }
   }
 
+  ckeckPresion=(num: number)=> {
+    //Tipo de lugar
+    if(num == 1){
+      this.item.armaFuego = true;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 2){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = true;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 3){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = true;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 4){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = true;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 5){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = true;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 6){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = true;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    //Clase de Arma
+    if(num == 7){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = true;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+    }
+    if(num == 8){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = true;
+    }
+    //Lugar
+    if(num == 9){
+      this.item.viaPublica = true;
+      this.item.domParticular = false;
+      this.item.viaFerroCarril = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 10){
+      this.item.viaPublica = false;
+      this.item.domParticular = true;
+      this.item.viaFerroCarril = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 11){
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.viaFerroCarril = true;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+    }
+    if(num == 12){
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.viaFerroCarril = false;
+      this.item.carcelComisaria = true;
+      this.item.otroLugar = false;
+    }
+    if(num == 13){
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.viaFerroCarril = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = true;
+    }   
+  }
+
   
   back() {
     this.router.navigate(['/lst-preventivo']);

@@ -14,6 +14,7 @@
         >
         <input
           [(ngModel)]="item.armaFuego"
+          (click)="ckeckPresion(1)"
           name="armaFuego"
           type="checkbox"
           class="form-sm-control"
@@ -26,6 +27,7 @@
         >
         <input
           [(ngModel)]="item.armaBlElcontundente"
+          (click)="ckeckPresion(2)"
           name="armaBlElcontundente"
           type="checkbox"
           class="form-sm-control"
@@ -38,7 +40,8 @@
         >
         <input
           [(ngModel)]="item.sumersion"
-          name="subUrbano"
+          (click)="ckeckPresion(3)"
+          name="sumersion"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -52,6 +55,7 @@
         >
         <input
           [(ngModel)]="item.envenenamiento"
+          (click)="ckeckPresion(4)"
           name="envenenamiento"
           type="checkbox"
           class="form-sm-control"
@@ -64,6 +68,7 @@
         >
         <input
           [(ngModel)]="item.ahorcamiento"
+          (click)="ckeckPresion(5)"
           name="ahorcamiento"
           type="checkbox"
           class="form-sm-control"
@@ -76,6 +81,7 @@
         >
         <input
           [(ngModel)]="item.seArroja"
+          (click)="ckeckPresion(6)"
           name="seArroja"
           type="checkbox"
           class="form-sm-control"
@@ -84,27 +90,43 @@
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
           7 - Se arroja a la vía del ferrocarril:</label
         >
         <input
           [(ngModel)]="item.seArrojaVia"
+          (click)="ckeckPresion(7)"
           name="seArrojaVia"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          8 - Otra modalidad:</label
+          8 - Otra modalidad (Especificar):</label
         >
         <input
           [(ngModel)]="item.otraModalidad"
+          (click)="ckeckPresion(8)"
           name="otraModalidad"
           type="checkbox"
           class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div *ngIf="item.otraModalidad" class="form-group row">
+      <div class="col-md-12">
+        <label for="especificarModalidad" class="col-sm-12 col-form-label">
+          Especificar Modalidad:</label
+        >
+        <input
+          [(ngModel)]="item.especificarModalidad"
+          name="especificarModalidad"
+          type="text"
+          class="form-control"
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
@@ -118,6 +140,7 @@
         >
         <input
           [(ngModel)]="item.viaPublica"
+          (click)="ckeckPresion(9)"
           name="viaPublica"
           type="checkbox"
           class="form-sm-control"
@@ -130,6 +153,7 @@
         >
         <input
           [(ngModel)]="item.domParticular"
+          (click)="ckeckPresion(10)"
           name="domParticular"
           type="checkbox"
           class="form-sm-control"
@@ -142,6 +166,7 @@
         >
         <input
           [(ngModel)]="item.viaFerroCarril"
+          (click)="ckeckPresion(11)"
           name="viaFerroCarril"
           type="checkbox"
           class="form-sm-control"
@@ -156,6 +181,7 @@
         >
         <input
           [(ngModel)]="item.carcelComisaria"
+          (click)="ckeckPresion(12)"
           name="sinArma"
           type="checkbox"
           class="form-sm-control"
@@ -168,6 +194,7 @@
         >
         <input
           [(ngModel)]="item.otroLugar"
+          (click)="ckeckPresion(13)"
           name="sinArma"
           type="checkbox"
           class="form-sm-control"
@@ -175,7 +202,7 @@
         />
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="item.otroLugar" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
           Especificar lugar:</label

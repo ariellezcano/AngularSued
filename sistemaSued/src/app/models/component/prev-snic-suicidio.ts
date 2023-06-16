@@ -9,6 +9,7 @@ export class PrevSnicSuicidio {
     seArroja: boolean;
     seArrojaVia: boolean;
     otraModalidad: boolean;
+    especificarModalidad: string | undefined | null;
     viaPublica: boolean;
     domParticular: boolean;
     viaFerroCarril: boolean;
