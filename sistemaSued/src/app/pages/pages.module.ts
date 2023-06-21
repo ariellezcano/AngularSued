@@ -147,6 +147,8 @@ import { VentanaLstAbmMediosComponent } from './component/ventana-lst-abm-medios
 import { VentanaLstAbmObjetoComponent } from './component/ventana-lst-abm-objeto/ventana-lst-abm-objeto.component';
 import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidios-dolosos/abm-homicidios-dolosos.component';
 import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
+import { AbmSuicidioComponent } from './frm-abm/component/abm-suicidio/abm-suicidio.component';
+import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio/planillas/planilla-excel-suicidio/planilla-excel-suicidio.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -289,6 +291,8 @@ defineLocale('es', esLocale);
       VentanaLstAbmObjetoComponent,
       AbmHomicidiosDolososComponent,
       PlanillaExcelComponent,
+      AbmSuicidioComponent,
+      PlanillaExcelSuicidioComponent,
       
     ],
     exports: [],
