@@ -76,6 +76,8 @@ import { LstVinculoComponent } from './lst/lst-vinculo/lst-vinculo.component';
 import { PagesComponent } from './pages.component';
 import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidios-dolosos/abm-homicidios-dolosos.component';
 import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
+import { AbmSuicidioComponent } from './frm-abm/component/abm-suicidio/abm-suicidio.component';
+import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio/planillas/planilla-excel-suicidio/planilla-excel-suicidio.component';
 
 const routes: Routes = [
   {
@@ -611,6 +613,21 @@ const routes: Routes = [
           {
             path: 'planillaExcel',
             component: PlanillaExcelComponent,
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'planillaSuicidios',
+        children: [
+          {
+            path: 'abm',
+            component: AbmSuicidioComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'planillaExcel',
+            component: PlanillaExcelSuicidioComponent,
             canActivate: [AuthGuard],
           },
         ],

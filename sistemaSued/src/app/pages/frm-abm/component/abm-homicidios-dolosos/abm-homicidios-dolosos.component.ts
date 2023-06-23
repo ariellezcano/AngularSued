@@ -71,6 +71,7 @@ export class AbmHomicidiosDolososComponent implements OnInit {
   }
 
   sendData(arr: PlanillaHd[]) {
+    this.dataService.dataArray = [];
     this.dataService.setDataArray(arr);
   }
 

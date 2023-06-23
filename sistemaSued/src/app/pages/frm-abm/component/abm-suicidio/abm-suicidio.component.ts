@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
+import { PlanillaSuicidio } from 'src/app/models/component/models-planillas/planillaSuicidio';
+import { DataService } from 'src/app/services/data.service';
+import { ExelService } from 'src/app/services/planillas/exel.service';
+import { PlanillasService } from 'src/app/services/planillas/planillas.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,12 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class AbmSuicidioComponent implements OnInit {
 
-  @Output() emmit: EventEmitter<PlanillaHd[]> = new EventEmitter();
+  @Output() emmit: EventEmitter<PlanillaSuicidio[]> = new EventEmitter();
 
   fecha1: any;
   fecha2: any;
+  suicidio: boolean;
+  tentativa: boolean;
 
-  arrHomicidio:PlanillaHd[];
+  arrSuicidio:PlanillaSuicidio[];
 
   constructor(
     private wsdl: PlanillasService,
@@ -23,9 +30,9 @@ export class AbmSuicidioComponent implements OnInit {
     private dataService: DataService,
     private router: Router
   ) {
-    //this.fecha1 = new Date();
-    //this.fecha2 = new Date();
-    this.arrHomicidio = [];
+    this.arrSuicidio = [];
+    this.suicidio = false;
+    this.tentativa = false;
   }
 
   ngOnInit(): void {}
@@ -33,15 +40,14 @@ export class AbmSuicidioComponent implements OnInit {
   async buscar() {
     try {
       if(this.fecha1 != undefined && this.fecha2 == undefined){
-        this.fecha2 = this.fecha1
+        this.fecha2 = this.fecha1;
       }
-      const buscar = this.wsdl.getListHomicidioDoloso(this.fecha1, this.fecha2);
+      const buscar = this.wsdl.getSuicidio(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
-        this.arrHomicidio = result.data;
-        //this.emmit.emit(this.arrHomicidio)
-        this.sendData(this.arrHomicidio)
+        this.arrSuicidio = result.data;
+        this.sendData(this.arrSuicidio)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -63,10 +69,11 @@ export class AbmSuicidioComponent implements OnInit {
 
   // para exportar a excel en la funcion
   exportTableToExcel(): void {
-    this.excelService.exportAsExcelFile(this.arrHomicidio, 'archivo');
+    this.excelService.exportAsExcelFile(this.arrSuicidio, 'archivo');
   }
 
-  sendData(arr: PlanillaHd[]) {
+  sendData(arr: PlanillaSuicidio[]) {
+    this.dataService.dataArray = [];
     this.dataService.setDataArray(arr);
   }
 
@@ -82,6 +89,16 @@ export class AbmSuicidioComponent implements OnInit {
 
   planillaExcel() {
     this.router.navigate(['/principal/planillaHomicidiosDolosos/planillaExcel']);
+  }
+
+  ActivarCasilla(num: number) {
+    if (num == 1) {
+      this.suicidio = true;
+      this.tentativa = false;
+    } else if (num == 2) {
+      this.suicidio = false;
+      this.tentativa = true;
+    }
   }
 
 }

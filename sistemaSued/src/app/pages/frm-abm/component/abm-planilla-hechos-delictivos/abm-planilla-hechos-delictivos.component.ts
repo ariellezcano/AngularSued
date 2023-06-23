@@ -142,7 +142,7 @@ export class AbmPlanillaHechosDelictivosComponent implements OnInit {
   }
 
   verificar() {
-    console.log('prev', this.itemsPrev);
+    // console.log('prev', this.itemsPrev);
     for (let index = 0; index < this.itemsPrev.length; index++) {
       this.itemsPrev[index].totalIntervencion = 0;
       this.itemsPrev[index].totalDenParticular = 0;
