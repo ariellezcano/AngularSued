@@ -1,1 +1,164 @@
-<p>planilla-excel-suicidio works!</p>
+<br />
+<hr />
+<div class="container-xxl">
+  <div class="row" id="table" #table>
+    <table id="tablaHd" class="table text-center">
+      <thead>
+        <tr>
+          <th class="encabezado" scope="col" colspan="12">DATOS DEL HECHO</th>
+          <th class="encabezado" scope="col" colspan="4">DATOS DEL SUICIDA</th>
+          <th class="encabezado" scope="col" colspan="4">DATOS DEL TESTIGO</th>
+        </tr>
+        <tr>
+          <th class="encabezado" scope="col">
+            Código de Departamento* (según codificación INDEC)
+          </th>
+          <!-- <th scope="col">Nombre Departamento</th> -->
+          <th class="encabezado" scope="col">
+            Número de Seccional* (según codificación reportada a DNGIC)
+          </th>
+          <!-- <th scope="col">Nombre Unidad</th> -->
+          <th class="encabezado" scope="col">
+            Código de Localidad* (según codificación INDEC)
+          </th>
+          <!-- <th scope="col">Nombre Localidad</th> -->
+          <th class="encabezado" scope="col">Nº de Sumario</th>
+          <th class="encabezado" scope="col">Fecha del hecho*</th>
+          <th class="encabezado" scope="col">Hora del hecho*</th>
+          <th class="encabezado" scope="col" colspan="2">(A) Tipo de lugar*</th>
+          <th class="encabezado" scope="col" colspan="2">
+            (B) Modalidad *Especificar sólo código 8
+          </th>
+          <th class="encabezado" scope="col" colspan="2">
+            (C) Motivo que origina el registro del hecho *Especificar sólo
+            código 4
+          </th>
+          <th class="encabezado" scope="col">Sexo (D)*</th>
+          <th class="encabezado" scope="col">Edad *</th>
+          <th class="encabezado" scope="col" colspan="2">(E) Género*</th>
+          <th class="encabezado" class="encabezado" scope="col">Sexo (D)</th>
+          <th class="encabezado" scope="col">Edad</th>
+          <!-- victima -->
+          <th class="encabezado" scope="col" colspan="2">
+            (E) Género* Especificar sólo código 5
+          </th>
+        </tr>
+        <tr>
+          <th class="encabezado">codigo_departamento</th>
+          <!-- <th>Nombre Departamento</th> -->
+          <th class="encabezado">codigo_seccional</th>
+          <!-- <th>Nombre Unidad</th> -->
+          <th class="encabezado">codigo_localidad</th>
+          <!-- <th>Nombre Localidad</th> -->
+          <th class="encabezado">numero_sumario</th>
+          <th class="encabezado">fecha_hecho</th>
+          <th class="encabezado">hora_hecho</th>
+          <th class="encabezado">tipo_lugar</th>
+          <th class="encabezado">otro_tipo_lugar</th>
+          <th class="encabezado">calle_interseccion</th>
+          <th class="encabezado">tipo_lugar</th>
+          <th class="encabezado">otro_tipo_lugar</th>
+          <th class="encabezado">modalidad</th>
+          <th class="encabezado">otro_modalidad</th>
+          <th class="encabezado">motivo_origen_registro</th>
+          <th class="encabezado">otro_motivo_origen_registro</th>
+          <th class="encabezado">sexo_suicida</th>
+          <th class="encabezado">edad_suicida</th>
+          <th class="encabezado">identidad_genero_suicida</th>
+          <th class="encabezado">otro_identidad_genero_suicida</th>
+          <th class="encabezado">sexo_testigo</th>
+          <th class="encabezado">edad_testigo</th>
+          <th class="encabezado">identidad_genero_testigo</th>
+          <th class="encabezado">otro_identidad_genero_testigo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td class="celda">{{ item.codigoDpto }}</td>
+          <!-- <td>{{ item.nombreDpto }}</td> -->
+          <td class="celda">{{ item.codigoUnidad }}</td>
+          <!-- <td>{{ item.nombreUnidad }}</td> -->
+          <td class="celda">{{ item.codigoLocalidad }}</td>
+          <!-- <td>{{ item.nombreLocalidad }}</td> -->
+          <td class="celda">{{ item.nroPreventivo }}</td>
+          <td class="celda">{{ item.fechaHecho | date : "dd/MM/yyyy" }}</td>
+          <td class="celda">{{ item.horaHecho }}</td>
+          <td class="celda">
+            {{
+              tipoLugar(
+                item.viaPublica,
+                item.domParticular,
+                item.viaTren,
+                item.carcelComisaria,
+                item.otroLugar
+              )
+            }}
+          </td>
+          <td class="celda">{{ item.otroLugarEsp }}</td>
+          <td class="celda">
+            {{
+              modalidad(
+                item.armaFuego,
+                item.armaElementoContundente,
+                item.sumersion,
+                item.envenenamiento,
+                item.ahorcamiento,
+                item.seArroja,
+                item.seArrojaVia,
+                item.otraModalidad
+              )
+            }}
+          </td>
+          <td class="celda">{{ item.otraArmaEsp }}</td>
+          <td class="celda">
+            {{
+              ocacionDelito(
+                item.siRobo,
+                item.abusoSexual,
+                item.otroDelito,
+                item.noOtroDelito
+              )
+            }}
+          </td>
+          <td class="celda">{{ item.otroDelitoEsp }}</td>
+          <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
+          <td class="celda">s/d</td>
+          <td class="celda">1</td>
+          <td class="celda">{{ item.observacionAmpl }}</td>
+          <td class="celda">{{ item.dniVctima }}</td>
+          <td class="celda">{{ item.nombreVictima }}</td>
+          <td class="celda">{{ item.apellidoVictima }}</td>
+          <td class="celda">{{ item.codigoSexo }}</td>
+          <td class="celda">{{ item.edadVictima }}</td>
+          <td class="celda">{{ item.claseVictima }}</td>
+          <td class="celda">{{ item.especifClaseVic }}</td>
+          <td class="celda">{{ item.codigoOcupacion }}</td>
+          <td class="celda">{{ item.especOcupacion }}</td>
+          <td class="celda">{{ item.codigoGenero }}</td>
+          <td class="celda">{{ item.especGenero }}</td>
+          <td class="celda">{{ item.codigoSexInculpado }}</td>
+          <td class="celda">{{ item.edadInculpado }}</td>
+          <td class="celda">{{ item.claseInculpado }}</td>
+          <td class="celda">{{ item.especifClaseInc }}</td>
+          <td class="celda">{{ item.codigoVinculo }}</td>
+          <td class="celda">{{ item.codGeneroInculp }}</td>
+          <td class="celda">{{ item.especifGeneroInc }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="container">
+    <button class="btn btn-info" (click)="exportarExcel('planillaHd.xlsx')">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Descargar
+      planilla
+    </button>
+    &nbsp;
+    <button class="btn btn-primary" (click)="back()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Volver a
+      Pantalla Principal
+    </button>
+  </div>
+</div>

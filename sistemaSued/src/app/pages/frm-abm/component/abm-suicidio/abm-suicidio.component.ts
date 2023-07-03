@@ -18,7 +18,7 @@ export class AbmSuicidioComponent implements OnInit {
 
   fecha1: any;
   fecha2: any;
-  suicidio: boolean;
+  consumado: boolean;
   tentativa: boolean;
 
   arrSuicidio:PlanillaSuicidio[];
@@ -31,23 +31,30 @@ export class AbmSuicidioComponent implements OnInit {
     private router: Router
   ) {
     this.arrSuicidio = [];
-    this.suicidio = false;
+    this.consumado = false;
     this.tentativa = false;
   }
 
   ngOnInit(): void {}
 
   async buscar() {
+    let delito = 0;
     try {
       if(this.fecha1 != undefined && this.fecha2 == undefined){
         this.fecha2 = this.fecha1;
       }
-      const buscar = this.wsdl.getSuicidio(this.fecha1, this.fecha2);
+      if(this.consumado){
+        delito = 5;
+      }else if(this.tentativa){
+        delito = 6;
+      }
+      const buscar = this.wsdl.getSuicidio(this.fecha1, this.fecha2, delito);
       let data = await lastValueFrom(buscar);
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.arrSuicidio = result.data;
         this.sendData(this.arrSuicidio)
+        console.log(this.arrSuicidio)
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -88,15 +95,15 @@ export class AbmSuicidioComponent implements OnInit {
   }
 
   planillaExcel() {
-    this.router.navigate(['/principal/planillaHomicidiosDolosos/planillaExcel']);
+    this.router.navigate(['/principal/planillaSuicidios/planillaExcel']);
   }
 
   ActivarCasilla(num: number) {
     if (num == 1) {
-      this.suicidio = true;
+      this.consumado = true;
       this.tentativa = false;
     } else if (num == 2) {
-      this.suicidio = false;
+      this.consumado = false;
       this.tentativa = true;
     }
   }
