@@ -7,7 +7,7 @@
         <tr>
           <th class="encabezado" scope="col" colspan="12">DATOS DEL HECHO</th>
           <th class="encabezado" scope="col" colspan="4">DATOS DEL SUICIDA</th>
-          <th class="encabezado" scope="col" colspan="4">DATOS DEL TESTIGO</th>
+          <!-- <th class="encabezado" scope="col" colspan="4">DATOS DEL TESTIGO</th> -->
         </tr>
         <tr>
           <th class="encabezado" scope="col">
@@ -35,9 +35,9 @@
           </th>
           <th class="encabezado" scope="col">Sexo (D)*</th>
           <th class="encabezado" scope="col">Edad *</th>
-          <th class="encabezado" scope="col" colspan="2">(E) Género*</th>
+          <!-- <th class="encabezado" scope="col" colspan="2">(E) Género*</th>
           <th class="encabezado" class="encabezado" scope="col">Sexo (D)</th>
-          <th class="encabezado" scope="col">Edad</th>
+          <th class="encabezado" scope="col">Edad</th> -->
           <!-- victima -->
           <th class="encabezado" scope="col" colspan="2">
             (E) Género* Especificar sólo código 5
@@ -55,9 +55,6 @@
           <th class="encabezado">hora_hecho</th>
           <th class="encabezado">tipo_lugar</th>
           <th class="encabezado">otro_tipo_lugar</th>
-          <th class="encabezado">calle_interseccion</th>
-          <th class="encabezado">tipo_lugar</th>
-          <th class="encabezado">otro_tipo_lugar</th>
           <th class="encabezado">modalidad</th>
           <th class="encabezado">otro_modalidad</th>
           <th class="encabezado">motivo_origen_registro</th>
@@ -66,10 +63,10 @@
           <th class="encabezado">edad_suicida</th>
           <th class="encabezado">identidad_genero_suicida</th>
           <th class="encabezado">otro_identidad_genero_suicida</th>
-          <th class="encabezado">sexo_testigo</th>
-          <th class="encabezado">edad_testigo</th>
+          <!--<th class="encabezado">sexo_testigo</th>
+           <th class="encabezado">edad_testigo</th>
           <th class="encabezado">identidad_genero_testigo</th>
-          <th class="encabezado">otro_identidad_genero_testigo</th>
+          <th class="encabezado">otro_identidad_genero_testigo</th> -->
         </tr>
       </thead>
       <tbody>
@@ -109,40 +106,16 @@
               )
             }}
           </td>
-          <td class="celda">{{ item.otraArmaEsp }}</td>
-          <td class="celda">
-            {{
-              ocacionDelito(
-                item.siRobo,
-                item.abusoSexual,
-                item.otroDelito,
-                item.noOtroDelito
-              )
-            }}
-          </td>
-          <td class="celda">{{ item.otroDelitoEsp }}</td>
+          <td class="celda">{{ item.especificarModalidad }}</td>
           <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
-          <td class="celda">s/d</td>
-          <td class="celda">1</td>
-          <td class="celda">{{ item.observacionAmpl }}</td>
-          <td class="celda">{{ item.dniVctima }}</td>
-          <td class="celda">{{ item.nombreVictima }}</td>
-          <td class="celda">{{ item.apellidoVictima }}</td>
+          <td class="celda"></td>
           <td class="celda">{{ item.codigoSexo }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
-          <td class="celda">{{ item.claseVictima }}</td>
-          <td class="celda">{{ item.especifClaseVic }}</td>
-          <td class="celda">{{ item.codigoOcupacion }}</td>
-          <td class="celda">{{ item.especOcupacion }}</td>
-          <td class="celda">{{ item.codigoGenero }}</td>
-          <td class="celda">{{ item.especGenero }}</td>
-          <td class="celda">{{ item.codigoSexInculpado }}</td>
-          <td class="celda">{{ item.edadInculpado }}</td>
-          <td class="celda">{{ item.claseInculpado }}</td>
-          <td class="celda">{{ item.especifClaseInc }}</td>
-          <td class="celda">{{ item.codigoVinculo }}</td>
-          <td class="celda">{{ item.codGeneroInculp }}</td>
-          <td class="celda">{{ item.especifGeneroInc }}</td>
+          <td class="celda">{{ item.generoVictima }}</td>
+          <td class="celda">{{ item.especifGeneroVict }}</td>
+          <!-- <td class="celda">s/d</td>
+          <td class="celda">s/d</td>
+          <td class="celda">s/d</td> -->
         </tr>
       </tbody>
     </table>
@@ -151,7 +124,7 @@
 <hr />
 <div class="row">
   <div class="container">
-    <button class="btn btn-info" (click)="exportarExcel('planillaHd.xlsx')">
+    <button class="btn btn-info" (click)="exportarExcel('planillaSuicidios.xlsx')">
       <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Descargar
       planilla
     </button>

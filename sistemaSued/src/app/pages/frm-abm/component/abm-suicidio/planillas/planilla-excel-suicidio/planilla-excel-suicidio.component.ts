@@ -62,7 +62,7 @@ export class PlanillaExcelSuicidioComponent implements OnInit {
     viaTren: any,
     carcelComisaria: any,
     otroLugar: any,
-    sinDeterminar: any
+    //sinDeterminar: any
   ) {
     let valor = '';
     if (viaPublica) {
@@ -75,9 +75,10 @@ export class PlanillaExcelSuicidioComponent implements OnInit {
       valor = '4';
     } else if (otroLugar) {
       valor = '5';
-    } else if (sinDeterminar) {
-      valor = '99';
-    }
+    } 
+    // else if (sinDeterminar) {
+    //   valor = '99';
+    // }
     return valor;
   }
 
@@ -94,12 +95,20 @@ export class PlanillaExcelSuicidioComponent implements OnInit {
     let valor = '';
     if (armaFuego) {
       valor = '1';
-    } else if (armaBlanca) {
+    } else if (armaElementoContundente) {
       valor = '2';
-    } else if (otraArma) {
+    } else if (sumersion) {
       valor = '3';
-    } else if (sinArma) {
+    } else if (envenenamiento) {
       valor = '4';
+    } else if (ahorcamiento) {
+      valor = '5';
+    } else if (seArroja) {
+      valor = '6';
+    } else if (seArrojaVia) {
+      valor = '7';
+    } else if (otraModalidad) {
+      valor = '8';
     }
     return valor;
   }
