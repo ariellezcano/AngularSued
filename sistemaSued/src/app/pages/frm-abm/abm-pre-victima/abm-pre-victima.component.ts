@@ -164,8 +164,8 @@ export class AbmPreVictimaComponent implements OnInit {
           if (
             this.prev.delitoNavigation?.id == 1 ||
             this.prev.delitoNavigation?.id == 2 ||
-            this.prev.delitoNavigation?.id == 5 ||
-            this.prev.delitoNavigation?.id == 6
+            this.prev.delitoNavigation?.id == 5 
+            //||this.prev.delitoNavigation?.id == 6
           ) {
             this.item.fallecio = true;
           }
