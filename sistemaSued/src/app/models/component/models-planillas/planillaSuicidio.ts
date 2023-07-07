@@ -11,6 +11,7 @@ export class PlanillaSuicidio {
   carcelComisaria?: boolean;
   otroLugar?: boolean;
   otroLugarEsp?: string;
+  sinDeterminarLugar?: boolean;
   armaFuego?: boolean;
   armaElementoContundente?: boolean;
   sumersion?: boolean;
@@ -18,12 +19,18 @@ export class PlanillaSuicidio {
   ahorcamiento?: boolean;
   seArroja?: boolean;
   seArrojaVia?: boolean;
+  //agregue nuevo
+  seIncinera?: boolean;
+  //</agregue nuevo>
   otraModalidad?: boolean;
+  sinDeterminarModalidad?: boolean;
   especificarModalidad?: string;
   intervencionPolicial?: boolean;
+  nroDocumentoSuicida?: number;
+  nombreSuicida?: string;
+  apellidoSuicida?: string;
   codigoSexo?: number;
   edadVictima?: number;
   generoVictima?: number;
   especifGeneroVict?: string;
-
 }

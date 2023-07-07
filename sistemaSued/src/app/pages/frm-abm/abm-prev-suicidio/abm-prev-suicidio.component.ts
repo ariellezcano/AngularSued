@@ -145,6 +145,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 2){
       this.item.armaFuego = false;
@@ -156,6 +158,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 3){
       this.item.armaFuego = false;
@@ -167,6 +171,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 4){
       this.item.armaFuego = false;
@@ -178,6 +184,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 5){
       this.item.armaFuego = false;
@@ -189,6 +197,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 6){
       this.item.armaFuego = false;
@@ -200,6 +210,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = false;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     //Clase de Arma
     if(num == 7){
@@ -212,6 +224,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArrojaVia = true;
       this.item.otraModalidad = false;
       this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
     }
     if(num == 8){
       this.item.armaFuego = false;
@@ -222,6 +236,34 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.seArroja = false;
       this.item.seArrojaVia = false;
       this.item.otraModalidad = true;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = false;
+    }
+    if(num == 14){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+      this.item.seIncinera = true;
+      this.item.sinDeterminarModalidad = false;
+    }
+    if(num == 15){
+      this.item.armaFuego = false;
+      this.item.armaBlElcontundente = false;
+      this.item.sumersion = false;
+      this.item.envenenamiento = false;
+      this.item.ahorcamiento = false;
+      this.item.seArroja = false;
+      this.item.seArrojaVia = false;
+      this.item.otraModalidad = false;
+      this.item.especificarModalidad = null;
+      this.item.seIncinera = false;
+      this.item.sinDeterminarModalidad = true;
     }
     //Lugar
     if(num == 9){
@@ -230,6 +272,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.viaFerroCarril = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 10){
       this.item.viaPublica = false;
@@ -237,6 +281,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.viaFerroCarril = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 11){
       this.item.viaPublica = false;
@@ -244,6 +290,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.viaFerroCarril = true;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 12){
       this.item.viaPublica = false;
@@ -251,6 +299,8 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.viaFerroCarril = false;
       this.item.carcelComisaria = true;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 13){
       this.item.viaPublica = false;
@@ -258,6 +308,16 @@ export class AbmPrevSuicidioComponent implements OnInit {
       this.item.viaFerroCarril = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = true;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 16){
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.viaFerroCarril = false;
+      this.item.carcelComisaria = false;
+      this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = true;
     }   
   }
 

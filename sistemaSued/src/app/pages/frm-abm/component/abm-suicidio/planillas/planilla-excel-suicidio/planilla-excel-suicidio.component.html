@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th class="encabezado" scope="col" colspan="12">DATOS DEL HECHO</th>
-          <th class="encabezado" scope="col" colspan="4">DATOS DEL SUICIDA</th>
+          <th class="encabezado" scope="col" colspan="7">DATOS DEL SUICIDA</th>
           <!-- <th class="encabezado" scope="col" colspan="4">DATOS DEL TESTIGO</th> -->
         </tr>
         <tr>
@@ -33,6 +33,9 @@
             (C) Motivo que origina el registro del hecho *Especificar sólo
             código 4
           </th>
+          <th class="encabezado" scope="col">Nro. Documento</th>
+          <th class="encabezado" scope="col">Nombre</th>
+          <th class="encabezado" scope="col">Apellido</th>
           <th class="encabezado" scope="col">Sexo (D)*</th>
           <th class="encabezado" scope="col">Edad *</th>
           <!-- <th class="encabezado" scope="col" colspan="2">(E) Género*</th>
@@ -59,6 +62,9 @@
           <th class="encabezado">otro_modalidad</th>
           <th class="encabezado">motivo_origen_registro</th>
           <th class="encabezado">otro_motivo_origen_registro</th>
+          <th class="encabezado">documento_suicida</th>
+          <th class="encabezado">nombre_suicida</th>
+          <th class="encabezado">apellido_suicida</th>
           <th class="encabezado">sexo_suicida</th>
           <th class="encabezado">edad_suicida</th>
           <th class="encabezado">identidad_genero_suicida</th>
@@ -87,7 +93,8 @@
                 item.domParticular,
                 item.viaTren,
                 item.carcelComisaria,
-                item.otroLugar
+                item.otroLugar,
+                item.sinDeterminarLugar
               )
             }}
           </td>
@@ -102,13 +109,18 @@
                 item.ahorcamiento,
                 item.seArroja,
                 item.seArrojaVia,
-                item.otraModalidad
+                item.seIncinera,
+                item.otraModalidad,
+                item.sinDeterminarModalidad
               )
             }}
           </td>
           <td class="celda">{{ item.especificarModalidad }}</td>
           <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
           <td class="celda"></td>
+          <td class="celda">{{ item.nroDocumentoSuicida }}</td>
+          <td class="celda">{{ item.nombreSuicida }}</td>
+          <td class="celda">{{ item.apellidoSuicida }}</td>
           <td class="celda">{{ item.codigoSexo }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
           <td class="celda">{{ item.generoVictima }}</td>
@@ -124,7 +136,10 @@
 <hr />
 <div class="row">
   <div class="container">
-    <button class="btn btn-info" (click)="exportarExcel('planillaSuicidios.xlsx')">
+    <button
+      class="btn btn-info"
+      (click)="exportarExcel('planillaSuicidios.xlsx')"
+    >
       <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Descargar
       planilla
     </button>

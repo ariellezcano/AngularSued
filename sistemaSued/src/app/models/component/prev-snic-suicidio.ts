@@ -8,6 +8,8 @@ export class PrevSnicSuicidio {
     ahorcamiento: boolean;
     seArroja: boolean;
     seArrojaVia: boolean;
+    seIncinera: boolean;
+    sinDeterminarModalidad: boolean
     otraModalidad: boolean;
     especificarModalidad: string | undefined | null;
     viaPublica: boolean;
@@ -15,7 +17,8 @@ export class PrevSnicSuicidio {
     viaFerroCarril: boolean;
     carcelComisaria: boolean;
     otroLugar: boolean;
-    especifLugar!: string;
+    especifLugar!: string | undefined | null;
+    sinDeterminarLugar: boolean;
 
     constructor(){
         this.armaFuego = false;
@@ -25,11 +28,14 @@ export class PrevSnicSuicidio {
         this.ahorcamiento = false;
         this.seArroja = false;
         this.seArrojaVia = false;
+        this.seIncinera = false;
+        this.sinDeterminarModalidad = false;
         this.otraModalidad = false;
         this.viaPublica = false;
         this.domParticular = false;
         this.viaFerroCarril = false;
         this.carcelComisaria = false;
         this.otroLugar = false;
+        this.sinDeterminarLugar = false;
     }
 }

@@ -90,7 +90,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
           7 - Se arroja a la vía del ferrocarril:</label
         >
@@ -103,13 +103,41 @@
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
           8 - Otra modalidad (Especificar):</label
         >
         <input
           [(ngModel)]="item.otraModalidad"
           (click)="ckeckPresion(8)"
+          name="otraModalidad"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          9 - Se incinera:</label
+        >
+        <input
+          [(ngModel)]="item.seIncinera"
+          (click)="ckeckPresion(14)"
+          name="otraModalidad"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          9 - Sin Determinar:</label
+        >
+        <input
+          [(ngModel)]="item.sinDeterminarModalidad"
+          (click)="ckeckPresion(15)"
           name="otraModalidad"
           type="checkbox"
           class="form-sm-control"
@@ -175,7 +203,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
           4 - Carcel o Comisaría:</label
         >
@@ -188,13 +216,26 @@
           [ngModelOptions]="{ standalone: true }"
         />
       </div>
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
           5 - Otro lugar (Especificar):</label
         >
         <input
           [(ngModel)]="item.otroLugar"
           (click)="ckeckPresion(13)"
+          name="sinArma"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          5 - Sin Determinar:</label
+        >
+        <input
+          [(ngModel)]="item.sinDeterminarLugar"
+          (click)="ckeckPresion(16)"
           name="sinArma"
           type="checkbox"
           class="form-sm-control"
