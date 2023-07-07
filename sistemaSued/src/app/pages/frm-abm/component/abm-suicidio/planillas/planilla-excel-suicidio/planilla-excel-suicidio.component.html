@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th class="encabezado" scope="col" colspan="12">DATOS DEL HECHO</th>
-          <th class="encabezado" scope="col" colspan="7">DATOS DEL SUICIDA</th>
+          <th class="encabezado" scope="col" colspan="9">DATOS DEL SUICIDA</th>
           <!-- <th class="encabezado" scope="col" colspan="4">DATOS DEL TESTIGO</th> -->
         </tr>
         <tr>
@@ -38,6 +38,7 @@
           <th class="encabezado" scope="col">Apellido</th>
           <th class="encabezado" scope="col">Sexo (D)*</th>
           <th class="encabezado" scope="col">Edad *</th>
+          <th class="encabezado" scope="col" colspan="2">Clase Suicida(F)*</th>
           <!-- <th class="encabezado" scope="col" colspan="2">(E) Género*</th>
           <th class="encabezado" class="encabezado" scope="col">Sexo (D)</th>
           <th class="encabezado" scope="col">Edad</th> -->
@@ -67,6 +68,8 @@
           <th class="encabezado">apellido_suicida</th>
           <th class="encabezado">sexo_suicida</th>
           <th class="encabezado">edad_suicida</th>
+          <th class="encabezado">clase_suicida</th>
+          <th class="encabezado">otra_clase_suicida</th>
           <th class="encabezado">identidad_genero_suicida</th>
           <th class="encabezado">otro_identidad_genero_suicida</th>
           <!--<th class="encabezado">sexo_testigo</th>
@@ -123,6 +126,8 @@
           <td class="celda">{{ item.apellidoSuicida }}</td>
           <td class="celda">{{ item.codigoSexo }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
+          <td class="celda">{{ item.claseSuicida }}</td>
+          <td class="celda">{{ item.especifClaseSuicida }}</td>
           <td class="celda">{{ item.generoVictima }}</td>
           <td class="celda">{{ item.especifGeneroVict }}</td>
           <!-- <td class="celda">s/d</td>

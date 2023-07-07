@@ -31,6 +31,8 @@ export class PlanillaSuicidio {
   apellidoSuicida?: string;
   codigoSexo?: number;
   edadVictima?: number;
+  claseSuicida?: string;
+  especifClaseSuicida?: string;
   generoVictima?: number;
   especifGeneroVict?: string;
 }

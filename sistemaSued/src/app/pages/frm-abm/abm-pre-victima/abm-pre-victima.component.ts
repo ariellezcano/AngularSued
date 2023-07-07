@@ -61,6 +61,7 @@ export class AbmPreVictimaComponent implements OnInit {
 
   dnpc: boolean;
   dnpcHD: boolean;
+  dnpcSuicidio: boolean;
   //variable para verificar si fue enviado los datos
   enviado = false;
   //habilita campos al modificar "muestra los datos guardados en bd"
@@ -136,6 +137,7 @@ export class AbmPreVictimaComponent implements OnInit {
     this.verProvincia = false;
     this.dnpc = false;
     this.dnpcHD = false;
+    this.dnpcSuicidio = false;
   }
 
   ngOnInit(): void {
@@ -164,7 +166,7 @@ export class AbmPreVictimaComponent implements OnInit {
           if (
             this.prev.delitoNavigation?.id == 1 ||
             this.prev.delitoNavigation?.id == 2 ||
-            this.prev.delitoNavigation?.id == 5 
+            this.prev.delitoNavigation?.id == 5
             //||this.prev.delitoNavigation?.id == 6
           ) {
             this.item.fallecio = true;
@@ -173,8 +175,13 @@ export class AbmPreVictimaComponent implements OnInit {
             this.dnpc = true;
             this.item.fallecio = true;
           }
-          //si es homicidio doloso consumado o tentativo
-          if(this.prev.delitoNavigation?.id == 1 || this.prev.delitoNavigation?.id == 2){
+          //si es homicidio doloso consumado o tentativo // suicidio consumado o tentativo
+          if (
+            this.prev.delitoNavigation?.id == 1 ||
+            this.prev.delitoNavigation?.id == 2 ||
+            this.prev.delitoNavigation?.id == 5 ||
+            this.prev.delitoNavigation?.id == 6
+          ) {
             this.dnpcHD = true;
           }
         }
