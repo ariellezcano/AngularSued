@@ -58,11 +58,12 @@ export class PlanillaExcelComponent implements OnInit {
 
   tipoLugar(
     viaPublica: any,
-    domParticular: any,                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    domParticular: any,
     comercio: any,
     interiorRodados: any,
     carcelComisaria: any,
-    otroLugar: any
+    otroLugar: any,
+    sinDeterminarLugar: any
   ) {
     let valor = '';
     if (viaPublica) {
@@ -77,11 +78,26 @@ export class PlanillaExcelComponent implements OnInit {
       valor = '5';
     } else if (otroLugar) {
       valor = '6';
+    } else if (sinDeterminarLugar) {
+      valor = '99';
     }
     return valor;
   }
 
-  arma(armaFuego: any, armaBlanca: any, otraArma: any, sinArma: any) {
+  arma(
+    armaFuego: any,
+    armaBlanca: any,
+    otraArma: any,
+    sinArma: any,
+    objetoContundente: any,
+    arrollamiento: any,
+    golpesPunio: any,
+    ahorcamientoAsfixia: any,
+    envenenamiento: any,
+    precipitacionAlVacio: any,
+    quemaduras: any,
+    sinDeterminarMecanismo: any
+  ) {
     let valor = '';
     if (armaFuego) {
       valor = '1';
@@ -91,6 +107,22 @@ export class PlanillaExcelComponent implements OnInit {
       valor = '3';
     } else if (sinArma) {
       valor = '4';
+    } else if (objetoContundente) {
+      valor = '5';
+    } else if (arrollamiento) {
+      valor = '6';
+    } else if (golpesPunio) {
+      valor = '7';
+    } else if (ahorcamientoAsfixia) {
+      valor = '8';
+    } else if (envenenamiento) {
+      valor = '9';
+    } else if (precipitacionAlVacio) {
+      valor = '10';
+    } else if (quemaduras) {
+      valor = '11';
+    } else if (sinDeterminarMecanismo) {
+      valor = '99';
     }
     return valor;
   }
@@ -99,7 +131,8 @@ export class PlanillaExcelComponent implements OnInit {
     siRobo: any,
     abusoSexual: any,
     otroDelito: any,
-    noOtroDelito: any
+    noOtroDelito: any,
+    sinDeterminarOcacionDelito: any
   ) {
     let valor = '';
     if (siRobo) {
@@ -110,6 +143,8 @@ export class PlanillaExcelComponent implements OnInit {
       valor = '3';
     } else if (noOtroDelito) {
       valor = '4';
+    } else if(sinDeterminarOcacionDelito){
+      valor = '99'
     }
     return valor;
   }
@@ -141,13 +176,13 @@ export class PlanillaExcelComponent implements OnInit {
   //   }
   // }
 
-  verificarDireccion(nombre: string | null, adicional: string | null){
+  verificarDireccion(nombre: string | null, adicional: string | null) {
     let dato = '';
     //alert("aca llegue")
-    console.log("direccion",nombre, adicional)
-    if(nombre != null){
+    //console.log('direccion', nombre, adicional);
+    if (nombre != null) {
       dato = nombre;
-    }else if(adicional != null){
+    } else if (adicional != null) {
       dato = adicional;
     }
     return dato;

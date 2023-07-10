@@ -89,6 +89,21 @@
         />
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          99 - Sin determinar:</label
+        >
+        <input
+          [(ngModel)]="item.sinDeterminarLugar"
+          (click)="ckeckPresion(15)"
+          name="sinDeterminarLugar"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
     <div *ngIf="item.otroLugar" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
@@ -153,6 +168,114 @@
           [(ngModel)]="item.sinArma"
           (click)="ckeckPresion(10)"
           name="sinArma"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          5 - Objeto Contundente:</label
+        >
+        <input
+          [(ngModel)]="item.objetoContundente"
+          (click)="ckeckPresion(16)"
+          name="nocturno"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          6 - Arrollamiento por rodado o tren:</label
+        >
+        <input
+          [(ngModel)]="item.arrollamiento"
+          (click)="ckeckPresion(17)"
+          name="arrollamiento"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="golpesPunio" class="col-sm-12 col-form-label">
+          7 - Golpes de puño:</label
+        >
+        <input
+          [(ngModel)]="item.golpesPunio"
+          (click)="ckeckPresion(18)"
+          name="golpesPunio"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="ahorcamientoAsfixia" class="col-sm-12 col-form-label">
+          8 - Ahorcamiento/Asfixia:</label
+        >
+        <input
+          [(ngModel)]="item.ahorcamientoAsfixia"
+          (click)="ckeckPresion(19)"
+          name="ahorcamientoAsfixia"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <label for="envenenamiento" class="col-sm-12 col-form-label">
+          9 - Envenenamiento:</label
+        >
+        <input
+          [(ngModel)]="item.envenenamiento"
+          (click)="ckeckPresion(20)"
+          name="envenenamiento"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="precipitacionAlVacio" class="col-sm-12 col-form-label">
+          10 - Precipitación Al Vacío:</label
+        >
+        <input
+          [(ngModel)]="item.precipitacionAlVacio"
+          (click)="ckeckPresion(21)"
+          name="precipitacionAlVacio"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="quemaduras" class="col-sm-12 col-form-label">
+          11 - Quemaduras:</label
+        >
+        <input
+          [(ngModel)]="item.quemaduras"
+          (click)="ckeckPresion(22)"
+          name="quemaduras"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-3">
+        <label for="sinDeterminarMecanismo" class="col-sm-12 col-form-label">
+          99 - Sin determinar:</label
+        >
+        <input
+          [(ngModel)]="item.sinDeterminarMecanismo"
+          (click)="ckeckPresion(23)"
+          name="sinDeterminarMecanismo"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -229,6 +352,21 @@
         />
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <label for="sinDeterminarOcacionDelito" class="col-sm-12 col-form-label">
+          99 - Sin determinar:</label
+        >
+        <input
+          [(ngModel)]="item.sinDeterminarOcacionDelito"
+          (click)="ckeckPresion(24)"
+          name="sinDeterminarOcacionDelito"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
     <div *ngIf="item.otroDel" class="row">
       <div class="col-md-12">
         <label for="Nombre" class="col-sm-12 col-form-label">
@@ -246,35 +384,40 @@
     </div>
     <hr />
     <div class="row">
-      <ng-container *ngIf="guardando; then thenTemplate; else elseTemplate"></ng-container>
+      <ng-container
+        *ngIf="guardando; then thenTemplate; else elseTemplate"
+      ></ng-container>
       <ng-template #thenTemplate>
         <button id="boton" class="btn btn-disabled" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          <span
+            class="spinner-grow spinner-grow-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
           Guardando datos...
         </button>
       </ng-template>
       <ng-template #elseTemplate>
         <ng-container
-        *ngIf="item.preventivo > 0; then thenTemplate; else elseTemplate"
-      ></ng-container>
-      <ng-template #thenTemplate>
-        <button class="btn btn-primary" type="submit">
-          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;
-          Editar registro</button>
+          *ngIf="item.preventivo > 0; then thenTemplate; else elseTemplate"
+        ></ng-container>
+        <ng-template #thenTemplate>
+          <button class="btn btn-primary" type="submit">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;
+            Editar registro
+          </button>
+        </ng-template>
+        <ng-template #elseTemplate>
+          <button class="btn btn-dark" type="submit">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp; Guardar
+          </button>
+        </ng-template>
       </ng-template>
-      <ng-template #elseTemplate>
-        <button class="btn btn-dark" type="submit">
-          <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;
-          Guardar</button>
-      </ng-template>
-      </ng-template>
-      
-     
+
       &nbsp;
       <button class="btn btn-info" type="button" (click)="back()">
         <i class="fa fa-hand-o-left" aria-hidden="true"></i>
-        &nbsp;
-        Cancelar
+        &nbsp; Cancelar
       </button>
     </div>
   </form>

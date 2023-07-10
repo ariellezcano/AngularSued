@@ -70,6 +70,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.intRodados = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 2){
       this.item.domParticular = true
@@ -78,6 +80,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.intRodados = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 3){
       this.item.comercio = true;
@@ -86,6 +90,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.intRodados = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 4){
       this.item.intRodados = true;
@@ -94,6 +100,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.comercio = false;
       this.item.carcelComisaria = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 5){
       this.item.carcelComisaria = true;
@@ -102,6 +110,8 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.comercio = false;
       this.item.intRodados = false;
       this.item.otroLugar = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = false;
     }
     if(num == 6){
       this.item.otroLugar = true;
@@ -110,6 +120,17 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.comercio = false;
       this.item.intRodados = false;
       this.item.carcelComisaria = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 15){
+      this.item.otroLugar = false;
+      this.item.viaPublica = false;
+      this.item.domParticular = false;
+      this.item.comercio = false;
+      this.item.intRodados = false;
+      this.item.carcelComisaria = false;
+      this.item.especifLugar = null;
+      this.item.sinDeterminarLugar = true
     }
     //Clase de Arma
     if(num == 7){
@@ -117,24 +138,180 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.armaBlanca = false;
       this.item.otraArma = false;
       this.item.sinArma = false;
+
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
     }
     if(num == 8){
       this.item.armaFuego = false;
       this.item.armaBlanca = true;
       this.item.otraArma = false;
       this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
     }
     if(num == 9){
       this.item.armaFuego = false;
       this.item.armaBlanca = false;
       this.item.otraArma = true;
       this.item.sinArma = false;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
     }
     if(num == 10){
       this.item.armaFuego = false;
       this.item.armaBlanca = false;
       this.item.otraArma = false;
       this.item.sinArma = true;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 16){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = true;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 17){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = true;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 18){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = true;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 19){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = true;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 20){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = true;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 21){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = true;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 22){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = true;
+      this.item.sinDeterminarMecanismo = false;
+    }
+    if(num == 23){
+      this.item.armaFuego = false;
+      this.item.armaBlanca = false;
+      this.item.otraArma = false;
+      this.item.sinArma = false;
+      this.item.especifArma = null;
+      this.item.objetoContundente = false;
+      this.item.arrollamiento = false;
+      this.item.golpesPunio = false;
+      this.item.ahorcamientoAsfixia = false;
+      this.item.envenenamiento = false;
+      this.item.precipitacionAlVacio = false;
+      this.item.quemaduras = false;
+      this.item.sinDeterminarMecanismo = true;
     }
     //Otro delito
     if(num == 11){
@@ -160,6 +337,13 @@ export class AbmPrevHomicidioComponent implements OnInit {
       this.item.violacion = false;
       this.item.otroDel = false;
       this.item.noOtrodelito = true;
+    }
+    if(num == 24){
+      this.item.robo = false;
+      this.item.violacion = false;
+      this.item.otroDel = false;
+      this.item.noOtrodelito = false;
+      this.item.sinDeterminarOcacionDelito = true;
     }   
   }
 
@@ -176,7 +360,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
 
   async actualizarDatos(obj: PrevSnicHomicidio) {
     this.guardando = true;
-    console.log("enviado modificar", this.item)
+    //console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
