@@ -313,7 +313,13 @@ export class AbmPreventivoComponent implements OnInit {
           });
         }
       }
-    } catch (error) {}
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        text: 'Hubo un error al filtrar el dato!',
+        //footer: '<b>No existe la búsqueda realizada...</b>',
+      });
+    }
   }
 
   capturar(event: Delito) {

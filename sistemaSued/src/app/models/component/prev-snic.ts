@@ -5,6 +5,15 @@ export class PrevSnic {
     urbano: boolean;
     subUrbano: boolean;
     rural: boolean;
+
+    calle: boolean;
+    rutaNacional: boolean;
+    rutaProvincial: boolean;
+    autopistaNacional: boolean;
+    c Boolean? autopistaProvincial { get; set; }
+        public Boolean? autovia { get; set; }
+        public Boolean? sinDeterminarLugar { get; set; }
+
     //Horario
     diurno: boolean;
     nocturno: boolean;
