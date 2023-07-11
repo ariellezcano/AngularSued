@@ -228,6 +228,46 @@ export class AbmSnicComponent implements OnInit {
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
     }
+    if(num == 11){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = true;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 12){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = true;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
   }
 
 
