@@ -10,9 +10,9 @@ export class PrevSnic {
     rutaNacional: boolean;
     rutaProvincial: boolean;
     autopistaNacional: boolean;
-    c Boolean? autopistaProvincial { get; set; }
-        public Boolean? autovia { get; set; }
-        public Boolean? sinDeterminarLugar { get; set; }
+    autopistaProvincial: boolean;
+    autovia: boolean;
+    sinDeterminarLugar: boolean;
 
     //Horario
     diurno: boolean;
@@ -43,7 +43,8 @@ export class PrevSnic {
     vehiculoMoto: boolean;
     motoPeaton: boolean;
     otroModo: boolean;
-    modoEspecificar!: string;
+    modoEspecificar: string | null | undefined;
+    vuelcoDespiste: boolean;
     //Tipo de Hecho
     colision: boolean;
     vuelco: boolean;
@@ -80,6 +81,7 @@ export class PrevSnic {
         this.vehiculoTsangre = false;
         this.multiple = false;
         this.vehiculoVehiculo = false;
+        this.vuelcoDespiste = false;
         this.bicicleta = false;
         this.motoMoto = false;
         this.tren = false;
@@ -111,5 +113,12 @@ export class PrevSnic {
         this.noFunciona = false;
         this.noHaySemaforo = false;
 
+        this.calle = false;
+        this.rutaNacional = false;
+        this.rutaProvincial = false;
+        this.autopistaNacional = false;
+        this.autopistaProvincial = false;
+        this.autovia = false;
+        this.sinDeterminarLugar = false;
     }
 }

@@ -12,6 +12,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Urbano:</label>
         <input
           [(ngModel)]="item.urbano"
+          (click)="ckeckPresion(1)"
           name="urbano"
           type="checkbox"
           class="form-sm-control"
@@ -22,6 +23,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Rural:</label>
         <input
           [(ngModel)]="item.rural"
+          (click)="ckeckPresion(2)"
           name="subUrbano"
           type="checkbox"
           class="form-sm-control"
@@ -30,6 +32,90 @@
       </div>
     </div>
     <hr />
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">1 - Calle:</label>
+        <input
+          [(ngModel)]="item.calle"
+          (click)="ckeckPresion(3)"
+          name="calle"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">2 - Ruta Nacional:</label>
+        <input
+          [(ngModel)]="item.rutaNacional"
+          (click)="ckeckPresion(4)"
+          name="rutaNacional"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">3 - Ruta Provincial:</label>
+        <input
+          [(ngModel)]="item.rutaProvincial"
+          (click)="ckeckPresion(5)"
+          name="rutaProvincial"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">4 - Autopista Nacional:</label>
+        <input
+          [(ngModel)]="item.autopistaNacional"
+          (click)="ckeckPresion(6)"
+          name="autopistaNacional"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">5 - Autopista Provincial:</label>
+        <input
+          [(ngModel)]="item.autopistaProvincial"
+          (click)="ckeckPresion(7)"
+          name="autopistaProvincial"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">6 - Autovía:</label>
+        <input
+          [(ngModel)]="item.autovia"
+          (click)="ckeckPresion(8)"
+          name="autopistaProvincial"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">99 - Sin determinar:</label>
+        <input
+          [(ngModel)]="item.sinDeterminarLugar"
+          (click)="ckeckPresion(9)"
+          name="sinDeterminarLugar"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <hr>
     <div class="form-group row">
       <legend><b>Horario:</b></legend>
       <div class="col-md-6">
@@ -143,10 +229,11 @@
       <legend><b>Modo Producción del Hecho:</b></legend>
       <div class="col-md-3">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Vehículo - Peatón:</label
+         1 - Vehículo - Peatón:</label
         >
         <input
           [(ngModel)]="item.vehiculoPeaton"
+          (click)="ckeckPresion(10)"
           name="vehiculoPeaton"
           type="checkbox"
           class="form-sm-control"
@@ -155,10 +242,11 @@
       </div>
       <div class="col-md-3">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Vehículo - Vehículo:</label
+        2 - Vehículo - Vehículo:</label
         >
         <input
           [(ngModel)]="item.vehiculoVehiculo"
+          (click)="ckeckPresion(11)"
           name="vehiculoVehiculo"
           type="checkbox"
           class="form-sm-control"
@@ -167,10 +255,11 @@
       </div>
       <div class="col-md-3">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Vehículo - Objeto fijo:</label
+         3 - Vehículo - Objeto fijo:</label
         >
         <input
           [(ngModel)]="item.vehiculoObjeto"
+          (click)="ckeckPresion(12)"
           name="vehiculoObjeto"
           type="checkbox"
           class="form-sm-control"
@@ -183,6 +272,7 @@
         >
         <input
           [(ngModel)]="item.vehiculoBici"
+          (click)="ckeckPresion(13)"
           name="vehiculoBici"
           type="checkbox"
           class="form-sm-control"
@@ -327,7 +417,7 @@
         />
       </div>
       <div class="col-md-3">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Otro Modo:</label>
+        <label for="Nombre" class="col-sm-12 col-form-label">5 - Otro Modo:</label>
         <input
           [(ngModel)]="item.otroModo"
           name="otroModo"
@@ -337,8 +427,20 @@
         />
       </div>
     </div>
-    <br />
     <div class="row">
+      <div class="col-md-12">
+        <label for="Nombre" class="col-sm-12 col-form-label">4 - Vuelco/Despiste:</label>
+        <input
+          [(ngModel)]="item.vuelcoDespiste"
+          name="vuelcoDespiste"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <br />
+    <div *ngIf="item.otroModo"class="row">
       <div class="col-md-2">
         <label for="" class="col-sm-12 col-form-label">Especificar:</label>
       </div>

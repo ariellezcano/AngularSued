@@ -135,7 +135,102 @@ export class AbmSnicComponent implements OnInit {
     }
   }
 
-  
+  ckeckPresion=(num: number)=> {
+    //Tipo de lugar
+    if(num == 1){
+      this.item.urbano = true;
+      this.item.rural = false;
+    }
+    if(num == 2){
+      this.item.urbano = false;
+      this.item.rural = true;
+    }
+    if(num == 3){
+      this.item.calle = true;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 4){
+      this.item.calle = false;
+      this.item.rutaNacional = true;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 5){
+      this.item.calle = false;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = true;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 6){
+      this.item.calle = false;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = true;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 7){
+      this.item.calle = false;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = true;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 8){
+      this.item.calle = false;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = true;
+      this.item.sinDeterminarLugar = false;
+    }
+    if(num == 9){
+      this.item.calle = false;
+      this.item.rutaNacional = false;
+      this.item.rutaProvincial = false;
+      this.item.autopistaNacional = false;
+      this.item.autopistaProvincial = false;
+      this.item.autovia = false;
+      this.item.sinDeterminarLugar = true;
+    }
+    if(num == 10){
+      this.item.vehiculoPeaton = true;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+  }
+
+
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
