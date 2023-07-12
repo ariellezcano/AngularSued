@@ -301,7 +301,7 @@
         >
         <input
           [(ngModel)]="item.bicicleta"
-          (click)="ckeckPresion(14)"
+          (click)="ckeckPresion(15)"
           name="bicicleta"
           type="checkbox"
           class="form-sm-control"
@@ -314,7 +314,7 @@
         >
         <input
           [(ngModel)]="item.vehiculo"
-          (click)="ckeckPresion(14)"
+          (click)="ckeckPresion(16)"
           name="vehiculo"
           type="checkbox"
           class="form-sm-control"
@@ -327,7 +327,7 @@
         >
         <input
           [(ngModel)]="item.vehiculoMoto"
-          (click)="ckeckPresion(15)"
+          (click)="ckeckPresion(17)"
           name="vehiculoMoto"
           type="checkbox"
           class="form-sm-control"
@@ -343,7 +343,7 @@
         >
         <input
           [(ngModel)]="item.vehiculoTsangre"
-          (click)="ckeckPresion(16)"
+          (click)="ckeckPresion(18)"
           name="vehiculoTsangre"
           type="checkbox"
           class="form-sm-control"
@@ -356,7 +356,7 @@
         >
         <input
           [(ngModel)]="item.motoMoto"
-          (click)="ckeckPresion(17)"
+          (click)="ckeckPresion(19)"
           name="motoMoto"
           type="checkbox"
           class="form-sm-control"
@@ -369,7 +369,7 @@
         >
         <input
           [(ngModel)]="item.motoTsangre"
-          (click)="ckeckPresion(18)"
+          (click)="ckeckPresion(20)"
           name="motoTsangre"
           type="checkbox"
           class="form-sm-control"
@@ -382,7 +382,7 @@
         >
         <input
           [(ngModel)]="item.motoPeaton"
-          (click)="ckeckPresion(19)"
+          (click)="ckeckPresion(21)"
           name="motoPeaton"
           type="checkbox"
           class="form-sm-control"
@@ -396,7 +396,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Múltiple:</label>
         <input
           [(ngModel)]="item.multiple"
-          (click)="ckeckPresion(20)"
+          (click)="ckeckPresion(22)"
           name="multiple"
           type="checkbox"
           class="form-sm-control"
@@ -407,7 +407,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Tren:</label>
         <input
           [(ngModel)]="item.tren"
-          (click)="ckeckPresion(21)"
+          (click)="ckeckPresion(23)"
           name="tren"
           type="checkbox"
           class="form-sm-control"
@@ -420,7 +420,7 @@
         >
         <input
           [(ngModel)]="item.atropelloAnimal"
-          (click)="ckeckPresion(22)"
+          (click)="ckeckPresion(24)"
           name="atropelloAnimal"
           type="checkbox"
           class="form-sm-control"
@@ -431,7 +431,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label">5 - Otro Modo:</label>
         <input
           [(ngModel)]="item.otroModo"
-          (click)="ckeckPresion(23)"
+          (click)="ckeckPresion(25)"
           name="otroModo"
           type="checkbox"
           class="form-sm-control"
@@ -444,7 +444,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label">4 - Vuelco/Despiste:</label>
         <input
           [(ngModel)]="item.vuelcoDespiste"
-          (click)="ckeckPresion(25)"
+          (click)="ckeckPresion(26)"
           name="vuelcoDespiste"
           type="checkbox"
           class="form-sm-control"
@@ -592,10 +592,11 @@
       <legend><b>Condiciones Climáticas:</b></legend>
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Clima Normal:</label
+         1 - Clima Normal (Bueno):</label
         >
         <input
           [(ngModel)]="item.climaNormal"
+          (click)="condicionesClimaticas(1)"
           name="climaNormal"
           type="checkbox"
           class="form-sm-control"
@@ -603,10 +604,11 @@
         />
       </div>
       <div class="col-md-4">
-        <label for="Nombre" class="col-sm-12 col-form-label"> Niebla:</label>
+        <label for="Nombre" class="col-sm-12 col-form-label"> 2 - Nublado:</label>
         <input
-          [(ngModel)]="item.niebla"
-          name="niebla"
+          [(ngModel)]="item.nublado"
+          (click)="condicionesClimaticas(2)"
+          name="nublado"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -614,11 +616,12 @@
       </div>
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Lluvia - Llovizna:</label
+         3 - Lluvia:</label
         >
         <input
-          [(ngModel)]="item.lluviaLlovizna"
-          name="lluviaLlovizna"
+          [(ngModel)]="item.lluvia"
+          (click)="condicionesClimaticas(3)"
+          name="lluvia"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -627,13 +630,55 @@
     </div>
     <div class="form-group row">
       <!-- alert alert-success -->
-      <div class="col-md-6">
+      <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Nieve - granizo:</label
+          4 - Llovizna:</label
         >
         <input
-          [(ngModel)]="item.nieveGranizo"
-          name="nieveGranizo"
+          [(ngModel)]="item.llovizna"
+          (click)="condicionesClimaticas(4)"
+          name="llovizna"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          5 - Nieve:</label
+        >
+        <input
+          [(ngModel)]="item.nieve"
+          name="llovizna"
+          type="checkbox"
+          class="form-sm-control"
+          disabled="disabled"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-4">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          6 - Granizo:</label
+        >
+        <input
+          [(ngModel)]="item.granizo"
+          (click)="condicionesClimaticas(5)"
+          name="granizo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+         7 - Otra condición:</label
+        >
+        <input
+          [(ngModel)]="item.otraCondicion"
+          (click)="condicionesClimaticas(6)"
+          name="otraCondicion"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -641,11 +686,12 @@
       </div>
       <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Otra condición:</label
+         99 - Sin Determinar:</label
         >
         <input
-          [(ngModel)]="item.otraCondicion"
-          name="otraCondicion"
+          [(ngModel)]="item.sinDeterminarCondicion"
+          (click)="condicionesClimaticas(7)"
+          name="sinDeterminarCondicion"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -676,10 +722,11 @@
       <Legend><b>Semáforo:</b></Legend>
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          Funciona bien:</label
+         1 - Funciona:</label
         >
         <input
           [(ngModel)]="item.funcionaB"
+          (click)="semaforo(1)"
           name="funcionaB"
           type="checkbox"
           class="form-sm-control"
@@ -688,10 +735,11 @@
       </div>
       <div class="col-md-4">
         <label for="Nombre" class="col-sm-12 col-form-label">
-          No funciona:</label
+        2 - No funciona:</label
         >
         <input
           [(ngModel)]="item.noFunciona"
+          (click)="semaforo(2)"
           name="noFunciona"
           type="checkbox"
           class="form-sm-control"
@@ -699,10 +747,35 @@
         />
       </div>
       <div class="col-md-4">
-        <label for="Nombre" class="col-sm-12 col-form-label"> No hay:</label>
+        <label for="Nombre" class="col-sm-12 col-form-label">3 - Sin semáforo:</label>
         <input
           [(ngModel)]="item.noHaySemaforo"
+          (click)="semaforo(3)"
           name="noHaySemaforo"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">4 - Semáforo intermitente:</label>
+        <input
+          [(ngModel)]="item.semaforoIntermitente"
+          (click)="semaforo(4)"
+          name="semaforoIntermitente"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">5 - Sin determinar:</label>
+        <input
+          [(ngModel)]="item.sinDeterminarSemaforo"
+          (click)="semaforo(5)"
+          name="sinDeterminarSemaforo"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"

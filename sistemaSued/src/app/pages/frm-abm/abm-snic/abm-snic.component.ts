@@ -268,6 +268,385 @@ export class AbmSnicComponent implements OnInit {
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
     }
+    if(num == 13){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = true;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 14){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = true;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 15){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = true;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 16){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = true;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 17){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = true;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 18){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = true;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 19){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = true;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 20){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = true;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 21){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = true;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 22){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = true;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 23){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = true;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 24){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = true;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+    }
+    if(num == 25){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = true;
+      this.item.vuelcoDespiste = false;
+    }
+    if(num == 26){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = true;
+      this.item.modoEspecificar = null;
+    }
+  }
+
+  condicionesClimaticas = (num: number) => {
+    if(num == 1){
+      this.item.climaNormal = true;
+      this.item.nublado = false;
+      this.item.lluvia = false;
+      this.item.llovizna = false;
+      this.item.granizo = false;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 2){
+      this.item.climaNormal = false;
+      this.item.nublado = true;
+      this.item.lluvia = false;
+      this.item.llovizna = false;
+      this.item.granizo = false;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 3){
+      this.item.climaNormal = false;
+      this.item.nublado = false;
+      this.item.lluvia = true;
+      this.item.llovizna = false;
+      this.item.granizo = false;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 4){
+      this.item.climaNormal = false;
+      this.item.nublado = false;
+      this.item.lluvia = false;
+      this.item.llovizna = true;
+      this.item.granizo = false;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 5){
+      this.item.climaNormal = false;
+      this.item.nublado = false;
+      this.item.lluvia = false;
+      this.item.llovizna = false;
+      this.item.granizo = true;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 6){
+      this.item.climaNormal = false;
+      this.item.nublado = false;
+      this.item.lluvia = false;
+      this.item.llovizna = false;
+      this.item.granizo = false;
+      this.item.otraCondicion = true;
+      this.item.sinDeterminarCondicion = false;
+    }
+    if(num == 7){
+      this.item.climaNormal = false;
+      this.item.nublado = false;
+      this.item.lluvia = false;
+      this.item.llovizna = false;
+      this.item.granizo = false;
+      this.item.otraCondicion = false;
+      this.item.sinDeterminarCondicion = true;
+    }
+  }
+
+  semaforo(num: number){
+    if(num == 1){
+      this.item.funcionaB = true;
+      this.item.noFunciona = false;
+      this.item.noHaySemaforo = false;
+      this.item.semaforoIntermitente = false;
+      this.item.sinDeterminarSemaforo = false;
+    } else if(num == 2){
+      this.item.funcionaB = false;
+      this.item.noFunciona = true;
+      this.item.noHaySemaforo = false;
+      this.item.semaforoIntermitente = false;
+      this.item.sinDeterminarSemaforo = false;
+    }else if(num == 3){
+      this.item.funcionaB = false;
+      this.item.noFunciona = false;
+      this.item.noHaySemaforo = true;
+      this.item.semaforoIntermitente = false;
+      this.item.sinDeterminarSemaforo = false;
+    }else if(num == 4){
+      this.item.funcionaB = false;
+      this.item.noFunciona = false;
+      this.item.noHaySemaforo = false;
+      this.item.semaforoIntermitente = true;
+      this.item.sinDeterminarSemaforo = false;
+    }else if(num == 5){
+      this.item.funcionaB = false;
+      this.item.noFunciona = false;
+      this.item.noHaySemaforo = false;
+      this.item.semaforoIntermitente = false;
+      this.item.sinDeterminarSemaforo = true;
+    }
   }
 
 

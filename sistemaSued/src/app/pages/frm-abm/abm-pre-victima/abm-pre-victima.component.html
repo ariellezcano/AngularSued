@@ -241,7 +241,7 @@
       />
     </div>
   </div>
-  
+
   <div *ngIf="dnpc" class="row">
     <legend>
       <em><u>DNPC</u></em>
@@ -258,10 +258,10 @@
         <option value="2">2 - Acompañante</option>
         <option value="3">3 - Pasajero</option>
         <option value="4">4 - Peatón</option>
-        <option value="5">5 - Civil Detenido</option>
+        <!-- <option value="5">5 - Civil Detenido</option>
         <option value="6">6 - Policía de Franco</option>
-        <option value="7">7 - Policía Detenido</option>
-        <option value="8">8 - Otro</option>
+        <option value="7">7 - Policía Detenido</option> -->
+        <option value="5">5 - Otro</option>
         <option value="99">99 - Sin determinar</option>
       </select>
     </div>
@@ -273,22 +273,45 @@
         class="form-select text-center"
         aria-label="Default select example"
       >
-        <option value="micro de larga distancia">
-          1 - Micro de larga distancia
-        </option>
-        <option value="colectivo">2 - Colectivo</option>
-        <option value="camion">3 - Camión</option>
-        <option value="camioneta">4 - Camioneta</option>
-        <option value="automovil">5 - Automóvil</option>
-        <option value="motocicleta">6 - Motocicleta</option>
-        <option value="ciclomotor">7 - Ciclomotor</option>
-        <option value="bicicleta">8 - Bicicleta</option>
-        <option value="tren">9 - Tren</option>
-        <option value="otros">10 - Otros</option>
+        <option value="1">1 - Micro de larga distancia</option>
+        <option value="2">2 - Colectivo</option>
+        <option value="3">3 - Camión</option>
+        <option value="4">4 - Camioneta</option>
+        <option value="5">5 - Automóvil</option>
+        <option value="6">6 - Motocicleta</option>
+        <option value="7">7 - Ciclomotor</option>
+        <option value="8">8 - Bicicleta</option>
+        <option value="9">9 - Tren</option>
+        <option value="10">10 - Otros (Especificar)</option>
       </select>
     </div>
   </div>
-
+  <div *ngIf="dnpc" class="row">
+    <div class="col-md-6">
+      <div *ngIf="item.dnpcClase == '5'" class="col-md-6">
+        <label for="especifGenero"> Especificar Clase de Victima:</label>
+        <input
+          [(ngModel)]="item.especifClaseVict"
+          name="especifClaseVict"
+          type="text"
+          class="form-control text-center"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="item.dnpcVehiculo == '10'" class="col-md-6">
+        <label for="especifGenero"> Especificar Clase de Vehículo:</label>
+        <input
+          [(ngModel)]="item.especifClaseVehiculo"
+          name="especifClaseVict"
+          type="text"
+          class="form-control text-center"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+  </div>
   <br />
   <div class="row">
     <legend><u>Domicilio:</u></legend>
@@ -316,7 +339,6 @@
         ></app-combo-provincia>
       </div>
     </ng-template>
-
     <div class="col-md-6">
       <label class="col-sm-12 col-form-label" for="">Filtro Barrio:</label>
       <div class="input-group mb-3">
