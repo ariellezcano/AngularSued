@@ -267,13 +267,11 @@
         />
       </div>
       <div class="col-md-3">
-        <label for="Nombre" class="col-sm-12 col-form-label">
-          Vehículo - Bicicleta:</label
-        >
+        <label for="Nombre" class="col-sm-12 col-form-label">4 - Vuelco/Despiste:</label>
         <input
-          [(ngModel)]="item.vehiculoBici"
-          (click)="ckeckPresion(13)"
-          name="vehiculoBici"
+          [(ngModel)]="item.vuelcoDespiste"
+          (click)="ckeckPresion(26)"
+          name="vuelcoDespiste"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -441,11 +439,13 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <label for="Nombre" class="col-sm-12 col-form-label">4 - Vuelco/Despiste:</label>
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Vehículo - Bicicleta:</label
+        >
         <input
-          [(ngModel)]="item.vuelcoDespiste"
-          (click)="ckeckPresion(26)"
-          name="vuelcoDespiste"
+          [(ngModel)]="item.vehiculoBici"
+          (click)="ckeckPresion(13)"
+          name="vehiculoBici"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
