@@ -37,7 +37,8 @@
             Preventivos</a
           >
         </li>
-        <li *ngIf="rol == 'DEVELOPER'" class="nav-item dropdown">
+        <!-- *ngIf="rol == 'DEVELOPER'" -->
+        <li *ngIf="rol == 'MANAGER'" class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -205,7 +206,8 @@
             </li>
           </ul>
         </li>
-        <div *ngIf="rol == 'DEVELOPER'" class="dropdown">
+        <!-- *ngIf="rol == 'DEVELOPER'" -->
+        <div *ngIf="rol == 'MANAGER'" class="dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
