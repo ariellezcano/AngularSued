@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
           });
         }
       } else if (res.code == 401) {
-        alert(res.code);
+        //alert(res.code);
         Swal.fire(
           'Usuario no habilitado',
           'Por favor contáctese con el administrador del sistema para generar su usuario',
