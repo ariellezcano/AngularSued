@@ -27,49 +27,9 @@
             <b> Usuarios </b></a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            [routerLink]="['/lst-preventivo/']"
-          >
-            <i class="fa fa-archive" aria-hidden="true"></i>
-            Preventivos</a
-          >
-        </li>
+        
         <!-- *ngIf="rol == 'DEVELOPER'" -->
-        <li *ngIf="rol == 'MANAGER'" class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <i class="fa fa-plus-square" aria-hidden="true"></i>
-            Otros:
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/lst-contravencion/']"
-                >Contravenciones</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/lst-colisiones/']"
-                >Colisiones</a
-              >
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/lst-lesiones/']"
-                >Lesiones Leves</a
-              >
-            </li>
-          </ul>
-        </li>
+        
         <li *ngIf="rol == 'MANAGER' || rol == 'ADMINISTRADOR' || rol == 'DEVELOPER'" class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -205,6 +165,48 @@
               >
             </li>
           </ul>
+        </li>
+        <li *ngIf="rol == 'MANAGER'" class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+            Otros:
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-contravencion/']"
+                >Contravenciones</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-colisiones/']"
+                >Colisiones</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" [routerLink]="['/lst-lesiones/']"
+                >Lesiones Leves</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            [routerLink]="['/lst-preventivo/']"
+          >
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            Preventivos</a
+          >
         </li>
         <!-- *ngIf="rol == 'DEVELOPER'" -->
         <div *ngIf="rol == 'MANAGER'" class="dropdown">
