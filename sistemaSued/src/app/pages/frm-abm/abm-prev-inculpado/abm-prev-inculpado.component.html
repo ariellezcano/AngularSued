@@ -263,8 +263,22 @@
         <option value="7">7 - Ciclomotor</option>
         <option value="8">8 - Bicicleta</option>
         <option value="9">9 - Tren</option>
-        <option value="10">10 - Otros</option>
+        <option value="10">10 - Otros (Especificar)</option>
       </select>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div *ngIf="item.dnpcVehiculo == '10'" class="col-md-6">
+      <label for="especifGenero"> Especificar Vehículo:</label>
+      <input
+        [(ngModel)]="item.especifClaseVehiculo"
+        name="especifClaseVehiculo"
+        type="text"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
     </div>
     <div class="col-md-3"></div>
   </div>

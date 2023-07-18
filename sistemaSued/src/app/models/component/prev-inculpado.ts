@@ -30,6 +30,7 @@ export class PrevInculpado {
     dirBarrio!: number;
     domDirAdicional!: string;
     dnpcVehiculo!: string;
+    especifClaseVehiculo!: string;
 
     nacionalidadNavigation: any;
     sexoNavigation: any;
