@@ -1,0 +1,63 @@
+<br />
+<div class="container border border-danger rounded">
+  <br />
+  <div class="row">
+    <legend class="text-primary">
+      <b> DATOS PARA GENERAR EL REPORTE:</b>
+    </legend>
+    <label for=""><b> Planilla de Muertes Viales </b></label>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha:</label>
+      <input
+        [(ngModel)]="fecha1"
+        id="codigo"
+        type="date"
+        name="fecha1"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3">
+      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha:</label>
+      <input
+        [(ngModel)]="fecha2"
+        id="codigo"
+        type="date"
+        name="fecha2"
+        class="form-control"
+        [ngModelOptions]="{ standalone: true }"
+      />
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="buscar()"
+      >
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        Filtrar dato
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" (click)="back()">
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        Cancelar
+      </button>
+      &nbsp;
+      <button *ngIf="this.arrMuerteVial.length > 0" type="button" class="btn btn-info" (click)="planillaExcel()">
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;
+        Ver Planilla Generada
+      </button>
+    </div>
+  </div>
+  <br />
+</div>
+

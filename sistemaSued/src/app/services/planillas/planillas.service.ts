@@ -20,4 +20,8 @@ export class PlanillasService {
   getSuicidio(fecha1: any, fecha2: any, tipo: number) {
     return this.http.get( `${this.api}/suicidio/${fecha1},${fecha2},${tipo}`);
   }
+
+  getMuertesViales(fecha1: any, fecha2: any) {
+    return this.http.get( `${this.api}/muertesViales/${fecha1},${fecha2}`);
+  }
 }

@@ -136,7 +136,6 @@ import { AbmPrevUnidadEspecialComponent } from './frm-abm/abm-prev-unidad-especi
 import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-planilla-hd.component';
 import { FilBuscadorDelitoComponent } from './component/fil-buscador-delito/fil-buscador-delito.component';
 import { ComboRolComponent } from './component/combo-rol/combo-rol.component';
-import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hechos-delictivos/abm-planilla-hechos-delictivos.component';
 import { VerificacionComponent } from './compartido/verificacion/verificacion.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -149,6 +148,8 @@ import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidio
 import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
 import { AbmSuicidioComponent } from './frm-abm/component/abm-suicidio/abm-suicidio.component';
 import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio/planillas/planilla-excel-suicidio/planilla-excel-suicidio.component';
+import { AbmMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/abm-muertes-viales.component';
+import { PlanillaExcelMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/planillas/planilla-excel-muertes-viales/planilla-excel-muertes-viales.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -284,7 +285,6 @@ defineLocale('es', esLocale);
       AbmPlanillaHDComponent,
       FilBuscadorDelitoComponent,
       ComboRolComponent,
-      AbmPlanillaHechosDelictivosComponent,
       VerificacionComponent,
       FilBuscadorLocalidadComponent,
       VentanaLstAbmMediosComponent,
@@ -293,6 +293,8 @@ defineLocale('es', esLocale);
       PlanillaExcelComponent,
       AbmSuicidioComponent,
       PlanillaExcelSuicidioComponent,
+      AbmMuertesVialesComponent,
+      PlanillaExcelMuertesVialesComponent,
       
     ],
     exports: [],

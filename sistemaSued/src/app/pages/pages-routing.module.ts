@@ -44,7 +44,6 @@ import { AbmUnidadesComponent } from './frm-abm/abm-unidades/abm-unidades.compon
 import { AbmVehiculoMarcaComponent } from './frm-abm/abm-vehiculo-marca/abm-vehiculo-marca.component';
 import { AbmVinculoComponent } from './frm-abm/abm-vinculo/abm-vinculo.component';
 import { AbmPlanillaHDComponent } from './frm-abm/component/abm-planilla-hd/abm-planilla-hd.component';
-import { AbmPlanillaHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hechos-delictivos/abm-planilla-hechos-delictivos.component';
 import { LstArmaMarcaComponent } from './lst/lst-arma-marca/lst-arma-marca.component';
 import { LstArticuloComponent } from './lst/lst-articulo/lst-articulo.component';
 import { LstBarrioComponent } from './lst/lst-barrio/lst-barrio.component';
@@ -78,6 +77,8 @@ import { AbmHomicidiosDolososComponent } from './frm-abm/component/abm-homicidio
 import { PlanillaExcelComponent } from './frm-abm/component/abm-homicidios-dolosos/planillas/planilla-excel/planilla-excel.component';
 import { AbmSuicidioComponent } from './frm-abm/component/abm-suicidio/abm-suicidio.component';
 import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio/planillas/planilla-excel-suicidio/planilla-excel-suicidio.component';
+import { AbmMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/abm-muertes-viales.component';
+import { PlanillaExcelMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/planillas/planilla-excel-muertes-viales/planilla-excel-muertes-viales.component';
 
 const routes: Routes = [
   {
@@ -592,16 +593,16 @@ const routes: Routes = [
           },
         ],
       },
-      {
-        path: 'planillaHechosDelictivos',
-        children: [
-          {
-            path: 'abm',
-            component: AbmPlanillaHechosDelictivosComponent,
-            canActivate: [AuthGuard],
-          },
-        ],
-      },
+      // {
+      //   path: 'planillaHechosDelictivos',
+      //   children: [
+      //     {
+      //       path: 'abm',
+      //       component: AbmPlanillaHechosDelictivosComponent,
+      //       canActivate: [AuthGuard],
+      //     },
+      //   ],
+      // },
       {
         path: 'planillaHomicidiosDolosos',
         children: [
@@ -628,6 +629,21 @@ const routes: Routes = [
           {
             path: 'planillaExcel',
             component: PlanillaExcelSuicidioComponent,
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
+      {
+        path: 'planillaMuerteVial',
+        children: [
+          {
+            path: 'abm',
+            component: AbmMuertesVialesComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'planillaExcel',
+            component: PlanillaExcelMuertesVialesComponent,
             canActivate: [AuthGuard],
           },
         ],
