@@ -38,11 +38,7 @@
   <hr />
   <div class="row">
     <div class="col-md-12">
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="buscar()"
-      >
+      <button type="button" class="btn btn-primary" (click)="buscar()">
         <i class="fa fa-search-plus" aria-hidden="true"></i>
         Filtrar dato
       </button>
@@ -52,20 +48,29 @@
         Cancelar
       </button>
       &nbsp;
-      <button *ngIf="this.arrMuerteVial.length > 0" type="button" class="btn btn-info" (click)="planillaExcel()">
-        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;
-        Ver Planilla Generada
+      <button
+        *ngIf="this.arrMuerteVial.length > 0"
+        type="button"
+        class="btn btn-info"
+        (click)="planillaExcel()"
+      >
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Ver Planilla
+        Generada
       </button>
     </div>
   </div>
-  <div *ngIf="this.arrMuerteVial.length < 0" class="row">
-    <div class="alert alert-warning d-flex align-items-center" role="alert">
-      <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <br />
+  <div *ngIf="vacio" class="row">
+    <div
+      class="alert alert-warning d-flex align-items-center col-md-12"
+      role="alert"
+    >
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      &nbsp;
       <div>
-        No hay datos
+        <legend>No hay datos correspondiente a la fecha ingresada</legend>
       </div>
     </div>
   </div>
   <br />
 </div>
-

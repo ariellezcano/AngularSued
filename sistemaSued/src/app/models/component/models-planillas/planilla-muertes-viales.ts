@@ -1,7 +1,57 @@
 export class PlanillaMuertesViales {
-    
+ 
+    codigoDpto?: number;
+    codigoUnidad?: number;
+    codigoLocalidad?: number;
+    nroPreventivo?: number;
+    fechaHecho?: any;
+    horaHecho?: string;
+    nombreCalle?: string;
+    calleInterseccion?: string;
+    dirAdicionalCalle?: string;
+    alturaCalle?: number;
+    semaforoFunciona?: boolean;
+    semaforoNoFunciona?: boolean;
+    sinSemaforo?: boolean;
+    semaforoIntermitente?: boolean;
+    sinDeterminarSemaforo?: boolean;
+    lugarCalle?: boolean;
+    rutaNacional?: boolean;
+    rutaProvincial?: boolean;
+    autopistaNacional?: boolean;
+    autopistaProvincial?: boolean;
+    autovia?: boolean;
+    sinDeterminarLugar?: boolean;
+    vehiculoPeaton?: boolean;
+    vehiculoVehiculo?: boolean;
+    vehiculoObjeto?: boolean;
+    vuelcoDespiste?: boolean;
+    otroModoProd?: boolean;
+    especificarModoProd?: string;
+    climaNormal?: boolean;
+    niebla?: boolean;
+    lluvia?: boolean;
+    llovizna?: boolean;
+    granizo?: boolean;
+    nublado?: boolean;
+    otraCondicion?: boolean;
+    sinDeterminarCondicion?: boolean;
+    intervencionPolicial?: boolean;
+    numeroDocumentoVict?: number;
+    nombreVictima?: string;
+    sexoVictima?: number;
+    edadVictima?: number;
+    claseVictima?: string;
+    especifClaseVict?: string;
+    vehiculoVictima?: string;
+    especifVehiculoVict?: string;
+    generoVictima?: number;
+    especifGenero?: string;
+    sexoInculpado?: number;
+    edadInculpado?: number;
+    vehiculoInputado?: string;
+    vehiculoClase?: string;
+    generoInculpado?: number;
+    especifGeneroInc?: string;
 
-    constructor(){
-
-    }
 }
