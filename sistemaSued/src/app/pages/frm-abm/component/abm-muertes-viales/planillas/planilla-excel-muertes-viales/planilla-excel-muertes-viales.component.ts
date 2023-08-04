@@ -36,15 +36,6 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     this.getDataService();
   }
 
-  // ngAfterViewInit() {
-  //   if (this.tablaRef && this.tablaRef.nativeElement) {
-  //     setTimeout(() => {
-  //       const data = this.tablaRef.nativeElement;
-  //       console.log('adentro', data);
-  //     }, 3000);
-  //   }
-  // }
-
   getDataService() {
     this.items = [];
     const data = this.dataService.getDataArray();
@@ -79,6 +70,31 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     } else if (sinDeterminarLugar) {
       valor = '99';
     } 
+    // else if (sinDeterminar) {
+    //   valor = '99';
+    // }
+    return valor;
+  }
+
+  semaforo(
+    semaforoFunciona: any,
+    semaforoNoFunciona: any,
+    sinSemaforo: any,
+    semaforoIntermitente: any,
+    sinDeterminarSemaforo: any,
+  ) {
+    let valor = '';
+    if (semaforoFunciona) {
+      valor = '1';
+    } else if (semaforoNoFunciona) {
+      valor = '2';
+    } else if (sinSemaforo) {
+      valor = '3';
+    } else if (semaforoIntermitente) {
+      valor = '4';
+    } else if (sinDeterminarSemaforo) {
+      valor = '99';
+    }
     // else if (sinDeterminar) {
     //   valor = '99';
     // }

@@ -74,25 +74,34 @@
           <th class="encabezado">numero_sumario</th>
           <th class="encabezado">fecha_hecho</th>
           <th class="encabezado">hora_hecho</th>
+          <th class="encabezado">calle</th>
+          <th class="encabezado">altura</th>
+          <th class="encabezado">calle_interseccion</th>
+          <th class="encabezado">estado_semaforo</th>
           <th class="encabezado">tipo_lugar</th>
-          <th class="encabezado">otro_tipo_lugar</th>
-          <th class="encabezado">modalidad</th>
-          <th class="encabezado">otro_modalidad</th>
+          <th class="encabezado">modo_hecho</th>
+          <th class="encabezado">otro_modo_hecho</th>
+          <th class="encabezado">clima</th>
+          <th class="encabezado">otro_clima</th>
           <th class="encabezado">motivo_origen_registro</th>
           <th class="encabezado">otro_motivo_origen_registro</th>
-          <th class="encabezado">documento_suicida</th>
-          <th class="encabezado">nombre_suicida</th>
-          <th class="encabezado">apellido_suicida</th>
-          <th class="encabezado">sexo_suicida</th>
-          <th class="encabezado">edad_suicida</th>
-          <th class="encabezado">clase_suicida</th>
-          <th class="encabezado">otra_clase_suicida</th>
-          <th class="encabezado">identidad_genero_suicida</th>
-          <th class="encabezado">otro_identidad_genero_suicida</th>
-          <!--<th class="encabezado">sexo_testigo</th>
-           <th class="encabezado">edad_testigo</th>
-          <th class="encabezado">identidad_genero_testigo</th>
-          <th class="encabezado">otro_identidad_genero_testigo</th> -->
+          <th class="encabezado">documento_victima</th>
+          <th class="encabezado">nombre_victima</th>
+          <th class="encabezado">apellido_victima</th>
+          <th class="encabezado">sexo_victima</th>
+          <th class="encabezado">edad_victima</th>
+          <th class="encabezado">clase_victima</th>
+          <th class="encabezado">otra_clase_victima</th>
+          <th class="encabezado">vehiculo_victima</th>
+          <th class="encabezado">otro_vehiculo_victima</th>
+          <th class="encabezado">identidad_genero_victima</th>
+          <th class="encabezado">otro_identidad_genero_victima</th>
+          <th class="encabezado">sexo_imputado</th>
+          <th class="encabezado">edad_imputado</th>
+          <th class="encabezado">vehiculo_imputado</th>
+          <th class="encabezado">otro_vehiculo_imputado</th>
+          <th class="encabezado">identidad_genero_imputado</th>
+          <th class="encabezado">otro_identidad_genero_imputado</th>
         </tr>
       </thead>
       <tbody>
@@ -106,14 +115,29 @@
           <td class="celda">{{ item.nroPreventivo }}</td>
           <td class="celda">{{ item.fechaHecho | date : "dd/MM/yyyy" }}</td>
           <td class="celda">{{ item.horaHecho }}</td>
+          <td class="celda">{{ item.nombreCalle }} {{item.dirAdicionalCalle}}</td>
+          <td class="celda">{{ item.alturaCalle }}</td>
+          <td class="celda">{{ item.calleInterseccion }}</td>
+          <td class="celda">
+            {{
+              semaforo(
+                item.semaforoFunciona,
+                item.semaforoNoFunciona,
+                item.sinSemaforo,
+                item.semaforoIntermitente,
+                item.sinDeterminarSemaforo
+              )
+            }}
+          </td>
           <td class="celda">
             {{
               tipoLugar(
-                item.viaPublica,
-                item.domParticular,
-                item.viaTren,
-                item.carcelComisaria,
-                item.otroLugar,
+                item.lugarCalle,
+                item.rutaNacional,
+                item.rutaProvincial,
+                item.autopistaNacional,
+                item.autopistaProvincial,
+                item.autovia,
                 item.sinDeterminarLugar
               )
             }}
