@@ -9,10 +9,9 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-planilla-excel-muertes-viales',
   templateUrl: './planilla-excel-muertes-viales.component.html',
-  styleUrls: ['./planilla-excel-muertes-viales.component.scss']
+  styleUrls: ['./planilla-excel-muertes-viales.component.scss'],
 })
 export class PlanillaExcelMuertesVialesComponent implements OnInit {
-
   @ViewChild(AbmMuertesVialesComponent, { static: false })
   fil!: AbmMuertesVialesComponent;
 
@@ -40,7 +39,7 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     this.items = [];
     const data = this.dataService.getDataArray();
     this.items = data;
-    //console.log("items datos",this.items)
+    console.log("items datos",this.items)
   }
 
   back() {
@@ -49,30 +48,30 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
   }
 
   tipoLugar(
-    viaPublica: any,
-    domParticular: any,
-    viaTren: any,
-    carcelComisaria: any,
-    otroLugar: any,
+    lugarCalle: any,
+    rutaNacional: any,
+    rutaProvincial: any,
+    autopistaNacional: any,
+    autopistaProvincial: any,
+    autovia: any,
     sinDeterminarLugar: any
   ) {
     let valor = '';
-    if (viaPublica) {
+    if (lugarCalle) {
       valor = '1';
-    } else if (domParticular) {
+    } else if (rutaNacional) {
       valor = '2';
-    } else if (viaTren) {
+    } else if (rutaProvincial) {
       valor = '3';
-    } else if (carcelComisaria) {
+    } else if (autopistaNacional) {
       valor = '4';
-    } else if (otroLugar) {
+    } else if (autopistaProvincial) {
       valor = '5';
+    } else if (autovia) {
+      valor = '6';
     } else if (sinDeterminarLugar) {
       valor = '99';
-    } 
-    // else if (sinDeterminar) {
-    //   valor = '99';
-    // }
+    }
     return valor;
   }
 
@@ -81,7 +80,7 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     semaforoNoFunciona: any,
     sinSemaforo: any,
     semaforoIntermitente: any,
-    sinDeterminarSemaforo: any,
+    sinDeterminarSemaforo: any
   ) {
     let valor = '';
     if (semaforoFunciona) {
@@ -95,9 +94,6 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     } else if (sinDeterminarSemaforo) {
       valor = '99';
     }
-    // else if (sinDeterminar) {
-    //   valor = '99';
-    // }
     return valor;
   }
 
@@ -112,7 +108,6 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     seIncinera: any,
     otraModalidad: any,
     sinDeterminarModalidad: any
-
   ) {
     let valor = '';
     if (armaFuego) {
@@ -131,9 +126,9 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
       valor = '7';
     } else if (otraModalidad) {
       valor = '8';
-    }else if (seIncinera) {
+    } else if (seIncinera) {
       valor = '9';
-    }else if (sinDeterminarModalidad) {
+    } else if (sinDeterminarModalidad) {
       valor = '99';
     }
     return valor;
@@ -164,6 +159,64 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
       valor = '2';
     } else {
       valor = '1';
+    }
+    return valor;
+  }
+
+  modoProduccion(
+    vehiculoPeaton: any,
+    vehiculoVehiculo: any,
+    vehiculoObjeto: any,
+    vuelcoDespiste: any,
+    otroModoProd: any,
+    sinDeterminarModoProd: any
+    
+  ) {
+    let valor = '';
+    if (vehiculoPeaton) {
+      valor = '1';
+    } else if (vehiculoVehiculo) {
+      valor = '2';
+    } else if (vehiculoObjeto) {
+      valor = '3';
+    } else if (vuelcoDespiste) {
+      valor = '4';
+    } else if (otroModoProd) {
+      valor = '5';
+    }else if (sinDeterminarModoProd) {
+      valor = '99';
+    }
+    return valor;
+  }
+
+  clima(
+    climaNormal: any,
+    nublado: any,
+    lluvia: any,
+    llovizna: any,
+    niebla: any,
+    granizo: any,
+    otraCondicion: any,
+    sinDeterminarCondicion: any
+  ) {
+    let valor = '';
+    if (climaNormal) {
+      valor = '1';
+    } else if (nublado) {
+      valor = '2';
+    } else if (lluvia) {
+      valor = '3';
+    } else if (llovizna) {
+      valor = '4';
+    }else if (granizo) {
+      valor = '6';
+    }else if (otraCondicion) {
+      valor = '7';
+    }else if (sinDeterminarCondicion) {
+      valor = '99';
+    }else if (niebla) {
+      valor = '7';
+      this.item.especifCondicionClima = 'Niebla'
     }
     return valor;
   }

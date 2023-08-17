@@ -27,6 +27,7 @@ export class PlanillaMuertesViales {
     vehiculoObjeto?: boolean;
     vuelcoDespiste?: boolean;
     otroModoProd?: boolean;
+    sinDeterminarModoProd?: boolean;
     especificarModoProd?: string;
     climaNormal?: boolean;
     niebla?: boolean;
@@ -36,9 +37,11 @@ export class PlanillaMuertesViales {
     nublado?: boolean;
     otraCondicion?: boolean;
     sinDeterminarCondicion?: boolean;
+    especifCondicionClima?: string;
     intervencionPolicial?: boolean;
     numeroDocumentoVict?: number;
     nombreVictima?: string;
+    apellidoVictima?: string;
     sexoVictima?: number;
     edadVictima?: number;
     claseVictima?: string;

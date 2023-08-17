@@ -32,7 +32,7 @@
           <th class="encabezado" scope="col">Altura / Nro.*</th>
           <th class="encabezado" scope="col">Calle Intersección</th>
           <th class="encabezado" scope="col">Semáforo (A)</th>
-          <th class="encabezado" scope="col" colspan="2">(B) Tipo de lugar*</th>
+          <th class="encabezado" scope="col">(B) Tipo de lugar*</th>
           <th class="encabezado" scope="col" colspan="2">
             (c) Modo de Producción del Hecho* Especificar sólo código 5
           </th>
@@ -142,38 +142,54 @@
               )
             }}
           </td>
-          <td class="celda">{{ item.otroLugarEsp }}</td>
+          <!-- <td class="celda">{{ item.otroLugarEsp }}</td> -->
           <td class="celda">
             {{
-              modalidad(
-                item.armaFuego,
-                item.armaElementoContundente,
-                item.sumersion,
-                item.envenenamiento,
-                item.ahorcamiento,
-                item.seArroja,
-                item.seArrojaVia,
-                item.seIncinera,
-                item.otraModalidad,
-                item.sinDeterminarModalidad
+              modoProduccion(
+                item.vehiculoPeaton,
+                item.vehiculoVehiculo,
+                item.vehiculoObjeto,
+                item.vuelcoDespiste,
+                item.otroModoProd,
+                item.sinDeterminarModoProd
               )
             }}
           </td>
-          <td class="celda">{{ item.especificarModalidad }}</td>
+          <td class="celda">{{ item.especificarModoProd }}</td>
+          <td class="celda">
+            {{
+              clima(
+                item.climaNormal,
+                item.niebla,
+                item.lluvia,
+                item.llovizna,
+                item.granizo,
+                item.nublado,
+                item.otraCondicion,
+                item.sinDeterminarCondicion
+              )
+            }}
+          </td>
+          <td class="celda">{{ item.especifCondicionClima }}</td>
           <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
           <td class="celda"></td>
-          <td class="celda">{{ item.nroDocumentoSuicida }}</td>
-          <td class="celda">{{ item.nombreSuicida }}</td>
-          <td class="celda">{{ item.apellidoSuicida }}</td>
-          <td class="celda">{{ item.codigoSexo }}</td>
+          <td class="celda">{{ item.numeroDocumentoVict }}</td>
+          <td class="celda">{{ item.nombreVictima }}</td>
+          <td class="celda">{{ item.apellidoVictima }}</td>
+          <td class="celda">{{ item.sexoVictima }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
-          <td class="celda">{{ item.claseSuicida }}</td>
-          <td class="celda">{{ item.especifClaseSuicida }}</td>
+          <td class="celda">{{ item.claseVictima }}</td>
+          <td class="celda">{{ item.especifClaseVict }}</td>
+          <td class="celda">{{ item.vehiculoVictima }}</td>
+          <td class="celda">{{ item.especifVehiculoVict }}</td>
           <td class="celda">{{ item.generoVictima }}</td>
-          <td class="celda">{{ item.especifGeneroVict }}</td>
-          <!-- <td class="celda">s/d</td>
-          <td class="celda">s/d</td>
-          <td class="celda">s/d</td> -->
+          <td class="celda">{{ item.especifGenero }}</td>
+          <td class="celda">{{ item.sexoInculpado }}</td>
+          <td class="celda">{{ item.edadInculpado }}</td>
+          <td class="celda">{{ item.vehiculoInputado }}</td>
+          <td class="celda">{{ item.vehiculoClase }}</td>
+          <td class="celda">{{ item.generoInculpado }}</td>
+          <td class="celda">{{ item.especifGeneroInc }}</td>
         </tr>
       </tbody>
     </table>
