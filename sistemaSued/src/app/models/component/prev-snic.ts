@@ -42,6 +42,7 @@ export class PrevSnic {
   vehiculoMoto: boolean;
   motoPeaton: boolean;
   otroModo: boolean;
+  sinDetModoProduccion: boolean;
   modoEspecificar: string | null | undefined;
   vuelcoDespiste: boolean;
   //Tipo de Hecho
@@ -100,6 +101,7 @@ export class PrevSnic {
     this.vehiculoMoto = false;
     this.motoPeaton = false;
     this.otroModo = false;
+    this.sinDetModoProduccion = false;
     this.colision = false;
     this.vuelco = false;
     this.inmersion = false;

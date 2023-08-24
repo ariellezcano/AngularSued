@@ -122,6 +122,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Diurno:</label>
         <input
           [(ngModel)]="item.diurno"
+          (click)="horario(1)"
           name="diurno"
           type="checkbox"
           class="form-sm-control"
@@ -132,6 +133,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Nocturno:</label>
         <input
           [(ngModel)]="item.nocturno"
+          (click)="horario(2)"
           name="nocturno"
           type="checkbox"
           class="form-sm-control"
@@ -438,7 +440,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <label for="Nombre" class="col-sm-12 col-form-label">
           Vehículo - Bicicleta:</label
         >
@@ -446,6 +448,19 @@
           [(ngModel)]="item.vehiculoBici"
           (click)="ckeckPresion(13)"
           name="vehiculoBici"
+          type="checkbox"
+          class="form-sm-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Nombre" class="col-sm-12 col-form-label">
+          Sin determinar modo:</label
+        >
+        <input
+          [(ngModel)]="item.sinDetModoProduccion"
+          (click)="ckeckPresion(27)"
+          name="sinDetModoProduccion"
           type="checkbox"
           class="form-sm-control"
           [ngModelOptions]="{ standalone: true }"
@@ -475,6 +490,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Colisión:</label>
         <input
           [(ngModel)]="item.colision"
+          (click)="tipoHecho(1)"
           name="colision"
           type="checkbox"
           class="form-sm-control"
@@ -485,6 +501,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Vuelco:</label>
         <input
           [(ngModel)]="item.vuelco"
+          (click)="tipoHecho(2)"
           name="vuelco"
           type="checkbox"
           class="form-sm-control"
@@ -495,6 +512,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Inmersión:</label>
         <input
           [(ngModel)]="item.inmersion"
+          (click)="tipoHecho(3)"
           name="inmersion"
           type="checkbox"
           class="form-sm-control"
@@ -505,6 +523,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Incendio:</label>
         <input
           [(ngModel)]="item.incendio"
+          (click)="tipoHecho(4)"
           name="incendio"
           type="checkbox"
           class="form-sm-control"
@@ -520,6 +539,7 @@
         >
         <input
           [(ngModel)]="item.caidaOcupante"
+          (click)="tipoHecho(5)"
           name="caidaOcupante"
           type="checkbox"
           class="form-sm-control"
@@ -530,6 +550,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Otros:</label>
         <input
           [(ngModel)]="item.otroTh"
+          (click)="tipoHecho(6)"
           name="otro"
           type="checkbox"
           class="form-sm-control"
@@ -557,6 +578,7 @@
         >
         <input
           [(ngModel)]="item.dentroCalzada"
+          (click)="ubicacion(1)"
           name="dentroCalzada"
           type="checkbox"
           class="form-sm-control"
@@ -569,6 +591,7 @@
         >
         <input
           [(ngModel)]="item.fueraCalzada"
+          (click)="ubicacion(2)"
           name="fueraCalzada"
           type="checkbox"
           class="form-sm-control"
@@ -579,6 +602,7 @@
         <label for="Nombre" class="col-sm-12 col-form-label"> Se ignora:</label>
         <input
           [(ngModel)]="item.ignoraCalzada"
+          (click)="ubicacion(3)"
           name="ignoraCalzada"
           type="checkbox"
           class="form-sm-control"

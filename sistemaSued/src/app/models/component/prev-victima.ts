@@ -22,6 +22,7 @@ export class PrevVictima {
     especifClaseVict!: string;
     dnpcVehiculo!: string;
     especifClaseVehiculo!: string;
+    
     nacionNavigation: any;
     estudioNavigation: any;
     ocupacionNavigation: any;

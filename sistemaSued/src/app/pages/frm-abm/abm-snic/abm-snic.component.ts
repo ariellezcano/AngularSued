@@ -227,6 +227,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 11){
       this.item.vehiculoPeaton = false;
@@ -247,6 +248,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 12){
       this.item.vehiculoPeaton = false;
@@ -267,6 +269,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 13){
       this.item.vehiculoPeaton = false;
@@ -287,6 +290,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 14){
       this.item.vehiculoPeaton = false;
@@ -307,6 +311,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 15){
       this.item.vehiculoPeaton = false;
@@ -327,6 +332,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 16){
       this.item.vehiculoPeaton = false;
@@ -347,6 +353,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 17){
       this.item.vehiculoPeaton = false;
@@ -367,6 +374,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 18){
       this.item.vehiculoPeaton = false;
@@ -387,6 +395,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 19){
       this.item.vehiculoPeaton = false;
@@ -407,6 +416,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 20){
       this.item.vehiculoPeaton = false;
@@ -427,6 +437,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 21){
       this.item.vehiculoPeaton = false;
@@ -447,6 +458,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 22){
       this.item.vehiculoPeaton = false;
@@ -467,6 +479,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 23){
       this.item.vehiculoPeaton = false;
@@ -487,6 +500,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 24){
       this.item.vehiculoPeaton = false;
@@ -507,6 +521,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = false;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 25){
       this.item.vehiculoPeaton = false;
@@ -526,6 +541,7 @@ export class AbmSnicComponent implements OnInit {
       this.item.atropelloAnimal = false;
       this.item.otroModo = true;
       this.item.vuelcoDespiste = false;
+      this.item.sinDetModoProduccion = false;
     }
     if(num == 26){
       this.item.vehiculoPeaton = false;
@@ -546,6 +562,28 @@ export class AbmSnicComponent implements OnInit {
       this.item.otroModo = false;
       this.item.vuelcoDespiste = true;
       this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = false;
+    }
+    if(num == 27){
+      this.item.vehiculoPeaton = false;
+      this.item.vehiculoVehiculo = false;
+      this.item.vehiculoObjeto = false;
+      this.item.vehiculoBici = false;
+      this.item.motoBici = false;
+      this.item.bicicleta = false;
+      this.item.vehiculo = false;
+      this.item.vehiculoMoto = false;
+      this.item.vehiculoTsangre = false;
+      this.item.motoMoto = false;
+      this.item.motoTsangre = false;
+      this.item.motoPeaton = false;
+      this.item.multiple = false;
+      this.item.tren = false;
+      this.item.atropelloAnimal = false;
+      this.item.otroModo = false;
+      this.item.vuelcoDespiste = false;
+      this.item.modoEspecificar = null;
+      this.item.sinDetModoProduccion = true;
     }
   }
 
@@ -646,6 +684,80 @@ export class AbmSnicComponent implements OnInit {
       this.item.noHaySemaforo = false;
       this.item.semaforoIntermitente = false;
       this.item.sinDeterminarSemaforo = true;
+    }
+  }
+
+
+  tipoHecho(num: number){
+    if(num == 1){
+      this.item.colision = true;
+      this.item.vuelco = false;
+      this.item.inmersion = false;
+      this.item.incendio = false;
+      this.item.caidaOcupante = false;
+      this.item.otroTh = false;
+
+    } else if(num == 2){
+      this.item.colision = false;
+      this.item.vuelco = true;
+      this.item.inmersion = false;
+      this.item.incendio = false;
+      this.item.caidaOcupante = false;
+      this.item.otroTh = false;
+    }else if(num == 3){
+      this.item.colision = false;
+      this.item.vuelco = false;
+      this.item.inmersion = true;
+      this.item.incendio = false;
+      this.item.caidaOcupante = false;
+      this.item.otroTh = false;
+    }else if(num == 4){
+      this.item.colision = false;
+      this.item.vuelco = false;
+      this.item.inmersion = false;
+      this.item.incendio = true;
+      this.item.caidaOcupante = false;
+      this.item.otroTh = false;
+    }else if(num == 5){
+      this.item.colision = false;
+      this.item.vuelco = false;
+      this.item.inmersion = false;
+      this.item.incendio = false;
+      this.item.caidaOcupante = true;
+      this.item.otroTh = false;
+    }else if(num == 6){
+      this.item.colision = false;
+      this.item.vuelco = false;
+      this.item.inmersion = false;
+      this.item.incendio = false;
+      this.item.caidaOcupante = false;
+      this.item.otroTh = true;
+    }
+  }
+
+  ubicacion(num: number){
+    if(num == 1){
+      this.item.dentroCalzada = true;
+      this.item.fueraCalzada = false;
+      this.item.ignoraCalzada = false;
+    }else if(num == 2){
+      this.item.dentroCalzada = false;
+      this.item.fueraCalzada = true;
+      this.item.ignoraCalzada = false;
+    }else if(num == 3){
+      this.item.dentroCalzada = false;
+      this.item.fueraCalzada = false;
+      this.item.ignoraCalzada = true;
+    }
+  }
+
+  horario(num: number){
+    if(num == 1){
+      this.item.diurno = true;
+      this.item.nocturno = false;
+    }else if(num == 2){
+      this.item.diurno = false;
+      this.item.nocturno = true;
     }
   }
 
