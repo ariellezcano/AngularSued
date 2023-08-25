@@ -26,6 +26,7 @@
         <table class="table text-center">
           <thead class="border border-dark">
             <tr>
+              <td>#</td>
               <th>Código</th>
               <th>Descripción</th>
               <th>Acción</th>
@@ -33,6 +34,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of items">
+              <td class="text-danger">{{item.id}}</td>
               <td class="text-primary">{{ item.codigo }}</td>
               <td class="text-primary">{{ item.descripcion}}</td>
               <td>
