@@ -218,6 +218,7 @@ export class AbmPreventivoComponent implements OnInit {
     if (this.item.fechaHecho != undefined) {
       this.item.fechaHecho = moment(this.item.fechaHecho, 'DD/MM/YYYY');
     }
+    this.item.usuarioModifica = Number(UturuncoUtils.getSession('user'));
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));

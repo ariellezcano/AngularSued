@@ -25,6 +25,7 @@ export class Preventivo {
     nivelEducativo!: string;
     usuarioCrea: any;
     fechaCreacion: any;
+    usuarioModifica: any;
     usuarioBaja: any;
     activo: boolean;
 
