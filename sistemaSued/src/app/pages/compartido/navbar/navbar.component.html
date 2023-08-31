@@ -17,7 +17,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li *ngIf="rol == 'MANAGER' || rol == 'DEVELOPER'" ngif class="nav-item">
+        <li
+          *ngIf="rol == 'MANAGER' || rol == 'DEVELOPER'"
+          ngif
+          class="nav-item"
+        >
           <a
             class="nav-link active"
             aria-current="page"
@@ -27,10 +31,15 @@
             <b> Usuarios </b></a
           >
         </li>
-        
+
         <!-- *ngIf="rol == 'DEVELOPER'" -->
-        
-        <li *ngIf="rol == 'MANAGER' || rol == 'ADMINISTRADOR' || rol == 'DEVELOPER'" class="nav-item dropdown">
+
+        <li
+          *ngIf="
+            rol == 'MANAGER' || rol == 'ADMINISTRADOR' || rol == 'DEVELOPER'
+          "
+          class="nav-item dropdown"
+        >
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -166,7 +175,7 @@
             </li>
           </ul>
         </li>
-        <li *ngIf="rol == 'MANAGER'" class="nav-item dropdown">
+        <!-- <li *ngIf="rol == 'MANAGER'" class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -197,7 +206,7 @@
               >
             </li>
           </ul>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a
             class="nav-link active"
@@ -209,7 +218,7 @@
           >
         </li>
         <!-- *ngIf="rol == 'DEVELOPER'" -->
-        <div *ngIf="rol == 'DEVELOPER'" class="dropdown">
+        <div *ngIf="rol != 'VISTA'" class="dropdown">
           <a
             class="nav-link dropdown-toggle"
             href="#"
@@ -218,38 +227,47 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-          <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
+            <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>
             Planillas
           </a>
-          
+
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <li>
-              <a class="dropdown-item">
-                Planillas para S.N.I.C. &raquo;
-              </a>
+              <a class="dropdown-item"> Planillas para S.N.I.C. &raquo; </a>
               <ul class="dropdown-menu dropdown-submenu">
-                <li>
+                <!-- <li>
                   <a class="dropdown-item" [routerLink]="['/planillaHechosDelictivos/abm']">Planillas de Hechos Delictuosos</a>
                 </li>
-                <li>
+                <li >
                   <a class="dropdown-item" >Delitos contra la propiedad</a>
+                </li> -->
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/planillaHomicidiosDolosos/abm']"
+                    >Planilla Homicidios Dolosos</a
+                  >
                 </li>
                 <li>
-                  <a class="dropdown-item" [routerLink]="['/planillaHomicidiosDolosos/abm']">Planilla Homicidios Dolosos</a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/planillaMuerteVial/abm']"
+                    >Homicidios Culposos Acc. Tránsito</a
+                  >
                 </li>
                 <li>
-                  <a class="dropdown-item" [routerLink]="['/planillaMuerteVial/abm']">Homicidios Culposos Acc. Tránsito</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" [routerLink]="['/planillaSuicidios/abm']">Suicidios</a>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="['/planillaSuicidios/abm']"
+                    >Suicidios</a
+                  >
                 </li>
               </ul>
             </li>
-            <li><a class="dropdown-item" href="#">Action</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Action</a></li>
             <li>
               <a class="dropdown-item" href="#">Another action</a>
-            </li>
-            
+            </li> -->
           </ul>
         </div>
       </ul>

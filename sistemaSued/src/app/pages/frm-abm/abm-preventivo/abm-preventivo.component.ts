@@ -139,6 +139,7 @@ export class AbmPreventivoComponent implements OnInit {
     return this.form.controls;
   }
 
+
   async findId() {
     if (this.id > 0) {
       try {
@@ -251,7 +252,8 @@ export class AbmPreventivoComponent implements OnInit {
       ) {
         this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
         //console.log("usuario crea", this.item.usuarioCrea)
-        var hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
+        //var
+        let hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
         //var convert = hora;
         //var Format = hora.replace(/[:]/g, '');
         this.item.hora = hora;
