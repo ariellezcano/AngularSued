@@ -29,6 +29,7 @@ import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
 import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
+import { results } from 'src/app/models/resultsCoordenada';
 
 @Component({
   selector: 'app-abm-preventivo',
@@ -48,6 +49,9 @@ export class AbmPreventivoComponent implements OnInit {
   latitud?: string;
   @Output()
   longitud?: string;
+
+  // lstCoordenadas: results[];
+  // seleccionCoordenada: results;
 
   map: boolean;
   //public id!: number;
@@ -107,6 +111,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.latitud = '';
     this.longitud = '';
     this.coordenadas = '';
+    //this.lstCoordenadas = [];
     this.ditems = [];
     this.ditem = new Delito();
     this.lugarItems = [];
@@ -117,6 +122,7 @@ export class AbmPreventivoComponent implements OnInit {
     this.cItemInt = new Calle();
     this.BItems = [];
     this.Bitem = new Barrio();
+    //this.seleccionCoordenada = new results();
     this.map = false;
     this.googleMaps = true;
     this.automatico = false;
@@ -138,7 +144,6 @@ export class AbmPreventivoComponent implements OnInit {
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
-
 
   async findId() {
     if (this.id > 0) {
@@ -191,7 +196,7 @@ export class AbmPreventivoComponent implements OnInit {
           }
         }
       } catch (error) {
-        Swal.fire(`Error al obtener los datos, ${error}`)
+        Swal.fire(`Error al obtener los datos, ${error}`);
       }
     }
   }
@@ -361,9 +366,9 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   opcCalle = {
-    individual: "individual",
-    interseccion: "interseccion"
-  }
+    individual: 'individual',
+    interseccion: 'interseccion',
+  };
 
   async filtrarCalle(tipoCalle: string) {
     let criterio = '';
@@ -470,7 +475,8 @@ export class AbmPreventivoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       console.log(result);
       if (result.results != undefined) {
-        console.log(result.result);
+        //console.log(result.result);
+        //if (result.results == 1) {
         this.item.latitud = '';
         this.item.longitud = '';
         this.latitud = '';
@@ -480,11 +486,27 @@ export class AbmPreventivoComponent implements OnInit {
         this.item.longitud = result.results[0].lon;
         this.longitud = this.item.longitud;
         this.map = true;
+        // } else {
+        //   this.lstCoordenadas = result.results;
+        // }
       }
     } catch (error) {
       Swal.fire('Error al obtener el dato');
     }
   }
+
+  // capturarCoordenada(event: any) {
+  //   this.seleccionCoordenada = event;
+  //   this.item.latitud = '';
+  //   this.item.longitud = '';
+  //   this.latitud = '';
+  //   this.longitud = '';
+  //   this.item.latitud = this.seleccionCoordenada.results.lat;
+  //   this.latitud = this.item.latitud;
+  //   this.item.longitud = event.results.lon;
+  //   this.longitud = this.item.longitud;
+  //   this.map = true;
+  // }
 
   async enviarCoordenadas() {
     try {

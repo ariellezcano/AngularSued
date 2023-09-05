@@ -508,6 +508,30 @@
           </button>
         </div>
       </div>
+      <!-- <div *ngIf="lstCoordenadas.length > 0" class="row">
+        <div class="col-md-3"></div>
+        <div  class="col-md-6">
+          
+            <div class="control-group">
+              <div class="form-group controls">
+                <br>
+                <label>Seleccione Coordenada</label>
+                <select
+                  (ngModelChange)="capturarCoordenada($event)"
+                  name="seleccionCoordenada"
+                  [(ngModel)]="seleccionCoordenada"
+                  class="form-select form-select-lm mb-3" aria-label=".form-select-lg example"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <option *ngFor="let seleccionCoordenada of lstCoordenadas" [ngValue]="seleccionCoordenada">
+                    {{ seleccionCoordenada.results.results.state}}
+                  </option>
+                </select>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div> -->
       <br />
       <div class="row">
         <span>
