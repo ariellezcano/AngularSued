@@ -26,6 +26,7 @@ export class AbmDtallePreventivoComponent implements OnInit {
   ngOnInit(): void {
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
+    console.log("this.id", this.id)
     this.findId();
   }
 

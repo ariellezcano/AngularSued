@@ -148,6 +148,7 @@ export class AbmPreVictimaComponent implements OnInit {
     });
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
+    //console.log("this.id", this.id)
     this.obtenerDetalle();
     this.findId();
   }
@@ -192,9 +193,12 @@ export class AbmPreVictimaComponent implements OnInit {
   async obtenerDetalle() {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
+      //console.log("result detalle",data)
       const result = JSON.parse(JSON.stringify(data));
+      //console.log("result final parse",result)
       if (result.code == 200) {
         this.items = result.data;
+        //console.log("Victima",this.items)
       } else {
         this.items = [];
       }

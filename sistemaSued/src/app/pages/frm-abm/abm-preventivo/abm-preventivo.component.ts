@@ -152,7 +152,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          console.log('this.itemPreventivo', this.item);
+          //console.log('this.itemPreventivo', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'DD-MM-YYYY'
