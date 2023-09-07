@@ -22,13 +22,13 @@ export class FilMarcaMotoComponent implements OnInit {
   totalRegistros!: number;
   totalPaginas!: number;
   public limit: any;
-  public limits: Number[] = [5, 10, 25];
+  public limits: Number[] = [ 10, 20 ,30];
 
   constructor(private wsdl: MarcaMotoService) {
     this.busqueda = '';
     this.items = [];
 
-    this.limit = 5;
+    this.limit = 10;
     this.paginaActual = 1;
     this.siguiente = false;
     this.anterior = false;
