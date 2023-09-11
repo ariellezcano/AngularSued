@@ -15,7 +15,7 @@ export const environment = {
   //real
   //URL: 'http://10.125.31.149/api/',
 
-  URLOci: 'https://policiadigital.chaco.gob.ar:9090/api_oci/',
+  URLOci: 'http://10.125.31.23/api_mesaEntrada/',
   URLGeolocalizacion: 'https://api.geoapify.com/v1/geocode/search?text=',
 
   URLCivil: 'http://10.125.30.74/api_civil/',
