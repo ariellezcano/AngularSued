@@ -16,6 +16,7 @@
           <input
             aria-describedby="basic-addon1"
             [(ngModel)]="item.fechaPreventivo"
+            (ngModelChange)="dividirFecha()"
             type="text"
             placeholder="00-00-0000"
             class="form-control"
@@ -72,6 +73,7 @@
               type="number"
               class="form-control"
               [ngModelOptions]="{ standalone: true }"
+              disabled
             />
           </div>
           <div class="col-md-4">
@@ -385,7 +387,7 @@
             </option>
           </select>
         </div>
-        <div class="col-md-6">
+        <div *ngIf="item.delito == 3" class="col-md-6">
           <label class="col-sm-12 col-form-label" for="">Calle Intersección:</label>
           <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">

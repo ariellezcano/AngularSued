@@ -108,6 +108,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.obtenerDetalle();
+
   }
 
   get f(): { [key: string]: AbstractControl } {

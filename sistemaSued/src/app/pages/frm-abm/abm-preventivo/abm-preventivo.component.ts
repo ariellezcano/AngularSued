@@ -212,6 +212,13 @@ export class AbmPreventivoComponent implements OnInit {
   //   //}
   // }
 
+  dividirFecha(){
+    if(this.item.fechaPreventivo != undefined){
+      const dia = this.item.fechaPreventivo.getFullYear();
+      this.item.anio = dia;
+    }
+  }
+
   async actualizarDatos(obj: Preventivo) {
     if (this.item.fechaPreventivo != undefined) {
       this.item.fechaPreventivo = moment(
@@ -312,6 +319,11 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlDelito.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          Swal.fire(
+            'Búsqueda realizada correctamente!',
+            'Seleccione el dato encontrado del campo seleccionable!',
+            'success'
+          )
           this.ditems = result.data;
         } else if (result.code == 204) {
           Swal.fire({
@@ -344,6 +356,11 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          Swal.fire(
+            'Búsqueda realizada correctamente!',
+            'Seleccione el dato encontrado del campo seleccionable!',
+            'success'
+          )
           this.lugarItems = result.data;
         } else if (result.code == 204) {
           Swal.fire({
@@ -384,6 +401,11 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlCalle.doFilter(criterio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          Swal.fire(
+            'Búsqueda realizada correctamente!',
+            'Seleccione el dato encontrado del campo seleccionable!',
+            'success'
+          )
           if (tipoCalle == this.opcCalle.individual) {
             this.CItems = result.data;
           } else if (tipoCalle == this.opcCalle.interseccion) {
@@ -425,6 +447,11 @@ export class AbmPreventivoComponent implements OnInit {
         let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
+          Swal.fire(
+            'Búsqueda realizada correctamente!',
+            'Seleccione el dato encontrado del campo seleccionable!',
+            'success'
+          )
           this.BItems = result.data;
         } else if (result.code == 204) {
           // this.item.barrio = 0;

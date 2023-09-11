@@ -32,7 +32,11 @@ export class FilBuscadorLocalidadComponent implements OnInit {
         let data = await this.wsdl.doFilter(this.busqueda).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          
+          Swal.fire(
+            'Búsqueda realizada correctamente!',
+            'Seleccione el dato encontrado del campo seleccionable!',
+            'success'
+          )
           this.items = result.data;
         } else if (result.code == 204) {
           Swal.fire({
