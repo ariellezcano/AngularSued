@@ -327,7 +327,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
             'Búsqueda realizada correctamente!',
             'Seleccione el dato encontrado del campo seleccionable!',
             'success'
-          )
+          );
           //this.Mitems = [];
           this.Mitems = result.data;
         } else if (result.code == 204) {
