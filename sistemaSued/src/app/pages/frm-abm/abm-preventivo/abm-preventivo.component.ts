@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -41,6 +41,8 @@ export class AbmPreventivoComponent implements OnInit {
   filLocalidad!: FilBuscadorLocalidadComponent;
   @ViewChild(FilBuscadorCalleComponent, { static: false })
   filCalleInterseccion!: FilBuscadorCalleComponent;
+
+  @ViewChild('close') cerrar!: ElementRef;
 
   @Input()
   public id!: number;
@@ -192,7 +194,7 @@ export class AbmPreventivoComponent implements OnInit {
             this.item.pais =
               this.item.localidadNavigation?.nacionNavigation?.nacion;
             this.item.cp = this.item.localidadNavigation?.codPostal;
-            this.filLocalidad.busqueda = this.item.localidadNavigation?.nombre;
+            //this.filLocalidad.busqueda = this.item.localidadNavigation?.nombre;
           }
         }
       } catch (error) {
@@ -588,6 +590,7 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.cp = event.codPostal;
       this.item.pais = event.nacionNavigation?.nacion;
     }
+    this.cerrar.nativeElement.click();
   }
 
   // unidadEspecial(event: UnidadesSued) {
