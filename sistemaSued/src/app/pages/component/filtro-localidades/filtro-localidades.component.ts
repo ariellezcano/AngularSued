@@ -88,7 +88,7 @@ export class FiltroLocalidadesComponent implements OnInit {
 
   Filter(event: any) {
     this.filtro = event.target.value;
-    console.log('this.filter', this.filtro);
+    //console.log('this.filter', this.filtro);
     this.list();
   }
 }
