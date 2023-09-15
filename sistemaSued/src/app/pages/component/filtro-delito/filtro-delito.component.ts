@@ -1,22 +1,23 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Localidad } from 'src/app/models/index.models';
-import { LocalidadService } from 'src/app/services/index.service';
+import { Delito } from 'src/app/models/index.models';
+import { DelitoService } from 'src/app/services/index.service';
 
 @Component({
-  selector: 'app-filtro-localidades',
-  templateUrl: './filtro-localidades.component.html',
-  styleUrls: ['./filtro-localidades.component.scss'],
+  selector: 'app-filtro-delito',
+  templateUrl: './filtro-delito.component.html',
+  styleUrls: ['./filtro-delito.component.scss']
 })
-export class FiltroLocalidadesComponent implements OnInit {
+export class FiltroDelitoComponent implements OnInit {
+
   @Output()
-  filter: EventEmitter<Localidad> = new EventEmitter<Localidad>();
+  filter: EventEmitter<Delito> = new EventEmitter<Delito>();
 
   proccess: Boolean;
   public search: String = '';
   public oldSearch: String = '';
 
-  item: Localidad;
-  items: Localidad[];
+  item: Delito;
+  items: Delito[];
   filtro: string = '';
   /* Searcheable table Filter */
   public limit: Number;
@@ -27,18 +28,13 @@ export class FiltroLocalidadesComponent implements OnInit {
   anterior: boolean;
   siguiente: boolean;
   paginaSiguiente!: number;
-  public limits: Number[] = [5, 10, 25, 50, 100];
+  public limits: Number[] = [7, 10, 25, 50, 100];
 
-  // setPage(page: any) {
-  //   this.paginaActual = page;
-  //   this.list();
-  // }
-
-  constructor(private wsdl: LocalidadService) {
+  constructor(private wsdl: DelitoService) {
     this.proccess = false;
     this.limit = 5;
     this.paginaActual = 1;
-    this.item = new Localidad();
+    this.item = new Delito();
     this.items = [];
     this.siguiente = false;
     this.anterior = false;
@@ -60,7 +56,6 @@ export class FiltroLocalidadesComponent implements OnInit {
     }
     this.list();
   }
-
 
   public async list() {
     try {
@@ -89,11 +84,11 @@ export class FiltroLocalidadesComponent implements OnInit {
     } catch (error) {}
   }
 
-  enviar(item: Localidad) {
+  enviar(item: Delito) {
     this.filter.emit(item);
   }
 
-  compareFn(c1: Localidad, c2: Localidad): boolean {
+  compareFn(c1: Delito, c2: Delito): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
@@ -102,4 +97,5 @@ export class FiltroLocalidadesComponent implements OnInit {
     //console.log('this.filter', this.filtro);
     this.list();
   }
+
 }
