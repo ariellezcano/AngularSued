@@ -151,6 +151,9 @@ import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio
 import { AbmMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/abm-muertes-viales.component';
 import { PlanillaExcelMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/planillas/planilla-excel-muertes-viales/planilla-excel-muertes-viales.component';
 import { FiltroLocalidadesComponent } from './component/filtro-localidades/filtro-localidades.component';
+import { FiltroDelitoComponent } from './component/filtro-delito/filtro-delito.component';
+import { FiltroLugarComponent } from './component/filtro-lugar/filtro-lugar.component';
+import { FiltroBarrioComponent } from './component/filtro-barrio/filtro-barrio.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -297,6 +300,9 @@ defineLocale('es', esLocale);
       AbmMuertesVialesComponent,
       PlanillaExcelMuertesVialesComponent,
       FiltroLocalidadesComponent,
+      FiltroDelitoComponent,
+      FiltroLugarComponent,
+      FiltroBarrioComponent,
       
     ],
     exports: [],

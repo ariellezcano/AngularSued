@@ -148,8 +148,67 @@
     </div>
     <div class="form-group row">
       <div class="col-md-6">
-        <label for="">Filtro Delito:</label>
-        <div class="input-group mb-3">
+        <label for="">Delito:</label>
+        <div class="row">
+          <div class="col-md-1">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#delito"
+            >
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div *ngIf="this.item.delito > 0" class="col-md-11">
+            <label for=""
+              ><b>Nombre Delito: </b>{{ this.item.nombreDelito }}, &nbsp;&nbsp;<b>Tipo de Delito: </b>{{ this.item.nombreDnpc }}</label
+            >
+          </div>
+        </div>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="delito"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                 <b class="text-danger">Módulo Delito</b>
+                </h5>
+                <button
+                  type="button"
+                  #closeDelito
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-delito
+                  (filter)="capturar($event)"
+                ></app-filtro-delito>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">
             <i class="fa fa-search" aria-hidden="true"></i>
           </span>
@@ -175,11 +234,69 @@
           <option *ngFor="let ditem of ditems" [ngValue]="ditem">
             {{ ditem.descripcion }} - {{ ditem.dnpcNavigation.descripcion }}
           </option>
-        </select>
+        </select> -->
       </div>
       <div class="col-md-6">
-        <label for="">Filtro Lugar:</label>
-        <div class="input-group mb-3">
+        <label for="">Lugar:</label>
+        <div class="row">
+          <div class="col-md-1">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#Lugar"
+            >
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div *ngIf="this.item.lugar > 0" class="col-md-11">
+            <label for=""
+              ><b>Nombre Lugar: </b>{{ this.busquedaLugar }}</label
+            >
+          </div>
+        </div>
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="Lugar"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                 <b class="text-danger">Módulo Lugares</b>
+                </h5>
+                <button
+                  type="button"
+                  #closeLugar
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-lugar
+                  (filter)="capturarLugar($event)"
+                ></app-filtro-lugar>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">
             <i class="fa fa-search" aria-hidden="true"></i>
           </span>
@@ -205,7 +322,7 @@
           <option *ngFor="let litem of lugarItems" [ngValue]="litem">
             {{ litem.descripcion }}
           </option>
-        </select>
+        </select> -->
       </div>
     </div>
     <ng-container
@@ -293,7 +410,7 @@
         </div>
       </div>
     </ng-container>
-
+<br>
     <div class="form-group row">
       <div class="row">
         <legend>
@@ -358,10 +475,10 @@
                 <div class="modal-footer">
                   <button
                     type="button"
-                    class="btn btn-secondary"
+                    class="btn btn-danger"
                     data-bs-dismiss="modal"
                   >
-                    Close
+                    Cancelar
                   </button>
                 </div>
               </div>
@@ -377,8 +494,69 @@
           ></app-combo-localidad> -->
         </div>
         <div class="col-md-6">
-          <label class="col-sm-12 col-form-label" for="">Filtro Barrio:</label>
-          <div class="input-group mb-3">
+          <label>Barrio:</label>
+          <div class="row">
+            <div class="col-md-1">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#barrio"
+              >
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div *ngIf="this.item.barrio > 0" class="col-md-11">
+              <label for=""
+                ><b>Nombre: </b>{{ this.busquedaBarrio }}</label
+              >
+            </div>
+          </div>
+          <!-- filtro nuevo -->
+          <!-- Button trigger modal -->
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="barrio"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                   <b class="text-danger">Módulo Barrio</b>
+                  </h5>
+                  <button
+                    type="button"
+                    #closeBarrio
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <app-filtro-barrio
+                    (filter)="capturarBarrio($event)"
+                  ></app-filtro-barrio>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
               <i class="fa fa-search" aria-hidden="true"></i>
             </span>
@@ -404,7 +582,7 @@
             <option *ngFor="let Bitem of BItems" [ngValue]="Bitem">
               {{ Bitem.nombre }}
             </option>
-          </select>
+          </select> -->
         </div>
       </div>
       <div class="row">

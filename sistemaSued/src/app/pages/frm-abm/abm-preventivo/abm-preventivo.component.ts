@@ -43,6 +43,10 @@ export class AbmPreventivoComponent implements OnInit {
   filCalleInterseccion!: FilBuscadorCalleComponent;
 
   @ViewChild('close') cerrar!: ElementRef;
+  @ViewChild('closeDelito') cerrarDelito!: ElementRef;
+  @ViewChild('closeLugar') cerrarLugar!: ElementRef;
+  @ViewChild('closeBarrio') cerrarBarrio!: ElementRef;
+  
 
   @Input()
   public id!: number;
@@ -169,7 +173,9 @@ export class AbmPreventivoComponent implements OnInit {
             this.busquedaBarrio = this.item.barrioNavigation?.nombre;
           }
           if (this.item.delito != undefined) {
-            this.busqueda = this.item.delitoNavigation?.descripcion;
+            //this.busqueda = this.item.delitoNavigation?.descripcion;
+            this.item.nombreDelito = this.item.delitoNavigation?.descripcion;
+            this.item.nombreDnpc = this.item.delitoNavigation?.dnpcNavigation?.descripcion;
           }
           if (this.item.lugar != undefined) {
             this.busquedaLugar = this.item.lugarNavigation?.descripcion;
@@ -346,9 +352,12 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturar(event: Delito) {
     if (event != undefined) {
+      console.log("evento delito",event)
       this.item.delito = event.id;
-      this.busqueda = event.descripcion;
+      this.item.nombreDelito = event.descripcion;
+      this.item.nombreDnpc = event.dnpcNavigation?.descripcion;
     }
+    this.cerrarDelito.nativeElement.click();
   }
 
   async filtrarLugar() {
@@ -379,9 +388,11 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturarLugar(event: Lugar) {
     if (event != undefined) {
+      console.log("evento lugar",event)
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
     }
+    this.cerrarLugar.nativeElement.click();
   }
 
   opcCalle = {
@@ -474,6 +485,7 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
     }
+    this.cerrarBarrio.nativeElement.click();
   }
 
   //seleccion localidad es del combo

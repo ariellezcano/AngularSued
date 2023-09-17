@@ -41,9 +41,13 @@ export class Preventivo {
 
     nombreUnidad: string;
     nombreUniEspecial: string;
+    //localidad
     localidadCoordenada: any;
     cp: any;
     pais: any;
+    //delito
+    nombreDelito: any;
+    nombreDnpc: any;
 
     constructor(){
         this.activo = true;
