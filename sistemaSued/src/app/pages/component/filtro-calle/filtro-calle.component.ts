@@ -1,23 +1,23 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Delito } from 'src/app/models/index.models';
-import { DelitoService } from 'src/app/services/index.service';
+import { Calle } from 'src/app/models/index.models';
+import { CalleService } from 'src/app/services/index.service';
 
 @Component({
-  selector: 'app-filtro-delito',
-  templateUrl: './filtro-delito.component.html',
-  styleUrls: ['./filtro-delito.component.scss']
+  selector: 'app-filtro-calle',
+  templateUrl: './filtro-calle.component.html',
+  styleUrls: ['./filtro-calle.component.scss']
 })
-export class FiltroDelitoComponent implements OnInit {
+export class FiltroCalleComponent implements OnInit {
 
   @Output()
-  filter: EventEmitter<Delito> = new EventEmitter<Delito>();
+  filter: EventEmitter<Calle> = new EventEmitter<Calle>();
 
   proccess: Boolean;
   public search: String = '';
   public oldSearch: String = '';
 
-  item: Delito;
-  items: Delito[];
+  item: Calle;
+  items: Calle[];
   filtro: string = '';
   /* Searcheable table Filter */
   public limit: Number;
@@ -28,13 +28,18 @@ export class FiltroDelitoComponent implements OnInit {
   anterior: boolean;
   siguiente: boolean;
   paginaSiguiente!: number;
-  public limits: Number[] = [7, 10, 25, 50, 100];
+  public limits: Number[] = [5, 10, 25, 50, 100];
 
-  constructor(private wsdl: DelitoService) {
+  // setPage(page: any) {
+  //   this.paginaActual = page;
+  //   this.list();
+  // }
+
+  constructor(private wsdl: CalleService) {
     this.proccess = false;
     this.limit = 5;
     this.paginaActual = 1;
-    this.item = new Delito();
+    this.item = new Calle();
     this.items = [];
     this.siguiente = false;
     this.anterior = false;
@@ -57,6 +62,7 @@ export class FiltroDelitoComponent implements OnInit {
     this.list();
   }
 
+
   public async list() {
     try {
       if (this.filtro == '' || this.filtro == undefined) {
@@ -65,7 +71,6 @@ export class FiltroDelitoComponent implements OnInit {
           .then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          console.log("llegue", result.data)
           this.items = result.data;
           this.totalRegistros = result.totalRegistros;
           this.totalPaginas = result.totalPaginas;
@@ -85,11 +90,11 @@ export class FiltroDelitoComponent implements OnInit {
     } catch (error) {}
   }
 
-  enviar(item: Delito) {
+  enviar(item: Calle) {
     this.filter.emit(item);
   }
 
-  compareFn(c1: Delito, c2: Delito): boolean {
+  compareFn(c1: Calle, c2: Calle): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
@@ -98,5 +103,4 @@ export class FiltroDelitoComponent implements OnInit {
     //console.log('this.filter', this.filtro);
     this.list();
   }
-
 }

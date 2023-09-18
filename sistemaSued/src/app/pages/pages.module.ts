@@ -154,6 +154,7 @@ import { FiltroLocalidadesComponent } from './component/filtro-localidades/filtr
 import { FiltroDelitoComponent } from './component/filtro-delito/filtro-delito.component';
 import { FiltroLugarComponent } from './component/filtro-lugar/filtro-lugar.component';
 import { FiltroBarrioComponent } from './component/filtro-barrio/filtro-barrio.component';
+import { FiltroCalleComponent } from './component/filtro-calle/filtro-calle.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -303,6 +304,7 @@ defineLocale('es', esLocale);
       FiltroDelitoComponent,
       FiltroLugarComponent,
       FiltroBarrioComponent,
+      FiltroCalleComponent,
       
     ],
     exports: [],

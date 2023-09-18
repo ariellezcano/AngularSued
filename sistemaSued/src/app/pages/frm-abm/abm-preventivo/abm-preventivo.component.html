@@ -585,7 +585,7 @@
           </select> -->
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">
           <label
             *ngIf="this.item.localidadNavigation != undefined"
@@ -597,11 +597,73 @@
             ></label
           >
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <div class="col-md-6">
           <label class="col-sm-12 col-form-label" for="">Calle:</label>
-          <div class="input-group mb-3">
+          <div class="row">
+            <div class="col-md-1">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#calle"
+              >
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div *ngIf="this.item.calle > 0" class="col-md-11">
+              <label for=""
+                ><b>Calle seleccionada:</b> &nbsp;{{ this.busquedaCalle }}</label
+              >
+            </div>
+          </div>
+          <!-- filtro nuevo -->
+          <!-- Button trigger modal -->
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="calle"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                   <b class="text-danger">Módulo Calle</b>
+                  </h5>
+                  <button
+                    type="button"
+                    #closeCalle
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <app-filtro-calle
+                    (filter)="capturarCalle($event)"
+                  ></app-filtro-calle>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
               <i class="fa fa-search" aria-hidden="true"></i>
             </span>
@@ -628,13 +690,74 @@
             <option *ngFor="let Citem of CItems" [ngValue]="Citem">
               {{ Citem.nombre }}
             </option>
-          </select>
+          </select> -->
         </div>
         <div class="col-md-6">
           <label class="col-sm-12 col-form-label" for=""
             >Calle Intersección:</label
           >
-          <div class="input-group mb-3">
+          <div class="row">
+            <div class="col-md-1">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#calleInterseccion"
+              >
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div *ngIf="this.item.calleInterseccion > 0" class="col-md-11">
+              <label for=""
+                ><b>Calle seleccionada:</b> &nbsp;{{ this.busquedaCalleInterseccion }}</label
+              >
+            </div>
+          </div>
+          <!-- filtro nuevo -->
+          <!-- Button trigger modal -->
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="calleInterseccion"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabindex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">
+                   <b class="text-danger">Módulo Calle</b>
+                  </h5>
+                  <button
+                    type="button"
+                    #closeCalleInterseccion
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <app-filtro-calle
+                    (filter)="capturarCalleInterseccion($event)"
+                  ></app-filtro-calle>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">
               <i class="fa fa-search" aria-hidden="true"></i>
             </span>
@@ -661,7 +784,7 @@
             <option *ngFor="let cItemInt of CItemsInters" [ngValue]="cItemInt">
               {{ cItemInt.nombre }}
             </option>
-          </select>
+          </select> -->
         </div>
       </div>
       <div class="row">

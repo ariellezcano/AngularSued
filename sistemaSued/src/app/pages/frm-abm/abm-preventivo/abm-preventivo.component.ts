@@ -46,6 +46,8 @@ export class AbmPreventivoComponent implements OnInit {
   @ViewChild('closeDelito') cerrarDelito!: ElementRef;
   @ViewChild('closeLugar') cerrarLugar!: ElementRef;
   @ViewChild('closeBarrio') cerrarBarrio!: ElementRef;
+  @ViewChild('closeCalle') cerrarCalle!: ElementRef;
+  @ViewChild('closeCalleInterseccion') cerrarCalleInt!: ElementRef;
   
 
   @Input()
@@ -187,8 +189,8 @@ export class AbmPreventivoComponent implements OnInit {
           if (this.item.calleInterseccion != undefined) {
             this.busquedaCalleInterseccion =
               this.item.calleInterseccionNavigation?.nombre;
-            this.cItemInt.nombre =
-              this.item.calleInterseccionNavigation?.nombre;
+            // this.cItemInt.nombre =
+            //   this.item.calleInterseccionNavigation?.nombre;
           }
           if (this.item.unidad != undefined) {
             this.item.nombreUnidad = this.item.unidadNavigation.nombre;
@@ -443,13 +445,16 @@ export class AbmPreventivoComponent implements OnInit {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
     }
+    this.cerrarCalle.nativeElement.click();
   }
   //calle interseccion
   capturarCalleInterseccion(event: Calle) {
     if (event != undefined) {
+      console.log("calle", event)
       this.item.calleInterseccion = event.id;
       this.busquedaCalleInterseccion = event.nombre;
     }
+    this.cerrarCalleInt.nativeElement.click();
   }
 
   async filtrarBarrio() {
