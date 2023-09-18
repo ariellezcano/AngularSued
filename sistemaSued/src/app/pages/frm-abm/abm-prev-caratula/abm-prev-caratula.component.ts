@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Delito, PrevCaratula, Preventivo } from 'src/app/models/index.models';
@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class AbmPrevCaratulaComponent implements OnInit {
 
+  @ViewChild('closeDelito') cerrarDelito!: ElementRef;
+  
   @Input()
   public id: number;
   //valida el formulario
@@ -104,7 +106,6 @@ export class AbmPrevCaratulaComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          
           this.idSeleccion = this.item.id;
           this.busqueda = result.dato.delitoNavigation?.descripcion;
           this.mostrarBtnModif = true;
@@ -192,32 +193,33 @@ export class AbmPrevCaratulaComponent implements OnInit {
     }
   }
 
-  async filtrarDelito() {
-    this.Ditems = [];
-    try {
-      if (this.busqueda != '' && this.busqueda != undefined) {
-        let data = await this.wsdlModalidad.doFilter(this.busqueda).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.Ditems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
-        }
-      }
-    } catch (error) {}
-  }
+  // async filtrarDelito() {
+  //   this.Ditems = [];
+  //   try {
+  //     if (this.busqueda != '' && this.busqueda != undefined) {
+  //       let data = await this.wsdlModalidad.doFilter(this.busqueda).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.Ditems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>'
+  //         })
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
 
   capturar(event: Delito) {
     if (event != undefined) {
       this.busqueda = event.descripcion;
       this.item.delito = event.id;
-      this.item.capturaDescripcion = event.descripcion;
-      this.item.codigo = event.codTitulo +" - "+ event.codCapitulo +" - "+ event.codTipo +" - "+ event.codSubTipo;
+      this.busqueda = event.descripcion;
+      //this.item.codigo = event.codTitulo +" - "+ event.codCapitulo +" - "+ event.codTipo +" - "+ event.codSubTipo;
     }
+    this.cerrarDelito.nativeElement.click();
   }
 
   //agrega fila en memoria

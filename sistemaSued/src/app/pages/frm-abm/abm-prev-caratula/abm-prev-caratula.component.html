@@ -16,8 +16,64 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <label for="" class="col-sm-12 col-form-label">Filtrar Delito:</label>
-      <div class="input-group mb-3">
+      <label for="" class="col-sm-12 col-form-label">Delito:</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.delito > 0" class="col-md-11">
+          <label for=""
+            ><b>Delito: </b>{{ this.busqueda }}</label
+          >
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Delito</h5>
+              <button
+                  type="button"
+                  #closeDelito
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-delito
+                  (filter)="capturar($event)"
+                ></app-filtro-delito>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -46,7 +102,7 @@
         <option *ngFor="let Ditem of Ditems" [ngValue]="Ditem">
           {{ Ditem.descripcion }}
         </option>
-      </select>
+      </select> -->
     </div>
     <div class="col-md-6">
       <ng-container
