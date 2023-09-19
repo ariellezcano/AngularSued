@@ -82,20 +82,20 @@ export class AbmPreventivoComponent implements OnInit {
 
   item: Preventivo;
 
-  ditems: Delito[];
-  ditem: Delito;
+  // ditems: Delito[];
+  // ditem: Delito;
 
-  lugarItems: Lugar[];
-  litem: Lugar;
+  // lugarItems: Lugar[];
+  // litem: Lugar;
 
-  CItems: Calle[];
-  Citem: Calle;
+  // CItems: Calle[];
+  // Citem: Calle;
 
-  CItemsInters: Calle[];
-  cItemInt: Calle;
+  // CItemsInters: Calle[];
+  // cItemInt: Calle;
 
-  BItems: Barrio[];
-  Bitem: Barrio;
+  // BItems: Barrio[];
+  // Bitem: Barrio;
 
   constructor(
     private route: ActivatedRoute,
@@ -120,16 +120,16 @@ export class AbmPreventivoComponent implements OnInit {
     this.longitud = '';
     this.coordenadas = '';
     //this.lstCoordenadas = [];
-    this.ditems = [];
-    this.ditem = new Delito();
-    this.lugarItems = [];
-    this.litem = new Lugar();
-    this.CItems = [];
-    this.Citem = new Calle();
-    this.CItemsInters = [];
-    this.cItemInt = new Calle();
-    this.BItems = [];
-    this.Bitem = new Barrio();
+    //this.ditems = [];
+    //this.ditem = new Delito();
+    //this.lugarItems = [];
+    //this.litem = new Lugar();
+    //this.CItems = [];
+    //this.Citem = new Calle();
+    //this.CItemsInters = [];
+    //this.cItemInt = new Calle();
+    //this.BItems = [];
+    //this.Bitem = new Barrio();
     //this.seleccionCoordenada = new results();
     this.map = false;
     this.googleMaps = true;
@@ -184,7 +184,7 @@ export class AbmPreventivoComponent implements OnInit {
           }
           if (this.item.calle != undefined) {
             this.busquedaCalle = this.item.calleNavigation?.nombre;
-            this.Citem.nombre = this.item.calleNavigation?.nombre;
+            //this.Citem.nombre = this.item.calleNavigation?.nombre;
           }
           if (this.item.calleInterseccion != undefined) {
             this.busquedaCalleInterseccion =
@@ -322,35 +322,35 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  async filtrarDelito() {
-    this.ditems = [];
-    try {
-      if (this.busqueda != '' && this.busqueda != undefined) {
-        let data = await this.wsdlDelito.doFilter(this.busqueda).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          Swal.fire(
-            'Búsqueda realizada correctamente!',
-            'Seleccione el dato encontrado del campo seleccionable!',
-            'success'
-          )
-          this.ditems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        text: 'Hubo un error al filtrar el dato!',
-        //footer: '<b>No existe la búsqueda realizada...</b>',
-      });
-    }
-  }
+  // async filtrarDelito() {
+  //   this.ditems = [];
+  //   try {
+  //     if (this.busqueda != '' && this.busqueda != undefined) {
+  //       let data = await this.wsdlDelito.doFilter(this.busqueda).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         Swal.fire(
+  //           'Búsqueda realizada correctamente!',
+  //           'Seleccione el dato encontrado del campo seleccionable!',
+  //           'success'
+  //         )
+  //         this.ditems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire({
+  //       icon: 'error',
+  //       text: 'Hubo un error al filtrar el dato!',
+  //       //footer: '<b>No existe la búsqueda realizada...</b>',
+  //     });
+  //   }
+  // }
 
   capturar(event: Delito) {
     if (event != undefined) {
@@ -362,31 +362,31 @@ export class AbmPreventivoComponent implements OnInit {
     this.cerrarDelito.nativeElement.click();
   }
 
-  async filtrarLugar() {
-    this.lugarItems = [];
-    try {
-      if (this.busquedaLugar != '' && this.busquedaLugar != undefined) {
-        let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          Swal.fire(
-            'Búsqueda realizada correctamente!',
-            'Seleccione el dato encontrado del campo seleccionable!',
-            'success'
-          )
-          this.lugarItems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire('Error al obtener el dato');
-    }
-  }
+  // async filtrarLugar() {
+  //   this.lugarItems = [];
+  //   try {
+  //     if (this.busquedaLugar != '' && this.busquedaLugar != undefined) {
+  //       let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         Swal.fire(
+  //           'Búsqueda realizada correctamente!',
+  //           'Seleccione el dato encontrado del campo seleccionable!',
+  //           'success'
+  //         )
+  //         this.lugarItems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire('Error al obtener el dato');
+  //   }
+  // }
 
   capturarLugar(event: Lugar) {
     if (event != undefined) {
@@ -402,42 +402,42 @@ export class AbmPreventivoComponent implements OnInit {
     interseccion: 'interseccion',
   };
 
-  async filtrarCalle(tipoCalle: string) {
-    let criterio = '';
-    if (tipoCalle == this.opcCalle.individual) {
-      this.CItems = [];
-      criterio = this.busquedaCalle;
-    } else if (tipoCalle == this.opcCalle.interseccion) {
-      this.CItemsInters = [];
-      criterio = this.busquedaCalleInterseccion;
-    }
-    try {
-      if (criterio != '' && criterio != undefined) {
-        let data = await this.wsdlCalle.doFilter(criterio).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          Swal.fire(
-            'Búsqueda realizada correctamente!',
-            'Seleccione el dato encontrado del campo seleccionable!',
-            'success'
-          )
-          if (tipoCalle == this.opcCalle.individual) {
-            this.CItems = result.data;
-          } else if (tipoCalle == this.opcCalle.interseccion) {
-            this.CItemsInters = result.data;
-          }
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire('Error al obtener el dato');
-    }
-  }
+  // async filtrarCalle(tipoCalle: string) {
+  //   let criterio = '';
+  //   if (tipoCalle == this.opcCalle.individual) {
+  //     this.CItems = [];
+  //     criterio = this.busquedaCalle;
+  //   } else if (tipoCalle == this.opcCalle.interseccion) {
+  //     this.CItemsInters = [];
+  //     criterio = this.busquedaCalleInterseccion;
+  //   }
+  //   try {
+  //     if (criterio != '' && criterio != undefined) {
+  //       let data = await this.wsdlCalle.doFilter(criterio).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         Swal.fire(
+  //           'Búsqueda realizada correctamente!',
+  //           'Seleccione el dato encontrado del campo seleccionable!',
+  //           'success'
+  //         )
+  //         if (tipoCalle == this.opcCalle.individual) {
+  //           this.CItems = result.data;
+  //         } else if (tipoCalle == this.opcCalle.interseccion) {
+  //           this.CItemsInters = result.data;
+  //         }
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire('Error al obtener el dato');
+  //   }
+  // }
 
   //calle individual
   capturarCalle(event: Calle) {
@@ -457,33 +457,33 @@ export class AbmPreventivoComponent implements OnInit {
     this.cerrarCalleInt.nativeElement.click();
   }
 
-  async filtrarBarrio() {
-    //console.log(this.item.barrio)
-    this.BItems = [];
-    try {
-      if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
-        let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          Swal.fire(
-            'Búsqueda realizada correctamente!',
-            'Seleccione el dato encontrado del campo seleccionable!',
-            'success'
-          )
-          this.BItems = result.data;
-        } else if (result.code == 204) {
-          // this.item.barrio = 0;
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire('Error al obtener el dato');
-    }
-  }
+  // async filtrarBarrio() {
+  //   //console.log(this.item.barrio)
+  //   this.BItems = [];
+  //   try {
+  //     if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
+  //       let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         Swal.fire(
+  //           'Búsqueda realizada correctamente!',
+  //           'Seleccione el dato encontrado del campo seleccionable!',
+  //           'success'
+  //         )
+  //         this.BItems = result.data;
+  //       } else if (result.code == 204) {
+  //         // this.item.barrio = 0;
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire('Error al obtener el dato');
+  //   }
+  // }
 
   capturarBarrio(event: Barrio) {
     if (event != undefined) {
@@ -511,7 +511,7 @@ export class AbmPreventivoComponent implements OnInit {
     try {
       let data = await this.wsdlGeo
         .geolocalizacion(
-          this.Citem.nombre,
+          this.busquedaCalle,
           this.item.dirNro,
           this.item.cp,
           this.item.localidadCoordenada,
