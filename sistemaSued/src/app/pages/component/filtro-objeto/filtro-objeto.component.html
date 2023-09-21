@@ -68,7 +68,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="enviar(e)" *ngFor="let e of items">
+            <tr (click)="enviar(e)" *ngFor="let e of items" class="text-center">
               <!-- <td scope="row">{{item.id}} </td> -->
               <td data-titulo="nombre">{{ e.descripcion?.toLocaleUpperCase() }}</td>
   

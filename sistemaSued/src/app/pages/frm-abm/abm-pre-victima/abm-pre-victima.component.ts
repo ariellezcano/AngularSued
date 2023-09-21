@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -53,6 +54,11 @@ export class AbmPreVictimaComponent implements OnInit {
   @ViewChild(ComboEstudioComponent, { static: false })
   comboEstudio!: ComboEstudioComponent;
 
+  @ViewChild('closeNacion') cerrarNacion!: ElementRef;
+  @ViewChild('closeOcup') cerrarOcup!: ElementRef;
+  @ViewChild('closeBarrio') cerrarBarrio!: ElementRef;
+  @ViewChild('closeCalle') cerrarCalle!: ElementRef;
+  
   //@Output() emmitProvincia: EventEmitter<Provincia> = new EventEmitter();
   public id!: number;
 
@@ -107,8 +113,8 @@ export class AbmPreVictimaComponent implements OnInit {
     private router: Router,
     private wsdl: PrevVictimaService,
     private wsdlPreventivo: PreventivoService,
-    private wsdlOcupacion: OcupacionService,
-    private wsdlNacionalidad: NacionesService,
+    //private wsdlOcupacion: OcupacionService,
+    //private wsdlNacionalidad: NacionesService,
     private wsdlBarrio: BarrioService,
     private wsdlCalle: CalleService,
     private formBuilder: FormBuilder
@@ -329,15 +335,12 @@ export class AbmPreVictimaComponent implements OnInit {
             this.busquedaOc = result.dato.ocupacionNavigation.descripcion;
           }
           if (this.item.barrio > 0) {
-            //console.log("barrio tiene")
             this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
           }
           if (this.item.calle > 0) {
             this.busquedaCalle = result.dato.calleNavigation?.nombre;
           }
           if (this.item.sexo > 0) {
-            //console.log("RECUPERO SEXO PERSONA")
-            //alert("ACTIVADO SEXO")
             this.item.capturaSexo = result.dato.sexoNavigation?.descripcion;
             this.verSexo = true;
           }
@@ -352,7 +355,6 @@ export class AbmPreVictimaComponent implements OnInit {
             this.verEstudio = true;
           }
           if (this.item.provincia > 0) {
-            //this.emmitProvincia.emit(this.item.provinciaNavigation);
             this.item.capturaProvincia =
               result.dato.provinciaNavigation?.nombre;
             this.verProvincia = true;
@@ -365,24 +367,24 @@ export class AbmPreVictimaComponent implements OnInit {
   }
 
   //filtra y captura nacionalidad
-  async filtrarNacionalidad() {
-    this.Nitems = [];
-    try {
-      if (this.busqueda != '' && this.busqueda != undefined) {
-        let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.Nitems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {}
-  }
+  // async filtrarNacionalidad() {
+  //   this.Nitems = [];
+  //   try {
+  //     if (this.busqueda != '' && this.busqueda != undefined) {
+  //       let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.Nitems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
 
   capturar(event: Naciones) {
     if (event != undefined) {
@@ -390,26 +392,27 @@ export class AbmPreVictimaComponent implements OnInit {
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
     }
+    this.cerrarNacion.nativeElement.click();
   }
   //filtra y captura ocupacion
-  async filtrarOcupacion() {
-    this.Oitems = [];
-    try {
-      if (this.busquedaOc != '' && this.busquedaOc != undefined) {
-        let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.Oitems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {}
-  }
+  // async filtrarOcupacion() {
+  //   this.Oitems = [];
+  //   try {
+  //     if (this.busquedaOc != '' && this.busquedaOc != undefined) {
+  //       let data = await this.wsdlOcupacion.doFilter(this.busquedaOc).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.Oitems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
 
   capturarOc(event: Ocupacion) {
     if (event != undefined) {
@@ -417,64 +420,67 @@ export class AbmPreVictimaComponent implements OnInit {
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
     }
+    this.cerrarOcup.nativeElement.click();
   }
 
   //filtro calle
-  async filtrarCalle() {
-    this.CItems = [];
-    try {
-      if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
-        let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.CItems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire('Error al obtener el dato');
-    }
-  }
+  // async filtrarCalle() {
+  //   this.CItems = [];
+  //   try {
+  //     if (this.busquedaCalle != '' && this.busquedaCalle != undefined) {
+  //       let data = await this.wsdlCalle.doFilter(this.busquedaCalle).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.CItems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire('Error al obtener el dato');
+  //   }
+  // }
 
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
     }
+    this.cerrarCalle.nativeElement.click();
   }
 
   //filtro barrio
-  async filtrarBarrio() {
-    this.BItems = [];
-    try {
-      if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
-        let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          this.BItems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>',
-          });
-        }
-      }
-    } catch (error) {
-      Swal.fire('Error al obtener el dato');
-    }
-  }
+  // async filtrarBarrio() {
+  //   this.BItems = [];
+  //   try {
+  //     if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
+  //       let data = await this.wsdlBarrio.doFilter(this.busquedaBarrio).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.BItems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>',
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     Swal.fire('Error al obtener el dato');
+  //   }
+  // }
 
   capturarBarrio(event: Barrio) {
     if (event != undefined) {
       this.item.barrio = event.id;
       this.busquedaBarrio = event.nombre;
     }
+    this.cerrarBarrio.nativeElement.click();
   }
 
   //agrega fila en memoria

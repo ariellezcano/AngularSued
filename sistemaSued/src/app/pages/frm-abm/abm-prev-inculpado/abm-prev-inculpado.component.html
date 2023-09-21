@@ -119,9 +119,65 @@
     <div class="col-md-1"></div>
     <div class="col-md-4">
       <label for="" class="col-sm-12 col-form-label"
-        >Filtro Nacionalidad:</label
+        >Nacionalidad:</label
       >
-      <div class="input-group mb-3">
+
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#examplePais"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.nacionalidad > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección: </b>{{ this.busqueda }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="examplePais"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Nación</h5>
+              <button
+                  type="button"
+                  #closeNacion
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-nacionalidad
+                  (filter)="capturar($event)"
+                ></app-filtro-nacionalidad>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -147,7 +203,7 @@
         <option *ngFor="let Nitem of Nitems" [ngValue]="Nitem">
           {{ Nitem.nacionalidad }}
         </option>
-      </select>
+      </select> -->
     </div>
     <div class="col-md-4">
       <app-combo-provincia
@@ -170,9 +226,64 @@
   <div class="row">
     <legend><u>Domicilio:</u></legend>
     <div class="col-md-4">
-      <app-fil-buscador-barrio
+      <label for="">Barrio</label>
+      <!-- <app-fil-buscador-barrio
         (emmit)="doFoundBarrio($event)"
-      ></app-fil-buscador-barrio>
+      ></app-fil-buscador-barrio> -->
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleBarr"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.dirBarrio > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.busquedaBarrio }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleBarr"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Barrio</h5>
+              <button
+                  type="button"
+                  #closeBarr
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-barrio
+                  (filter)="doFoundBarrio($event)"
+                ></app-filtro-barrio>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <app-fil-buscador-calle

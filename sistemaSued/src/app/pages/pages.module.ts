@@ -156,6 +156,9 @@ import { FiltroLugarComponent } from './component/filtro-lugar/filtro-lugar.comp
 import { FiltroBarrioComponent } from './component/filtro-barrio/filtro-barrio.component';
 import { FiltroCalleComponent } from './component/filtro-calle/filtro-calle.component';
 import { FiltroObjetoComponent } from './component/filtro-objeto/filtro-objeto.component';
+import { FiltroModalidadComponent } from './component/filtro-modalidad/filtro-modalidad.component';
+import { FiltroNacionalidadComponent } from './component/filtro-nacionalidad/filtro-nacionalidad.component';
+import { FiltroOcupacionComponent } from './component/filtro-ocupacion/filtro-ocupacion.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -307,6 +310,9 @@ defineLocale('es', esLocale);
       FiltroBarrioComponent,
       FiltroCalleComponent,
       FiltroObjetoComponent,
+      FiltroModalidadComponent,
+      FiltroNacionalidadComponent,
+      FiltroOcupacionComponent,
       
     ],
     exports: [],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -9,9 +9,7 @@ import {
 } from 'src/app/models/index.models';
 import {
   ModalidadService,
-  PreventivoService,
   PrevModalidadService,
-  PrevObjetoService,
 } from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
@@ -22,6 +20,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-prev-modalidad.component.scss'],
 })
 export class AbmPrevModalidadComponent implements OnInit {
+
+  @ViewChild('closeModalidad') cerrarModal!: ElementRef;
+
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -234,6 +235,7 @@ export class AbmPrevModalidadComponent implements OnInit {
       this.item.codigo = event.codigo;
       
     }
+    this.cerrarModal.nativeElement.click();
   }
 
   //agrega fila en memoria

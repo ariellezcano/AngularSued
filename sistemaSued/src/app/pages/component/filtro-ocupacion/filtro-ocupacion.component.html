@@ -62,17 +62,15 @@
     <div class="col-md-12">
       <div class="table-responsive-sm">
         <table class="table table-hover">
-          <thead class="thead-inverse ">
-            <tr class="table-primary text-center">
-              <th>Código</th>
-              <th>nombre</th>
+          <thead class="thead-inverse text-center">
+            <tr class="table-primary">
+              <th>Nombre</th>
             </tr>
           </thead>
           <tbody class="text-center">
-            <tr (click)="enviar(e)" *ngFor="let e of items">
+            <tr (click)="enviar(e)" *ngFor="let e of items" class="text-center">
               <!-- <td scope="row">{{item.id}} </td> -->
-              <td>{{e.codigo}}</td>
-              <td data-titulo="nombre">{{ e.nombre?.toLocaleUpperCase() }}</td>
+              <td data-titulo="nombre">{{ e.descripcion?.toLocaleUpperCase() }}</td>
   
               <!-- <td data-titulo="seleccionar">
                               <button type="button" title="elegir" placement="top" show-delay="10"

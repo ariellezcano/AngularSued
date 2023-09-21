@@ -1,5 +1,5 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
@@ -47,7 +47,8 @@ export class AbmPrevObjetoComponent implements OnInit {
 
   @ViewChild(VentanaLstAbmObjetoComponent, { static: false }) ventanaObj!: VentanaLstAbmObjetoComponent;
 
-
+  @ViewChild('closeObj') cerrarObj!: ElementRef;
+  
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -554,7 +555,7 @@ export class AbmPrevObjetoComponent implements OnInit {
           if (this.item.fecha != undefined) {
             this.item.fecha = moment(this.item.fecha).format('DD-MM-YYYY');
           }
-          this.busqueda = result.dato.objetoNavigation.descripcion;
+          this.busqueda = result.dato.objetoNavigation?.descripcion;
           this.mostrarBtnModif = true;
         }
       } catch (error) {}
@@ -635,6 +636,7 @@ export class AbmPrevObjetoComponent implements OnInit {
       this.item.capturaObj = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codSubTipo;
     }
+    this.cerrarObj.nativeElement.click();
   }
 
   cancelVentObj(){

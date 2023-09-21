@@ -14,8 +14,64 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Filtro Objeto:</label>
-      <div class="input-group mb-3">
+      <label for="" class="col-sm-12 col-form-label">Objeto:</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#example"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.objeto > 0" class="col-md-11">
+          <label for=""
+            ><b>Objeto: </b>{{ this.busqueda }}</label
+          >
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="example"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Objeto</h5>
+              <button
+                  type="button"
+                  #closeObj
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-objeto
+                  (filter)="capturar($event)"
+                ></app-filtro-objeto>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -41,7 +97,7 @@
         <option *ngFor="let Oitem of Oitems" [ngValue]="Oitem">
           {{ Oitem.descripcion }}
         </option>
-      </select>
+      </select> -->
     </div>
     <ng-container *ngIf="idSeleccion > 0 && this.busqueda == 'DINERO EN EFECTIVO'; then thenTemplate; else elseTemplate"></ng-container>
     <ng-template #thenTemplate>
@@ -133,7 +189,7 @@
   </div>
 
   <!-- agregue nuevo verificar -->
-  <ng-container *ngIf="mostrarModal">
+  <!-- <ng-container *ngIf="mostrarModal">
     <div class="row">
       <div class="col-md-4">
         <button
@@ -149,7 +205,7 @@
       <div class="col-md-4"></div>
       <div class="col-md-4"></div>
     </div>
-  </ng-container>
+  </ng-container> -->
 <!-- /agregue nuevo verificar -->
 
   <div class="row">

@@ -1,10 +1,29 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { Barrio, Calle, Estudio, IdentidadGenero, Localidad, Naciones, Ocupacion, Preventivo, PrevInculpado, Provincia, Sexo, Vinculo } from 'src/app/models/index.models';
-import { CalleService, NacionesService, OcupacionService, PreventivoService, PrevInculpadoService } from 'src/app/services/index.service';
+import {
+  Barrio,
+  Calle,
+  Estudio,
+  IdentidadGenero,
+  Localidad,
+  Naciones,
+  Ocupacion,
+  Preventivo,
+  PrevInculpado,
+  Provincia,
+  Sexo,
+  Vinculo,
+} from 'src/app/models/index.models';
+import {
+  CalleService,
+  NacionesService,
+  OcupacionService,
+  PreventivoService,
+  PrevInculpadoService,
+} from 'src/app/services/index.service';
 import { Utils } from 'src/app/utils/utils';
 import Swal from 'sweetalert2';
 import { ComboEstudioComponent } from '../../component/combo-estudio/combo-estudio.component';
@@ -19,21 +38,30 @@ import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-loca
 @Component({
   selector: 'app-abm-prev-inculpado',
   templateUrl: './abm-prev-inculpado.component.html',
-  styleUrls: ['./abm-prev-inculpado.component.scss']
+  styleUrls: ['./abm-prev-inculpado.component.scss'],
 })
 export class AbmPrevInculpadoComponent implements OnInit {
+  @ViewChild(FilBuscadorCalleComponent, { static: false })
+  filCalle!: FilBuscadorCalleComponent;
+  @ViewChild(FilBuscadorBarrioComponent, { static: false })
+  filBarrio!: FilBuscadorBarrioComponent;
+  @ViewChild(FilBuscadorLocalidadComponent, { static: false })
+  filLocalidad!: FilBuscadorLocalidadComponent;
 
-  @ViewChild(FilBuscadorCalleComponent, { static: false }) filCalle!: FilBuscadorCalleComponent;
-  @ViewChild(FilBuscadorBarrioComponent, { static: false }) filBarrio!: FilBuscadorBarrioComponent;
-  @ViewChild(FilBuscadorLocalidadComponent, { static: false }) filLocalidad!: FilBuscadorLocalidadComponent;
+  @ViewChild(ComboProvinciaComponent, { static: false })
+  comboProvincia!: ComboProvinciaComponent;
+  @ViewChild(ComboSexoComponent, { static: false })
+  comboSexo!: ComboSexoComponent;
+  @ViewChild(ComboIdentidadGeneroComponent, { static: false })
+  comboGenero!: ComboIdentidadGeneroComponent;
+  @ViewChild(ComboVinculoComponent, { static: false })
+  comboVinculo!: ComboVinculoComponent;
+  @ViewChild(ComboEstudioComponent, { static: false })
+  comboEstudio!: ComboEstudioComponent;
 
-  @ViewChild(ComboProvinciaComponent, { static: false }) comboProvincia!: ComboProvinciaComponent;
-  @ViewChild(ComboSexoComponent, { static: false }) comboSexo!: ComboSexoComponent;
-  @ViewChild(ComboIdentidadGeneroComponent, { static: false }) comboGenero!: ComboIdentidadGeneroComponent;
-  @ViewChild(ComboVinculoComponent,{ static: false }) comboVinculo!: ComboVinculoComponent;
-  @ViewChild(ComboEstudioComponent,{ static: false }) comboEstudio!: ComboEstudioComponent;
+  @ViewChild('closeNacion') cerrarNacion!: ElementRef;
+  @ViewChild('closeBarr') cerrarBarr!: ElementRef;
 
- 
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -41,7 +69,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
   //variable para verificar si fue enviado los datos
   enviado = false;
   dnpc: boolean;
-//boton
+  //boton
   mostrarBtnModif: boolean;
   //id seleccion tabla
   idSeleccion!: number;
@@ -58,15 +86,15 @@ export class AbmPrevInculpadoComponent implements OnInit {
   verProv: boolean;
   verLocalidad: boolean;
   //verificar
- //vista previa del preventivo
+  //vista previa del preventivo
   prev: Preventivo;
   prevInc: PrevInculpado;
 
-   //Se usa para la carga en tabla de prevVictima
+  //Se usa para la carga en tabla de prevVictima
   item: PrevInculpado;
   items: PrevInculpado[];
 
-   //ocupado en el filtro naciones
+  //ocupado en el filtro naciones
   Nitems: Naciones[];
   Nitem: Naciones;
 
@@ -90,7 +118,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bsLocaleService: BsLocaleService
   ) {
-    this.bsLocaleService.use('es');//fecha en español, datepicker
+    this.bsLocaleService.use('es'); //fecha en español, datepicker
     this.item = new PrevInculpado();
     this.items = [];
     this.prev = new Preventivo();
@@ -141,7 +169,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.prev = result.dato;
-          if(this.prev.delitoNavigation?.id == 3){
+          if (this.prev.delitoNavigation?.id == 3) {
             this.dnpc = true;
           }
         }
@@ -173,10 +201,9 @@ export class AbmPrevInculpadoComponent implements OnInit {
   // }
 
   async actualizarDatos(obj: PrevInculpado) {
-    if(this.item.fechaDetencion !== undefined){
-      this.item.fechaDetencion = moment(this.item.fechaDetencion,"DD/MM/YYYY");
+    if (this.item.fechaDetencion !== undefined) {
+      this.item.fechaDetencion = moment(this.item.fechaDetencion, 'DD/MM/YYYY');
     }
-    
     this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
@@ -184,8 +211,8 @@ export class AbmPrevInculpadoComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.guardando = false;
-        this.idSeleccion=0;
-        this.mostrarBtnModif=false;
+        this.idSeleccion = 0;
+        this.mostrarBtnModif = false;
         this.verificar = false;
         this.verSexo = false;
         this.verGenero = false;
@@ -196,6 +223,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.busqueda = '';
         this.busquedaCalle = '';
         this.busquedaOc = '';
+        this.busquedaBarrio = '';
         this.filBarrio.busqueda = '';
         this.filBarrio.item = new Barrio();
         this.filBarrio.items = [];
@@ -216,11 +244,9 @@ export class AbmPrevInculpadoComponent implements OnInit {
         });
       } else if (result.code == 204) {
         this.guardando = false;
-
       }
     } catch (error) {
       this.guardando = false;
-
     }
   }
 
@@ -247,7 +273,8 @@ export class AbmPrevInculpadoComponent implements OnInit {
         this.busqueda = '';
         this.busquedaOc = '';
         this.busquedaCalle = '';
-        this.filBarrio.busqueda = '';
+        //this.filBarrio.busqueda = '';
+        this.busquedaBarrio = '';
         this.filBarrio.item = new Barrio();
         this.filBarrio.items = [];
         this.filCalle.busqueda = '';
@@ -265,8 +292,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
 
         this.item = new PrevInculpado();
         this.obtenerDetalle();
-
-      } else if(result.code == 204) {
+      } else if (result.code == 204) {
         this.guardando = false;
         Swal.fire({
           icon: 'info',
@@ -284,125 +310,126 @@ export class AbmPrevInculpadoComponent implements OnInit {
     }
   }
 
-//trae los datos para modificar
-async traerDatos(id: number) {
-  if (this.id > 0) {
-    try {
-      let data = await this.wsdl.getFindId(id).then();
-      const result = JSON.parse(JSON.stringify(data));
-      if (result.code == 200) {
-        this.item = result.dato;
-        this.mostrarBtnModif = true;
-        //console.log("verificar datos", result.dato)
-        this.idSeleccion = result.dato.id;
-        if(this.item.fechaDetencion != null){
-          this.item.fechaDetencion = moment( this.item.fechaDetencion).format('DD-MM-YYYY');
-        }
-        if(result.dato.ocupacion > 0){
-          this.busquedaOc = result.dato.ocupacionNavigation?.descripcion;
-        }
-        if(result.dato.nacionalidad > 0){
-          this.busqueda = result.dato.nacionalidadNavigation?.nacionalidad;
-        }
-        if(result.dato.dirCalle > 0){
-          this.filCalle.busqueda = result.dato.dirCalleNavigation?.nombre;
-        }
-        if(result.dato.dirBarrio > 0){
-          this.filBarrio.busqueda = result.dato.barrioNavigation?.nombre;
-        }
-        if(result.dato.provincia > 0){
-          this.verificar = true;
-        }
-        if(result.dato.sexo > 0){
-          this.verSexo = true;
-        }
-        if(result.dato.genero > 0){
-          this.verGenero = true;
-        }
-        if(result.dato.vinculo > 0){
-          this.verVinculo = true;
-        }
-        if(result.dato.estudios > 0){
-          this.verEstudio = true;
-        }
-        if(result.dato.provDetencion > 0){
-        this.verProv = true;
-        }
-        if(result.dato.localidad > 0){
-          this.filLocalidad.busqueda = result.dato.localidadNavigation?.nombre; 
-          this.verLocalidad = true;
-        }
-        if(result.dato.calle > 0){
-          this.busquedaCalle = result.dato.calleNavigation?.nombre;
-        }
-        
-      }
-    } catch (error) {}
-  }
-}
-
-
-
-//cancelar modificacion
-cancelarModificacion() {
-  this.busqueda = '';
-  this.busquedaOc = '';
-  this.busquedaCalle = '';
-  this.filBarrio.busqueda = '';
-  this.filBarrio.item = new Barrio();
-  this.filBarrio.items = [];
-  this.filCalle.busqueda = '';
-  this.filCalle.item = new Calle();
-  this.filCalle.items = [];
-  this.item = new PrevInculpado();
-  this.filLocalidad.busqueda = '';
-  this.filLocalidad.item = new Localidad();
-  this.filLocalidad.items = [];
-  this.verificar = false;
-  this.verSexo = false;
-  this.verGenero = false;
-  this.verVinculo = false;
-  this.verEstudio = false;
-  this.verProv = false;
-  this.verLocalidad = false;
-  this.mostrarBtnModif = false;
-}
-
-//captura localidad
-// doFoundLocalidad(event: Localidad){
-//   if (event != undefined) {
-//     this.item.localidad = event.id;
-//     //alert(this.item.localidad);
-//   }
-// }
-
-//filtra y captura nacionalidad
-  async filtrarNacionalidad() {
-    this.Nitems = [];
-    try {
-      if (this.busqueda != '' && this.busqueda != undefined) {
-        let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
+  //trae los datos para modificar
+  async traerDatos(id: number) {
+    if (this.id > 0) {
+      try {
+        let data = await this.wsdl.getFindId(id).then();
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
-          this.Nitems = result.data;
-        } else if (result.code == 204) {
-          Swal.fire({
-            icon: 'warning',
-            text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+          this.item = result.dato;
+          this.mostrarBtnModif = true;
+          //console.log("verificar datos", result.dato)
+          this.idSeleccion = result.dato.id;
+          if (this.item.fechaDetencion != null) {
+            this.item.fechaDetencion = moment(this.item.fechaDetencion).format(
+              'DD-MM-YYYY'
+            );
+          }
+          if (result.dato.ocupacion > 0) {
+            this.busquedaOc = result.dato.ocupacionNavigation?.descripcion;
+          }
+          if (result.dato.nacionalidad > 0) {
+            this.busqueda = result.dato.nacionalidadNavigation?.nacionalidad;
+          }
+          if (result.dato.dirCalle > 0) {
+            this.filCalle.busqueda = result.dato.dirCalleNavigation?.nombre;
+          }
+          if (result.dato.dirBarrio > 0) {
+            this.busquedaBarrio = result.dato.barrioNavigation?.nombre;
+          }
+          if (result.dato.provincia > 0) {
+            this.verificar = true;
+          }
+          if (result.dato.sexo > 0) {
+            this.verSexo = true;
+          }
+          if (result.dato.genero > 0) {
+            this.verGenero = true;
+          }
+          if (result.dato.vinculo > 0) {
+            this.verVinculo = true;
+          }
+          if (result.dato.estudios > 0) {
+            this.verEstudio = true;
+          }
+          if (result.dato.provDetencion > 0) {
+            this.verProv = true;
+          }
+          if (result.dato.localidad > 0) {
+            this.filLocalidad.busqueda =
+              result.dato.localidadNavigation?.nombre;
+            this.verLocalidad = true;
+          }
+          if (result.dato.calle > 0) {
+            this.busquedaCalle = result.dato.calleNavigation?.nombre;
+          }
         }
-      }
-    } catch (error) {}
+      } catch (error) {}
+    }
   }
+
+  //cancelar modificacion
+  cancelarModificacion() {
+    this.busqueda = '';
+    this.busquedaOc = '';
+    this.busquedaCalle = '';
+    this.busquedaBarrio = '';
+    this.filBarrio.busqueda = '';
+    this.filBarrio.item = new Barrio();
+    this.filBarrio.items = [];
+    this.filCalle.busqueda = '';
+    this.filCalle.item = new Calle();
+    this.filCalle.items = [];
+    this.item = new PrevInculpado();
+    this.filLocalidad.busqueda = '';
+    this.filLocalidad.item = new Localidad();
+    this.filLocalidad.items = [];
+    this.verificar = false;
+    this.verSexo = false;
+    this.verGenero = false;
+    this.verVinculo = false;
+    this.verEstudio = false;
+    this.verProv = false;
+    this.verLocalidad = false;
+    this.mostrarBtnModif = false;
+  }
+
+  //captura localidad
+  // doFoundLocalidad(event: Localidad){
+  //   if (event != undefined) {
+  //     this.item.localidad = event.id;
+  //     //alert(this.item.localidad);
+  //   }
+  // }
+
+  //filtra y captura nacionalidad
+  // async filtrarNacionalidad() {
+  //   this.Nitems = [];
+  //   try {
+  //     if (this.busqueda != '' && this.busqueda != undefined) {
+  //       let data = await this.wsdlNacionalidad.doFilter(this.busqueda).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         this.Nitems = result.data;
+  //       } else if (result.code == 204) {
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'Verifique el dato ingresado!',
+  //           footer: '<b>No existe la búsqueda realizada...</b>'
+  //         })
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
 
   capturar(event: Naciones) {
     if (event != undefined) {
       this.busqueda = event.nacionalidad;
       this.item.nacionalidad = event.id;
       this.item.capturaNacionalidad = event.nacionalidad;
-      
     }
+    this.cerrarNacion.nativeElement.click();
   }
   //filtra y captura ocupacion
   async filtrarOcupacion() {
@@ -417,8 +444,8 @@ cancelarModificacion() {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {}
@@ -429,7 +456,6 @@ cancelarModificacion() {
       this.busquedaOc = event.descripcion;
       this.item.ocupacion = event.id;
       this.item.capturaOcupacion = event.descripcion;
-     
     }
   }
 
@@ -523,20 +549,19 @@ cancelarModificacion() {
           Swal.fire({
             icon: 'warning',
             text: 'Verifique el dato ingresado!',
-            footer: '<b>No existe la búsqueda realizada...</b>'
-          })
+            footer: '<b>No existe la búsqueda realizada...</b>',
+          });
         }
       }
     } catch (error) {
       Swal.fire('Error al obtener el dato');
     }
   }
-//captura el dato
+  //captura el dato
   capturarCalle(event: Calle) {
     if (event != undefined) {
       this.item.calle = event.id;
       this.busquedaCalle = event.nombre;
-     
     }
   }
 
@@ -591,15 +616,19 @@ cancelarModificacion() {
     }
   }
   //captura la calle
-  doFoundCalle(event: Calle){
+  doFoundCalle(event: Calle) {
     this.item.dirCalle = event.id;
     this.item.capturadirCalle = event.nombre;
   }
 
   //captura el barrio
-  doFoundBarrio(event: Barrio){
-    this.item.dirBarrio = event.id;
-    this.item.capturaBarrio = event.nombre;
+  doFoundBarrio(event: Barrio) {
+    if (event != undefined) {
+      this.item.dirBarrio = event.id;
+      this.busquedaBarrio = event.nombre;
+      //this.item.capturaBarrio = event.nombre;
+    }
+    this.cerrarBarr.nativeElement.click();
   }
 
   //cambia el valor del booleano para mostrar en la vista
@@ -608,7 +637,7 @@ cancelarModificacion() {
     let valor = '';
     if (item) {
       valor = 'Si';
-    }else{
+    } else {
       valor = 'No';
     }
     return valor;
@@ -617,5 +646,4 @@ cancelarModificacion() {
   back() {
     this.router.navigate(['/lst-preventivo']);
   }
-
 }
