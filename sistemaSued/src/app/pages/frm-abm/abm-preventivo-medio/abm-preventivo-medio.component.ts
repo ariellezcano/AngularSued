@@ -1,6 +1,6 @@
 import { NgIf } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
@@ -30,6 +30,9 @@ import { VentanaLstAbmMediosComponent } from '../../component/ventana-lst-abm-me
 export class AbmPreventivoMedioComponent implements OnInit {
   @ViewChild(FilArmaComponent, { static: false }) fil!: FilArmaComponent;
   @ViewChild(VentanaLstAbmMediosComponent, { static: false }) ventanaMedio!: VentanaLstAbmMediosComponent;
+
+
+  @ViewChild('closeMedio') cerrarMedio!: ElementRef;
 
   public id!: number;
   //valida el formulario
@@ -161,7 +164,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
           this.busqueda = result.dato.medioNavigation?.descripcion;
-          if(this.item.medioNavigation.descripcion == 'GANADO MAYOR Y MENOR'){
+          if(this.item.medioNavigation?.descripcion == 'GANADO MAYOR Y MENOR'){
             this.item.capturaDescripcion = this.item.medioNavigation?.descripcion;
           }
           
@@ -315,47 +318,47 @@ export class AbmPreventivoMedioComponent implements OnInit {
   }
 
   //filtro de medios y captura
-  async filtrarMedio() {
-    //alert("ACA ESTO")
-    this.Mitems = [];
-    try {
-      if (this.busqueda != '' && this.busqueda != undefined) {
-        let data = await this.wsdlMedio.doFilter(this.busqueda).then();
-        const result = JSON.parse(JSON.stringify(data));
-        if (result.code == 200) {
-          Swal.fire(
-            'Búsqueda realizada correctamente!',
-            'Seleccione el dato encontrado del campo seleccionable!',
-            'success'
-          );
-          //this.Mitems = [];
-          this.Mitems = result.data;
-        } else if (result.code == 204) {
-          // Swal.fire({
-          //   title: '¡No existe el dato buscado!',
-          //   text: "Desea crearlo!",
-          //   icon: 'warning',
-          //   showCancelButton: true,
-          //   confirmButtonColor: '#3085d6',
-          //   cancelButtonColor: '#d33',
-          //   confirmButtonText: 'Crear!',
-          //   cancelButtonText: 'Cancelar'
-          // }).then((result) => {
-          //   if (result.isConfirmed) {
+  // async filtrarMedio() {
+  //   //alert("ACA ESTO")
+  //   this.Mitems = [];
+  //   try {
+  //     if (this.busqueda != '' && this.busqueda != undefined) {
+  //       let data = await this.wsdlMedio.doFilter(this.busqueda).then();
+  //       const result = JSON.parse(JSON.stringify(data));
+  //       if (result.code == 200) {
+  //         Swal.fire(
+  //           'Búsqueda realizada correctamente!',
+  //           'Seleccione el dato encontrado del campo seleccionable!',
+  //           'success'
+  //         );
+  //         //this.Mitems = [];
+  //         this.Mitems = result.data;
+  //       } else if (result.code == 204) {
+  //         // Swal.fire({
+  //         //   title: '¡No existe el dato buscado!',
+  //         //   text: "Desea crearlo!",
+  //         //   icon: 'warning',
+  //         //   showCancelButton: true,
+  //         //   confirmButtonColor: '#3085d6',
+  //         //   cancelButtonColor: '#d33',
+  //         //   confirmButtonText: 'Crear!',
+  //         //   cancelButtonText: 'Cancelar'
+  //         // }).then((result) => {
+  //         //   if (result.isConfirmed) {
               
-          //     this.mostrarModal = true;
-          //   }
-          // })
-          Swal.fire({
-            icon: 'warning',
-            text: 'El criterio ingresado no existe!',
-            footer: '<CENTER><b>Si desea crearlo o verificar su existencia, abra la ventana de medios...</b></CENTER>'
-          })
-          this.mostrarModal = true;
-        }
-      }
-    } catch (error) {}
-  }
+  //         //     this.mostrarModal = true;
+  //         //   }
+  //         // })
+  //         Swal.fire({
+  //           icon: 'warning',
+  //           text: 'El criterio ingresado no existe!',
+  //           footer: '<CENTER><b>Si desea crearlo o verificar su existencia, abra la ventana de medios...</b></CENTER>'
+  //         })
+  //         this.mostrarModal = true;
+  //       }
+  //     }
+  //   } catch (error) {}
+  // }
 
   capturar(event: Medio) {
     if (event != undefined) {
@@ -364,6 +367,7 @@ export class AbmPreventivoMedioComponent implements OnInit {
       this.item.capturaDescripcion = event.descripcion;
       this.item.codigo = event.codTipo + '-' + event.codMedio;
     }
+    this.cerrarMedio.nativeElement.click();
   }
 
   //captura el arma

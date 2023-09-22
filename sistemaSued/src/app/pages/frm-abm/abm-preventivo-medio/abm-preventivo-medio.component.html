@@ -38,8 +38,63 @@
       </div>
     </div>
     <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Filtrar Medio:</label>
-      <div class="input-group mb-3">
+      <label for="" class="col-sm-12 col-form-label">Medio Utilizado:</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleMedio"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.medioUtilizado > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.busqueda }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleMedio"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Medios</h5>
+              <button
+                  type="button"
+                  #closeMedio
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-medio
+                  (filter)="capturar($event)"
+                ></app-filtro-medio>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -65,7 +120,7 @@
         <option *ngFor="let Mitem of Mitems" [ngValue]="Mitem">
           {{ Mitem.descripcion }}
         </option>
-      </select>
+      </select> -->
     </div>
     <div class="col-md-4">
       <center>
@@ -268,7 +323,7 @@
                     show-delay="10"
                     (click)="seleccionado(i.id)"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#exampleModalArma"
                     class="color btn-circle"
                   >
                     <i class="fa fa-info" aria-hidden="true"></i>
@@ -350,7 +405,7 @@
 <!-- Modal -->
 <div
   class="modal fade"
-  id="exampleModal"
+  id="exampleModalArma"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"

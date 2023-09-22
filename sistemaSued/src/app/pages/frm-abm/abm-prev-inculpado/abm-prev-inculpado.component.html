@@ -286,9 +286,64 @@
       </div>
     </div>
     <div class="col-md-4">
-      <app-fil-buscador-calle
+      <label for="">Calle:</label>
+      <!-- <app-fil-buscador-calle
         (emmit)="doFoundCalle($event)"
-      ></app-fil-buscador-calle>
+      ></app-fil-buscador-calle> -->
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleCalleInc"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.dirCalle > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.item.capturadirCalle }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleCalleInc"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Calle</h5>
+              <button
+                  type="button"
+                  #closeCalleInc
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-calle
+                  (filter)="doFoundCalle($event)"
+                ></app-filtro-calle>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
       <label for="Nombre" class="col-sm-12 col-form-label"> Nro.:</label>
@@ -397,8 +452,62 @@
   <div class="row">
     <legend><u>General:</u></legend>
     <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Filtro Ocupación:</label>
-      <div class="input-group mb-3">
+      <label for="" class="col-sm-12 col-form-label">Ocupación:</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleOcup"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.ocupacion > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.busquedaOc }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleOcup"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Ocupación</h5>
+              <button
+                  type="button"
+                  #closeOcupacion
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-ocupacion
+                  (filter)="capturarOc($event)"
+                ></app-filtro-ocupacion>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -424,7 +533,7 @@
         <option *ngFor="let Oitem of Oitems" [ngValue]="Oitem">
           {{ Oitem.descripcion }}
         </option>
-      </select>
+      </select> -->
     </div>
     <div class="col-md-4">
       <app-combo-estudio
@@ -462,8 +571,63 @@
       ></app-combo-provincia>
     </div>
     <div class="col-md-4">
-      <app-fil-buscador-localidad (emmit)="seleccionLocalidad($event)">
-      </app-fil-buscador-localidad>
+      <label for="" class="col-sm-12 col-form-label">Localidad</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleLocal"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.localidad > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.item.capturaLocalidad }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleLocal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Localidades</h5>
+              <button
+                  type="button"
+                  #closeLocalid
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-localidades
+                  (filter)="seleccionLocalidad($event)"
+                ></app-filtro-localidades>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <app-fil-buscador-localidad (emmit)="seleccionLocalidad($event)">
+      </app-fil-buscador-localidad> -->
       <!-- <app-combo-localidad
         [dibujar]="item.localidadNavigation"
         (emitir)="seleccionLocalidad($event)"
@@ -511,8 +675,62 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <label for="" class="col-sm-12 col-form-label">Filtro Calle:</label>
-      <div class="input-group mb-3">
+      <label for="" class="col-sm-12 col-form-label">Calle:</label>
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleCall"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.calle > 0" class="col-md-11">
+          <label for=""
+            ><b>Selección:&nbsp;&nbsp;</b>{{ this.busquedaCalle }}</label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleCall"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Calles</h5>
+              <button
+                  type="button"
+                  #closeCall
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-calle
+                  (filter)="capturarCalle($event)"
+                ></app-filtro-calle>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">
           <i class="fa fa-search" aria-hidden="true"></i>
         </span>
@@ -538,7 +756,7 @@
         <option *ngFor="let Citem of CItems" [ngValue]="Citem">
           {{ Citem.nombre }}
         </option>
-      </select>
+      </select> -->
     </div>
     <div class="col-md-4">
       <label for="Nombre" class="col-sm-12 col-form-label"> Número:</label>
