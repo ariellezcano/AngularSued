@@ -1,4 +1,11 @@
-import { Component, ElementRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -48,7 +55,7 @@ export class AbmPreventivoComponent implements OnInit {
   @ViewChild('closeBarrio') cerrarBarrio!: ElementRef;
   @ViewChild('closeCalle') cerrarCalle!: ElementRef;
   @ViewChild('closeCalleInterseccion') cerrarCalleInt!: ElementRef;
-  
+  @ViewChild('closeUnidad') cerrarUnidad!: ElementRef;
 
   @Input()
   public id!: number;
@@ -177,7 +184,8 @@ export class AbmPreventivoComponent implements OnInit {
           if (this.item.delito != undefined) {
             //this.busqueda = this.item.delitoNavigation?.descripcion;
             this.item.nombreDelito = this.item.delitoNavigation?.descripcion;
-            this.item.nombreDnpc = this.item.delitoNavigation?.dnpcNavigation?.descripcion;
+            this.item.nombreDnpc =
+              this.item.delitoNavigation?.dnpcNavigation?.descripcion;
           }
           if (this.item.lugar != undefined) {
             this.busquedaLugar = this.item.lugarNavigation?.descripcion;
@@ -222,8 +230,8 @@ export class AbmPreventivoComponent implements OnInit {
   //   //}
   // }
 
-  dividirFecha(){
-    if(this.item.fechaPreventivo != undefined){
+  dividirFecha() {
+    if (this.item.fechaPreventivo != undefined) {
       const dia = this.item.fechaPreventivo.getFullYear();
       this.item.anio = dia;
     }
@@ -354,7 +362,7 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturar(event: Delito) {
     if (event != undefined) {
-      console.log("evento delito",event)
+      console.log('evento delito', event);
       this.item.delito = event.id;
       this.item.nombreDelito = event.descripcion;
       this.item.nombreDnpc = event.dnpcNavigation?.descripcion;
@@ -390,7 +398,7 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturarLugar(event: Lugar) {
     if (event != undefined) {
-      console.log("evento lugar",event)
+      console.log('evento lugar', event);
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
     }
@@ -450,7 +458,7 @@ export class AbmPreventivoComponent implements OnInit {
   //calle interseccion
   capturarCalleInterseccion(event: Calle) {
     if (event != undefined) {
-      console.log("calle", event)
+      console.log('calle', event);
       this.item.calleInterseccion = event.id;
       this.busquedaCalleInterseccion = event.nombre;
     }
@@ -576,8 +584,11 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   unidad(event: UnidadesSued) {
-    this.item.unidad = event.id;
-    this.item.nombreUnidad = event.nombre;
+    if (event != undefined) {
+      this.item.unidad = event.id;
+      this.item.nombreUnidad = event.nombre;
+    }
+    this.cerrarUnidad.nativeElement.click();
   }
 
   cortarCadena() {

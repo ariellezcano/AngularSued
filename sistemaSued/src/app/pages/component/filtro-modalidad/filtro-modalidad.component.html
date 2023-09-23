@@ -71,14 +71,6 @@
             <tr (click)="enviar(e)" *ngFor="let e of items" class="text-center">
               <!-- <td scope="row">{{item.id}} </td> -->
               <td data-titulo="nombre">{{ e.descripcion?.toLocaleUpperCase() }}</td>
-  
-              <!-- <td data-titulo="seleccionar">
-                              <button type="button" title="elegir" placement="top" show-delay="10"
-                                  class="btn btn-secondary btn-sm">
-                                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                              </button>
-  
-                          </td> -->
             </tr>
           </tbody>
         </table>

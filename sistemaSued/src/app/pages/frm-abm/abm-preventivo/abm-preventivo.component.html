@@ -31,18 +31,72 @@
       </div>
       <div id="autocompletado" class="col-md-6">
         <label for="" class="col-sm-12 col-form-label">Unidad:</label>
-        <app-fil-autocompletado-unidad-sued
+      <div class="row">
+        <div class="col-md-1">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleUnidad"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="this.item.unidad > 0" class="col-md-11">
+          <label class="text-primary" for=""
+            ><b>Selección:&nbsp;&nbsp;</b> <em>{{ this.item.nombreUnidad }}</em></label
+          >
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleUnidad"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Módulo Unidad</h5>
+              <button
+                  type="button"
+                  #closeUnidad
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <app-filtro-unidad
+                  (filter)="unidad($event)"
+                ></app-filtro-unidad>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- <app-fil-autocompletado-unidad-sued
           (unidadSeleccionada)="unidad($event)"
           [ngModelOptions]="{ standalone: true }"
         >
-        </app-fil-autocompletado-unidad-sued>
+        </app-fil-autocompletado-unidad-sued> -->
       </div>
     </div>
-    <div *ngIf="item.unidad > 0" class="row">
+    <!-- <div *ngIf="item.unidad > 0" class="row">
       <div class="col-md-12 alert alert-info">
         Unidad Seleccionada:&nbsp;&nbsp;<b>{{ item.nombreUnidad }}</b>
       </div>
-    </div>
+    </div> -->
     <!-- <div class="row">
       <div class="col-md-6">
         <label for="" class="col-sm-12 col-form-label"
