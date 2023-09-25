@@ -147,7 +147,7 @@ export class AbmUnidadesComponent implements OnInit {
   removeUnderscore(input: string): string {
     // Utilizamos la función replace para reemplazar todos los guiones bajos (_) por una cadena vacía ('')
     const result = input.replace(/-/g, '');
-    console.log(result)
+    //console.log(result)
     return result;
   }
 
