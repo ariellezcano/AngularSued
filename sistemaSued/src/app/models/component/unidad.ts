@@ -3,7 +3,7 @@ import { Regional } from './regional';
 export class Unidad {
 
     id!: number;
-    cuof!: String;
+    cuof!: string;
     nombre!: string;
     telefono!: String;
     ubicacion!: String;

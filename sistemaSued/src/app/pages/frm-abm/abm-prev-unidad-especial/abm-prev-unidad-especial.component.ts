@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment from 'moment';
@@ -22,8 +22,11 @@ import { FilAutocompletadoUnidadSuedComponent } from '../../component/fil-autoco
   styleUrls: ['./abm-prev-unidad-especial.component.scss'],
 })
 export class AbmPrevUnidadEspecialComponent implements OnInit {
-  @ViewChild(FilAutocompletadoUnidadSuedComponent, { static: false }) fil!: FilAutocompletadoUnidadSuedComponent;
-  
+  @ViewChild(FilAutocompletadoUnidadSuedComponent, { static: false })
+  fil!: FilAutocompletadoUnidadSuedComponent;
+
+  @ViewChild('closeIntUnidad') cerrarUnidadEsp!: ElementRef;
+
   @Input()
   public id: number;
   //valida el formulario
@@ -32,7 +35,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
   //variable para verificar si fue enviado los datos
   enviado = false;
 
-  busqueda;
+  //busqueda;
   idSeleccion!: number;
 
   prev: Preventivo;
@@ -55,7 +58,7 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
     this.items = [];
     this.prev = new Preventivo();
     this.prevCad = new PrevUnidadEspecial();
-    this.busqueda = '';
+    //this.busqueda = '';
     this.guardando = false;
     this.mostrarBtnModif = false;
     this.id = 0;
@@ -98,9 +101,9 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
         if (result.code == 200) {
           this.item = result.dato;
           this.idSeleccion = result.dato.id;
-          this.item.nombreUnidad = result.dato.unidadEspNavigation.nombre;
-          if(this.item.fecha != null){
-            this.item.fecha = moment( this.item.fecha).format('DD-MM-YYYY');
+          this.item.nombreUnidad = result.dato.unidadEspNavigation?.nombre;
+          if (this.item.fecha != null) {
+            this.item.fecha = moment(this.item.fecha).format('DD-MM-YYYY');
           }
           this.mostrarBtnModif = true;
         }
@@ -168,8 +171,8 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ingrese unidad interviniente!'
-      })
+        text: 'Ingrese unidad interviniente!',
+      });
     }
   }
 
@@ -223,8 +226,11 @@ export class AbmPrevUnidadEspecialComponent implements OnInit {
   }
 
   unidad(event: UnidadesSued) {
-    this.item.unidadEspecial = event.id;
-    this.item.nombreUnidad = event.nombre;
+    if (event != undefined) {
+      this.item.unidadEspecial = event.id;
+      this.item.nombreUnidad = event.nombre;
+    }
+    this.cerrarUnidadEsp.nativeElement.click();
   }
 
   back() {

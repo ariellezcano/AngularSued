@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Departamento, Localidad, Unidad, UnidadesSued } from 'src/app/models/index.models';
+import {
+  Departamento,
+  Localidad,
+  Unidad,
+  UnidadesSued,
+} from 'src/app/models/index.models';
 import { UnidadesSuedService } from 'src/app/services/index.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-abm-unidades',
   templateUrl: './abm-unidades.component.html',
-  styleUrls: ['./abm-unidades.component.scss']
+  styleUrls: ['./abm-unidades.component.scss'],
 })
 export class AbmUnidadesComponent implements OnInit {
-
   public id!: number;
   //valida el formulario
   form!: FormGroup;
@@ -50,7 +59,7 @@ export class AbmUnidadesComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
+        // console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
         }
@@ -89,14 +98,15 @@ export class AbmUnidadesComponent implements OnInit {
     } catch (error) {}
   }
 
-
   async guardar() {
     try {
-      let data = await this.wsdl.doInsert(this.item).then(
+      let data = await this.wsdl
+        .doInsert(this.item)
+        .then
         /*data => {
           console.log("data de data", data)
         }*/
-      );
+        ();
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.back();
@@ -107,7 +117,7 @@ export class AbmUnidadesComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-      } else if(result.code == 204) {
+      } else if (result.code == 204) {
         Swal.fire({
           icon: 'info',
           title: 'Alerta...',
@@ -124,9 +134,38 @@ export class AbmUnidadesComponent implements OnInit {
   }
 
   unidad(event: Unidad) {
-    this.item.unidad = event.id;
-    this.item.nombre = event.nombre;
+    if (event != undefined) {
+      this.item.unidad = event.id;
+      this.item.nombre = event.nombre;
+      if(event.cuof != undefined){
+        this.item.codigo = this.removeUnderscore(event.cuof);
+      }
+    }
   }
+
+
+  removeUnderscore(input: string): string {
+    // Utilizamos la función replace para reemplazar todos los guiones bajos (_) por una cadena vacía ('')
+    const result = input.replace(/-/g, '');
+    console.log(result)
+    return result;
+  }
+
+  // convertStringToInt(input: string): number | null {
+  //   // Eliminar guiones bajos de la cadena
+  //   const stringWithoutUnderscore = input.replace(/_/g, '');
+  
+  //   // Intentar convertir la cadena en un número entero
+  //   const integerValue = parseInt(stringWithoutUnderscore, 10);
+  
+  //   // Verificar si la conversión fue exitosa
+  //   if (!isNaN(integerValue)) {
+  //     return integerValue;
+  //   } else {
+  //     return null; // Retornar null si no se pudo convertir
+  //   }
+  // }
+  
 
   // seleccionLocalidad(event: Localidad) {
   //   if (event != undefined) {
@@ -139,9 +178,8 @@ export class AbmUnidadesComponent implements OnInit {
   //     this.item.departamento = event.id;
   //   }
   // }
-  
+
   back() {
     this.router.navigate(['/lst-unidades']);
   }
-
 }

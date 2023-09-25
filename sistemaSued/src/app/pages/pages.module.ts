@@ -161,6 +161,7 @@ import { FiltroNacionalidadComponent } from './component/filtro-nacionalidad/fil
 import { FiltroOcupacionComponent } from './component/filtro-ocupacion/filtro-ocupacion.component';
 import { FiltroMedioComponent } from './component/filtro-medio/filtro-medio.component';
 import { FiltroUnidadComponent } from './component/filtro-unidad/filtro-unidad.component';
+import { FiltroUnidadMesaEntradaComponent } from './component/filtro-unidad-mesa-entrada/filtro-unidad-mesa-entrada.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -317,6 +318,7 @@ defineLocale('es', esLocale);
       FiltroOcupacionComponent,
       FiltroMedioComponent,
       FiltroUnidadComponent,
+      FiltroUnidadMesaEntradaComponent,
       
     ],
     exports: [],
