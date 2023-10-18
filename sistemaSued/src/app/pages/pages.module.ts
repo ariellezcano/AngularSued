@@ -162,6 +162,7 @@ import { FiltroOcupacionComponent } from './component/filtro-ocupacion/filtro-oc
 import { FiltroMedioComponent } from './component/filtro-medio/filtro-medio.component';
 import { FiltroUnidadComponent } from './component/filtro-unidad/filtro-unidad.component';
 import { FiltroUnidadMesaEntradaComponent } from './component/filtro-unidad-mesa-entrada/filtro-unidad-mesa-entrada.component';
+import { AbmDelitosPropiedadComponent } from './frm-abm/component/abm-delitos-propiedad/abm-delitos-propiedad.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -319,6 +320,7 @@ defineLocale('es', esLocale);
       FiltroMedioComponent,
       FiltroUnidadComponent,
       FiltroUnidadMesaEntradaComponent,
+      AbmDelitosPropiedadComponent,
       
     ],
     exports: [],

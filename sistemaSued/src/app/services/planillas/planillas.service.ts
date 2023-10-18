@@ -24,4 +24,8 @@ export class PlanillasService {
   getMuertesViales(fecha1: any, fecha2: any) {
     return this.http.get( `${this.api}/muertesViales/${fecha1},${fecha2}`);
   }
+
+  getDelPropiedad(fecha1: any, fecha2: any) {
+    return this.http.get( `${this.api}/DelitosContraPropiedad/${fecha1},${fecha2}`);
+  }
 }

@@ -79,6 +79,7 @@ import { AbmSuicidioComponent } from './frm-abm/component/abm-suicidio/abm-suici
 import { PlanillaExcelSuicidioComponent } from './frm-abm/component/abm-suicidio/planillas/planilla-excel-suicidio/planilla-excel-suicidio.component';
 import { AbmMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/abm-muertes-viales.component';
 import { PlanillaExcelMuertesVialesComponent } from './frm-abm/component/abm-muertes-viales/planillas/planilla-excel-muertes-viales/planilla-excel-muertes-viales.component';
+import { AbmDelitosPropiedadComponent } from './frm-abm/component/abm-delitos-propiedad/abm-delitos-propiedad.component';
 
 const routes: Routes = [
   {
@@ -646,6 +647,21 @@ const routes: Routes = [
             component: PlanillaExcelMuertesVialesComponent,
             canActivate: [AuthGuard],
           },
+        ],
+      },
+      {
+        path: 'planillaDelPropiedad',
+        children: [
+          {
+            path: 'abm',
+            component: AbmDelitosPropiedadComponent,
+            canActivate: [AuthGuard],
+          },
+          // {
+          //   path: 'planillaExcel',
+          //   component: PlanillaExcelMuertesVialesComponent,
+          //   canActivate: [AuthGuard],
+          // },
         ],
       },
     ],
