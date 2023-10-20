@@ -7,8 +7,6 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  Departamento,
-  Localidad,
   Unidad,
   UnidadesSued,
 } from 'src/app/models/index.models';
@@ -137,18 +135,19 @@ export class AbmUnidadesComponent implements OnInit {
     if (event != undefined) {
       this.item.unidad = event.id;
       this.item.nombre = event.nombre;
-      if(event.cuof != undefined){
-        this.item.codigo = this.removeUnderscore(event.cuof);
-      }
+      //console.log("Unidad",event)
+      // if(event.cuof != undefined){
+      //   this.item.codigo = this.removeUnderscore(event.cuof);
+      // }
     }
   }
 
 
-  removeUnderscore(input: string): string {
-    // Utilizamos la función replace para reemplazar todos los guiones bajos (-) por una cadena vacía ('')
-    const result = input.replace(/-/g, '');
-    return result;
-  }
+  // removeUnderscore(input: string): string {
+  //   // Utilizamos la función replace para reemplazar todos los guiones bajos (-) por una cadena vacía ('')
+  //   const result = input.replace(/-/g, '');
+  //   return result;
+  // }
 
   // convertStringToInt(input: string): number | null {
   //   // Eliminar guiones bajos de la cadena
