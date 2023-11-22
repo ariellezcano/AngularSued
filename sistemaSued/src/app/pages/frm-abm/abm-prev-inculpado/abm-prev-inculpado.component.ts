@@ -272,6 +272,9 @@ export class AbmPrevInculpadoComponent implements OnInit {
     if(this.item.edad == undefined){
       this.item.edad = 0;
     }
+    if(this.item.sexo == undefined){
+      this.item.sexo = 5;
+    }
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       ////console.log("data", data)

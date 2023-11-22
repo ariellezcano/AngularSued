@@ -1,0 +1,117 @@
+<br />
+<hr />
+<div class="container-xxl">
+  <div class="row" id="table" #table>
+    <table id="tablaHd" class="table text-center">
+      <thead>
+        <tr>
+          <th class="encabezado" scope="col" colspan="19">DATOS DEL HECHO</th>
+          <th class="encabezado" scope="col" colspan="7">
+            DATOS DE LOS INCULPADOS CONOCIDOS
+          </th>
+        </tr>
+        <tr>
+          <th class="encabezado" scope="col">
+            Código de Departamento* (según codificación INDEC)
+          </th>
+          <!-- <th scope="col">Nombre Departamento</th> -->
+          <th class="encabezado" scope="col">
+            Número de Seccional* (según codificación reportada a DNEC)
+          </th>
+          <!-- <th scope="col">Nombre Unidad</th> -->
+          <th class="encabezado" scope="col">
+            Código de delito contra la propiedad (A)*
+          </th>
+          <!-- <th scope="col">Nombre Localidad</th> -->
+          <th class="encabezado" scope="col" colspan="2">Cantidad de hechos*</th>
+          <th class="encabezado" scope="col" colspan="2">Cantidad de hechos según GRAVEDAD**</th>
+          <th class="encabezado" scope="col" colspan="4">Cantidad de hechos según TIPO DE LUGAR</th>
+          <th class="encabezado" scope="col" colspan="4">Cantidad de hechos según ARMA</th>
+          <th class="encabezado" scope="col" colspan="4">Motivo que origina el registro del hecho</th>
+          <th class="encabezado" scope="col" colspan="3">Cantidad de Inculpados según SEXO</th>
+          <th class="encabezado" scope="col" colspan="4">
+            Cantidad de Inculpados según EDADES
+          </th>
+        </tr>
+        <tr>
+          <th class="encabezado">codigo_departamento</th>
+          <!-- <th>Nombre Departamento</th> -->
+          <th class="encabezado">codigo_seccional</th>
+          <!-- <th>Nombre Unidad</th> -->
+          <th class="encabezado">tipo_delito</th>
+          <!-- <th>Nombre Localidad</th> -->
+          <th class="encabezado">inculpado_conocido</th>
+          <th class="encabezado">inculpado_desconocido</th>
+          <th class="encabezado">hechos_segun_gravedad_sin_lesiones_muertes</th>
+          <th class="encabezado">hechos_agravados_por_lesiones_muertes</th>
+          <th class="encabezado">en_via_publica</th>
+          <th class="encabezado">en_comercio</th>
+          <th class="encabezado">en_domicilio_particular</th>
+          <th class="encabezado">sin_determinar</th>
+          <th class="encabezado">con_arma_de_fuego</th>
+          <th class="encabezado">con_otra_arma</th>
+          <th class="encabezado">sin_arma</th>
+          <th class="encabezado">arma_sin_determinar</th>
+          <th class="encabezado">por_denuncia_particular</th>
+          <th class="encabezado">por_intervencion_policial</th>
+          <th class="encabezado">por_orden_judicial</th>
+          <th class="encabezado">otro_motivo_origen_registro</th>
+          <th class="encabezado">inculpado_masculino</th>
+          <th class="encabezado">inculpado_femenino</th>
+          <th class="encabezado">inculpado_sexo_no_consta</th>
+          <th class="encabezado">edad_0_a_15</th>
+          <th class="encabezado">edad_16_a_17</th>
+          <th class="encabezado">edad_mayor_18</th>
+          <th class="encabezado">edad_no_consta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td class="celda">{{ item.codigoDpto }}</td>
+          <!-- <td>{{ item.nombreDpto }}</td> -->
+          <td class="celda">{{ item.seccional }}</td>
+          <!-- <td>{{ item.nombreUnidad }}</td> -->
+          <td class="celda">{{ delito(item.delito?.Delito) }}</td>
+          <!-- <td>{{ item.nombreLocalidad }}</td> -->
+          <td class="celda">{{ item.inculpConocido }}</td>
+          <td class="celda">{{ item.inculpDesconocido }}</td>
+          <td class="celda">{{ item.sinLesionesMuerte }}</td>
+          <td class="celda">{{ item.fallecidos }}</td>
+          <td class="celda">{{ item.viaPublica }}</td>
+          <td class="celda">{{ item.enComercio }}</td>
+          <td class="celda">{{ item.domicilioParticular }}</td>
+          <td class="celda">{{ item.lugarSinDeterminar }}</td>
+          <td class="celda">{{ item.conArmaFuego }}</td>
+          <td class="celda">{{ item.conOtraArma }}</td>
+          <td class="celda">{{ item.sinArma }}</td>
+          <td class="celda">{{ item.sinDeterminarArma }}</td>
+          <td class="celda">{{ item.denParticular }}</td>
+          <td class="celda">{{ item.intervenPol }}</td>
+          <td class="celda"></td>
+          <td class="celda"></td>
+          <td class="celda">{{ item.inculpadoMasc }}</td>
+          <td class="celda">{{ item.inculpadoFem }}</td>
+          <td class="celda">{{ item.inculpadoSexoNoConsta }}</td>
+          <td class="celda">{{ item.IncEdad0a15 }}</td>
+          <td class="celda">{{ item.IncEdad16a17 }}</td>
+          <td class="celda">{{ item.IncEdadMayor18 }}</td>
+          <td class="celda">{{ item.IncEdadNoConsta }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="container">
+    <button class="btn btn-info" (click)="exportarExcel('planillaDP.xlsx')">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Descargar
+      planilla
+    </button>
+    &nbsp;
+    <button class="btn btn-primary" (click)="back()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Volver a
+      Pantalla Principal
+    </button>
+  </div>
+</div>

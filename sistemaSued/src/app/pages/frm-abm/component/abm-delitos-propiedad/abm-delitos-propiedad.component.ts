@@ -10,10 +10,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-abm-delitos-propiedad',
   templateUrl: './abm-delitos-propiedad.component.html',
-  styleUrls: ['./abm-delitos-propiedad.component.scss']
+  styleUrls: ['./abm-delitos-propiedad.component.scss'],
 })
 export class AbmDelitosPropiedadComponent implements OnInit {
-
   @Output() emmit: EventEmitter<PlanillaDelPropiedad[]> = new EventEmitter();
 
   fecha1: any;
@@ -42,21 +41,19 @@ export class AbmDelitosPropiedadComponent implements OnInit {
       }
       const buscar = this.wsdl.getDelPropiedad(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
-      //console.log('data', data);
       const result = JSON.parse(JSON.stringify(data));
-      console.log('result', result);
+      //console.log('result', result);
       if (result.code == 200) {
-        this.arrDelPropiedad = result.data;
-        this.sendData(this.arrDelPropiedad);
+        this.arrDelPropiedad = result.dataAgrupada;
         //console.log('planilla delPropiedad', this.arrDelPropiedad);
+        this.sendData(this.arrDelPropiedad);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
-          title: 'Busqueda realizada correctamente, descargue la planilla',
+          title: 'Busqueda realizada correctamente!, descargue la planilla',
           showConfirmButton: false,
           timer: 1500,
         });
-        //this.emmit.emit();
       } else if (result.code == 204) {
         this.vacio = true;
       }
@@ -88,8 +85,7 @@ export class AbmDelitosPropiedadComponent implements OnInit {
     this.router.navigate(['/principal/']);
   }
 
-  // planillaExcel() {
-  //   this.router.navigate(['/principal/planillaMuerteVial/planillaExcel']);
-  // }
-
+  planillaExcel() {
+    this.router.navigate(['/principal/planillaDelPropiedad/planillaExcel']);
+  }
 }
