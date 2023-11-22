@@ -360,7 +360,7 @@ export class AbmPrevHomicidioComponent implements OnInit {
 
   async actualizarDatos(obj: PrevSnicHomicidio) {
     this.guardando = true;
-    //console.log("enviado modificar", this.item)
+    ////console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));

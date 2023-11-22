@@ -109,7 +109,7 @@ export class AbmPrevCaratulaComponent implements OnInit {
           this.idSeleccion = this.item.id;
           this.busqueda = result.dato.delitoNavigation?.descripcion;
           this.mostrarBtnModif = true;
-          console.log("id", this.idSeleccion, this.mostrarBtnModif)
+          //console.log("id", this.idSeleccion, this.mostrarBtnModif)
         }
       } catch (error) {}
     }

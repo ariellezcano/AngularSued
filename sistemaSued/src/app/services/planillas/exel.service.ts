@@ -70,7 +70,7 @@ export class ExelService {
   //     var navigator: any;
 
   //     var tableSelect: any = document.getElementById(tableID);
-  //     console.log(tableSelect);
+  //     //console.log(tableSelect);
   //     var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
   //     // Specify file name

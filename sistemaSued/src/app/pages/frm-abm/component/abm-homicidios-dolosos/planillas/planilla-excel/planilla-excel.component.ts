@@ -39,7 +39,7 @@ export class PlanillaExcelComponent implements OnInit {
   //   if (this.tablaRef && this.tablaRef.nativeElement) {
   //     setTimeout(() => {
   //       const data = this.tablaRef.nativeElement;
-  //       console.log('adentro', data);
+  //       //console.log('adentro', data);
   //     }, 3000);
   //   }
   // }
@@ -48,7 +48,7 @@ export class PlanillaExcelComponent implements OnInit {
     this.items = [];
     const data = this.dataService.getDataArray();
     this.items = data;
-    //console.log("items datos",this.items)
+    ////console.log("items datos",this.items)
   }
 
   back() {
@@ -179,7 +179,7 @@ export class PlanillaExcelComponent implements OnInit {
   verificarDireccion(nombre: string | null, adicional: string | null) {
     let dato = '';
     //alert("aca llegue")
-    //console.log('direccion', nombre, adicional);
+    ////console.log('direccion', nombre, adicional);
     if (nombre != null) {
       dato = nombre;
     } else if (adicional != null) {

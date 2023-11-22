@@ -82,7 +82,7 @@ export class LstUsuariosComponent implements OnInit {
       this.procesando = true;
       this.item.baja = true;
       this.item.usuarioBaja = Number(UturuncoUtils.getSession('user'));
-      console.log('usuario', this.item);
+      //console.log('usuario', this.item);
       const res = await this.wsdl.doUpdateBaja(this.item.id, this.item).then();
       const result = JSON.parse(JSON.stringify(res));
       if (result.code == 200) {
@@ -96,12 +96,12 @@ export class LstUsuariosComponent implements OnInit {
             )
             .then();
           let res = JSON.parse(JSON.stringify(data));
-          console.log('resultadoasa', result);
+          //console.log('resultadoasa', result);
           if (res.code == 200) {
-            console.log('Personal inhabilitado');
+            //console.log('Personal inhabilitado');
           }
         } catch (error) {
-          console.log('respuestaerror', error);
+          //console.log('respuestaerror', error);
         }
         UturuncoUtils.showToas('Usuario inhabilitado correctamente!', 'success');
         this.cancel();

@@ -47,7 +47,7 @@ export class PrevVictimaService {
       .post(this.api, evento, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
-        console.log('ERROR', err);
+        //console.log('ERROR', err);
         return {
           code: 500,
           data: err.message,
@@ -63,7 +63,7 @@ export class PrevVictimaService {
       .put(this.api + '/' + id, evento, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         return {
           code: 500,
           data: err.message,

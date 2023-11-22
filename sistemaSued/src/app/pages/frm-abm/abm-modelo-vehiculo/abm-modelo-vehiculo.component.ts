@@ -70,7 +70,7 @@ export class AbmModeloVehiculoComponent implements OnInit {
   }
 
   async actualizarDatos(obj: ModeloVehiculo) {
-    //console.log("enviado modificar", this.item)
+    ////console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -90,11 +90,11 @@ export class AbmModeloVehiculoComponent implements OnInit {
 
 
   async guardar() {
-    //console.log("items", this.item);
+    ////console.log("items", this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
-          console.log("data de data", data)
+          //console.log("data de data", data)
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));

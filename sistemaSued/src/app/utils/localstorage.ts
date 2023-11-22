@@ -21,7 +21,7 @@ export class LocalstorageService {
     try {
       sessionStorage.removeItem(key);
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   }
 }

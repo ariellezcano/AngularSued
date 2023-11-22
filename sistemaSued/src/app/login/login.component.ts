@@ -52,9 +52,9 @@ export class LoginComponent implements OnInit {
           .then();
         this.proccess = false;
         const res = JSON.parse(JSON.stringify(data));
-        console.log('respuesta policia digital', res);
+        //console.log('respuesta policia digital', res);
         if (res.code == 200) {
-          //console.log("data login2", res)
+          ////console.log("data login2", res)
           // this.route.navigate(['/principal']);
           this.id = res.data;
           this.login2();
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
       this.proccess = true;
       let data = await this.wsdlUsuarioSued.getFindId(this.id).then();
       const res = JSON.parse(JSON.stringify(data));
-      console.log('bdlocal', res);
+      //console.log('bdlocal', res);
       if (res.code == 200) {
         this.item = res.dato;
         if (!this.item.baja && this.item.activo) {
@@ -127,7 +127,7 @@ export class LoginComponent implements OnInit {
       }
       this.proccess = false;
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       Swal.fire('Oops...', 'Algo salio mal vuelva a intentar ', 'error');
       this.proccess = false;
     }

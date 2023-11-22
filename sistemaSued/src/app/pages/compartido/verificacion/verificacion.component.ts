@@ -44,11 +44,11 @@ export class VerificacionComponent implements OnInit {
 
       if (res.code == 200) {
         this.proccess = false;
-        //console.log('registro usuario login 2', res.code);
+        ////console.log('registro usuario login 2', res.code);
         this.item = res.data;
-        //console.log('item', this.item)
+        ////console.log('item', this.item)
         if (!this.item.baja && this.item.activo) {
-          //console.log("baja verificar", this.item.baja)
+          ////console.log("baja verificar", this.item.baja)
           this.apellido = res.data.datosPersonal.apellido;
           this.nombre = res.data.datosPersonal.nombre;
           this.rol = res.data.datosPersonal.rol;

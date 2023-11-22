@@ -31,7 +31,7 @@ export class LstLugarComponent implements OnInit {
   }
 
   doFound(event: Lugar[]) {
-    console.log("event",event)
+    //console.log("event",event)
     this.items = event;
   }
 

@@ -73,7 +73,7 @@ export class UnidadService {
       .post(this.api + '/', evento, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         return {
           code: 500,
           data: err.message,
@@ -89,7 +89,7 @@ export class UnidadService {
       .put(this.api + '/' + id, evento, { headers: this.other_header })
       .toPromise()
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         return {
           code: 500,
           data: err.message,

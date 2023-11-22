@@ -47,7 +47,7 @@ export class ComboProvinciaComponent implements OnInit {
     await this.wsdl.getList(1, 100).then((data: any) => {
       //this.items = [];
       this.items = data.data;
-      //console.log(this.items);
+      ////console.log(this.items);
       this.items.sort((x: any, y: any) => {
         if (x.nombre > y.nombre) {
           return 1;

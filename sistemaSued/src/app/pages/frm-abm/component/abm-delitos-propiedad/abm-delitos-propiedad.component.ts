@@ -42,13 +42,13 @@ export class AbmDelitosPropiedadComponent implements OnInit {
       }
       const buscar = this.wsdl.getDelPropiedad(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
-      console.log('data', data);
+      //console.log('data', data);
       const result = JSON.parse(JSON.stringify(data));
       console.log('result', result);
       if (result.code == 200) {
         this.arrDelPropiedad = result.data;
         this.sendData(this.arrDelPropiedad);
-        console.log('planilla delPropiedad', this.arrDelPropiedad);
+        //console.log('planilla delPropiedad', this.arrDelPropiedad);
         Swal.fire({
           position: 'top-end',
           icon: 'success',

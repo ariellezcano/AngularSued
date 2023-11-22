@@ -52,7 +52,7 @@ export class AbmLocalidadComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
+       // //console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
           if(this.item.nacion != undefined){
@@ -75,14 +75,14 @@ export class AbmLocalidadComponent implements OnInit {
       if (this.id > 0) {
         this.actualizarDatos(this.item);
       } else {
-        //console.log("datos enviados", this.item)
+        ////console.log("datos enviados", this.item)
         this.guardar();
       }
     //}
   }
 
   async actualizarDatos(obj: Localidad) {
-    //console.log("enviado modificar", this.item)
+    ////console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -105,7 +105,7 @@ export class AbmLocalidadComponent implements OnInit {
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
-          console.log("data de data", data)
+          //console.log("data de data", data)
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));

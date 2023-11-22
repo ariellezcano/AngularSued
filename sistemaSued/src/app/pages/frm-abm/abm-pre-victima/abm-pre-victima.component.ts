@@ -154,7 +154,7 @@ export class AbmPreVictimaComponent implements OnInit {
     });
     //captura el id que viene en el url
     this.id = this.route.snapshot.params['id'];
-    //console.log("this.id", this.id)
+    ////console.log("this.id", this.id)
     this.obtenerDetalle();
     this.findId();
   }
@@ -199,12 +199,12 @@ export class AbmPreVictimaComponent implements OnInit {
   async obtenerDetalle() {
     try {
       let data = await this.wsdl.doFilter(this.id).then();
-      //console.log("result detalle",data)
+      ////console.log("result detalle",data)
       const result = JSON.parse(JSON.stringify(data));
-      //console.log("result final parse",result)
+      ////console.log("result final parse",result)
       if (result.code == 200) {
         this.items = result.data;
-        //console.log("Victima",this.items)
+        ////console.log("Victima",this.items)
       } else {
         this.items = [];
       }
@@ -272,11 +272,11 @@ export class AbmPreVictimaComponent implements OnInit {
   async guardar() {
     this.guardando = true;
     this.item.preventivo = this.id;
-    console.log('items', this.item);
+    //console.log('items', this.item);
     try {
       let data = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log('resultado ', result);
+      //console.log('resultado ', result);
       if (result.code == 200) {
         this.item = new PrevVictima();
         this.guardando = false;
@@ -322,11 +322,11 @@ export class AbmPreVictimaComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          //console.log("victimas",this.item);
+          ////console.log("victimas",this.item);
           this.idSeleccion = result.dato.id;
           this.mostrarBtnModif = true;
 
-          //console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
+          ////console.log("id seleccionado y btn", this.idSeleccion, this.mostrarBtnModif)
 
           if (this.item.nacionalidad > 0) {
             this.busqueda = result.dato.nacionNavigation.nacionalidad;

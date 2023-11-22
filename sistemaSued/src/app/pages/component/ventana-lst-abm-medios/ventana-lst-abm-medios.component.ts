@@ -47,13 +47,13 @@ export class VentanaLstAbmMediosComponent implements OnInit {
   }
 
   async guardar() {
-    //console.log("items", this.item);
+    ////console.log("items", this.item);
     try {
       let data = await this.wsdl
         .doInsert(this.item)
         .then
         /*data => {
-          console.log("data de data", data)
+          //console.log("data de data", data)
         }*/
         ();
       const result = JSON.parse(JSON.stringify(data));

@@ -211,7 +211,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
     this.guardando = true;
     try {
       let data = await this.wsdl.doUpdate(obj.id, obj).then();
-      //console.log(data)
+      ////console.log(data)
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.guardando = false;
@@ -269,13 +269,16 @@ export class AbmPrevInculpadoComponent implements OnInit {
   async guardar() {
     this.guardando = true;
     this.item.preventivo = this.id;
+    if(this.item.edad == undefined){
+      this.item.edad = 0;
+    }
     try {
       let data = await this.wsdl.doInsert(this.item).then();
-      console.log("data", data)
+      ////console.log("data", data)
       const result = JSON.parse(JSON.stringify(data));
-      console.log("res", result)
+      //console.log("res", result)
       if (result.code == "200") {
-        console.error("sin error", result.code)
+        //console.error("sin error", result.code)
         this.guardando = false;
         this.busqueda = '';
         this.busquedaOc = '';
@@ -328,7 +331,7 @@ export class AbmPrevInculpadoComponent implements OnInit {
         if (result.code == 200) {
           this.item = result.dato;
           this.mostrarBtnModif = true;
-          //console.log("verificar datos", result.dato)
+          ////console.log("verificar datos", result.dato)
           this.idSeleccion = result.dato.id;
           if (this.item.fechaDetencion != null) {
             this.item.fechaDetencion = moment(this.item.fechaDetencion).format(

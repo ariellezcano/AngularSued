@@ -276,7 +276,7 @@ export class AbmPrevObjetoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.itemAuto = result.dato;
-          console.log('detalles del auto', this.itemAuto);
+          //console.log('detalles del auto', this.itemAuto);
           this.itemAuto.marcaModeloAuto =
             result.dato.modeloNavigation?.descripcion;
           this.itemAuto.marcaAuto =
@@ -407,7 +407,7 @@ export class AbmPrevObjetoComponent implements OnInit {
     if (this.item.objeto !== undefined) {
       this.guardando = true;
       this.item.preventivo = this.id;
-      //console.log("data", this.item)
+      ////console.log("data", this.item)
       try {
         let data = await this.wsdl.doInsert(this.item).then();
         const result = JSON.parse(JSON.stringify(data));

@@ -46,7 +46,7 @@ export class VentanaLstAbmObjetoComponent implements OnInit {
   doAction() {
     this.enviado = true;
     if (this.form.valid) {
-      //console.log("datos enviados", this.item)
+      ////console.log("datos enviados", this.item)
       this.guardar();
     } else {
       Swal.fire({
@@ -66,13 +66,13 @@ export class VentanaLstAbmObjetoComponent implements OnInit {
   }
 
   async guardar() {
-    //console.log("items", this.item);
+    ////console.log("items", this.item);
     try {
       let data = await this.wsdl
         .doInsert(this.item)
         .then
         /*data => {
-          console.log("data de data", data)
+          //console.log("data de data", data)
         }*/
         ();
       const result = JSON.parse(JSON.stringify(data));

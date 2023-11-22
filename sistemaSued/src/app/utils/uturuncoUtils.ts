@@ -28,7 +28,7 @@ export class UturuncoUtils {
         for (let i = 0; i < localStorage.length; i++) {
           let key = this.loc.key(i);
           let value = this.loc.getItem(key);
-          console.log(key, value);
+          //console.log(key, value);
         }
         */
   }
@@ -97,7 +97,7 @@ export class UturuncoUtils {
       var navigator: any;
 
       var tableSelect: any = document.getElementById(tableID);
-      console.log(tableSelect);
+      //console.log(tableSelect);
       var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
       // Specify file name

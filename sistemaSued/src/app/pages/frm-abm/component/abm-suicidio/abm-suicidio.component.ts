@@ -54,7 +54,7 @@ export class AbmSuicidioComponent implements OnInit {
       if (result.code == 200) {
         this.arrSuicidio = result.data;
         this.sendData(this.arrSuicidio)
-        console.log(this.arrSuicidio)
+        //console.log(this.arrSuicidio)
         Swal.fire({
           position: 'top-end',
           icon: 'success',

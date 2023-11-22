@@ -44,9 +44,9 @@ export class AbmConsultaUsuarioComponent implements OnInit {
     this.dtSued.fechaAlta = moment(this.dtSued.fechaAlta).format('YYYY-MM-DD');
     try {
       let data = await this.wsdl.doInsert(this.dtSued).then();
-      console.log("data", data)
+      //console.log("data", data)
       let res = JSON.parse(JSON.stringify(data));
-      console.log("res", res)
+      //console.log("res", res)
       if (res.code == 200) {
         try {
           let data = await this.wsdlRegistro.patchSistemaHabilitados(this.dtSued.usuarioRepo, this.nombre, this.url, this.activo).then();
@@ -82,11 +82,11 @@ export class AbmConsultaUsuarioComponent implements OnInit {
   }
 
   doFound(event: Usuario_repo) {
-    console.log('Event', event);
+    //console.log('Event', event);
     this.proceso = true;
-    //console.log('event', event);
+    ////console.log('event', event);
     if (event.civil != null) {
-      //console.log('Personal civil', event);
+      ////console.log('Personal civil', event);
         this.dtSued.tipoPersona = false;
         this.dtSued.civil = event.civil.id;
         this.dtSued.nombre = event.civil.nombre;

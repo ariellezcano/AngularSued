@@ -78,7 +78,7 @@ export class FilPreventivoComponent implements OnInit {
           this.items = result.data;
           this.totalRegistros = result.totalRegistros;
           this.totalPaginas = result.totalPaginas;
-          //console.log("result", result)
+          ////console.log("result", result)
           this.emmit.emit(this.items);
         }
       } else {
@@ -105,10 +105,10 @@ export class FilPreventivoComponent implements OnInit {
           )
           .then();
         const result = JSON.parse(JSON.stringify(data));
-        console.log("result", result)
+        //console.log("result", result)
         if (result.code == 200) {
           this.items = result.data;
-          //console.log(this.items)
+          ////console.log(this.items)
           this.fecha = '';
           this.uniCodigo = '';
           this.anio = '';

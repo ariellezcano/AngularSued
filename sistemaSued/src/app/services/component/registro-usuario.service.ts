@@ -73,14 +73,14 @@ export class RegistroUsuarioService {
         activo: activo,
       },
     };
-    console.log('body e', body);
+    //console.log('body e', body);
     return this.http
       .patch(this.api + 'find/sistemaHabilitados/', body, {
         headers: this.other_header,
       })
       .toPromise()
       .catch((err) => {
-        console.log('body', this.api);
+        //console.log('body', this.api);
         return {
           code: 500,
           data: err.message,

@@ -45,7 +45,7 @@ export class FilUnidadAutocompletadoComponent implements OnInit {
 
   selectEvent(item: any) {
     this.item = item;
-    //console.log("event", item)
+    ////console.log("event", item)
     this.unidadSeleccionada.emit(this.item);
   }
 

@@ -39,7 +39,7 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
     this.items = [];
     const data = this.dataService.getDataArray();
     this.items = data;
-    console.log("items datos",this.items)
+    //console.log("items datos",this.items)
   }
 
   back() {
@@ -241,7 +241,7 @@ export class PlanillaExcelMuertesVialesComponent implements OnInit {
   verificarDireccion(nombre: string | null, adicional: string | null) {
     let dato = '';
     //alert("aca llegue")
-    console.log('direccion', nombre, adicional);
+    //console.log('direccion', nombre, adicional);
     if (nombre != null) {
       dato = nombre;
     } else if (adicional != null) {

@@ -52,7 +52,7 @@ export class FilUsuariosComponent implements OnInit {
       }
       let data = await this.wsdl.doFindDni(this.crit).then();
       this.result = JSON.parse(JSON.stringify(data));
-      //console.log("que es", this.result);
+      ////console.log("que es", this.result);
       if (this.result.code == 200) {
         this.id = this.result.data.id;
         this.verificarUsuario();
@@ -96,11 +96,11 @@ export class FilUsuariosComponent implements OnInit {
 
   async verificarUsuario() {
     let data1 = await this.wsdlUsuarioSued.getFindId(this.id).then();
-    console.log('data1', data1);
+    //console.log('data1', data1);
     const result1 = JSON.parse(JSON.stringify(data1));
     if (result1.code == 200) {
       this.item = result1.dato;
-      console.log('this.item', this.item);
+      //console.log('this.item', this.item);
       if (this.item.baja) {
         Swal.fire({
           title: 'El usuario se encuentra dado de baja',
@@ -148,10 +148,10 @@ export class FilUsuariosComponent implements OnInit {
         let data = await this.wsdl.patchSistemaHabilitados(this.item.usuarioRepo, this.nombre, this.url, this.activoSistema).then();
         let res = JSON.parse(JSON.stringify(data));
         if(res.code == 200){
-          console.log("Personal Habilitado");
+          //console.log("Personal Habilitado");
         }
       } catch (error) {
-        //console.log("respuestaerror", error);
+        ////console.log("respuestaerror", error);
       }
 
       Swal.fire(

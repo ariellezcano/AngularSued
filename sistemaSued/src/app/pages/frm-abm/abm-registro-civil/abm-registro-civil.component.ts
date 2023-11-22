@@ -69,10 +69,10 @@ export class AbmRegistroCivilComponent implements OnInit {
         
         let data = await this.wsdl.doFind(this.id).then();
         let res = JSON.parse(JSON.stringify(data));
-        console.log("this id ",res.code);
+        //console.log("this id ",res.code);
         if (res.code == 200) {
           this.item = res.data;
-          //console.log("findid", this.item)
+          ////console.log("findid", this.item)
           if(this.item.fechaNacimiento != undefined) { 
             this.item.fechaNacimiento = moment(this.item.fechaNacimiento).format(
             'YYYY-MM-DD'
@@ -108,7 +108,7 @@ export class AbmRegistroCivilComponent implements OnInit {
     try {
       //this.item.unidad.id = 622;
       this.item.usuarioCrea = UturuncoUtils.getSession('user');
-     // console.log("datos enviados", this.item)
+     // //console.log("datos enviados", this.item)
       this.procesando = true;
       const res = await this.wsdl.doInsert(this.item).then();
       const result = JSON.parse(JSON.stringify(res));

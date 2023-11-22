@@ -52,7 +52,7 @@ export class AbmContravencionComponent implements OnInit {
       try {
         let data = await this.wsdl.getFindId(this.id).then();
         const result = JSON.parse(JSON.stringify(data));
-       // console.log('find', result);
+       // //console.log('find', result);
         if (result.code == 200) {
           this.item = result.dato;
 
@@ -72,14 +72,14 @@ export class AbmContravencionComponent implements OnInit {
       if (this.id > 0) {
         this.actualizarDatos(this.item);
       } else {
-        //console.log("datos enviados", this.item)
+        ////console.log("datos enviados", this.item)
         this.guardar();
       }
     //}
   }
 
   async actualizarDatos(obj: Contravencion) {
-    //console.log("enviado modificar", this.item)
+    ////console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));

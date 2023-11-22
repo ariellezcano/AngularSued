@@ -87,7 +87,7 @@ export class AbmPlanillaHDComponent implements OnInit {
       const result = JSON.parse(JSON.stringify(data));
       if (result.code == 200) {
         this.items = result.data;
-        console.log('items', this.items);
+        //console.log('items', this.items);
       }
     } catch (error) {
       Swal.fire('Error al obtener los datos,' + error);

@@ -38,7 +38,6 @@ export class GeolocalizacionService {
       pais +
       '&format=json&apiKey=' +
       this.apiKey;
-    //console.log('datass', data);
     return (
       fetch(data, requestOptions)
         .then((response) => {
@@ -48,7 +47,7 @@ export class GeolocalizacionService {
             throw new Error("Server response wasn't OK");
           }
         })
-        //.then(result => console.log(result))
+        .then(result => console.log(result))
         .catch((error) => console.log('error', error))
     );
   }
@@ -63,7 +62,7 @@ export class GeolocalizacionService {
         if (result.features.length) {
           Swal.fire(result.features[0].properties.formatted);
         } else {
-          console.log('No address found');
+          //console.log('No address found');
         }
       });
   }
@@ -75,9 +74,9 @@ export class GeolocalizacionService {
       .then((response) => response.json())
       .then((result) => {
         if (result.features.length) {
-          console.log(result.features[0].properties.formatted);
+          //console.log(result.features[0].properties.formatted);
         } else {
-          console.log('No address found');
+          //console.log('No address found');
         }
       });
   }

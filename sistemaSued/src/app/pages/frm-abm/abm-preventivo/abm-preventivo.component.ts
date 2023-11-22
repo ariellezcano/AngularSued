@@ -167,7 +167,7 @@ export class AbmPreventivoComponent implements OnInit {
         const result = JSON.parse(JSON.stringify(data));
         if (result.code == 200) {
           this.item = result.dato;
-          //console.log('this.itemPreventivo', this.item);
+          ////console.log('this.itemPreventivo', this.item);
           if (this.item.fechaHecho != undefined) {
             this.item.fechaHecho = moment(this.item.fechaHecho).format(
               'DD-MM-YYYY'
@@ -243,7 +243,7 @@ export class AbmPreventivoComponent implements OnInit {
         this.item.fechaPreventivo,
         'DD/MM/YYYY'
       );
-      console.log(this.item.fechaPreventivo);
+      //console.log(this.item.fechaPreventivo);
     }
 
     if (this.item.fechaHecho != undefined) {
@@ -281,14 +281,14 @@ export class AbmPreventivoComponent implements OnInit {
         Date.parse(this.item.fechaHecho)
       ) {
         this.item.usuarioCrea = Number(UturuncoUtils.getSession('user'));
-        //console.log("usuario crea", this.item.usuarioCrea)
+        ////console.log("usuario crea", this.item.usuarioCrea)
         //var
         let hora = moment(this.item.hora, 'h:mm:ss A').format('HH:mm');
         //var convert = hora;
         //var Format = hora.replace(/[:]/g, '');
         this.item.hora = hora;
 
-        // console.log(this.item);
+        // //console.log(this.item);
 
         try {
           let data = await this.wsdl.doInsert(this.item).then();
@@ -362,7 +362,7 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturar(event: Delito) {
     if (event != undefined) {
-      console.log('evento delito', event);
+      //console.log('evento delito', event);
       this.item.delito = event.id;
       this.item.nombreDelito = event.descripcion;
       this.item.nombreDnpc = event.dnpcNavigation?.descripcion;
@@ -398,7 +398,7 @@ export class AbmPreventivoComponent implements OnInit {
 
   capturarLugar(event: Lugar) {
     if (event != undefined) {
-      console.log('evento lugar', event);
+      //console.log('evento lugar', event);
       this.item.lugar = event.id;
       this.busquedaLugar = event.descripcion;
     }
@@ -458,7 +458,7 @@ export class AbmPreventivoComponent implements OnInit {
   //calle interseccion
   capturarCalleInterseccion(event: Calle) {
     if (event != undefined) {
-      console.log('calle', event);
+      //console.log('calle', event);
       this.item.calleInterseccion = event.id;
       this.busquedaCalleInterseccion = event.nombre;
     }
@@ -466,7 +466,7 @@ export class AbmPreventivoComponent implements OnInit {
   }
 
   // async filtrarBarrio() {
-  //   //console.log(this.item.barrio)
+  //   ////console.log(this.item.barrio)
   //   this.BItems = [];
   //   try {
   //     if (this.busquedaBarrio != '' && this.busquedaBarrio != undefined) {
@@ -527,9 +527,9 @@ export class AbmPreventivoComponent implements OnInit {
         )
         .then();
       const result = JSON.parse(JSON.stringify(data));
-      console.log(result);
+      //console.log(result);
       if (result.results != undefined) {
-        //console.log(result.result);
+        ////console.log(result.result);
         //if (result.results == 1) {
         this.item.latitud = '';
         this.item.longitud = '';

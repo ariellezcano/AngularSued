@@ -73,7 +73,7 @@ export class AbmSnicComponent implements OnInit {
 
   async actualizarDatos(obj: PrevSnic) {
     this.guardando = true;
-    //console.log("enviado modificar", this.item)
+    ////console.log("enviado modificar", this.item)
     try {
       let data = await this.wsdl.doUpdate(this.id, obj).then();
       const result = JSON.parse(JSON.stringify(data));
@@ -103,7 +103,7 @@ export class AbmSnicComponent implements OnInit {
     try {
       let data = await this.wsdl.doInsert(this.item).then(
         /*data => {
-          console.log("data de data", data)
+          //console.log("data de data", data)
         }*/
       );
       const result = JSON.parse(JSON.stringify(data));
