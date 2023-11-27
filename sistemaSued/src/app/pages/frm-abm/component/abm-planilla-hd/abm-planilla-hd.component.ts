@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { lastValueFrom } from 'rxjs';
 import {
   Delito,
   Departamento,
@@ -11,7 +12,10 @@ import {
 import { FilAutocompletadoUnidadSuedComponent } from 'src/app/pages/component/fil-autocompletado-unidad-sued/fil-autocompletado-unidad-sued.component';
 import { FilBuscadorDelitoComponent } from 'src/app/pages/component/fil-buscador-delito/fil-buscador-delito.component';
 import { FilDelitoComponent } from 'src/app/pages/filters/fil-delito/fil-delito.component';
+import { DataService } from 'src/app/services/data.service';
 import { PreventivoService } from 'src/app/services/index.service';
+import { ExelService } from 'src/app/services/planillas/exel.service';
+import { PlanillasService } from 'src/app/services/planillas/planillas.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,83 +24,80 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-planilla-hd.component.scss'],
 })
 export class AbmPlanillaHDComponent implements OnInit {
-  @ViewChild(FilBuscadorDelitoComponent, { static: false })
-  filDelito!: FilBuscadorDelitoComponent;
-  //@ViewChild(FilAutocompletadoUnidadSuedComponent, { static: false }) filUnidad!: FilAutocompletadoUnidadSuedComponent;
+  @Output() emmit: EventEmitter<PlanillaHechosDelictivos[]> = new EventEmitter();
 
-  item: PlanillaHD;
-  items: PlanillaHD[];
+  fecha1: any;
+  fecha2: any;
+
+  vacio: boolean = false;
+
+  arrHd: PlanillaHechosDelictivos[];
 
   constructor(
-    private wsdl: PreventivoService,
-    private route: ActivatedRoute,
+    private wsdl: PlanillasService,
+    //private route: ActivatedRoute,
+    private excelService: ExelService,
+    private dataService: DataService,
     private router: Router
   ) {
-    this.item = new PlanillaHD();
-    this.items = [];
+    this.arrHd = [];
   }
 
   ngOnInit(): void {}
 
-  seleccionLocalidad(event: Localidad) {
-    this.item.localidad = event.id;
-  }
-
-  seleccionDpto(event: Departamento) {
-    this.item.departamento = event.id;
-  }
-
-  unidad(event: UnidadesSued) {
-    this.item.unidad = event.id;
-    this.item.nombreUnidad = event.nombre;
-  }
-
-  delito(event: Delito) {
-    this.item.delito = event.id;
-    this.item.delitoSeleccionado = event.descripcion;
-  }
-
   async buscar() {
-    if (this.item.fecha2 == undefined) {
-      this.item.fecha2 = this.item.fecha1;
-    }
-    if (this.item.localidad == undefined) {
-      this.item.localidad = 0;
-    }
-    if (this.item.departamento == undefined) {
-      this.item.departamento = 0;
-    }
-    if (this.item.unidad == undefined) {
-      this.item.unidad = 0;
-    }
-    if (this.item.delito == undefined) {
-      this.item.delito = 0;
-    }
-
     try {
-      let data = await this.wsdl
-        .doFilterPlanilla(
-          this.item.fecha1,
-          this.item.fecha2,
-          this.item.localidad,
-          this.item.departamento,
-          this.item.unidad,
-          this.item.delito
-        )
-        .then();
+      if (this.fecha1 != undefined && this.fecha2 == undefined) {
+        this.fecha2 = this.fecha1;
+      }
+      const buscar = this.wsdl.getDelPropiedad(this.fecha1, this.fecha2);
+      let data = await lastValueFrom(buscar);
       const result = JSON.parse(JSON.stringify(data));
+      //console.log('result', result);
       if (result.code == 200) {
-        this.items = result.data;
-        //console.log('items', this.items);
+        this.arrHd = result.dataAgrupada;
+        //console.log('planilla delPropiedad', this.arrDelPropiedad);
+        this.sendData(this.arrHd);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Busqueda realizada correctamente!, descargue la planilla',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else if (result.code == 204) {
+        this.vacio = true;
       }
     } catch (error) {
-      Swal.fire('Error al obtener los datos,' + error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `Hubo un error en la busqueda de datos!, ${error}`,
+      });
     }
+  }
+
+  // para exportar a excel en la funcion
+  exportTableToExcel(): void {
+    this.excelService.exportAsExcelFile(this.arrHd, 'archivo');
+  }
+
+  sendData(arr: PlanillaDelPropiedad[]) {
+    this.dataService.dataArray = [];
+    this.dataService.setDataArray(arr);
   }
 
   cancelar() {
-    this.item = new PlanillaHD();
+    //this.item = new PlanillaHechosDel();
     this.back();
+  }
+
+  back() {
+    this.router.navigate(['/principal/']);
+  }
+
+  planillaExcel() {
+    this.router.navigate(['/principal/planillaDelPropiedad/planillaExcel']);
   }
 
   back() {

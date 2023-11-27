@@ -595,16 +595,16 @@ const routes: Routes = [
           },
         ],
       },
-      // {
-      //   path: 'planillaHechosDelictivos',
-      //   children: [
-      //     {
-      //       path: 'abm',
-      //       component: AbmPlanillaHechosDelictivosComponent,
-      //       canActivate: [AuthGuard],
-      //     },
-      //   ],
-      // },
+      {
+        path: 'planillaHechosDelictivos',
+        children: [
+          {
+            path: 'abm',
+            component: AbmPlanillaHDComponent,
+            canActivate: [AuthGuard],
+          },
+        ],
+      },
       {
         path: 'planillaHomicidiosDolosos',
         children: [

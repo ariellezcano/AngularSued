@@ -1,76 +1,76 @@
-<br>
-<div class="container border border-info">
+<br />
+<div class="container border border-danger rounded">
   <br />
   <div class="row">
-    <legend class="text-primary"><b> DATOS PARA GENERAR EL REPORTE:</b></legend>
+    <legend class="text-primary">
+      <b> DATOS PARA GENERAR EL REPORTE:</b>
+    </legend>
+    <label for=""><b> Planilla de Delitos contra la Propiedad</b></label>
   </div>
   <hr />
   <div class="row">
+    <div class="col-md-3"></div>
     <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Desde Fecha:</label>
       <input
-        [(ngModel)]="item.fecha1"
+        [(ngModel)]="fecha1"
         id="codigo"
         type="date"
+        name="fecha1"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
     <div class="col-md-3">
-      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha</label>
+      <label for="Nombre" class="col-sm-12 col-form-label"> Hasta Fecha:</label>
       <input
-        [(ngModel)]="item.fecha2"
+        [(ngModel)]="fecha2"
         id="codigo"
         type="date"
+        name="fecha2"
         class="form-control"
         [ngModelOptions]="{ standalone: true }"
       />
     </div>
-    <div class="col-md-3">
-      <app-combo-localidad
-        [dibujar]="item"
-        (emitir)="seleccionLocalidad($event)"
-      ></app-combo-localidad>
-    </div>
-    <div class="col-md-3">
-      <app-combo-departamento
-        [dibujar]="item"
-        (emitir)="seleccionDpto($event)"
-      ></app-combo-departamento>
+    <div class="col-md-3"></div>
+  </div>
+  <br />
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <button type="button" class="btn btn-primary" (click)="buscar()">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+        Filtrar dato
+      </button>
+      &nbsp;
+      <button type="button" class="btn btn-danger" (click)="back()">
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        Cancelar
+      </button>
+      &nbsp;
+      <button
+        *ngIf="this.arrDelPropiedad.length > 0"
+        type="button"
+        class="btn btn-info"
+        (click)="planillaExcel()"
+      >
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Ver Planilla
+        Generada
+      </button>
     </div>
   </div>
   <br />
-  <div class="row">
-    <div class="col-md-6">
-      <label class="col-sm-12 col-form-label"> Jurisdicción</label>
-      <app-fil-autocompletado-unidad-sued
-        (unidadSeleccionada)="unidad($event)"
-      ></app-fil-autocompletado-unidad-sued>
-    </div>
-    <div class="col-md-6">
-      <app-fil-buscador-delito
-        (emmit)="delito($event)"
-      ></app-fil-buscador-delito>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div *ngIf="item.unidad > 0" class="col-md-6">
-        <label class="col-sm-12 col-form-label alert alert-info"> {{item.nombreUnidad}}</label>
+  <div *ngIf="vacio" class="row">
+    <div
+      class="alert alert-warning d-flex align-items-center col-md-12"
+      role="alert"
+    >
+      <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+      &nbsp;
+      <div>
+        <legend>No hay datos correspondiente a la fecha ingresada</legend>
+      </div>
     </div>
   </div>
-  <br>
-  <hr>
-  <div class="row">
-    <div class="col-md-12">
-        <button type="button" class="btn btn-primary" (click)="buscar()">
-          <i class="fa fa-search-plus" aria-hidden="true"></i>
-          Filtrar dato</button>
-        &nbsp;
-        <button type="button" class="btn btn-danger" (click)="back()">
-          <i class="fa fa-thumbs-down" aria-hidden="true"></i>
-          Cancelar</button>
-    </div>
-  </div>
-  <br>
+  <br />
 </div>
