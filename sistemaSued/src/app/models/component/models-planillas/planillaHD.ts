@@ -1,11 +1,20 @@
 export class PlanillaHD{
-    fecha1: any;
-    fecha2: any;
-    localidad!: number;
-    departamento!: number;
-    unidad!: number;
-    delito!: number;
-
-    nombreUnidad: any;
-    delitoSeleccionado: any;
+    codigoDpto?: number;
+    delito?: string;
+    seccional?: number;
+    unidad?: string;
+    preventivo?: []
+    denunciaParticular?: number;
+    intervenPol?: number;
+    nombreVictima?: [];
+    victimaMasculino?: number;
+    victimaFemenino?: number;
+    victimaSexoNoConsta?: number;
+    victGeneroMasc?: number;
+    victGeneroFem?: number;
+    victGenVarTrans?: number;
+    victGenMujerTrans?: number;
+    victGenOtro?: number;
+    victGenSinDeterminar?: number;
+    totalRegistros?: number;
 }

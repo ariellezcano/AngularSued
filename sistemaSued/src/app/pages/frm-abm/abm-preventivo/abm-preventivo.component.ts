@@ -524,13 +524,12 @@ export class AbmPreventivoComponent implements OnInit {
           this.item.cp,
           this.item.localidadCoordenada,
           this.item.pais
-        )
-        .then();
+        );
+        //console.log("COORDENADAS",data);
       const result = JSON.parse(JSON.stringify(data));
-      //console.log(result);
-      if (result.results != undefined) {
-        ////console.log(result.result);
-        //if (result.results == 1) {
+      console.log("COORDENADAS",result);
+      if (result.results !== undefined) {
+        
         this.item.latitud = '';
         this.item.longitud = '';
         this.latitud = '';
@@ -540,9 +539,7 @@ export class AbmPreventivoComponent implements OnInit {
         this.item.longitud = result.results[0].lon;
         this.longitud = this.item.longitud;
         this.map = true;
-        // } else {
-        //   this.lstCoordenadas = result.results;
-        // }
+        
       }
     } catch (error) {
       Swal.fire('Error al obtener el dato');

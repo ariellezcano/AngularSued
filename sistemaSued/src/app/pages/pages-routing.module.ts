@@ -585,16 +585,16 @@ const routes: Routes = [
       },
 
       // PLANILLAS
-      {
-        path: 'planillaHD',
-        children: [
-          {
-            path: 'abm',
-            component: AbmPlanillaHDComponent,
-            canActivate: [AuthGuard],
-          },
-        ],
-      },
+      // {
+      //   path: 'planillaHD',
+      //   children: [
+      //     {
+      //       path: 'abm',
+      //       component: AbmPlanillaHDComponent,
+      //       canActivate: [AuthGuard],
+      //     },
+      //   ],
+      // },
       {
         path: 'planillaHechosDelictivos',
         children: [
@@ -603,6 +603,11 @@ const routes: Routes = [
             component: AbmPlanillaHDComponent,
             canActivate: [AuthGuard],
           },
+          // {
+          //   path: 'planillaExcel',
+          //   component: PlanillaExcelComponent,
+          //   canActivate: [AuthGuard],
+          // },
         ],
       },
       {

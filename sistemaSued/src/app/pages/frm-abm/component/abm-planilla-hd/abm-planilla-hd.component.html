@@ -5,7 +5,7 @@
     <legend class="text-primary">
       <b> DATOS PARA GENERAR EL REPORTE:</b>
     </legend>
-    <label for=""><b> Planilla de Delitos contra la Propiedad</b></label>
+    <label for=""><b> Planilla de Hechos Delictivos</b></label>
   </div>
   <hr />
   <div class="row">
@@ -49,7 +49,7 @@
       </button>
       &nbsp;
       <button
-        *ngIf="this.arrDelPropiedad.length > 0"
+        *ngIf="this.arrHd.length > 0"
         type="button"
         class="btn btn-info"
         (click)="planillaExcel()"

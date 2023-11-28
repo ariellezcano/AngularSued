@@ -24,14 +24,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./abm-planilla-hd.component.scss'],
 })
 export class AbmPlanillaHDComponent implements OnInit {
-  @Output() emmit: EventEmitter<PlanillaHechosDelictivos[]> = new EventEmitter();
+  @Output() emmit: EventEmitter<PlanillaHD[]> = new EventEmitter();
 
   fecha1: any;
   fecha2: any;
 
   vacio: boolean = false;
 
-  arrHd: PlanillaHechosDelictivos[];
+  arrHd: PlanillaHD[];
 
   constructor(
     private wsdl: PlanillasService,
@@ -50,13 +50,13 @@ export class AbmPlanillaHDComponent implements OnInit {
       if (this.fecha1 != undefined && this.fecha2 == undefined) {
         this.fecha2 = this.fecha1;
       }
-      const buscar = this.wsdl.getDelPropiedad(this.fecha1, this.fecha2);
+      const buscar = this.wsdl.getHechoDelictivo(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
       const result = JSON.parse(JSON.stringify(data));
       //console.log('result', result);
       if (result.code == 200) {
         this.arrHd = result.dataAgrupada;
-        //console.log('planilla delPropiedad', this.arrDelPropiedad);
+        console.log('planilla delPropiedad', this.arrHd);
         this.sendData(this.arrHd);
         Swal.fire({
           position: 'top-end',
@@ -82,7 +82,7 @@ export class AbmPlanillaHDComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.arrHd, 'archivo');
   }
 
-  sendData(arr: PlanillaDelPropiedad[]) {
+  sendData(arr: PlanillaHD[]) {
     this.dataService.dataArray = [];
     this.dataService.setDataArray(arr);
   }
@@ -92,12 +92,8 @@ export class AbmPlanillaHDComponent implements OnInit {
     this.back();
   }
 
-  back() {
-    this.router.navigate(['/principal/']);
-  }
-
   planillaExcel() {
-    this.router.navigate(['/principal/planillaDelPropiedad/planillaExcel']);
+    this.router.navigate(['/principal/planillaHechosDelictivos/planillaExcel']);
   }
 
   back() {

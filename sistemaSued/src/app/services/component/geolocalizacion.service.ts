@@ -38,18 +38,20 @@ export class GeolocalizacionService {
       pais +
       '&format=json&apiKey=' +
       this.apiKey;
-    return (
-      fetch(data, requestOptions)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw new Error("Server response wasn't OK");
-          }
-        })
-        .then(result => console.log(result))
-        .catch((error) => console.log('error', error))
-    );
+      return (
+        fetch(data, requestOptions)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("Server response wasn't OK");
+            }
+          })
+          .catch((error) => {
+            console.log('error', error);
+            throw error;
+          })
+      );
   }
 
   obtenerGeo(lat: any, lon: any) {

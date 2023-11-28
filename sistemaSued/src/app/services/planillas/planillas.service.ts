@@ -28,4 +28,8 @@ export class PlanillasService {
   getDelPropiedad(fecha1: any, fecha2: any) {
     return this.http.get( `${this.api}/DelitosContraPropiedad/${fecha1},${fecha2}`);
   }
+
+  getHechoDelictivo(fecha1: any, fecha2: any) {
+    return this.http.get( `${this.api}/hechosDelictivos/${fecha1},${fecha2}`);
+  }
 }
