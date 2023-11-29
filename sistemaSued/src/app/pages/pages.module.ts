@@ -164,6 +164,7 @@ import { FiltroUnidadComponent } from './component/filtro-unidad/filtro-unidad.c
 import { FiltroUnidadMesaEntradaComponent } from './component/filtro-unidad-mesa-entrada/filtro-unidad-mesa-entrada.component';
 import { AbmDelitosPropiedadComponent } from './frm-abm/component/abm-delitos-propiedad/abm-delitos-propiedad.component';
 import { PlanillaExcelDelPropiedadComponent } from './frm-abm/component/abm-delitos-propiedad/planillas/planilla-excel-del-propiedad/planilla-excel-del-propiedad.component';
+import { PlanillaExcelHechosDelictivosComponent } from './frm-abm/component/abm-planilla-hd/planillas/planilla-excel-hechos-delictivos/planilla-excel-hechos-delictivos.component';
 defineLocale('es', esLocale);
 
 @NgModule({
@@ -323,6 +324,7 @@ defineLocale('es', esLocale);
       FiltroUnidadMesaEntradaComponent,
       AbmDelitosPropiedadComponent,
       PlanillaExcelDelPropiedadComponent,
+      PlanillaExcelHechosDelictivosComponent,
       
     ],
     exports: [],

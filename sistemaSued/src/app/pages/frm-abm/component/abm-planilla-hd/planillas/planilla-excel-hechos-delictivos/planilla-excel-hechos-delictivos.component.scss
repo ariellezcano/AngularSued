@@ -1,0 +1,18 @@
+#tablaHd {
+    font-size: 8px;
+    padding: 0px;
+    margin: 0%;
+  }
+  
+  #table {
+    overflow-x: auto; /* Permite el desplazamiento horizontal si la tabla es más ancha que el contenedor */
+    //max-width: 100%; /* Ajusta el ancho máximo para que no exceda el contenedor */
+  }
+  
+  .encabezado {
+    border: 1px solid black;
+  }
+  
+  .celda {
+    border: 1px solid black;
+  }

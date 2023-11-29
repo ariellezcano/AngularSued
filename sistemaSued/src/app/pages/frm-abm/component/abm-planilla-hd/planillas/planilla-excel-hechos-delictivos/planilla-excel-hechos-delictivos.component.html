@@ -1,0 +1,91 @@
+<br />
+<hr />
+<div class="container-xxl">
+  <div class="row" id="table" #table>
+    <table id="tablaHd" class="table text-center">
+      <thead>
+        <!-- <tr>
+          <th class="encabezado" scope="col" colspan="19">DATOS DEL HECHO</th>
+          <th class="encabezado" scope="col" colspan="7">
+            DATOS DE LOS INCULPADOS CONOCIDOS
+          </th>
+        </tr> -->
+        <tr>
+          <th class="encabezado" scope="col">
+            Código de Departamento* (según codificación INDEC)
+          </th>
+          <!-- <th scope="col">Nombre Departamento</th> -->
+          <th class="encabezado" scope="col">
+            Número de Seccional* (según codificación reportada a DNEC)
+          </th>
+          <!-- <th scope="col">Nombre Unidad</th> -->
+          <th class="encabezado" scope="col">
+            Código del tipo de delito (A)*
+          </th>
+          <!-- <th scope="col">Nombre Localidad</th> -->
+          <th class="encabezado" scope="col" colspan="4">Cantidad de hechos *</th>
+          <th class="encabezado" scope="col" colspan="3">Cantidad de víctimas - Sexo**</th>
+          <th class="encabezado" scope="col" colspan="6">Cantidad de víctimas - Género</th>
+          <!-- <th class="encabezado" scope="col">Total de registros verificados</th> -->
+        </tr>
+        <tr>
+          <th class="encabezado">codigo_departamento</th>
+          <th class="encabezado">codigo_seccional</th>
+          <th class="encabezado">tipo_delito</th>
+          <th class="encabezado">hechos_por_denuncia_particular</th>
+          <th class="encabezado">hechos_por_interv_policial</th>
+          <th class="encabezado">hechos_por_orden_judicial</th>
+          <th class="encabezado">hechos_otros_no_consta</th>
+          <th class="encabezado">victimas_masculino</th>
+          <th class="encabezado">victimas_femenino</th>
+          <th class="encabezado">victimas_no_consta</th>
+          <th class="encabezado">varon</th>
+          <th class="encabezado">mujer</th>
+          <th class="encabezado">varon_trans</th>
+          <th class="encabezado">mujer_trans</th>
+          <th class="encabezado">genero_otro</th>
+          <th class="encabezado">genero_sd</th>
+          <!-- <th class="encabezado">Registros</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items">
+          <td class="celda">{{ item.codigoDpto }}</td>
+          <!-- <td>{{ item.nombreDpto }}</td> -->
+          <td class="celda">{{ item.seccional }}</td>
+          <!-- <td>{{ item.nombreUnidad }}</td> -->
+          <td class="celda">{{ item.codDelito }} - {{ item.delito }}</td>
+          <!-- <td>{{ item.nombreLocalidad }}</td> -->
+          <td class="celda">{{ item.denunciaParticular }}</td>
+          <td class="celda">{{ item.intervenPol }}</td>
+          <td class="celda"></td>
+          <td class="celda"></td>
+          <td class="celda">{{ item.victimaMasculino }}</td>
+          <td class="celda">{{ item.victimaFemenino }}</td>
+          <td class="celda">{{ item.victimaSexoNoConsta }}</td>
+          <td class="celda">{{ item.victGeneroMasc }}</td>
+          <td class="celda">{{ item.victGeneroFem }}</td>
+          <td class="celda">{{ item.victGenVarTrans }}</td>
+          <td class="celda">{{ item.victGenMujerTrans }}</td>
+          <td class="celda">{{ item.victGenOtro }}</td>
+          <td class="celda">{{ item.victGenSinDeterminar }}</td>
+          <!-- <td class="celda">{{ item.totalRegistros }}</td> -->
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="container">
+    <button class="btn btn-info" (click)="exportarExcel('planillaHd.xlsx')">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Descargar
+      planilla
+    </button>
+    &nbsp;
+    <button class="btn btn-primary" (click)="back()">
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>&nbsp; Volver a
+      Pantalla Principal
+    </button>
+  </div>
+</div>

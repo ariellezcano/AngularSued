@@ -1,5 +1,6 @@
 export class PlanillaHD{
     codigoDpto?: number;
+    codDelito?: number;
     delito?: string;
     seccional?: number;
     unidad?: string;
