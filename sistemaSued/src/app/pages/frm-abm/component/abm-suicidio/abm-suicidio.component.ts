@@ -20,7 +20,7 @@ export class AbmSuicidioComponent implements OnInit {
   fecha2: any;
   consumado: boolean;
   tentativa: boolean;
-
+  msg: boolean;
   arrSuicidio:PlanillaSuicidio[];
 
   constructor(
@@ -30,6 +30,7 @@ export class AbmSuicidioComponent implements OnInit {
     private dataService: DataService,
     private router: Router
   ) {
+    this.msg = false;
     this.arrSuicidio = [];
     this.consumado = false;
     this.tentativa = false;
@@ -63,6 +64,8 @@ export class AbmSuicidioComponent implements OnInit {
           timer: 1500
         })
         //this.emmit.emit();
+      }else if (result.code == 204) {
+        this.msg = true;
       }
     
     } catch (error) {

@@ -17,8 +17,9 @@ export class AbmHomicidiosDolososComponent implements OnInit {
 
   fecha1: any;
   fecha2: any;
+  msg: boolean;
 
-  arrHomicidio:PlanillaHd[];
+  arrHomicidio: PlanillaHd[];
 
   constructor(
     private wsdl: PlanillasService,
@@ -30,14 +31,15 @@ export class AbmHomicidiosDolososComponent implements OnInit {
     //this.fecha1 = new Date();
     //this.fecha2 = new Date();
     this.arrHomicidio = [];
+    this.msg = false;
   }
 
   ngOnInit(): void {}
 
   async buscar() {
     try {
-      if(this.fecha1 != undefined && this.fecha2 == undefined){
-        this.fecha2 = this.fecha1
+      if (this.fecha1 != undefined && this.fecha2 == undefined) {
+        this.fecha2 = this.fecha1;
       }
       const buscar = this.wsdl.getListHomicidioDoloso(this.fecha1, this.fecha2);
       let data = await lastValueFrom(buscar);
@@ -45,23 +47,24 @@ export class AbmHomicidiosDolososComponent implements OnInit {
       if (result.code == 200) {
         this.arrHomicidio = result.data;
         //this.emmit.emit(this.arrHomicidio)
-        this.sendData(this.arrHomicidio)
+        this.sendData(this.arrHomicidio);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
           title: 'Busqueda realizada correctamente, descargue la planilla',
           showConfirmButton: false,
-          timer: 1500
-        })
+          timer: 1500,
+        });
         //this.emmit.emit();
+      } else if (result.code == 204) {
+        this.msg = true;
       }
-    
     } catch (error) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: `Hubo un error en la busqueda de datos!, ${error}`
-      })
+        text: `Hubo un error en la busqueda de datos!, ${error}`,
+      });
     }
   }
 
@@ -75,7 +78,6 @@ export class AbmHomicidiosDolososComponent implements OnInit {
     this.dataService.setDataArray(arr);
   }
 
-
   cancelar() {
     //this.item = new PlanillaHechosDel();
     this.back();
@@ -86,6 +88,8 @@ export class AbmHomicidiosDolososComponent implements OnInit {
   }
 
   planillaExcel() {
-    this.router.navigate(['/principal/planillaHomicidiosDolosos/planillaExcel']);
+    this.router.navigate([
+      '/principal/planillaHomicidiosDolosos/planillaExcel',
+    ]);
   }
 }

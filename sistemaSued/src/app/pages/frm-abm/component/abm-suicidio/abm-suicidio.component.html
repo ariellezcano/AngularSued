@@ -85,6 +85,12 @@
       </button>
     </div>
   </div>
-  <br />
+  <hr />
+  <div *ngIf="msg" class="row container">
+    <div class="alert alert-danger">
+      <i class="fa fa-ban" aria-hidden="true"></i> &nbsp;
+      <b> No existen datos correspondientes a la fecha ingresada </b>
+    </div>
+  </div>
 </div>
 

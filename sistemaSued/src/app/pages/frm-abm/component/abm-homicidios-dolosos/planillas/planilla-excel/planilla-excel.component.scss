@@ -7,6 +7,8 @@
 #table {
   overflow-x: auto; /* Permite el desplazamiento horizontal si la tabla es más ancha que el contenedor */
   //max-width: 100%; /* Ajusta el ancho máximo para que no exceda el contenedor */
+  max-height: 300px; /* Altura máxima del contenedor */
+  overflow-y: auto; /* Habilita el desplazamiento vertical cuando la tabla excede la altura del contenedor */
 }
 
 .encabezado {

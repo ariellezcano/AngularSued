@@ -38,11 +38,7 @@
   <hr />
   <div class="row">
     <div class="col-md-12">
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="buscar()"
-      >
+      <button type="button" class="btn btn-primary" (click)="buscar()">
         <i class="fa fa-search-plus" aria-hidden="true"></i>
         Filtrar dato
       </button>
@@ -52,12 +48,22 @@
         Cancelar
       </button>
       &nbsp;
-      <button *ngIf="this.arrHomicidio.length > 0" type="button" class="btn btn-info" (click)="planillaExcel()">
-        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp;
-        Ver Planilla Generada
+      <button
+        *ngIf="this.arrHomicidio.length > 0"
+        type="button"
+        class="btn btn-info"
+        (click)="planillaExcel()"
+      >
+        <i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Ver Planilla
+        Generada
       </button>
     </div>
   </div>
-  <br />
+  <hr />
+  <div *ngIf="msg" class="row container">
+    <div  class="alert alert-danger">
+      <i class="fa fa-ban" aria-hidden="true"></i> &nbsp;
+      <b> No existen datos correspondientes a la fecha ingresada </b>
+    </div>
+  </div>
 </div>
-

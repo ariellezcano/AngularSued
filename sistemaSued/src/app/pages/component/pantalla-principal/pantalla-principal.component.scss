@@ -5,8 +5,13 @@
     //margin-top: -80px !important;
 }
 .img{
-    background-image: url("../../../../assets/img/0.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    opacity: 0.8;
+    // background-image: url("../../../../assets/img/0.jpg");
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    // opacity: 0.8;
+    background-image: url("../../../../assets/img/imgSistema.jpg");
+    width: 100%; /* Ajusta el ancho al 100% del contenedor padre */
+    height: 90vh; /* Establece la altura al 100% del viewport (altura visible de la pantalla) */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el contenedor */
+    background-position: center;
 }
