@@ -45,7 +45,7 @@ export class AbmDelitosPropiedadComponent implements OnInit {
       //console.log('result', result);
       if (result.code == 200) {
         this.arrDelPropiedad = result.dataAgrupada;
-        //console.log('planilla delPropiedad', this.arrDelPropiedad);
+        console.log('planilla delPropiedad', this.arrDelPropiedad);
         this.sendData(this.arrDelPropiedad);
         Swal.fire({
           position: 'top-end',
