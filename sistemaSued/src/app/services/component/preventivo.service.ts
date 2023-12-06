@@ -147,4 +147,10 @@ export class PreventivoService {
         };
       });
   }
+
+
+    getUltimoNroPreventivo(unidad: number, anio: number){
+      const ruta = this.api +"/"+ 'obtenerUltimoNroPreventivo';
+      return this.http.get(`${ruta}/${unidad},${anio}`)
+  }
 }

@@ -1,3 +1,4 @@
+import { Unidad } from './../../../models/component/unidad';
 import {
   Component,
   ElementRef,
@@ -25,18 +26,14 @@ import {
   UnidadesSued,
 } from 'src/app/models/index.models';
 import {
-  BarrioService,
-  CalleService,
-  DelitoService,
   GeolocalizacionService,
-  LugarService,
   PreventivoService,
 } from 'src/app/services/index.service';
 import { UturuncoUtils } from 'src/app/utils/uturuncoUtils';
 import Swal from 'sweetalert2';
 import { FilBuscadorLocalidadComponent } from '../../component/fil-buscador-localidad/fil-buscador-localidad.component';
 import { FilBuscadorCalleComponent } from '../../component/fil-buscador-calle/fil-buscador-calle.component';
-import { results } from 'src/app/models/resultsCoordenada';
+import { Subject, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-abm-preventivo',
@@ -44,6 +41,10 @@ import { results } from 'src/app/models/resultsCoordenada';
   styleUrls: ['./abm-preventivo.component.scss'],
 })
 export class AbmPreventivoComponent implements OnInit {
+
+  variableSubject: Subject<void> = new Subject<void>();
+  otraVariable: any;
+
   @ViewChild(FilBuscadorLocalidadComponent, { static: false })
   filLocalidad!: FilBuscadorLocalidadComponent;
   @ViewChild(FilBuscadorCalleComponent, { static: false })
@@ -89,30 +90,12 @@ export class AbmPreventivoComponent implements OnInit {
 
   item: Preventivo;
 
-  // ditems: Delito[];
-  // ditem: Delito;
-
-  // lugarItems: Lugar[];
-  // litem: Lugar;
-
-  // CItems: Calle[];
-  // Citem: Calle;
-
-  // CItemsInters: Calle[];
-  // cItemInt: Calle;
-
-  // BItems: Barrio[];
-  // Bitem: Barrio;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private wsdlGeo: GeolocalizacionService,
     private wsdl: PreventivoService,
-    private wsdlLugar: LugarService,
-    private wsdlDelito: DelitoService,
-    private wsdlCalle: CalleService,
-    private wsdlBarrio: BarrioService,
     private formBuilder: FormBuilder,
     private bsLocaleService: BsLocaleService
   ) {
@@ -149,6 +132,11 @@ export class AbmPreventivoComponent implements OnInit {
     this.form = this.formBuilder.group({
       //codigo: ['', Validators.required],
       //descripcion: ['', Validators.required],
+    });
+
+
+    this.variableSubject.subscribe(() => {
+      this.obtenerNroPrev();
     });
 
     //captura el id que viene en el url
@@ -233,7 +221,7 @@ export class AbmPreventivoComponent implements OnInit {
   dividirFecha() {
     if (this.item.fechaPreventivo != undefined) {
       const dia = this.item.fechaPreventivo.getFullYear();
-      this.item.anio = dia;
+        this.item.anio = dia;
     }
   }
 
@@ -330,35 +318,6 @@ export class AbmPreventivoComponent implements OnInit {
     }
   }
 
-  // async filtrarDelito() {
-  //   this.ditems = [];
-  //   try {
-  //     if (this.busqueda != '' && this.busqueda != undefined) {
-  //       let data = await this.wsdlDelito.doFilter(this.busqueda).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         Swal.fire(
-  //           'Búsqueda realizada correctamente!',
-  //           'Seleccione el dato encontrado del campo seleccionable!',
-  //           'success'
-  //         )
-  //         this.ditems = result.data;
-  //       } else if (result.code == 204) {
-  //         Swal.fire({
-  //           icon: 'warning',
-  //           text: 'Verifique el dato ingresado!',
-  //           footer: '<b>No existe la búsqueda realizada...</b>',
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     Swal.fire({
-  //       icon: 'error',
-  //       text: 'Hubo un error al filtrar el dato!',
-  //       //footer: '<b>No existe la búsqueda realizada...</b>',
-  //     });
-  //   }
-  // }
 
   capturar(event: Delito) {
     if (event != undefined) {
@@ -370,31 +329,6 @@ export class AbmPreventivoComponent implements OnInit {
     this.cerrarDelito.nativeElement.click();
   }
 
-  // async filtrarLugar() {
-  //   this.lugarItems = [];
-  //   try {
-  //     if (this.busquedaLugar != '' && this.busquedaLugar != undefined) {
-  //       let data = await this.wsdlLugar.doFilter(this.busquedaLugar).then();
-  //       const result = JSON.parse(JSON.stringify(data));
-  //       if (result.code == 200) {
-  //         Swal.fire(
-  //           'Búsqueda realizada correctamente!',
-  //           'Seleccione el dato encontrado del campo seleccionable!',
-  //           'success'
-  //         )
-  //         this.lugarItems = result.data;
-  //       } else if (result.code == 204) {
-  //         Swal.fire({
-  //           icon: 'warning',
-  //           text: 'Verifique el dato ingresado!',
-  //           footer: '<b>No existe la búsqueda realizada...</b>',
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     Swal.fire('Error al obtener el dato');
-  //   }
-  // }
 
   capturarLugar(event: Lugar) {
     if (event != undefined) {
@@ -410,7 +344,6 @@ export class AbmPreventivoComponent implements OnInit {
     interseccion: 'interseccion',
   };
 
-  // async filtrarCalle(tipoCalle: string) {
   //   let criterio = '';
   //   if (tipoCalle == this.opcCalle.individual) {
   //     this.CItems = [];
@@ -514,6 +447,22 @@ export class AbmPreventivoComponent implements OnInit {
   //   }
   // }
 
+  async obtenerNroPrev() {
+    if(this.item.unidad != undefined && this.item.anio != undefined){
+      try {
+        const consulta = this.wsdl.getUltimoNroPreventivo(this.item.unidad, this.item.anio);
+        const data = await firstValueFrom(consulta);
+        const result = JSON.parse(JSON.stringify(data));
+        if (result.code == '200') {
+          this.item.nro = result.dato;
+          //console.log("nroPreventivo",this.item.nro);
+        }
+      } catch (error) {
+        Swal.fire('Error al obtener el dato');
+      }
+    }
+  }
+
   async buscarCoordenadas() {
     this.map = false;
     try {
@@ -584,8 +533,14 @@ export class AbmPreventivoComponent implements OnInit {
     if (event != undefined) {
       this.item.unidad = event.id;
       this.item.nombreUnidad = event.nombre;
+      this.modificarOtraVariable(this.item.unidad);
     }
     this.cerrarUnidad.nativeElement.click();
+  }
+
+  modificarOtraVariable(nuevoValor: any): void {
+    this.otraVariable = nuevoValor;
+    this.variableSubject.next(); // Notifica a los suscriptores que la variable ha cambiado
   }
 
   cortarCadena() {

@@ -123,10 +123,10 @@
           </td>
           <td class="celda">{{ item.especificarModalidad }}</td>
           <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
-          <td class="celda"></td>
+          <td class="celda">0</td>
           <td class="celda">{{ item.nroDocumentoSuicida }}</td>
-          <td class="celda">{{ item.nombreSuicida }}</td>
-          <td class="celda">{{ item.apellidoSuicida }}</td>
+          <td class="celda">{{ item.nombreSuicida | uppercase }}</td>
+          <td class="celda">{{ item.apellidoSuicida | uppercase }}</td>
           <td class="celda">{{ item.codigoSexo }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
           <td class="celda">{{ item.claseSuicida }}</td>

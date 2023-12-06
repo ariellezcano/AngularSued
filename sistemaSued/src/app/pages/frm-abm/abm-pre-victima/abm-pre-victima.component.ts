@@ -25,8 +25,6 @@ import {
 import {
   BarrioService,
   CalleService,
-  NacionesService,
-  OcupacionService,
   PreventivoService,
   PrevVictimaService,
 } from 'src/app/services/index.service';
@@ -113,10 +111,6 @@ export class AbmPreVictimaComponent implements OnInit {
     private router: Router,
     private wsdl: PrevVictimaService,
     private wsdlPreventivo: PreventivoService,
-    //private wsdlOcupacion: OcupacionService,
-    //private wsdlNacionalidad: NacionesService,
-    private wsdlBarrio: BarrioService,
-    private wsdlCalle: CalleService,
     private formBuilder: FormBuilder
   ) {
     this.item = new PrevVictima();

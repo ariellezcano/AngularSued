@@ -177,10 +177,10 @@
           </td>
           <td class="celda">{{ item.especifCondicionClima }}</td>
           <td class="celda">{{ intervencion(item.intervencionPolicial) }}</td>
-          <td class="celda"></td>
+          <td class="celda">0</td>
           <td class="celda">{{ item.numeroDocumentoVict }}</td>
-          <td class="celda">{{ item.nombreVictima }}</td>
-          <td class="celda">{{ item.apellidoVictima }}</td>
+          <td class="celda">{{ item.nombreVictima | uppercase }}</td>
+          <td class="celda">{{ item.apellidoVictima | uppercase }}</td>
           <td class="celda">{{ item.sexoVictima }}</td>
           <td class="celda">{{ item.edadVictima }}</td>
           <td class="celda">{{ item.claseVictima }}</td>
